@@ -1,9 +1,10 @@
-import { Callout } from "nextra-theme-docs";
+import { Callout, Card, Cards } from "nextra-theme-docs";
 
 # Using the Hashboard CLI
 
 The Hashboard CLI allows you to create Preview and Deploy Builds directly from your terminal or continuous integration system.
 
+<<<<<<< HEAD
 ## Quickstart
 
 ### 1. Create an Access Key
@@ -73,6 +74,10 @@ By default, the CLI expects your Access Key to be located at `~/.glean/hashboard
 - Setting the `HASHBOARD_CREDENTIALS_FILEPATH` environment variable to a different filepath
 - Using the `--credentials-filepath` command-line option to use a different filepath
 - Setting the `HASHBOARD_PROJECT_ID`, `HASHBOARD_ACCESS_KEY_ID`, and `HASHBOARD_SECRET_ACCESS_KEY_TOKEN` environment variables to the respective values stored in your Access Key file.
+<Cards>
+  <Card arrow title="CLI Quickstart" href="/docs/cli/quickstart" />
+  <Card arrow title="glean build" href="/docs/cli/commands/build" />
+</Cards>
 
 ## Using environment variables
 
@@ -130,24 +135,6 @@ jobs:
       HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID_PROD }}
       HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN_PROD }}
 ```
-
-## Hashboard Pull
-
-`glean pull` is a command-line utility for moving resources from the web UI into DataOps or pulling down changes. When you invoke `glean pull` with no arguments, it will fetch all resources from your Hashboard project and save their configurations to your working directory. If you already have local files that correspond to resources in Hashboard, they will be overwritten.
-
-If you provide a [GRN](./resource-identifiers.mdx) as an argument, `glean pull` will restrict itself to only the specified resource and all resources it depends on. For example, `glean pull sv:the-sv-id` will retrieve the resource configuration for the specified saved exploration, plus any model(s) it depends on.
-
-<Callout type="warning">
-  When developing locally, you are not required to specify GRNs in Hashboard
-  resource configuration files. However, when running `hb deploy`, GRNs are
-  assigned based on the relative path from the working directory to the resource
-  configuration file. Subsequent uses of `glean pull` should therefore be run
-  from the same working directory.
-</Callout>
-
-Note that `glean pull` is a potentially destructive operation that will change files in your working directory. Make sure your `git status` is clean (no uncommitted changes in the working directory) before pulling resources.
-
-`glean pull` will not remove configuration files when the corresponding resource is deleted from the web UI.
 
 ## dbt Utility
 
