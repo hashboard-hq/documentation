@@ -97,10 +97,10 @@ export default {
   logo: (
     <span>
       <Image
-        src="/brand/glean-logo-light.png"
+        src="/brand/hashboard-logo.svg"
         alt="Hashboard logo"
-        width={96}
-        height={28}
+        width={192}
+        height={56}
       />
     </span>
   ),
