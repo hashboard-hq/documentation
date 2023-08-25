@@ -2,13 +2,17 @@ import { Callout } from "nextra-theme-docs";
 
 # Model Joins
 
-In many cases, it can be useful to reuse data from one data model in others. This can be done in Glean by configuring joins across models. In essence, this is defining a primary-foreign key relationship across two Glean models.
+In many cases, it can be useful to reuse data from one data model in others. This can be done in Hashboard by configuring joins across models. In essence, this is defining a primary-foreign key relationship across two Hashboard models.
 
 After configuring a join, you'll be able to use any attributes from the joined model in the base model. Note that joins only include the model **attributes**, not the model **measures**.
 
 <Callout type="info">
+<<<<<<< HEAD
   Currently, Glean joins are always LEFT OUTER JOINS. Any unmatched rows from
   the joined model will simply have blank values for the attributes.
+=======
+  Currently, Hashboard joins are always LEFT OUTER JOINS. Any unmatched rows from the joined model will simply have blank values for the attributes.
+>>>>>>> fd6fbf1 (Initial pass at renaming Glean to Hashboard)
 </Callout>
 
 ## Setting up
@@ -71,7 +75,7 @@ This means the join is fully configured. Once you save your model, you can start
 
 ## Using joined attributes
 
-You can use joined attributes anywhere you use regular model attributes! Throughout Glean, anywhere you configure filters, breakouts, axes, and more, you'll see the attributes from the base model as well.
+You can use joined attributes anywhere you use regular model attributes! Throughout Hashboard, anywhere you configure filters, breakouts, axes, and more, you'll see the attributes from the base model as well.
 
 For example, they'll be added into the attribute tray alongside your pre-existing attributes:
 

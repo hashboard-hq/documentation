@@ -57,7 +57,7 @@ Breakouts can be reordered manually by dragging the attribute items.
 Some notes on sorting attributes:
 
 - If there are a lot of unique items in your list, only the first subset of items are retrieved from the database. Changing the sort order may trigger an additional database query to retrieve the new top of the list.
-- Even if there are a lot of items in your list, you can keep scrolling and Glean will automatically pull additional items into the attribute pane as you keep scrolling.
+- Even if there are a lot of items in your list, you can keep scrolling and Hashboard will automatically pull additional items into the attribute pane as you keep scrolling.
 - `NULL` values are sorted at the end of a list in descending order (and the top of a list in ascending order).
 - Behavior of numeric fields is different than strings, see below.
 
@@ -87,7 +87,7 @@ Array attributes are a powerful feature that allow you to filter and group on el
 
 ### Filtering and breaking out with arrays
 
-Filters and breakouts are applied to individual items within the arrays in your dataset. For example, if your customer contact activity dataset contains arrays representing campaigns, you can use filters to visualize contact activity for a specific campaign only. By breaking out the data, you can examine the distribution of activity across campaigns. Be aware that when using array attributes, Glean unnests the data, which may impact measures, depending on your specific dataset.
+Filters and breakouts are applied to individual items within the arrays in your dataset. For example, if your customer contact activity dataset contains arrays representing campaigns, you can use filters to visualize contact activity for a specific campaign only. By breaking out the data, you can examine the distribution of activity across campaigns. Be aware that when using array attributes, Hashboard unnests the data, which may impact measures, depending on your specific dataset.
 
 For more detailed information about filtering and breakouts, please refer to [Filter](/docs/visualizing-data/filter) and [Breakout](/docs/visualizing-data/breakout) pages.
 
@@ -98,7 +98,7 @@ String attributes are alphanumeric attributes and can have very high cardinality
 To search for a specific item in a string attribute, click the search icon in the attribute tile title menu.
 
 <Callout type="info">
-  While searching through a string field is supported, Glean is not optimized
+  While searching through a string field is supported, Hashboard is not optimized
   for full-text document search. This means that searching through human written
   comments and long documents is probably not a good idea (mostly it will be
   slow and potentially costly depending on how those documents are stored in

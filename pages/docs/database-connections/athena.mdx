@@ -11,11 +11,11 @@ popular db engine [Trino](https://trino.io/) is also based on Presto).
 
 
 Because Athena is a query engine that can query data in lots of different
-formats, it can be slow. Glean assumes you have data in a fast data warehouse
+formats, it can be slow. Hashboard assumes you have data in a fast data warehouse
 for interactive analytics, so Athena doesn't work really well as a primary data
 warehouse. The advantage of Athena is that you can start querying data quickly
 if it's already stored in S3. The disadvantages are: 1. reading schemas and
-metadata can be very slow, so development in Glean can be very slow 2. the
+metadata can be very slow, so development in Hashboard can be very slow 2. the
 performance of queries 3. in our experience the query engine is limited and
 doesn't support as many analytical features as BigQuery, DuckDB or Snowflake (no
 offset queries, for example).
@@ -26,7 +26,7 @@ Athena performance is highly dependent on how you choose to store your data. If
 you store carefully partitioned parquet files you may get reasonable
 performance. If you just store data in lots of large csv files it might take
 minutes to query, which wouldn't be great for interactive exploration, even with
-Glean's caching. Amazon has a few good articles on
+Hashboard's caching. Amazon has a few good articles on
 [tuning performance in Athena](https://docs.aws.amazon.com/athena/latest/ug/performance-tuning.html)
 
 <Callout type="warning">
@@ -40,13 +40,13 @@ Glean's caching. Amazon has a few good articles on
 ### How to get set up
 
 1.  Configure an IAM user in AWS and configure permissions
-2.  Set up a connection in Glean
+2.  Set up a connection in Hashboard
 
-## Create an AWS IAM user for Glean
+## Create an AWS IAM user for Hashboard
 
 1.  Create an IAM user. You should create an
     [IAM user in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html)
-    that is used for Glean access.
+    that is used for Hashboard access.
 2.  Create an appropriate IAM policy for Athena access. Your service account
     needs access to three AWS services:
 
@@ -84,10 +84,10 @@ Glean's caching. Amazon has a few good articles on
 4.  [Generate an access key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/)
     for your IAM user.
 
-## Create an Athena database connection in Glean
+## Create an Athena database connection in Hashboard
 
 1. First, go to your
-   [Glean settings](https://glean.io/app/p/settings#database_connections) page
+   [Hashboard settings](https://hashboard.com/app/p/settings#database_connections) page
    from the project dropdown.
 2. Click `+ New Database Connection` and fill out the fields below.
 
@@ -95,7 +95,7 @@ Glean's caching. Amazon has a few good articles on
 
 <Callout>
   We highly recommend specifying a schema (i.e. Athena database) to make
-  querying metadata and getting lists of tables faster in Glean during
+  querying metadata and getting lists of tables faster in Hashboard during
   development.
 </Callout>
 

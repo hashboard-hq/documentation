@@ -6,7 +6,7 @@ The goal of modeling data is to accurately measure a workflow or process in your
 If you are monitoring clinical trials patients, you might have a data model for
 If you are managing a call center, you may have a data model for calls.
 
-Since a Glean data model is based on a single underlying table, you should denormalize
+Since a Hashboard data model is based on a single underlying table, you should denormalize
 and join in as much relevant data as possible.
 
 Below are useful guidelines for how to think about and optimize your data models.
@@ -17,14 +17,22 @@ You should start data modeling by asking yourself what each row in your data mod
 
 In data warehousing terms, this is often referred to as [the grain or granularity of a table](http://www.datamartist.com/data-granularity-avoid-going-against-the-grain).
 
-If it's hard to describe what each row represents, it's possible you're not picking a good concept to model and that exploring this model in Glean won't be very intuitive.
+If it's hard to describe what each row represents, it's possible you're not picking a good concept to model and that exploring this model in Hashboard won't be very intuitive.
 
 <Callout type="info">
+<<<<<<< HEAD
   **Row count measure is required**— You can't remove the row count measure from
   a data model in Glean (at least, not very easily). It's good practice to
   rename the row count measure to describe what each row in the table represents
   (eg. Calls). If each row really doesn't mean anything, you can rename in a way
   that it won't accidentially get used " row count - dont use".
+=======
+  **Row count metric is required**— You can't remove the row count metric from a
+  data model in Hashboard (at least, not very easily). It's good practice to rename
+  the row count metric to describe what each row in the table represents (eg.
+  Calls). If each row really doesn't mean anything, you can rename in a way that
+  it won't accidentially get used " row count - dont use".
+>>>>>>> fd6fbf1 (Initial pass at renaming Glean to Hashboard)
 </Callout>
 
 ## Denormalize your data
@@ -65,11 +73,11 @@ The experienced data modeler should be able to deftly navigate one-to-many relat
   or more orders in the orders table.
 </Callout>
 
-Let's say in our Call Center each call has a series of tags associated with it. Tags can have values like `customer support`, `international` vs. `domestic` etc. There can be many tags associated with each call. Users may want to see call statistics grouped by tag as an Attributes. While other self-service tools may allow for realtime joining, Glean intentionally forces you to define joins upfront in your denormalized table.
+Let's say in our Call Center each call has a series of tags associated with it. Tags can have values like `customer support`, `international` vs. `domestic` etc. There can be many tags associated with each call. Users may want to see call statistics grouped by tag as an Attributes. While other self-service tools may allow for realtime joining, Hashboard intentionally forces you to define joins upfront in your denormalized table.
 
-If your tags are contained in an array type column, Glean should understand them automatically as an array attribute. Otherwise, it may make sense to have two data models: one for exploring call tags and one for exploring calls.
+If your tags are contained in an array type column, Hashboard should understand them automatically as an array attribute. Otherwise, it may make sense to have two data models: one for exploring call tags and one for exploring calls.
 
 <Callout>
-  **Next Steps**- If you're ready to begin building in Glean, learn how to [add
+  **Next Steps**- If you're ready to begin building in Hashboard, learn how to [add
   a Data Model](/docs/data-modeling/add-data-model).
 </Callout>

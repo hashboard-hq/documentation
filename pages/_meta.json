@@ -13,12 +13,12 @@
   },
   "get-access": {
     "title": "Get Access ↗",
-    "href": "https://glean.io/getAccess",
+    "href": "https://hashboard.com/getAccess",
     "type": "page"
   },
   "log-in": {
     "title": "Log In ↗",
-    "href": "https://glean.io/app",
+    "href": "https://hashboard.com/app",
     "type": "page"
   }
 }

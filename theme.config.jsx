@@ -98,14 +98,14 @@ export default {
     <span>
       <Image
         src="/brand/glean-logo-light.png"
-        alt="Glean logo"
+        alt="Hashboard logo"
         width={96}
         height={28}
       />
     </span>
   ),
-  logoLink: "https://glean.io",
-  useNextSeoProps: () => ({ titleTemplate: "Glean - %s" }),
+  logoLink: "https://hashboard.com",
+  useNextSeoProps: () => ({ titleTemplate: "Hashboard - %s" }),
   docsRepositoryBase:
     "https://github.com/glean-io/documentation/tree/main/",
   darkMode: false,
@@ -122,17 +122,17 @@ export default {
         <meta httpEquiv="Content-Language" content="en" />
         <meta
           name="description"
-          content="Explore data with your team with Glean"
+          content="Explore data with your team with Hashboard"
         />
         <meta
           name="og:description"
-          content="Explore data with your team with Glean"
+          content="Explore data with your team with Hashboard"
         />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site:domain" content="glean.io" />
-        <meta name="twitter:url" content="https://glean.io" />
-        <meta name="og:title" content={title ? title + " – Glean" : "Glean"} />
-        <meta name="apple-mobile-web-app-title" content="Glean" />
+        <meta name="twitter:site:domain" content="hashboard.com" />
+        <meta name="twitter:url" content="https://hashboard.com" />
+        <meta name="og:title" content={title ? title + " – Hashboard" : "Hashboard"} />
+        <meta name="apple-mobile-web-app-title" content="Hashboard" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link
           rel="icon"
@@ -157,8 +157,8 @@ export default {
   //banner: {
   //key: '2.0-release',
   //text: (
-  //<a href="https://glean.io" target="_blank" rel="noreferrer">
-  //🎉 Glean is released. Read more →
+  //<a href="https://hashboard.com" target="_blank" rel="noreferrer">
+  //🎉 Hashboard is released. Read more →
   //</a>
   //)
   //},

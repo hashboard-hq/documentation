@@ -1,5 +1,5 @@
 {
-  "cli": { "title": "Using the Glean CLI" },
+  "cli": { "title": "Using the Hashboard CLI" },
   "yaml-editor": { "title": "Using the YAML Editor" },
   "resource-identifiers": { "title": "Resource Identifiers" },
   "config-schema": { "title": "Configuration Schemas" },

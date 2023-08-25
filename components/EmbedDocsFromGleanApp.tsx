@@ -33,7 +33,7 @@ export default function EmbedDocsFromGleanApp({
         break;
       }
       default: {
-        console.log("Unknown Glean event: ", event.data.name);
+        console.log("Unknown Hashboard event: ", event.data.name);
         break;
       }
     }
