@@ -1,0 +1,22 @@
+# Using environment variables
+
+You can use environment variables to dynamically populate Hashboard configuration files with different values at runtime. At this time this only works with the CLI and not if you trigger builds from the App with our git integration.
+
+When creating a Build using local files, the CLI will replace placeholders of the form `${ENV_VAR_NAME}` with the corresponding environment variable. For example, if your model file contains:
+
+```yaml
+hb_version: "1.0"
+name: My Data Model
+source:
+  connectionName: ${DATABASE_CONNECTION_NAME}
+  physicalName: test_table
+```
+
+...then you can preview a Build against your `dev` database by running:
+
+```bash
+$ DATABASE_CONNECTION_NAME=dev hb preview
+```
+
+Environment variable substitution is not yet supported for Builds that are triggered via a git revision.
+

@@ -1,0 +1,123 @@
+import { Callout } from "nextra-theme-docs";
+
+# Users and Permissions
+
+You can invite members to your project in Hashboard to allow them to query and
+explore data. You can use [roles](/docs/project-management/users-and-permissions) to
+limit the actions a user can take - it probably makes sense to start people with
+lower levels of permissions across the board and increase as you realize they
+need more advanced permissions.
+
+All users in your project will be able to view data in your project, but only
+owners can add additional members and only editors can change data models.
+
+It's a best practice to only allow analysts and analytically-inclined members
+of your team to edit data models. See [Data Modeling Best Practices](/docs/data-modeling/best-practices)
+
+## Add a user
+
+<Callout type="info">
+  [Direct link to your Hashboard user list](https://hashboard.com/app/p/people)
+</Callout>
+
+1. Go to the [`People`](https://hashboard.com/app/p/people) page using the link in
+   the project dropdown.
+2. Click `Users`.
+3. Click `+ Add User`.
+4. Fill out the form and click the submit button: `Add User`
+
+   - **Email:** Email to send the invite to. Projects can be setup to only allow
+     email addresses on your domain (eg. only emails ending in
+     `@yourcompany.com`).
+   - **Full Name:** User's display name. They can change this themselves at any time.
+   - **Role:** The user's role (see below).
+
+5. The invited user will receive an email with an invite link. The user can then
+   either create a username and password or use Google authentication to login.
+
+## Default roles
+
+Hashboard allows you to select one or more roles as "Default roles" for your project.
+These roles are automatically selected when you add new users to your project. 
+
+You can change the default roles for your project by going to the `People` from the left sidebar and clicking on the `Roles` sections.
+Below the `Roles` section there is a `Default Roles` section where you can select the default roles for your project. You must have at least
+one default role selected at any given time, so to swap default roles, add a second role then remove the first role.
+
+<Callout type="info">
+  **Deleting default roles**— You cannot delete a role if it is selected as a default role.
+</Callout>
+
+## System provided roles
+
+There are four roles in Hashboard with increasing levels of permissions. When adding a new user, our system-provided default role is `Editor`. 
+
+| Role         | Description                                                                                                            |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| Owner        | Owners can manage members in a project.                                                                                |
+| Editor       | Editors can manage data models and data connections, both creating and editing existing data models & data connections.|
+| Collaborator | Collaborators can interact with shared views, query data sources, explore data and create new saved explorations.      |
+| Viewer       | Viewers can interact with shared views, query data sources, and explore data.                                          |
+
+<Callout type="info">
+  **What permission do I need to `Download underlying data`?**— Users need a role with the `READ_RAW_DATA` permission to download underlying data. 
+  All of Hashboard's system provided roles have this permission by default so to restrict the downloading of underlying data for a subset of users you 
+  would need to remove the `READ_RAW_DATA` permission from one of system provided roles, or create a new role that does not have the `READ_RAW_DATA` permission.
+</Callout>
+
+## Modifying roles
+
+<Callout type="warning">
+  **Limitations**— Roles are limited today in Hashboard to two main functions: 1)
+  governing which actions can be taken such as creating saved explorations and
+  editing dashboards; and 2) governing access to data models. If you do not have
+  access to read data from a data model, then saved explorations for that data
+  model will not work. Today, it is not possible to remove access from a
+  specific saved exploration independently from a data model.
+</Callout>
+
+Hashboard uses role based access control to allow users to do specific actions within Hashboard. You can assign system provided roles, configure data access and limit which actions specific users can take inside of Hashboard.
+
+1. Navigate to the `People` page using the link on the left sidebar.
+2. Click `Roles`.
+3. Click the pencil `✏️` icon next to the role you want to modify.
+4. You can edit the role name and description in the main role page.
+5. To edit a permission, again click on the pencil `✏️` icon to edit a permission rule.
+6. Here you can modify the permissions and resources associated with the permissions.
+
+## Adding new roles
+
+1. Navigate to the `People` page using the link on the left sidebar.
+2. Click `Roles`.
+3. Click the `+ New Role` button.
+4. Fill out the form and click the submit button: `Create Role`
+   - **Name:** The name of the role.
+   - **Description:** A description of the role.
+5. Your new role should appear in the list of roles. Click `Edit` button to edit the role.
+6. Your new role will initially have no permissions rules. Click the `+ Add Permission Rule` button to add a new permission rule.
+<Callout type="info">
+  **What are permission rules?**— Permission rules are a set of permissions that all operate on a common resource or resources. 
+  For example, you can create a permission rule that allows users with the role to read all dashboards in a project. 
+  You can also create a separate permission rule that allows users with the role to read only a specific data model.
+</Callout>
+7. Name your permission rule with a descriptive name. 
+8. Select resources that the rule will apply to with the `Data Access` section. 
+Click the `Add` button to select from a list of all data models as well as a wildcard that targets any data model. Alternatively you can click the `Add all` button to add all models to the rule and the selectively remove models.
+8. Select permissions that the rule will apply to with the `Permissions` section. 
+Click the `Add` button to select from a list of all permissions. Alternatively you can click the `Add all` button to add all permissions to the rule and the selectively remove permissions.
+You can also easily start from the system defined roles by clicking one of additional buttons in the `Permissions` section.
+9. Once you are done configuring a permission rule, you can either add more permission rules or click the `Save` button to save the role.
+10. After you save, the role is now available to assign to users.
+
+
+## Deleting roles
+Aside from roles selected as [default roles](#default-roles), you can delete roles at any time.
+
+<Callout type="error">
+  When you delete a role, users with the deleted role will **immediately** lose that role and any permissions associated with it.
+</Callout>
+
+
+
+There is not way to restore a deleted role within Hashboard, but if you accidentally delete a role and need to restore it, contact us at [support@hashboard.com](mailto:support@hashboard.com)
+and our support team can restore it for you.

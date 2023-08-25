@@ -1,0 +1,18 @@
+import { Callout, Card, Cards } from "nextra-theme-docs";
+
+# Using the Hashboard CLI
+
+The Hashboard CLI allows you to create Preview and Deploy Builds directly from your terminal or continuous integration system.
+
+## Recommended workflows
+
+The CLI allows you to integrate Hashboard into your existing development and deployment process. As an example, here is a typical workflow that we use when making changes to Hashboard resources or upstream data:
+
+1. Store your Hashboard configuration files in a git repo alongside your data pipeline code.
+2. Run your pipelines to populate test data into a separate database or schema.
+3. Adjust your Hashboard configuration files as necessary to reflect your intended changes.
+4. Run `hb preview` to create a Preview Build, adjusting the `source` section of your model(s) to point at your test dataset.
+5. Make any necessary adjustments in the Preview and re-export your new configuration files.
+6. Send a Pull Request for all the pending changes, including a link to your Preview Build.
+7. Merge the Pull Request into your `main` git branch.
+8. Run `hb deploy --git-revision=main` to deploy your new Hashboard resources to your project.

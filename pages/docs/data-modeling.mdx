@@ -1,0 +1,39 @@
+import { Callout } from "nextra-theme-docs";
+
+# Data Models
+
+Data models in Hashboard allow you to define how your organization will measure, track and explore data. Defining the logic for your analytics upfront allows your users to dig in and analyze data without writing code or worrying about whether they can trust their results. This declarative workflow allows the analyst and data team to manage how you think about your business and Hashboard will build a user interface automatically that helps you explore that data.
+
+## Creating and Editing a Data Model
+
+There are two places where you will encounter and configure data models: when you first Add Data to the data model and by editing the data model.
+
+**Add a data model**
+
+See [Add Data Model](/docs/data-modeling/add-data-model) to see how to setup your first data models.
+
+**Editing a data model**
+
+1. Select the [More](/docs/visualizing-data/chart-menu) button on the top right-hand of the chart.
+2. Select `Edit Data Model`
+
+## Why use Data Models?
+
+One data model will result in many charts and analyses that will be built off of it. In most tools you write SQL (or some other code that gets you to a small dataset) and you build a visualization on that specific code. By specifying a data model first, we allow users that don't know SQL (or just don't have the time to write SQL) to dig into the data.
+
+More importantly, defining your data model will allow you to avoid having multiple versions of the same measurements. Two users looking to answer a single question will end up with the same chart - which is rarely the case in conventional data visualization.
+
+<Callout type="info">
+  **Consolidate Data Models**- Don't create a new data model for each chart or
+  analysis you produce. For the most part, you should try to reuse data models
+  and extend and expand on them when you want to produce a new analysis (instead
+  of starting from scratch)
+</Callout>
+
+## Measures and Attributes
+
+Data models have two components:
+
+- [Measures](/docs/data-modeling/measures): Measurements that go up and down over time. They are numeric and aggregate your data (like a count or a sum).
+
+- [Attributes](/docs/data-modeling/attributes): These allow you to filter and group data in Hashboard, and make use of dates.

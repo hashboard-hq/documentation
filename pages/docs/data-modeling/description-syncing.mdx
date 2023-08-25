@@ -1,0 +1,38 @@
+import { Callout } from "nextra-theme-docs";
+
+# Description Syncing
+
+If you've added descriptions to your columns via column comments/descriptions or
+dbt `persist-docs`, Hashboard will automatically import those descriptions when you
+create a Data Model or add new Attributes to it. Additionally, if your model was
+created using the Hashboard [dbt integration](../data-ops/dbt-integration.mdx), it
+will automatically include descriptions from your dbt model schema.
+
+In addition, if the comments/descriptions in your table change, you can import
+the latest values using the `Import descriptions` feature in the Model Builder.
+
+## Example
+
+For example, if you have a BigQuery table with a column that has a description:
+
+<img
+  src="/description_syncing/bigquery-example-column-description.png"
+  alt="BigQuery table with column description."
+  style={{ padding: "20px" }}
+/>
+
+Hashboard will automatically import that description when you create a Data Model for that table:
+
+<img
+  src="/description_syncing/hashboard-attribute-card-with-description.png"
+  alt="Hashboard automatically imports the description."
+  style={{ padding: "20px 0" }}
+/>
+
+In addition, you can import descriptions explicitly using the `Import descriptions` feature:
+
+<img
+  src="/description_syncing/hashboard-attribute-import-modal.png"
+  alt="Hashboard import description feature."
+  style={{ padding: "20px" }}
+/>

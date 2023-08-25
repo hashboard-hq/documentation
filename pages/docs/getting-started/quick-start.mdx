@@ -1,0 +1,65 @@
+import { Callout, Steps } from "nextra-theme-docs";
+
+# Quick Start in the App
+
+Once you get access to Hashboard, you will be invited to login to a project. Users can belong to multiple projects, but data cannot be shared between projects. So users, permissions, database connections, data models and every other resource is isolated in the context of a project. Typically your entire organization can be managed in a single project.
+
+<Callout type="info">
+  **Not ready to connect to a database?**- You can use a [Sandbox demo
+  project](/docs/project-management/demo-projects) to test the functionality of
+  Hashboard with sample datasets.
+</Callout>
+
+<Steps>
+
+### Add a database connection
+
+Also see [database connections](/docs/database-connections) for configurations specific to different database types.
+
+<Callout type="warning">
+  **Firewall Configuration**- If you use a firewall to restrict access to your
+  database, you'll need to allowlist Hashboard's IPs. Hashboard will always connect to
+  your database from one of these IP addresses.
+
+```
+18.210.29.198
+34.230.230.9
+```
+
+</Callout>
+
+1. [Go to the Settings page](https://hashboard.com/app/p/settings).
+2. Click `+ New Database Connection`.
+3. Select the type of database; either Athena, BigQuery, Snowflake, Postgres, Redshift, ClickHouse or DuckDB.
+4. Enter the credentials according to your type of database.
+5. Click `Test` to test your connection.
+6. Click `Add` to complete the process.
+
+### Define a data model
+
+Every chart and analysis is based on a Hashboard data model.
+
+1. [Go to your project homepage](https://hashboard.com/app/) and click `New Data Model`.
+   Select a database connection, click on a table name, and click `Build Model`.
+
+<Callout type="info">
+  **Using a SQL Query**- Each Hashboard data model is based on an underlying data
+  table. If the data in your data isn't quite in the right format, it's possible
+  to specify an underlying query as the basis for your data model.
+</Callout>
+
+2. Edit the name of the data model at the top of the page.
+3. Add additional measures and attributes by clicking `Add measure` and `Add attribute` next to the name of the field.
+3. Create a SQL based custom measure by clicking `Add custom measure` (see [Measures]() for more details).
+4. Click `Save Model` then click `Open in Explore` to start exploring the data.
+
+### Start interacting with your data
+
+1. On the previous page you can also simply click "Save & Explore" to jump right into the data explorer.  To start a new data exploration [Go to the Data Models page](https://hashboard.com/app/p/data-models).
+2. Click on the name of the data model we just created.
+
+> You're ready to begin interacting with your data. Next, [learn how to use the
+> Attribute Tray](/docs/visualizing-data/attribute-tray) to filter and breakout
+> your data.
+
+</Steps>

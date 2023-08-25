@@ -1,0 +1,13 @@
+{
+  "getting-started": { "title": "Getting Started" },
+  "data-modeling": { "title": "Data Models" },
+  "metrics": { "title": "Metrics" },
+  "database-connections": { "title": "Database Connections" },
+  "visualizing-data": { "title": "Data Explorer" },
+  "sharing-data-externally": { "title": "Sharing Data Externally" },
+  "dashboards": { "title": "Dashboards" },
+  "data-ops": { "title": "Developer Reference" },
+  "project-management": { "title": "Project Management" },
+  "guides": { "title": "Guides" },
+  "faq": {"title": "Frequently Asked Questions"}
+}

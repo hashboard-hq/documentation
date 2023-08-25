@@ -1,0 +1,42 @@
+# Filters
+
+Dashboard filters can be used to filter multiple charts or metrics at once.
+You can specify the default value for each filter that you add, or leave it
+blank to allow viewers to specify the filter only when they wish to.
+
+If there are specific charts or metrics that you would like the filters to ignore,
+you can check the "Ignore Dashboard Filters" setting in their configuration menu.
+
+## Editing filters
+
+Filters can be added to the dashboard globally or to any section once there are
+charts or metrics which can be filtered. Click the `+` button then select the
+attribute or timestamp you wish to filter on. You can remove a filter by clicking
+the `X` icon next to it.
+
+You can click one a specific filter to edit its value. When editing a dashboard,
+any value set here will become the default value for the filter when viewers
+load the dashboard.
+
+## Filter hierarchy
+
+Filters exist at three levels. When filters from different levels overlap,
+they are prioritized as such:
+
+1. Section filters
+2. Global filters
+3. Saved Exploration / Metric filters
+
+![Filter hierarchy](/dashboards/filter-hierarchy.png)
+
+Note that filter rules do not combine together - a filter with higher priority will completely override a filter with a lower priority. 
+
+## Filter synchronization
+
+Generally, dashboard filters are automatically synchronized based on the underlying column name of your attributes. For example, if you have two data models, each with an attribute based on a `customer_id` field, you only need to
+add one filter to the dashboard, and it will filter both data models by the provided value.
+
+You can turn off filter syncing by unchecking the "Apply to all models" option when configuring the filter. The filter will then be applied only to the model that the attribute comes from. 
+For attributes that come from models that are joined to other models in the dashboard, filter syncing will be off by default. 
+
+

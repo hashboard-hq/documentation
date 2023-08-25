@@ -1,0 +1,78 @@
+import { Steps, Tabs, Tab, info, Callout } from 'nextra-theme-docs'
+
+# Managing Staging and Production Environments in Hashboard
+
+In Hashboard you can manage ephemeral environments for your Business Intelligence dashboards that point to stage and production using [previews](/docs/data-ops/cli/preview). Although there is no explicit feature to manage multiple environments, you can leverage environmental variables in the Hashboard config spec to achieve this. This guide will walk you through how to set up and manage different environments for your data models.
+
+<Steps>
+### Point at different schemas with Environmental Variables or dbt itegration
+
+Hashboard allows you to use [environmental variables](/docs/dataops/environment-variables) in your config files. This enables you to switch between different database connections or other settings based on the environment you're working in.
+
+You can also use any dbt jinja or dbt macros to templatize or switch between different environments in Hashboard.
+
+<Tabs items={['Hashboard config', 'dbt']}>
+  <Tab>
+    You can set the environment variable in the context where you run your CLI and then specify your configuration file with that environment variable:
+    ```yaml filename="model.yml" copy {8}
+    hbVersion: "1.0"
+    type: model
+    alias: product_user_events
+    name: Product User Events
+    source:
+      connectionName: bigquery-hashboard-analytics
+      physicalName: events
+      schema: ${DB_SCHEMA}
+    cols:
+      - id: sent_at
+        type: attribute
+        physicalName: sent_at
+      - id: bounce_rate
+        type: metric
+        name: bounce rate
+        formattingOptions:
+          fixedDecimals: 0
+          formatAsPercent: true
+        sql: safe_divide(sum(if(event_name='bounceResource',1,0)),count(distinct user_id))
+    ```
+  </Tab>
+  <Tab>
+  ```yaml dbt_project.yml copy {11}
+  
+  models:
+    +meta:
+      # glean-defaults settings will be merged into each Hashboard model
+      glean-defaults:
+        glean: "1.0"
+        # preventUpdatesFromUI defaults to true, but can be set to false
+        preventUpdatesFromUI: false
+        source:
+          connectionName: bigquery-prod # you could also toggle the db connection
+          schema: "{{ target.schema }}"
+          # or you could do an env variable:
+          # schema: "{{ env_var('HB_SCHEMA_ENV') }}"
+          # OR a macro:
+          # schema: "{{ my_custom_macro(env) }}"
+  ```
+  </Tab>
+</Tabs>
+
+### Creating Dev and Staging Schemas
+
+You can create a development schema within your database and specify this dev or staging schema when building your data pipelines. You can then specify this same schema in your config files. This enables you to maintain a development environment that is separate from your production environment.  These are all possible environments you might want to configure:
+
+- **production** - the production environment will have your main analytics database and you will use [deploy](/docs/data-ops/cli/deploy) to update production in Hashboard
+- **staging** - your staging environment will point at a schema like `stage` in your database - you will create a new [preview](/docs/data-ops/cli/preview) each time staging changes
+- **local development** - during local testing you might have a dev schema `dev_carlos` - you can create a preview anytime you want to see how Hashboard looks with your current changes
+- **continuous integration environments** - some systems like dbt cloud can create a new schema for each pull request in git, you can again create a new preview environment in hashboard that points at each of these different CI environments
+
+<Callout type="info">
+ *Prepending Table Names* - An alternative to creating a separate schema is to prepend your table names with an environment indicator like `dev_`. This allows you to easily distinguish between production and development tables in the same schema.
+</Callout>
+
+### Building Hashboard Previews
+
+Once you have set up your dev schema or prepended your table names, you can build [Hashboard previews](/docs/data-ops/cli/preview) that point to these dev tables. This way, you can test changes and run models in a development environment before promoting them to production.  Also see the guide on [continuous integration](/docs/data-ops/continuous-integration) workflows.
+
+Each preview acts as it's own ephemeral environment - so you don't just have a single staging environment, but an environment for any change that you can reference.
+</Steps>

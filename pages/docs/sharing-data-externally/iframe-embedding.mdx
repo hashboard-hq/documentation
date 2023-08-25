@@ -1,0 +1,84 @@
+import { Callout } from "nextra-theme-docs";
+
+# Analytics Embedding
+
+Hashboard supports embedding Data Models, Saved Explorations, and Dashboards in external applications via an iframe.
+
+## Embedding a resource
+
+To embed a Hashboard resource, add `viewMode=embed` to the URL parameters of your Data Model, Saved Exploration, or Dashboard URL and set that URL to be the `src` of an `iframe` HTML tag.
+
+For instance, if your Saved Exploration URL is:
+
+```
+https://hashboard.com/app/sv/Sgf5dLgMfFeafeDe
+```
+
+then corresponding embedded iframe will be:
+
+```
+<iframe src="https://hashboard.com/app/sv/Sgf5dLgMfFeWVzie?viewMode=embed"></iframe>
+```
+
+When embedded, the Hashboard side navigation bar is replaced with an information bar at the bottom of the iframe. See [examples](#examples) below.
+
+<Callout type="info">
+  Right now we do not offer complete white labeling. Embeds via Hashboard surface our logo and a button to open the application at the bottom of the frame.
+</Callout>
+
+## Authentication
+
+Viewers must be logged in to Hashboard in order to see an embedded resource. If the current user is not logged in, they will be prompted to do so via an embedded login flow.
+
+Resource embeds can be combined with [Project Invite Links](/docs/project-management/invite-links) to enable self-service access to your Hashboard project. To do so:
+
+1. Enable [Project Invite Links](/docs/project-management/invite-links) on your project, if not already turned on.
+2. Copy the `projectInviteToken` parameter from your invite link and append it to your embedded URL.
+
+For instance, if your project invite link is:
+
+```
+https://hashboard.com/app?projectInviteToken=p-Ip2Lw8ep6XafEzSo_NF
+```
+
+and your Saved Exploration URL is:
+
+```
+https://hashboard.com/app/sv/Sgf5dLgMfFeafeDe
+```
+
+Then your self-service embed URL would be:
+
+```
+https://hashboard.com/app/sv/Sgf5dLgMfFeWVzie?viewMode=embed&projectInviteToken=p-Ip2Lw8ep6XafEzSo_NF
+```
+
+Embedded resources are also compatible with [Get Access Domains](/docs/project-management/get-access-domains). If enabled, any user with an email address from your organization's domain will be able to create a Hashboard account via the embedded resource.
+
+## Examples
+
+### Embedded Data Model
+
+<iframe
+  width="100%"
+  height="800px"
+  src="https://demo.hashboard.com/app/m/b76d1af8-69c3-3870-bdd2-46cdb2cc14df?viewMode=embed"
+></iframe>
+
+### Embedded Saved Exploration
+
+<iframe
+  width="100%"
+  height="800px"
+  border="1px"
+  src="https://demo.hashboard.com/app/sv/35a0e69c-8bf1-375b-84e1-68604b83ec0a?viewMode=embed"
+></iframe>
+
+### Embedded Dashboard
+
+<iframe
+  width="100%"
+  height="1000px"
+  border="1px"
+  src="https://demo.hashboard.com/app/dsb/40b45ca1-463d-3380-96c6-10d944738b08?viewMode=embed"
+></iframe>

@@ -1,0 +1,14 @@
+import { Cards, Card } from "/components/Cards";
+import { Terminal, MousePointerSquare } from 'lucide-react';
+import { iconProps } from "/components/Icon"
+
+# Welcome to Hashboard
+
+Hashboard is an interactive data exploration tool that enables anyone in your organization to discover actionable insights. If you have feedback about the product or this documentation, please reach out to [product@hashboard.com](mailto:product@hashboard.com) or feel free to [open a PR or issue in our docs github repo](https://github.com/hashboard-hq/documentation).
+
+<br />
+
+<Cards num={2}>
+  <Card arrow icon={<MousePointerSquare {...iconProps}  />} title="Quickstart in the App" href="/docs/getting-started/quick-start" />
+  <Card arrow icon={<Terminal {...iconProps} />} title="Quickstart from the Command Line" href="/docs/data-ops/quickstart" />
+</Cards>

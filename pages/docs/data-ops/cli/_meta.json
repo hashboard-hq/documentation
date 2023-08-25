@@ -1,0 +1,10 @@
+{
+  "preview": "preview",
+  "deploy": "deploy",
+  "pull": "pull",
+  "token": "token",
+  "cache": "cache",
+  "databases": "databases",
+  "tables": "tables",
+  "upload": "upload"
+}
