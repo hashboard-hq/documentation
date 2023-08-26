@@ -2,22 +2,31 @@ import { Cards, Card } from 'nextra-theme-docs'
 
 # Deploy
 
-Deploy is a convenience function which works similarly to `glean build --deploy`.  The one other difference is that `deploy` will allow you to preview your build before deployment and show you what will change.
+Deploy will update your Hashboard project with changes in your local configuration files.
+
+The `deploy` command works with dbt and git workflows:
 <br />
 <Cards>
-  <Card arrow icon=" 🏗️ " title="build options" href="./build" />
+  <Card arrow icon=" " title="dbt workflows" href="/docs/data-ops/dbt-integration" />
+  <Card arrow icon=" " title="git workflows" href="/docs/data-ops/git-integration" />
 </Cards>
+
 <br />
+
+## Examples
 
 ```bash filename="examples"
 # this will run a preview first and ask if you really want to deploy:
-glean deploy
+hb deploy
 
-# these two commands are identail
-glean deploy --no-preview
-glean build --deploy
+# this will skip the preview step
+hb deploy --no-preview
 
-# you can use deploy with all the same workfows as build:
-glean deploy --dbt
-glean deploy --git-revision=main
+# you can use deploy with dbt and git workflows:
+hb deploy --dbt
+hb deploy --git-revision=main
 ```
+
+## Empty builds
+
+By default, Hashboard prevents you from building empty projects, because this is usually a mistake (and could result in the deletion of resources).  To get around this, you can pass in the flag `--allow-dangerous-empty-build`

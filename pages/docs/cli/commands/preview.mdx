@@ -2,31 +2,29 @@ import { Cards, Card, Steps } from 'nextra-theme-docs'
 
 # Preview
 
-The preview command in Glean is a safe way to see what Glean configuration files will look like inside of Glean without affecting the state of the BI tool.  Pull makes forking and expirmenting with Glean from the command line cheap and easy.  A preview goes through the following steps:
+The preview command in Hashboard is a safe way to see what Hashboard configuration files will look like inside of Hashboard without affecting the state of the BI tool.  Pull makes forking and experimenting with Hashboard from the command line cheap and easy.  A preview goes through the following steps:
 
-1. Validate that local glean configuration files and dbt configuration (if using `--dbt`)
-2. Validate that the data warehouse schema is in sync with your models and metrics
-3. Create a copy of your main project and put it into a safe, containerized preview of your project
-   a. provides you a link to this forked version of your project
-4. Apply the configuration state fro your local file system
-5. Provide you a list of all "managed" resources that are changed: either created, updated, deleted or unchanged
+1. Validates local Hashboard configuration files and dbt configuration (if using `--dbt`)
+2. Validates that the data warehouse schema is in sync with your data models
+3. Creates a copy of your main project and puts it into a safe, containerized preview of your local changes and provides you a link to this forked version of your project
+4. Provides you with a list of all managed resources that are changed—either created, updated, deleted or unchanged
 
-You can also generate a preview with `glean build`, so all the workfows: like git workflows, dbt workflows etc. that are available with the `build` command are also available in the `preview` command.
-
+The `preview` command works with dbt and git workflows.
 <br />
 <Cards>
-  <Card arrow icon=" 🏗️ " title="build options" href="./build" />
+  <Card arrow icon=" " title="dbt workflows" href="/docs/data-ops/dbt-integration" />
+  <Card arrow icon=" " title="git workflows" href="/docs/data-ops/git-integration" />
 </Cards>
 
 
 ## Previewing resources
 
 <Steps>
-### run `glean preview`
+### run `hb preview`
 
 ```bash {30}
 # from the root of your dbt directory
-$ glean preview --dbt
+$ hb preview --dbt
 
 🐇 Running `dbt parse` to generate a manifest file.
 
@@ -59,7 +57,7 @@ Details: https://glean.io/app/p/builds/16LDUF46wuCwM8B2
 
 ### open the build
 
-Goto the build preview link at the bottom of the build details, for example `https://glean.io/app/p/builds/16LDUF46wuCwM8B2`. The build preview gives a list of resources with preview links.
+Go to the build preview link at the bottom of the build details, for example `https://glean.io/app/p/builds/16LDUF46wuCwM8B2`. The build preview gives a list of resources with preview links.
 <br />
 
 <img src="/build.png" style={{maxWidth: "600px" }} />
@@ -67,7 +65,7 @@ Goto the build preview link at the bottom of the build details, for example `htt
 
 ### navigate resource previews
 
-Click any resource to open the preview and start to explore.  The build is added as a url parameter so you can share links (or post them to PR's etc.).  You can navigate through your entire project in the preview mode.
+Click any resource to open the preview and start to explore.  The build is added as a url parameter so you can share links (or post them to PRs etc.).  You can navigate through your entire project in the preview mode.
 
 <br />
 
