@@ -1,78 +1,8 @@
-import { Callout } from "nextra-theme-docs";
+import { Callout, Card, Cards } from "nextra-theme-docs";
 
 # Using the Hashboard CLI
 
 The Hashboard CLI allows you to create Preview and Deploy Builds directly from your terminal or continuous integration system.
-
-## Quickstart
-
-### 1. Create an Access Key
-
-To use the CLI with your Hashboard project, you need an **Access Key**. An Access Key is used by Hashboard to identify who you are and what resources you have access to. You should use a separate Access Key for each distinct user or service using the CLI.
-
-1.  Go to the [`Settings`](https://hashboard.com/app/p/settings#access_keys) page using the link in the project dropdown
-2.  Click on `Access Keys`
-3.  Click `+ New Access Key` in the top right and follow the instructions. Your Access Key file will be downloaded automatically.
-4.  Move your Access Key to the default location CLI will look for it
-
-```bash
-$ mkdir ~/.hashboard
-$ mv ~/Downloads/hb_access_key.json ~/.hashboard/
-```
-
-<Callout type="warning">
-  Once you navigate away from the page, you will not be able to re-download your
-  Access Key. If you lose your Access Key, you will need to delete it and then
-  create a new one.
-</Callout>
-
-### 2. Install Hashboard CLI
-
-1. Confirm [Python 3](https://www.python.org/downloads/) is installed:
-
-   ```bash
-   $ python3 --version
-   ```
-
-2. Install Hashboard CLI into a virtual environment:
-
-   ```bash
-   $ python3 -m venv venv
-   $ source venv/bin/activate
-   $ pip3 install hashboard-cli
-   ```
-
-3. Confirm sucessful installation:
-
-```bash
-$ hb
-Usage: hb [OPTIONS] COMMAND [ARGS]...
-
-  A command-line interface for interacting with Hashboard.
-
-Options:
-...
-```
-
-Use the `--help` flag to see documentation about a specific command. For example:
-
-```bash
-$ hb preview --help
-Usage: hb preview [OPTIONS] [FILEPATH]
-
-  Validates resource configurations and generates a preview link.
-
-Options:
-...
-```
-
-## Moving your Access Key
-
-By default, the CLI expects your Access Key to be located at `~/.glean/hashboard_access_key.json`. You can override this by:
-
-- Setting the `HASHBOARD_CREDENTIALS_FILEPATH` environment variable to a different filepath
-- Using the `--credentials-filepath` command-line option to use a different filepath
-- Setting the `HASHBOARD_PROJECT_ID`, `HASHBOARD_ACCESS_KEY_ID`, and `HASHBOARD_SECRET_ACCESS_KEY_TOKEN` environment variables to the respective values stored in your Access Key file.
 
 ## Using environment variables
 
@@ -81,7 +11,7 @@ You can use environment variables to dynamically populate Hashboard configuratio
 When creating a Build using local files, the CLI will replace placeholders of the form `${ENV_VAR_NAME}` with the corresponding environment variable. For example, if your model file contains:
 
 ```yaml
-glean: "1.0"
+hb_version: "1.0"
 name: My Data Model
 source:
   connectionName: ${DATABASE_CONNECTION_NAME}
@@ -113,41 +43,23 @@ The CLI allows you to integrate Hashboard into your existing development and dep
 
 You can invoke the Hashboard CLI in a continuous integration system to automatically generate previews or deploy your project.
 
-For example, if you use GitHub, the following GitHub action will generate a Build Preview of the local `glean` directory whenever you send a pull request:
+For example, if you use GitHub, the following GitHub action will generate a Build Preview of the local `hashboard` directory whenever you send a pull request:
 
 ```yaml
-name: glean-preview
+name: hashboard-preview
 on: [pull_request]
 jobs:
-  create-glean-preview:
+  create-hashboard-preview:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: pip install glean-cli
-      - run: cd glean && hb preview
+      - run: pip install hashboard-cli
+      - run: cd hashboard && hb preview
     env:
       HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID_PROD }}
       HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID_PROD }}
       HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN_PROD }}
 ```
-
-## Hashboard Pull
-
-`glean pull` is a command-line utility for moving resources from the web UI into DataOps or pulling down changes. When you invoke `glean pull` with no arguments, it will fetch all resources from your Hashboard project and save their configurations to your working directory. If you already have local files that correspond to resources in Hashboard, they will be overwritten.
-
-If you provide a [GRN](./resource-identifiers.mdx) as an argument, `glean pull` will restrict itself to only the specified resource and all resources it depends on. For example, `glean pull sv:the-sv-id` will retrieve the resource configuration for the specified saved exploration, plus any model(s) it depends on.
-
-<Callout type="warning">
-  When developing locally, you are not required to specify GRNs in Hashboard
-  resource configuration files. However, when running `hb deploy`, GRNs are
-  assigned based on the relative path from the working directory to the resource
-  configuration file. Subsequent uses of `glean pull` should therefore be run
-  from the same working directory.
-</Callout>
-
-Note that `glean pull` is a potentially destructive operation that will change files in your working directory. Make sure your `git status` is clean (no uncommitted changes in the working directory) before pulling resources.
-
-`glean pull` will not remove configuration files when the corresponding resource is deleted from the web UI.
 
 ## dbt Utility
 

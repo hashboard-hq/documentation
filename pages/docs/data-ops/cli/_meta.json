@@ -1,0 +1,6 @@
+{
+  "preview": "preview",
+  "deploy": "deploy",
+  "pull": "pull",
+  "token": "token"
+}
