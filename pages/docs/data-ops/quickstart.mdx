@@ -2,27 +2,32 @@ import { Callout, Steps } from "nextra-theme-docs";
 
 # CLI Quickstart
 
-The Glean CLI lets you build your glean resources from configuration files, with [preview](./commands/preview) builds and [deployments](./commands/deploy).  Check out [example projects on github](https://github.com/glean-io/examples).
+The Hashboard CLI lets you build your Hashboard resources from configuration files, with [preview](./commands/preview) builds and [deployments](./commands/deploy).  Check out [example projects on github](https://github.com/hashboard-hq/examples).
 
 <Steps>
-### Install the glean cli
-First signup for an account by clicking 'get access' on [glean.io](https://glean.io).
+### Install the Hashboard cli
 
 ```bash copy
-pip install glean-cli
+pip install hashboard-cli
 ```
 
-### Authenticate
+### Signup and auth
 
-The `token` command will take you through a web-based auth flow and download your access token to the default token location at ~/.glean/glean_access_key.json - you can also specify the token location with the environment variable `GLEAN_CREDENTIALS_FILEPATH`.
+First signup for an account by clicking 'get access' on [hashboard.com](https://hashboard.com) or you can signup and authenticate with a single command:
 
-```bash copy
-glean token
+```bash copy filename="signup and auth via cli"
+hb signup
+```
+
+The `token` command will take you through a web-based auth flow and download your access token to the default token location at ~/.hashboard/hashboard_access_key.json - you can also specify the token location with the environment variable `HASHBOARD_CREDENTIALS_FILEPATH`.
+
+```bash filename="if you signed up on the web" copy
+hb token
 ```
 
 ### Pull resources
-You can now test that things are working properly:
+You can now test that things are working properly, a pull command is a good one to test:
 ```bash copy
-glean pull
+hb pull
 ```
 </Steps>
