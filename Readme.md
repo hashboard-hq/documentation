@@ -1,12 +1,12 @@
-# Glean documentation
+# Hashboard documentation
 
-User-facing documentation for [Glean](https://glean.io) built with nextra / nextjs.
+User-facing documentation for [Hashboard](https://hashboard.com) built with nextra / nextjs.
 
 ## Running the docs locally
 
 ```bash
 # Pull down the git repo locally: 
-git clone git@github.com:glean-io/documentation.git
+git clone git@github.com:hashboard-hq/documentation.git
 
 cd documentation
 

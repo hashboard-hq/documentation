@@ -22,7 +22,7 @@ new onboarding flow, a new user flow?
   width="100%"
   height="500px"
   frameBorder={0}
-  src="https://demo.glean.io/app/sv/c5120fe8-b0a0-36e3-bc56-a795c081722e?viewMode=embed"
+  src="https://demo.hashboard.com/app/sv/c5120fe8-b0a0-36e3-bc56-a795c081722e?viewMode=embed"
 />
 
 For this walk-through, we're going to look at the user engagement on the tech
@@ -31,7 +31,7 @@ public datasets and is kept up to date.
 
 ## Prepare curves in your data warehouse
 
-As with all tools you build in Glean, retention curves will be as powerful as
+As with all tools you build in Hashboard, retention curves will be as powerful as
 the data model you produce for them. For large user tables, it probably makes
 sense to prepare this data in your data warehouse, but it's also possible to
 calculate retention curves on the fly using a SQL-based data model. See
@@ -106,7 +106,7 @@ A few notes on the resulting columns:
 - **cohort_month** - this is the month a user joined the site
 - **cohort_month_str** - this is a bit of a workaround: you will cast your
   cohort month to a string so you can use it as an attribute and cut by it in
-  Glean
+  Hashboard
 - **month_number** - this is the number of months since a user joined the
   platform, this will be the x axis of our curve
 - **experiment** - this is a randomly assigned experiment for each user. Note
@@ -119,14 +119,14 @@ A few notes on the resulting columns:
   will help us answer the question "of users in this month, what percent of
   users abandoned us and have not returned since"
 
-## Create the model in Glean
+## Create the model in Hashboard
 
 1. From the data exploration page, click
    [Add Data Model](/docs/data-modeling/add-data-model)
 2. Either select your prepared retention table from your data warehouse or click
    `SQL Query` and enter a SQL query similar to the one above as the basis for
    your model. Click `Create Model`
-3. Set up your data model in Glean:
+3. Set up your data model in Hashboard:
 
    - Make sure that `month` is selected as your primary date, by selecting the
      gear next to it.
@@ -152,7 +152,7 @@ A few notes on the resulting columns:
   width="100%"
   height="500px"
   frameBorder={0}
-  src="https://demo.glean.io/app/sv/c5120fe8-b0a0-36e3-bc56-a795c081722e?viewMode=embed"
+  src="https://demo.hashboard.com/app/sv/c5120fe8-b0a0-36e3-bc56-a795c081722e?viewMode=embed"
 />
 
 1. Change the chart type to a `line`
@@ -175,7 +175,7 @@ A few notes on the resulting columns:
   width="100%"
   height="500px"
   frameBorder={0}
-  src="https://demo.glean.io/app/sv/07fdf78d-0f43-3320-b3dc-612a57fdfedc?viewMode=embed"
+  src="https://demo.hashboard.com/app/sv/07fdf78d-0f43-3320-b3dc-612a57fdfedc?viewMode=embed"
 />
 
 1. Make sure you add the Active Users measure specified above.

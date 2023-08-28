@@ -4,7 +4,7 @@ import { Steps } from 'nextra-theme-docs'
 
 ## Overview
 
-Glean can import models directly from dbt by specifying metrics in your dbt yaml file. Glean will automatically sync dbt documentation and keep metrics in sync with downstream dashboards (whether they are checked into version control or not). The Glean dbt integration can also be integrated in CI/CD workflows.
+Hashboard can import models directly from dbt by specifying metrics in your dbt yaml file. Hashboard will automatically sync dbt documentation and keep metrics in sync with downstream dashboards (whether they are checked into version control or not). The Hashboard dbt integration can also be integrated in CI/CD workflows.
 
 <Steps>
 
@@ -16,18 +16,18 @@ You can use the `glean-defaults` key to specify the glean version (which is requ
 
 models:
   +meta:
-    # glean-defaults settings will be merged into each Glean model
+    # glean-defaults settings will be merged into each Hashboard model
     glean-defaults:
       glean: "1.0"
       # preventUpdatesFromUI defaults to true, but can be set to false
       preventUpdatesFromUI: false
       source:
-        connectionName: bigquery-prod # the name of the conneciton in Glean
+        connectionName: bigquery-prod # the name of the conneciton in Hashboard
 ```
 
 ### Define model information
 
-The simplest example of a Glean model just defines a metric.  Glean models must include the `glean` key in the dbt model.
+The simplest example of a Hashboard model just defines a metric.  Hashboard models must include the `glean` key in the dbt model.
 
 ```yaml filename="models/schema.yml" copy
 version: 2
@@ -52,23 +52,23 @@ models:
             aggregate: row_count
 ```
 
-### Build your Glean models
+### Build your Hashboard models
 
 This is the simplest way to preview your models, there are more advanced options below.
 
 ```bash copy
 # assuming you've already built your tables with dbt run
-glean preview --dbt
+hb preview --dbt
 
 # and later
-glean deploy --dbt
+hb deploy --dbt
 ```
 
 </Steps>
 
 ## Model specification
 
-The `glean-defaults` connection configuration in the example above gets merged into the Glean configuration inside each dbt model.  If you don't specify the defaults, you must add the complete connection information in the `meta` key of each dbt model you want imported to Glean.  Only dbt models that specify a `glean` key will get built into Glean models.  
+The `glean-defaults` connection configuration in the example above gets merged into the Hashboard configuration inside each dbt model.  If you don't specify the defaults, you must add the complete connection information in the `meta` key of each dbt model you want imported to Hashboard.  Only dbt models that specify a `glean` key will get built into Hashboard models.  
 
 ```yaml filename="schema.yml" copy
 
@@ -79,9 +79,9 @@ models:
     description: model docs here
     meta:
       glean:
-        glean: "1.0" # Glean dbt integration version
+        glean: "1.0" # Hashboard dbt integration version
         source:
-          connectionName: snowflake_production # which Glean data connection to use, can also be specified globally if you use glean-defaults
+          connectionName: snowflake_production # which Hashboard data connection to use, can also be specified globally if you use glean-defaults
     columns:
       - name: a_str
         description: some column documentation
@@ -89,23 +89,23 @@ models:
 ```
 
 Some notes on how models get built from dbt:
-- Glean will read the dbt manifest file and find all models with a `glean` key specified within the `meta` key.
-- The name of dbt model is imported into Glean as the model name (this can be overriden).
-- Columns specified explicitly in the dbt model will become attributes in Glean.
+- Hashboard will read the dbt manifest file and find all models with a `glean` key specified within the `meta` key.
+- The name of dbt model is imported into Hashboard as the model name (this can be overriden).
+- Columns specified explicitly in the dbt model will become attributes in Hashboard.
 - Descriptions on the model will get imported as model documentation.
 - You can specify additional attribute configuration in a `meta` key for a column.
 
 How data model source is determined:
-- `source` has the same options as the corresponding field of [Glean data models](./config-schema/data-models.mdx).
-- Unless otherwise specified, Glean automatically infers defaults for the source `physicalName` and `schema`. If no `connectionName` or `connectionId` is specified, Glean will try to use a connection whose name is the same as the dbt target database (e.g. `"bigquery"` or `"snowflake"`).
+- `source` has the same options as the corresponding field of [Hashboard data models](./config-schema/data-models.mdx).
+- Unless otherwise specified, Hashboard automatically infers defaults for the source `physicalName` and `schema`. If no `connectionName` or `connectionId` is specified, Hashboard will try to use a connection whose name is the same as the dbt target database (e.g. `"bigquery"` or `"snowflake"`).
 
-You may then use dbt-core to produce a [Manifest JSON file](https://docs.getdbt.com/reference/artifacts/manifest-json), which should be included with any Glean DataOps build (or preview):
+You may then use dbt-core to produce a [Manifest JSON file](https://docs.getdbt.com/reference/artifacts/manifest-json), which should be included with any Hashboard DataOps build (or preview):
 
 ```bash copy
-glean preview --dbt-manifest=./target/manifest.json
+hb preview --dbt-manifest=./target/manifest.json
 ```
 
-Glean will include each dbt column as an attribute in the corresponding Glean model. You can also add additional fields to the dbt columns to take advantage of Glean's more advanced modeling features:
+Hashboard will include each dbt column as an attribute in the corresponding Hashboard model. You can also add additional fields to the dbt columns to take advantage of Hashboard's more advanced modeling features:
 
 ```yaml
     # ... as above
@@ -121,7 +121,7 @@ Glean will include each dbt column as an attribute in the corresponding Glean mo
             primaryKey: true
 ```
 
-To add Glean metrics (or other attributes not present in the dbt model) to the imported model, you can add a `cols` field to the dbt model's `meta.glean` configuration:
+To add Hashboard metrics (or other attributes not present in the dbt model) to the imported model, you can add a `cols` field to the dbt model's `meta.glean` configuration:
 
 ```yaml
 models:
@@ -135,7 +135,7 @@ models:
             sql: COUNT(DISTINCT customer_id) / COUNT(DISTINCT create_at)
 ```
 
-Glean configuration in your dbt schema file has access to the same [templating and macros](https://docs.getdbt.com/docs/build/jinja-macros) as your dbt configuration. You could, for example, configure the Glean data connection based on your dbt target:
+Hashboard configuration in your dbt schema file has access to the same [templating and macros](https://docs.getdbt.com/docs/build/jinja-macros) as your dbt configuration. You could, for example, configure the Hashboard data connection based on your dbt target:
 
 ```yaml
 models:
@@ -149,13 +149,13 @@ models:
           connectionName: "{{ target.database }}"
 ```
 
-Imported dbt models are exclusively controlled by DataOps and cannot be saved from the web UI, though you are still free to prototype and experiment with dbt models in the Glean model editor.
+Imported dbt models are exclusively controlled by DataOps and cannot be saved from the web UI, though you are still free to prototype and experiment with dbt models in the Hashboard model editor.
 
-Column descriptions will be [automatically synced](../data-modeling/description-syncing.mdx) from dbt to the corresponding Glean model during deploys.
+Column descriptions will be [automatically synced](../data-modeling/description-syncing.mdx) from dbt to the corresponding Hashboard model during deploys.
 
 ## Global configuration
 
-If all models use the same Glean `source`, you can configure a default `source` in the `dbt_project.yml` file:
+If all models use the same Hashboard `source`, you can configure a default `source` in the `dbt_project.yml` file:
 
 ```yaml filename="dbt_project.yml"
 
@@ -164,10 +164,10 @@ models:
     +meta: # will be applied to every model in models/the_models
       glean-defaults:
         source:
-          connectionName: # which Glean data connection to use
+          connectionName: # which Hashboard data connection to use
 ```
 
-To import all dbt models in a folder as Glean models, simply add
+To import all dbt models in a folder as Hashboard models, simply add
 
 ```yaml filename="dbt_project.yml"
 
@@ -177,9 +177,9 @@ models:
       glean-defaults:
         glean: "1.0"
         source:
-          connectionName: # which Glean data connection to use
-          # schema is always optional because Glean will infer it
+          connectionName: # which Hashboard data connection to use
+          # schema is always optional because Hashboard will infer it
           schema: "{{ target.schema }}" # can use jinja substitution here
 ```
 
-This configuration will add the `meta.glean` object to every model in `the_models`, so they will all be imported into Glean. You can still add additional metadata for the specific models (such as adding additional metrics).
+This configuration will add the `meta.glean` object to every model in `the_models`, so they will all be imported into Hashboard. You can still add additional metadata for the specific models (such as adding additional metrics).

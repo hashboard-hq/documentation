@@ -2,7 +2,7 @@ import { Callout } from "nextra-theme-docs";
 
 # Breakout
 
-Breaking out an attribute in Glean splits the visualization by the categories in that attribute. In a timeseries bar chart for example, you can map color to an attribute.
+Breaking out an attribute in Hashboard splits the visualization by the categories in that attribute. In a timeseries bar chart for example, you can map color to an attribute.
 
 ![Breaking out an attribute](/breakout4.gif)
 
@@ -14,10 +14,10 @@ Breaking out an attribute in Glean splits the visualization by the categories in
 
 ## Adding breakout items
 
-Glean visualizes the top six items in your attribute by default; the rest of the items are bucketed together into an `Other` category. This allows you to visualize the distribution of very high-[cardinality](https://en.wikipedia.org/wiki/Cardinality) columns easily. You can always add more groups if you want in the attribute tile, but generally, you shouldn't visualize too many items at a time - this is why we pick a low number as a default. You can control the number of groups from the attribute tile – see the [attribute tray](/docs/visualizing-data/attribute-tray) page for more details.
+Hashboard visualizes the top six items in your attribute by default; the rest of the items are bucketed together into an `Other` category. This allows you to visualize the distribution of very high-[cardinality](https://en.wikipedia.org/wiki/Cardinality) columns easily. You can always add more groups if you want in the attribute tile, but generally, you shouldn't visualize too many items at a time - this is why we pick a low number as a default. You can control the number of groups from the attribute tile – see the [attribute tray](/docs/visualizing-data/attribute-tray) page for more details.
 
 <Callout type="info">
-  When breaking out using Array attributes, Glean unnests your data, so the
+  When breaking out using Array attributes, Hashboard unnests your data, so the
   visualization depicts the distribution of all items within all arrays in your
   dataset.
 </Callout>

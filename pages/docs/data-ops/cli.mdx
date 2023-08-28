@@ -1,23 +1,23 @@
 import { Callout } from "nextra-theme-docs";
 
-# Using the Glean CLI
+# Using the Hashboard CLI
 
-The Glean CLI allows you to create Preview and Deploy Builds directly from your terminal or continuous integration system.
+The Hashboard CLI allows you to create Preview and Deploy Builds directly from your terminal or continuous integration system.
 
 ## Quickstart
 
 ### 1. Create an Access Key
 
-To use the CLI with your Glean project, you need an **Access Key**. An Access Key is used by Glean to identify who you are and what resources you have access to. You should use a separate Access Key for each distinct user or service using the CLI.
+To use the CLI with your Hashboard project, you need an **Access Key**. An Access Key is used by Hashboard to identify who you are and what resources you have access to. You should use a separate Access Key for each distinct user or service using the CLI.
 
-1.  Go to the [`Settings`](https://glean.io/app/p/settings#access_keys) page using the link in the project dropdown
+1.  Go to the [`Settings`](https://hashboard.com/app/p/settings#access_keys) page using the link in the project dropdown
 2.  Click on `Access Keys`
 3.  Click `+ New Access Key` in the top right and follow the instructions. Your Access Key file will be downloaded automatically.
 4.  Move your Access Key to the default location CLI will look for it
 
 ```bash
-$ mkdir ~/.glean
-$ mv ~/Downloads/glean_access_key.json ~/.glean/
+$ mkdir ~/.hashboard
+$ mv ~/Downloads/hb_access_key.json ~/.hashboard/
 ```
 
 <Callout type="warning">
@@ -26,7 +26,7 @@ $ mv ~/Downloads/glean_access_key.json ~/.glean/
   create a new one.
 </Callout>
 
-### 2. Install Glean CLI
+### 2. Install Hashboard CLI
 
 1. Confirm [Python 3](https://www.python.org/downloads/) is installed:
 
@@ -34,21 +34,21 @@ $ mv ~/Downloads/glean_access_key.json ~/.glean/
    $ python3 --version
    ```
 
-2. Install Glean CLI into a virtual environment:
+2. Install Hashboard CLI into a virtual environment:
 
    ```bash
    $ python3 -m venv venv
    $ source venv/bin/activate
-   $ pip3 install glean-cli
+   $ pip3 install hashboard-cli
    ```
 
 3. Confirm sucessful installation:
 
 ```bash
-$ glean
-Usage: glean [OPTIONS] COMMAND [ARGS]...
+$ hb
+Usage: hb [OPTIONS] COMMAND [ARGS]...
 
-  A command-line interface for interacting with Glean.
+  A command-line interface for interacting with Hashboard.
 
 Options:
 ...
@@ -57,8 +57,8 @@ Options:
 Use the `--help` flag to see documentation about a specific command. For example:
 
 ```bash
-$ glean preview --help
-Usage: glean preview [OPTIONS] [FILEPATH]
+$ hb preview --help
+Usage: hb preview [OPTIONS] [FILEPATH]
 
   Validates resource configurations and generates a preview link.
 
@@ -68,15 +68,15 @@ Options:
 
 ## Moving your Access Key
 
-By default, the CLI expects your Access Key to be located at `~/.glean/glean_access_key.json`. You can override this by:
+By default, the CLI expects your Access Key to be located at `~/.glean/hashboard_access_key.json`. You can override this by:
 
-- Setting the `GLEAN_CREDENTIALS_FILEPATH` environment variable to a different filepath
+- Setting the `HASHBOARD_CREDENTIALS_FILEPATH` environment variable to a different filepath
 - Using the `--credentials-filepath` command-line option to use a different filepath
-- Setting the `GLEAN_PROJECT_ID`, `GLEAN_ACCESS_KEY_ID`, and `GLEAN_SECRET_ACCESS_KEY_TOKEN` environment variables to the respective values stored in your Access Key file.
+- Setting the `HASHBOARD_PROJECT_ID`, `HASHBOARD_ACCESS_KEY_ID`, and `HASHBOARD_SECRET_ACCESS_KEY_TOKEN` environment variables to the respective values stored in your Access Key file.
 
 ## Using environment variables
 
-You can use environment variables to dynamically populate Glean configuration files with different values at runtime.
+You can use environment variables to dynamically populate Hashboard configuration files with different values at runtime.
 
 When creating a Build using local files, the CLI will replace placeholders of the form `${ENV_VAR_NAME}` with the corresponding environment variable. For example, if your model file contains:
 
@@ -91,27 +91,27 @@ source:
 ...then you can preview a Build against your `dev` database by running:
 
 ```bash
-$ DATABASE_CONNECTION_NAME=dev glean preview
+$ DATABASE_CONNECTION_NAME=dev hb preview
 ```
 
 Environment variable substitution is not yet supported for Builds that are triggered via a git revision.
 
 ## Recommended workflows
 
-The CLI allows you to integrate Glean into your existing development and deployment process. As an example, here is a typical workflow that we use when making changes to Glean resources or upstream data:
+The CLI allows you to integrate Hashboard into your existing development and deployment process. As an example, here is a typical workflow that we use when making changes to Hashboard resources or upstream data:
 
-1. Store your Glean configuration files in a git repo alongside your data pipeline code.
+1. Store your Hashboard configuration files in a git repo alongside your data pipeline code.
 2. Run your pipelines to populate test data into a separate database or schema.
-3. Adjust your Glean configuration files as necessary to reflect your intended changes.
-4. Run `glean preview` to create a Preview Build, adjusting the `source` section of your model(s) to point at your test dataset.
+3. Adjust your Hashboard configuration files as necessary to reflect your intended changes.
+4. Run `hb preview` to create a Preview Build, adjusting the `source` section of your model(s) to point at your test dataset.
 5. Make any necessary adjustments in the Preview and re-export your new configuration files.
 6. Send a Pull Request for all the pending changes, including a link to your Preview Build.
 7. Merge the Pull Request into your `main` git branch.
-8. Run `glean deploy --git-revision=main` to deploy your new Glean resources to your project.
+8. Run `hb deploy --git-revision=main` to deploy your new Hashboard resources to your project.
 
 ## Continuous integration
 
-You can invoke the Glean CLI in a continuous integration system to automatically generate previews or deploy your project.
+You can invoke the Hashboard CLI in a continuous integration system to automatically generate previews or deploy your project.
 
 For example, if you use GitHub, the following GitHub action will generate a Build Preview of the local `glean` directory whenever you send a pull request:
 
@@ -124,22 +124,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: pip install glean-cli
-      - run: cd glean && glean preview
+      - run: cd glean && hb preview
     env:
-      GLEAN_PROJECT_ID: ${{ secrets.GLEAN_PROJECT_ID_PROD }}
-      GLEAN_ACCESS_KEY_ID: ${{ secrets.GLEAN_ACCESS_KEY_ID_PROD }}
-      GLEAN_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.GLEAN_SECRET_ACCESS_KEY_TOKEN_PROD }}
+      HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID_PROD }}
+      HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID_PROD }}
+      HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN_PROD }}
 ```
 
-## Glean Pull
+## Hashboard Pull
 
-`glean pull` is a command-line utility for moving resources from the web UI into DataOps or pulling down changes. When you invoke `glean pull` with no arguments, it will fetch all resources from your Glean project and save their configurations to your working directory. If you already have local files that correspond to resources in Glean, they will be overwritten.
+`glean pull` is a command-line utility for moving resources from the web UI into DataOps or pulling down changes. When you invoke `glean pull` with no arguments, it will fetch all resources from your Hashboard project and save their configurations to your working directory. If you already have local files that correspond to resources in Hashboard, they will be overwritten.
 
 If you provide a [GRN](./resource-identifiers.mdx) as an argument, `glean pull` will restrict itself to only the specified resource and all resources it depends on. For example, `glean pull sv:the-sv-id` will retrieve the resource configuration for the specified saved exploration, plus any model(s) it depends on.
 
 <Callout type="warning">
-  When developing locally, you are not required to specify GRNs in Glean
-  resource configuration files. However, when running `glean deploy`, GRNs are
+  When developing locally, you are not required to specify GRNs in Hashboard
+  resource configuration files. However, when running `hb deploy`, GRNs are
   assigned based on the relative path from the working directory to the resource
   configuration file. Subsequent uses of `glean pull` should therefore be run
   from the same working directory.
@@ -151,4 +151,4 @@ Note that `glean pull` is a potentially destructive operation that will change f
 
 ## dbt Utility
 
-`glean preview` and `glean deploy` can optionally accept a flag, `--dbt`, which runs `dbt parse` and then uses the resulting manifest for the corresponding Glean build. See the [dbt integration documentation](./dbt-integration.mdx) for more information about the Glean dbt integration.
+`hb preview` and `hb deploy` can optionally accept a flag, `--dbt`, which runs `dbt parse` and then uses the resulting manifest for the corresponding Hashboard build. See the [dbt integration documentation](./dbt-integration.mdx) for more information about the Hashboard dbt integration.

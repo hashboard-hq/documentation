@@ -33,7 +33,7 @@ const nextJsConfig = {
     { source: "/docs/data-modeling/Data-Models-Overview", destination: "/docs/data-modeling/", permanent: false },
     { source: "/guides/data-modeling-best-practices", destination: "/docs/data-modeling/", permanent: false },
     { source: "/docs/data-modeling/best-practices", destination: "/docs/data-modeling/best-practices/", permanent: false },
-    { source: "/docs/data-ops/Using-the-Glean-CLI", destination: "/docs/data-ops/cli", permanent: false },
+    { source: "/docs/data-ops/Using-the-Hashboard-CLI", destination: "/docs/data-ops/cli", permanent: false },
     { source: "/docs/data-ops/config-schema/Data-Model", destination: "/docs/data-ops/config-schema/data-models", permanent: false },
     { source: "/docs/data-ops/config-schema/Saved-View", destination: "/docs/data-ops/config-schema/saved-explorations", permanent: false },
     { source: "/docs/data-ops/config-schema/saved-views", destination: "/docs/data-ops/config-schema/saved-explorations", permanent: false },

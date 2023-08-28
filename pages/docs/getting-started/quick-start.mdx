@@ -2,12 +2,12 @@ import { Callout } from "nextra-theme-docs";
 
 # Quick Start
 
-Once you get access to Glean, you will be invited to login to a project. Users can belong to multiple projects, but data cannot be shared between projects. So users, permissions, database connections, data models and every other resource is isolated in the context of a project. Typically your entire organization can be managed in a single project.
+Once you get access to Hashboard, you will be invited to login to a project. Users can belong to multiple projects, but data cannot be shared between projects. So users, permissions, database connections, data models and every other resource is isolated in the context of a project. Typically your entire organization can be managed in a single project.
 
 <Callout type="info">
   **Not ready to connect to a database?**- You can use a [Sandbox demo
   project](/docs/project-management/demo-projects) to test the functionality of
-  Glean with sample datasets.
+  Hashboard with sample datasets.
 </Callout>
 
 ## 1. Add a database connection
@@ -16,7 +16,7 @@ Also see [database connections](/docs/database-connections) for configurations s
 
 <Callout type="warning">
   **Firewall Configuration**- If you use a firewall to restrict access to your
-  database, you'll need to allowlist Glean's IPs. Glean will always connect to
+  database, you'll need to allowlist Hashboard's IPs. Hashboard will always connect to
   your database from one of these IP addresses.
 
 ```
@@ -28,7 +28,7 @@ Also see [database connections](/docs/database-connections) for configurations s
 
 ![](/quickstart.png)
 
-1. [Go to the Settings page](https://glean.io/app/p/settings)
+1. [Go to the Settings page](https://hashboard.com/app/p/settings)
 2. Click `+ New Database Connection`
 3. Select the type of database; either Athena, BigQuery, Snowflake, Postgres, Redshift, ClickHouse or DuckDB
 4. Enter the credentials according to your type of database
@@ -54,13 +54,13 @@ Also see [database connections](/docs/database-connections) for configurations s
   />
 </div>
 
-Every chart and analysis is based on a Glean data model.
+Every chart and analysis is based on a Hashboard data model.
 
-1. [Go to your project homepage](https://glean.io/app/) and click `New Data Model`
+1. [Go to your project homepage](https://hashboard.com/app/) and click `New Data Model`
    Select a database connection, click on a table name, and click `Build Model`
 
 <Callout type="info">
-  **Using a SQL Query**- Each Glean data model is based on an underlying data
+  **Using a SQL Query**- Each Hashboard data model is based on an underlying data
   table. If the data in your data isn't quite in the right format, it's possible
   to specify an underlying query as the basis for your data model.
 </Callout>
@@ -76,7 +76,7 @@ Every chart and analysis is based on a Glean data model.
 
 ![](/quickstart-2.png)
 
-1. [Go to the Data Models page](https://glean.io/app/p/data-models)
+1. [Go to the Data Models page](https://hashboard.com/app/p/data-models)
 2. Click on the name of the data model we just created
 
 > You're ready to begin interacting with your data. Next, [learn how to use the
