@@ -16,8 +16,8 @@ To use the CLI with your Hashboard project, you need an **Access Key**. An Acces
 4.  Move your Access Key to the default location CLI will look for it
 
 ```bash
-$ mkdir ~/.glean
-$ mv ~/Downloads/glean_access_key.json ~/.glean/
+$ mkdir ~/.hashboard
+$ mv ~/Downloads/hb_access_key.json ~/.hashboard/
 ```
 
 <Callout type="warning">
@@ -39,14 +39,14 @@ $ mv ~/Downloads/glean_access_key.json ~/.glean/
    ```bash
    $ python3 -m venv venv
    $ source venv/bin/activate
-   $ pip3 install glean-cli
+   $ pip3 install hashboard-cli
    ```
 
 3. Confirm sucessful installation:
 
 ```bash
-$ glean
-Usage: glean [OPTIONS] COMMAND [ARGS]...
+$ hb
+Usage: hb [OPTIONS] COMMAND [ARGS]...
 
   A command-line interface for interacting with Hashboard.
 
@@ -68,11 +68,11 @@ Options:
 
 ## Moving your Access Key
 
-By default, the CLI expects your Access Key to be located at `~/.glean/glean_access_key.json`. You can override this by:
+By default, the CLI expects your Access Key to be located at `~/.glean/hashboard_access_key.json`. You can override this by:
 
-- Setting the `GLEAN_CREDENTIALS_FILEPATH` environment variable to a different filepath
+- Setting the `HASHBOARD_CREDENTIALS_FILEPATH` environment variable to a different filepath
 - Using the `--credentials-filepath` command-line option to use a different filepath
-- Setting the `GLEAN_PROJECT_ID`, `GLEAN_ACCESS_KEY_ID`, and `GLEAN_SECRET_ACCESS_KEY_TOKEN` environment variables to the respective values stored in your Access Key file.
+- Setting the `HASHBOARD_PROJECT_ID`, `HASHBOARD_ACCESS_KEY_ID`, and `HASHBOARD_SECRET_ACCESS_KEY_TOKEN` environment variables to the respective values stored in your Access Key file.
 
 ## Using environment variables
 
@@ -126,9 +126,9 @@ jobs:
       - run: pip install glean-cli
       - run: cd glean && hb preview
     env:
-      GLEAN_PROJECT_ID: ${{ secrets.GLEAN_PROJECT_ID_PROD }}
-      GLEAN_ACCESS_KEY_ID: ${{ secrets.GLEAN_ACCESS_KEY_ID_PROD }}
-      GLEAN_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.GLEAN_SECRET_ACCESS_KEY_TOKEN_PROD }}
+      HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID_PROD }}
+      HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID_PROD }}
+      HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN_PROD }}
 ```
 
 ## Hashboard Pull

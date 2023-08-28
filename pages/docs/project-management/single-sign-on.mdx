@@ -41,7 +41,7 @@ Like SAML setup, we'll provide you with a link that will walk you through the ne
 In addition to the standard `id`, `emails`, `first_name`, and `last_name` attributes that we should receive automatically from your IdP on each
 SCIM event for a user, Hashboard requires the following attribute to be provided as well:
 
-`roles` → `<name_of_glean_role_1>,<name_of_glean_role_2>`
+`roles` → `<name_of_hashboard_role_1>,<name_of_hashboard_role_2>`
 (e.g. `Owner` or `Editor,SomeCustomRole`)
 
 This `roles` custom attribute must map to a comma-separated list of Hashboard role names (either built-in or custom) to assign to the given user.

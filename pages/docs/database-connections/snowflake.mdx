@@ -27,22 +27,22 @@ use role ACCOUNTADMIN;
 
 set database_name = '--YOUR DATABASE NAME--';
 set warehouse_name = '--YOUR WAREHOUSE NAME--';
-set glean_user = 'GLEAN_USER';
-set glean_role = 'GLEAN_ROLE';
+set hashboard_user = 'HASHBOARD_USER';
+set hashboard_role = 'HASHBOARD_ROLE';
 
-create user if not exists identifier($glean_user) password='--YOUR PASSWORD--';
-create role if not exists identifier($glean_role);
-grant role identifier($glean_role) to user identifier($glean_user);
+create user if not exists identifier($hashboard_user) password='--YOUR PASSWORD--';
+create role if not exists identifier($hashboard_role);
+grant role identifier($hashboard_role) to user identifier($hashboard_user);
 
 -- grant Hashboard role access to warehouse
 grant USAGE on warehouse identifier($warehouse_name)
-to role identifier($glean_role);
+to role identifier($hashboard_role);
 
 -- grant Hashboard access to database
-grant MONITOR, USAGE  on database identifier($database_name) to role identifier($glean_role);
-grant USAGE on all schemas in database identifier($database_name) to role identifier($glean_role);
-grant SELECT on all tables in database identifier($database_name) to role identifier($glean_role);
-grant SELECT on future tables in database identifier($database_name) to role identifier($glean_role);
+grant MONITOR, USAGE  on database identifier($database_name) to role identifier($hashboard_role);
+grant USAGE on all schemas in database identifier($database_name) to role identifier($hashboard_role);
+grant SELECT on all tables in database identifier($database_name) to role identifier($hashboard_role);
+grant SELECT on future tables in database identifier($database_name) to role identifier($hashboard_role);
 ```
 
 ## Create a Snowflake database connection in Hashboard
