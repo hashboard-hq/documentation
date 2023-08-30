@@ -7,5 +7,6 @@
   "dashboards": { "title": "Dashboards" },
   "data-ops": { "title": "Developer Reference" },
   "project-management": { "title": "Project Management" },
-  "guides": { "title": "Guides" }
+  "guides": { "title": "Guides" },
+  "faq": {"title": "Frequently Asked Questions"}
 }

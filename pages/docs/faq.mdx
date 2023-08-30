@@ -1,0 +1,27 @@
+# Frequently Asked Questions
+
+### How do I display the top 10 values and an "Other" section?
+1. From the Data Explorer, find the attribute you want to display the top 10 values for and [breakout by that attribute](/docs/visualizing-data/breakout#adding-and-removing-a-breakout).
+2. In the control panel, toggle on [dynamic breakouts](/docs/visualizing-data/breakout#dynamic-breakouts) with **Dynamic** toggle.
+3. Update the **Limit** to 10 with and ensure **Show Other** is checked.
+4. Your changes should take effect immediately and you should see the top 10 values and an "Other" section.
+
+### How do I import data from Excel / Google Sheets?
+
+1. Export your Excel or Google Sheets data as a CSV (Comma-Separated Values) file.
+2. Upload your CSV as a new data model by following [these steps](/docs/data-modeling/query-data-files).
+
+### How do I add an image to a dashboard?
+1. Open your dashboard in edit mode by navigating to the dashboard and clicking the **Edit** button.
+
+2. Add a [Text](/docs/dashboards/text) block to your dashboard then click into the Text block you added.
+
+3. Insert [markdown](https://commonmark.org/help/) for images utilizing the following syntax:
+
+```
+![alt text](<image URL> "image Title")
+```
+
+Replace `<image URL>` with your image's actual URL, and provide descriptive alt text and a title.
+
+4. Save your changes with the **Save** button. After saving, your image will be displayed within the Text block.
