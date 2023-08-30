@@ -1,0 +1,28 @@
+# Attributes
+
+Attributes are one of the main building blocks of data models in Hashboard. They enable things like filtering and grouping when exploring your data.
+
+You can setup and update attributes from the [Add Data Model](/docs/data-modeling/add-data-model) workflow.
+
+
+## Types
+
+The following attribute types are supported in Hashboard:
+
+| Type           | Description                              |
+|----------------|------------------------------------------|
+| Strings        | Textual data like (names, emails, etc)   |
+| Numbers        | Numeric values (integers, decimals, etc) |
+| Dates          | Time-based data (dates, timestamps, etc) |
+| Arrays         | Collections of values                    |
+| Booleans       | True/false values                        |
+
+
+## Configuration
+
+Attributes can be configured with the following optional settings:
+
+- **Description**: A readable description about the attribute - this will be surfaced when doing data explorations downstream. These can also be [synced directly from your database](/docs/data-modeling/description-syncing).
+- **Primary date**: This can be set on date attributes - it will be used throughout Hashboard as the default for time-based data explorations of your model.
+- **Primary key**: This can be set on any unique string or numeric attribute to enable joining to another model. See [Model Joins](/docs/data-modeling/model-joins) for more info.
+- **Binning**: A default bin width for the attribute - when doing data explorations, this will be used to automatically group numeric values into buckets.

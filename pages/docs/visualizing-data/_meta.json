@@ -1,1 +1,12 @@
-{}
+{
+    "explorations": "Explorations",
+    "chart-types": "Chart Types",
+    "controls": "Configuring Charts",
+    "attribute-tray": "Attribute Tray",
+    "breakout": "Breakout",
+    "calculations": "Calculations",
+    "chart-interactions": "Chart Interactions",
+    "chart-menu": "Chart Menu",
+    "data-tray": "Data Tray",
+    "filter": "Filtering data"
+}

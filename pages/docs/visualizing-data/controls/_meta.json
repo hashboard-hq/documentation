@@ -1,0 +1,17 @@
+{
+    "area-line-bar-controls": {
+      "title": "Area, Line, and Bar Charts"
+    },
+    "table-controls": {
+      "title": "Tables"
+    },
+    "pivot-table-controls": {
+      "title": "Pivot Tables"
+    },
+    "horizontal-bar-controls": {
+      "title": "Horizontal Bar Charts"
+    },
+    "source-data-table-controls": {
+      "title": "Source Data Tables"
+    }
+}

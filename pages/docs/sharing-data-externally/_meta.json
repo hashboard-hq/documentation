@@ -1,5 +1,3 @@
 {
-  "public-links": { "title": "Public Links" },
-  "slack-integration": {},
   "iframe-embedding": { "title": "Analytics Embedding" }
 }

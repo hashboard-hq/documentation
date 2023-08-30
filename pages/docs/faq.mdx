@@ -1,5 +1,16 @@
 # Frequently Asked Questions
 
+### How to find attribute tile in attribute tray?
+If you have many attributes in your data model it may not be efficient to scroll through the attribute tray to find what you're looking for. The best way to search for a specific attribute is with the [data tray](/docs/visualizing-data/data-tray). You can find the attribute tile by searching and the clicking attribute name in the attributes section in the data tray.
+
+### How do I create a bar on line chart?
+Hashboard allows you to represent multiple series with different chart types. You can click "Controls" to open the controls pane in the Data explorer, and click Y-axis title to configure the Y-axis settings. You can add another Y-axis by clicking "+" sign next to Y-axis section title. You can choose same or different chart type to assign to left or right Y-axis. You can remove Y-axis by clicking "-" next to left or right Y-axis title.
+
+### How do I create a stacked bar chart?
+1. In the control panel, set your chart type to **Bar**.
+2. [Breakout](docs/visualizing-data/breakout#adding-and-removing-a-breakout) by an attribute with multiple values.
+3. After selecting your breakout wait for the chart to refresh. The chart should automatically be stacked.
+
 ### How do I display the top 10 values and an "Other" section?
 1. From the Data Explorer, find the attribute you want to display the top 10 values for and [breakout by that attribute](/docs/visualizing-data/breakout#adding-and-removing-a-breakout).
 2. In the control panel, toggle on [dynamic breakouts](/docs/visualizing-data/breakout#dynamic-breakouts) with **Dynamic** toggle.
@@ -53,3 +64,11 @@ When updating or deleting a resource, be mindful of the possible consequences th
 
 When running a build with a model from dbt, make sure that the dbt project file contains the correct [Hashboard meta fields](/docs/data-ops/dbt-integration). 
 In addition, the --dbt flag must be used when running `hb preview` or `hb deploy` in order for dbt models to be included in the build.
+
+### How much does Hashboard cost? 
+Hashboard has public pricing options [available here](https://hashboard.com/pricing) 
+We offer free, 30-day trials for the Starter and Team plans. If you'd like to try the product out, you can get started now [here](https://hashboard.com/signup) or talk to [sales.] (mailto:sarah@hashboard.com) 
+
+### What permission does a user need to to download "Underlying data"?
+
+Users need to have a role with the `READ_RAW_DATA` permission to download underlying data. Read more about permissions and roles [here](/docs/project-management/users-and-permissions).
