@@ -99,7 +99,7 @@ How data model source is determined:
 - `source` has the same options as the corresponding field of [Hashboard data models](./config-schema/data-models.mdx).
 - Unless otherwise specified, Hashboard automatically infers defaults for the source `physicalName` and `schema`. If no `connectionName` or `connectionId` is specified, Hashboard will try to use a connection whose name is the same as the dbt target database (e.g. `"bigquery"` or `"snowflake"`).
 
-You may then use dbt-core to produce a [Manifest JSON file](https://docs.getdbt.com/reference/artifacts/manifest-json), which should be included with any Hashboard DataOps build (or preview):
+You may then use dbt-core to produce a [Manifest JSON file](https://docs.getdbt.com/reference/artifacts/manifest-json), which should be included with any Hashboard deploy (or preview):
 
 ```bash copy
 hb preview --dbt-manifest=./target/manifest.json
@@ -149,7 +149,7 @@ models:
           connectionName: "{{ target.database }}"
 ```
 
-Imported dbt models are exclusively controlled by DataOps and cannot be saved from the web UI, though you are still free to prototype and experiment with dbt models in the Hashboard model editor.
+Imported dbt models are exclusively controlled by code and cannot be saved from the web UI, though you are still free to prototype and experiment with dbt models in the Hashboard model editor.
 
 Column descriptions will be [automatically synced](../data-modeling/description-syncing.mdx) from dbt to the corresponding Hashboard model during deploys.
 

@@ -1,27 +1,8 @@
-import { Callout } from "nextra-theme-docs";
+import { Callout, Cards } from "nextra-theme-docs";
 
-# DataOps
+# Developer Reference
 
-<div style={{ position: "relative", paddingBottom: "62.5%", height: 0 }}>
-  <iframe
-    src="https://www.loom.com/embed/c7000e042e134a96a501d825dd1eaea9?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
-    frameBorder={0}
-    webkitallowfullscreen="true"
-    mozallowfullscreen="true"
-    allowFullScreen={true}
-    style={{
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%"
-    }}
-  />
-</div>
-
-DataOps in Hashboard allows you to represent your resources as configuration files, which can be stored in a Git repository and deployed to your Hashboard project as part of a change management workflow.
-
-Using DataOps, you can:
+Hashboard allows you to represent your resources as configuration files, which can be stored in a Git repository and deployed to your Hashboard project as part of a change management workflow.
 
 - ✅ **Validate** planned changes to your data warehouse or Hashboard resources to ensure that your views and dashboards don't break
 - 🏗️ **Preview updates** to your Hashboard project before making them visible to the rest of your organization
@@ -29,14 +10,9 @@ Using DataOps, you can:
 - 🧑‍💻 **Configure Hashboard** using the same tools that you use to develop your backend pipelines
 - 🚦 Use a **continuous integration** system to deploy updates to your Hashboard project
 
-DataOps is under active development and currently has some limitations, including:
+## Code-based Business Intelligence in Hashboard
 
-- The Hashboard configuration files do not yet support every feature that is available in the Hashboard web application.
-- If you build resources from a Git repository, users are still able to edit those resources through the Hashboard UI. When you re-deploy these resources with your DataOps configuration files, any changes made through the Hashboard UI will be overwritten.
-
-## DataOps Basics
-
-To use DataOps, you define one or more of your Hashboard resources using **configuration files**. A configuration file contains a complete specification of a resource. For instance, a Model configuration file contains information about which database connection to use, the name of the underlying database table, a list of attributes and metrics, etc.
+You can define one or more of your Hashboard resources using **configuration files**. A configuration file contains a complete specification of a resource. For instance, a Model configuration file contains information about which database connection to use, the name of the underlying database table, a list of attributes and metrics, etc.
 
 Using a set of configuration files, you create a **Build**. There are two different kinds of Builds:
 
@@ -49,8 +25,7 @@ Using a set of configuration files, you create a **Build**. There are two differ
   delete and create resources in Hashboard to leave your project in a consistent
   state. For example, if you delete a column in a model configuration file, all
   saved explorations that refer to that column will be automatically deleted (as
-  happens if you delete a column through the user interface). To use DataOps,
-  save the [configuration](/docs/data-ops/managing-resources-with-code) of one
+  happens if you delete a column through the user interface).  Pull the [configuration](/docs/data-ops/cli/pull) of one
   or more of your resources to your local environment or a Git repository. Then,
   you can create a Build using the [Hashboard command-line interface
   (CLI)](/docs/data-ops/using-the-glean-cli), or through the Hashboard web

@@ -1,3 +1,5 @@
+import { Callout } from "nextra-theme-docs";
+
 # Managing Resources With Code
 
 ## The build process
@@ -23,21 +25,14 @@ Full documentation of all configuration files can be found for each resource typ
 - [Color Palettes](/docs/data-ops/config-schema/Color-Palette)
 - [Homepage Launchpad](/docs/data-ops/config-schema/Homepage-Launchpad)
 
-### Exporting configuration files
 
-An easy way to get started building a configuration file is to export it from an existing Hashboard resource.
+<Callout type="info">
+**Exporting configuration files** - use the [hb pull](/docs/data-ops/cli/pull) command.
+</Callout>
 
-- Data Models:
-  1. Navigate to the [Data Models](https://hashboard.com/app/p/data-models) page
-  2. Click `Edit` for one of your Data Models
-  3. Click the `⋮` in the top-right corner
-  4. Click `DataOps Config`
-- Saved Explorations: On any Explore page, click the `⋮` in the top-right corner of the chart area, and then click `Export Saved Exploration Config File`.
-- Dashboards: On any Dashboard page, click the `⋮` in the top-right corner, and then click `View DataOps Config File`.
+### Migrating existing resources to code
 
-### Migrating existing resources into DataOps
-
-If you have existing content built in the UI and want to move it into DataOps,
+If you have existing content built in the UI and want to move it into code,
 you can specify the `grn` property on the resource. This will cause the config to
 update an existing resource with that [GRN](/docs/data-ops/resource-identifiers), instead of creating a
 new resource.
@@ -45,6 +40,6 @@ new resource.
 This can also be used to avoid recreating resources when renaming or refactoring
 the file structure of your project.
 
-### Controlled by DataOps
+### Code managed resources
 
-To protect specific resources to only be editable with DataOps, add the `preventUpdatesFromUI` flag set as `true` to any config. This prevents users from unintentionally updating critical resources from the Hashboard web application and gives your team greater control over valuable long lived resources that are core to your business needs.
+To protect specific resources to only be editable with the Hashboard deployments, add the `preventUpdatesFromUI` flag set as `true` to any config. This prevents users from unintentionally updating critical resources from the Hashboard web application and gives your team greater control over valuable long lived resources that are core to your business needs.
