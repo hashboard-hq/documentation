@@ -1,0 +1,31 @@
+# Resource Lineage
+
+Understanding Resource Lineage is crucial for maintaining the integrity and reliability of your Hashboard projects. This feature provides a comprehensive view of dependencies among various resources, enabling better decision-making when making changes.
+
+## Automatic dependency checks
+
+Hashboard validates dependencies in real-time when you make changes that could impact a dashboard or other resources. 
+
+#### Examples of dependency checks
+
+- Deleting a measure or attribute used in a saved exploration triggers a warning and shows you which saved explorations would be affected by your change.
+- Deleting a data model that's in use shows all current usages.
+- When triggering a project build preview, downstream impacts of your changes are listed.
+
+## Viewing resource lineage
+
+The Resource Lineage can be viewed as a dependency graph giving you different perspectives on how resources are connected.
+
+### Via the Builds page
+
+Follow this link: [Resource Lineage](https://hashboard.io/app/p/data-ops#resource_lineage) or
+
+1. Click the **More** menu in the navigation sidebar.
+2. Select **DataOps** from the menu.
+3. Scroll to **Resource Lineage** or 
+
+### On a per-resource basis
+
+1. Navigate to the resource you are interested in.
+2. Click on the dropdown three dots button at the top right of the page.
+3. Select **Resource Lineage** from the dropdown menu.
