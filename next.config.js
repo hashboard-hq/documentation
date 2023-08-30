@@ -26,7 +26,7 @@ const nextJsConfig = {
     { source: "/changelog", destination: "/changelog/2023_07_27", permanent: false },
 
 
-    // redirects for backwards compatability:
+    // redirects for backwards compatibility:
     { source: "/docs/dashboards/Overview", destination: "/docs/dashboards/", permanent: false },
     { source: "/docs/dashboards/saved-views", destination: "/docs/dashboards/saved-explorations", permanent: false },
     { source: "/docs/dashboards/Saved-View", destination: "/docs/dashboards/saved-explorations", permanent: false },
