@@ -25,3 +25,31 @@
 Replace `<image URL>` with your image's actual URL, and provide descriptive alt text and a title.
 
 4. Save your changes with the **Save** button. After saving, your image will be displayed within the Text block.
+
+### What to do when I get an "Unknown error" in DataOps?
+There are several potential causes for DataOps errors.
+
+#### Incorrect Configuration
+
+In Hashboard, [models](/docs/data-ops/config-schema/data-models), [saved explorations](/docs/data-ops/config-schema/saved-explorations), 
+[dashboards](/docs/data-ops/config-schema/dashboards), and [color palettes](/docs/data-ops/config-schema/color-palettes) have their own configuration schemas.
+When previewing or deploying builds, make sure that your configuration files contain all of the necessary fields. 
+
+#### Invalid or Non-Unique Alias
+
+If your resources have [aliases](/docs/data-ops/resource-identifiers), it's important to note that there are several criteria they must meet. 
+Specifically, in order for a build to deploy successfully, aliases must:
+- Be less than 120 characters in length.
+- Consist of alphanumeric characters and underscores only.
+- Be unique project-wide.
+
+#### Resource References
+
+In Hashboard, it is possible to have many resources that reference each other in different ways. 
+These references can be broken by deleting resources, updating aliases, or changing names of database connections, to name a few examples.
+When updating or deleting a resource, be mindful of the possible consequences that can occur downstream its resource lineage.
+
+#### dbt errors
+
+When running a build with a model from dbt, make sure that the dbt project file contains the correct [Hashboard meta fields](/docs/data-ops/dbt-integration). 
+In addition, the --dbt flag must be used when running `hb preview` or `hb deploy` in order for dbt models to be included in the build.
