@@ -59,9 +59,15 @@ There are four roles in Hashboard with increasing levels of permissions.
 | Collaborator | Collaborators can interact with shared views, query data sources, explore data and create new saved explorations. |
 | Viewer       | Viewers can interact with shared views, query data sources, and explore data.                                     |
 
+<Callout type="info">
+  **What permission do I need to `Download underlying data`?**— Users need a role with the `READ_RAW_DATA` permission to download underlying data. 
+  All of Hashboard's system provided roles have this permission by default so to restrict the downloading of underlying data for a subset of users you 
+  would need to remove the `READ_RAW_DATA` permission from one of system provided roles, or create a new role that does not have the `READ_RAW_DATA` permission.
+</Callout>
+
 ## Modifying roles
 
-<Callout type="info">
+<Callout type="warning">
   **Limitations**— Roles are limited today in Hashboard to two main functions: 1)
   governing which actions can be taken such as creating saved explorations and
   editing dashboards; and 2) governing access to data models. If you do not have
@@ -107,7 +113,11 @@ You can also easily start from the system defined roles by clicking one of addit
 ## Deleting roles
 Aside from roles selected as [default roles](#default-roles), you can delete roles at any time.
 
-Users with the deleted role will immediately lose that role and any permissions associated with it.
+<Callout type="error">
+  When you delete a role, users with the deleted role will **immediately** lose that role and any permissions associated with it.
+</Callout>
+
+
 
 There is not way to restore a deleted role within Hashboard, but if you accidentally delete a role and need to restore it, contact us at [support@hashboard.com](mailto:support@hashboard.com)
 and our support team can restore it for you.
