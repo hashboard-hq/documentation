@@ -1,0 +1,14 @@
+{
+    "area-line-bar-controls": {
+      "title": "Area, Line, and Bar chart controls"
+    },
+    "table-controls": {
+      "title": "Table controls"
+    },
+    "pivot-table-controls": {
+      "title": "Pivot Table controls"
+    },
+    "horizontal-bar-controls": {
+      "title": "Horizontal Bar chart controls"
+    }
+}
