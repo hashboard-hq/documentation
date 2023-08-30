@@ -35,7 +35,20 @@ of your team to edit data models. See [Data Modeling Best Practices](/docs/data-
 5. The invited user will receive an email with an invite link. The user can then
    either create a username and password or use Google authentication to login.
 
-## Default system roles
+## Default roles
+
+Hashboard allows you to select one or more roles as "Default roles" for your project.
+These roles are automatically selected when you add new users to your project. 
+
+You can change the default roles for your project by going to the `People` from the left sidebar and clicking on the `Roles` sections.
+Below the `Roles` section there is a `Default Roles` section where you can select the default roles for your project. You must have at least
+one default role selected at any given time, so to swap default roles, add a second role then remove the first role.
+
+<Callout type="info">
+  **Deleting default roles**— You cannot delete a role if it is selected as a default role.
+</Callout>
+
+## System provided roles
 
 There are four roles in Hashboard with increasing levels of permissions.
 
@@ -57,7 +70,7 @@ There are four roles in Hashboard with increasing levels of permissions.
   specific saved exploration independently from a data model.
 </Callout>
 
-Hashboard uses role based access control to allow users to do specific actions within Hashboard. You can assign default roles, configure data access and limit which actions specific users can take inside of Hashboard.
+Hashboard uses role based access control to allow users to do specific actions within Hashboard. You can assign system provided roles, configure data access and limit which actions specific users can take inside of Hashboard.
 
 1. Navigate to the `People` page using the link on the left sidebar.
 2. Click `Roles`.
@@ -65,3 +78,36 @@ Hashboard uses role based access control to allow users to do specific actions w
 4. You can edit the role name and description in the main role page.
 5. To edit a permission, again click on the pencil `✏️` icon to edit a permission rule.
 6. Here you can modify the permissions and resources associated with the permissions.
+
+## Adding new roles
+
+1. Navigate to the `People` page using the link on the left sidebar.
+2. Click `Roles`.
+3. Click the `+ New Role` button.
+4. Fill out the form and click the submit button: `Create Role`
+   - **Name:** The name of the role.
+   - **Description:** A description of the role.
+5. Your new role should appear in the list of roles. Click `Edit` button to edit the role.
+6. Your new role will initially have no permissions rules. Click the `+ Add Permission Rule` button to add a new permission rule.
+<Callout type="info">
+  **What are permission rules?**— Permission rules are a set of permissions that all operate on a common resource or resources. 
+  For example, you can create a permission rule that allows users with the role to read all dashboards in a project. 
+  You can also create a separate permission rule that allows users with the role to read only a specific data model.
+</Callout>
+7. Name your permission rule with a descriptive name. 
+8. Select resources that the rule will apply to with the `Data Access` section. 
+Click the `Add` button to select from a list of all data models as well as a wildcard that targets any data model. Alternatively you can click the `Add all` button to add all models to the rule and the selectively remove models.
+8. Select permissions that the rule will apply to with the `Permissions` section. 
+Click the `Add` button to select from a list of all permissions. Alternatively you can click the `Add all` button to add all permissions to the rule and the selectively remove permissions.
+You can also easily start from the system defined roles by clicking one of additional buttons in the `Permissions` section.
+9. Once you are done configuring a permission rule, you can either add more permission rules or click the `Save` button to save the role.
+10. After you save, the role is now available to assign to users.
+
+
+## Deleting roles
+Aside from roles selected as [default roles](#default-roles), you can delete roles at any time.
+
+Users with the deleted role will immediately lose that role and any permissions associated with it.
+
+There is not way to restore a deleted role within Hashboard, but if you accidentally delete a role and need to restore it, contact us at [support@hashboard.com](mailto:support@hashboard.com)
+and our support team can restore it for you.
