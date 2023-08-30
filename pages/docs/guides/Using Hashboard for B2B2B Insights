@@ -1,0 +1,45 @@
+# Hashboard for B2B2B 
+
+B2B2B, often abbreviated as "Business to Business to Business," refers to a specific type of business model where one company provides products or services to another company, which then integrates or resells those products/services to another business entity. In this type of model it is common for organizations to analyze data about how their business partners or customers are interacting with their product. In some cases, organizations may want to surface these insights back to their customers or users on a consistent basis and empower them and their customers to be able to indepedently explore the data. 
+
+In Hashboard, you can leverage [Partner Projects](/docs/project-management/partner-projects) to safely share data with external partners without inviting them into your main project. You can also systematically update Partner Projects by managing your Hashboard [resources with code](/docs/data-ops/managing-resources-with-code) to ensure consistency across all of your customers dashboards and saved views. 
+
+For this walkthrough, let's imagine that a media placement company called Media Corporation utilizes Hashboard to provide valuable insights to its customers – advertising agencies, who, in turn, serve consumer brands.
+
+## Understanding the Setup
+
+Media Corporation, contracting directly with Hashboard, manages the initial data from the data warehouse. They play a crucial role in collecting and organizing data for analysis. Here's how the B2B2B ecosystem is structured:
+
+**1. Media Corporation:** Contracts directly with Hashboard and manages the initial data extraction and preparation. They are responsible for setting up projects and ensuring data accuracy.
+
+**2. Advertising Agencies:** These are Media Corporation's customers. They use Hashboard and the data provided by Media Co. to analyze campaign performance, consumer behavior, and market trends.
+
+**3. Consumer Brands (End Customers):** Consumer brand companies are the final recipients of insights derived from Hashboard. Advertising agencies share the final data analysis and reports with these brands.
+
+## Getting Started with Hashboard
+
+For Media Corporation, Hashboard serves as a central hub for data insights. Here's a breakdown of the process:
+
+**1. Data Preparation:** Media Co. handles data extraction from the data warehouse and is responsible for the initial refinement of the data to ensure its accuracy and relevance.
+
+**2. Project Setup:** Media Co. creates Partner Projects within Hashboard for their advertising agency customers. These projects act as secure spaces for data collaboration for each advertising agency.
+
+**3. Managed Data Sharing:** Within the Partner Projects, Media Co. shares and manages specific datasets, metrics, and dashboards relevant to each agency's campaigns. This enables the Media Corporation's data team to systematically update templates, dashboards and resources across all of their partner projects, saving hours of work and eliminating manual, version control errors. 
+
+## Empowering Advertising Agencies
+
+The agencies benefit greatly from this structure because they're able to derive insights and share interactive, meaningful reports with their customers without getting stuck in a bottleneck with Media Corporation. 
+
+**1. Data Analysis:** The advertising agencies leverage Hashboard to analyze campaign metrics, customer engagement, and market trends. They can collaboratively explore the data from Media Co. and visualize it using various chart types, spot patterns, and draw conclusions.
+
+**2. Independent Exploration:** Hashboard's user-friendly interface enables team members of all technical skills to independently explore the data within their Partner Project. They can customize visualizations, apply filters, and surface insights without needing to rely on SQL. 
+
+**3. Scheduled Reports:** Hashboard's Scheduled Reports and alerting feature allows advertising agencies to automate the delivery of insights to their broader team. This ensures account managers and other people responsible for the relationship with the consumer brands receive timely updates on campaign performance without manual intervention.
+
+## Enhancing Consumer Brand Insights
+
+Last but not least, the data in Hashboard reaches the consumer brands. Instead of a typical static report, they're able to dig into their data to better understand their audience, campaign performance and market presence. 
+
+**1. Flexible Data Sharing:** The agencies can choose to share data from Hashboard with their customers in a variety of ways. They can add them directly to the Partner Projects, [embed the data](/docs/sharing-data-externally/iframe-embedding) in an external application or share via [public links](/docs/sharing-data-externally/public-links).
+
+**2. Data-Driven Decisions:** Consumer brands can make better informed marketing decisions based on the data shared by the advertising agencies. Users can explore and consume data in Hashboard without needing to write SQL or know complex data visualization practices. This enables more people to be data informed to optimize strategies and enhance brand engagement.
