@@ -1,5 +1,14 @@
 import EmbedDocsFromHashboardApp from "/components/EmbedDocsFromHashboardApp";
+import { Callout } from "nextra-theme-docs";
 
 # Saved Explorations
+
+<Callout type="warning">
+  Hashboard previously used the term **saved views** to refer to what are now
+  called **saved explorations**. At the moment our configuration files still
+  refer to `type: saved_view` when defining saved explorations. We plan to
+  update the schema of these configuration files in the future to use the term
+  **saved explorations** instead of **saved views**.
+</Callout>
 
 <EmbedDocsFromHashboardApp path="publicResourceSpecs/SavedView" />
