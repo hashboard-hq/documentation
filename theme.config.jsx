@@ -110,7 +110,7 @@ export default {
     "https://github.com/glean-io/documentation/tree/main/",
   darkMode: false,
   nextThemes: { defaultTheme: 'light' },
-  primaryHue: 38,
+  primaryHue: 189,
   sidebar: { defaultMenuCollapseLevel: 4, toggleButton: true },
   head: function useHead() {
     const { title } = useConfig();
