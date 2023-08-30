@@ -1,17 +1,17 @@
 import React, { useRef } from "react";
 import { useEvent } from "react-use";
 
-const GLEAN_APP_BASE_URL = process.env.NEXT_PUBLIC_GLEAN_APP_BASE_URL;
+const HASHBOARD_APP_BASE_URL = process.env.NEXT_PUBLIC_HASHBOARD_APP_BASE_URL;
 
-type EmbedDocsFromGleanAppProps = { path: string };
-export default function EmbedDocsFromGleanApp({
+type EmbedDocsFromHashboardAppProps = { path: string };
+export default function EmbedDocsFromHashboardApp({
   path
-}: EmbedDocsFromGleanAppProps) {
-  const docUrl = `${GLEAN_APP_BASE_URL}/dist/embed/embedDocs.html?${path}`;
+}: EmbedDocsFromHashboardAppProps) {
+  const docUrl = `${HASHBOARD_APP_BASE_URL}/dist/embed/embedDocs.html?${path}`;
   const iframe = useRef<HTMLIFrameElement | null>(null);
 
   useEvent("message", event => {
-    if (event.origin !== GLEAN_APP_BASE_URL)
+    if (event.origin !== HASHBOARD_APP_BASE_URL)
       return console.warn("Untrusted event", event);
     if (event.data?.type !== "gleanPublicEvent") return;
     if (!iframe.current) return;
