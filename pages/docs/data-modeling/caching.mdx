@@ -27,12 +27,18 @@ If you set this to 1, then the cache will effectively be disabled (data will onl
 3. Open `⚙️ Advanced Settings` via the `...` menu in the top right.
 4. Change the `Cache TTL`.
 
-## Manually clearing the cache
+## Bypassing the cache
+
+When viewing a saved exploration, you may want to fetch fresh data instead of using the cache.
+
+You can bypass the query cache by using the `Refresh Data` button, found in the dropdown menu in the upper-right corner when viewing a saved exploration. Additionally, there is a "refresh" icon found in the top bar.
+
+## Clearing the cache for a model
 
 Sometimes, you may know that the data a model uses has changed before Hashboard does. For example, after running an updated DBT pipeline.
 While you could just wait for the cache to expire (based on the TTL setting above), you can also immediately clear the cache for a given model.
 
-You can reset the model's cache using the [Hashboard CLI](/docs/data-ops/using-the-glean-cli):
+You can reset the model's cache using the [Hashboard CLI](/docs/data-ops/cli):
 
 ```
 hb cache clear m:MODEL_ID
