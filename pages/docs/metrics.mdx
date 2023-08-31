@@ -1,0 +1,108 @@
+import { Callout } from "nextra-theme-docs";
+
+# Metrics
+
+<Callout type="warning">
+  **Are you looking for measures?** Hashboard previously used the term **metric** to refer to what is now called a **measure**. Read more about [measures](/docs/data-modeling/measures).
+</Callout>
+
+Metrics are a quantifiable value used to assess and evaluate the performance, progress, or effectiveness of your organization. 
+By regularly measuring and analyzing your Hashboard metrics, your organization can gain valuable insights into your overall performance and inform future decision-making.
+
+## Metric types
+
+### Total
+Total metrics are the simplest type of metric. They are a single value that represents the total of all values for the selected measure. For example, a total metric might be total number of user registrations all time.
+
+On the metrics page, total metrics will display a value but no trend line.
+
+Total metrics can include filters as well over any attribute on the data model for the selected measure. For example, a total metric with a filter might be total number of user registrations all time for users in a particular region.
+To create a total metric, make sure your metric's configuration has the **Dimension** field set to **None**.
+
+### Timeseries
+Timeseries metrics are a series of values over time for the selected measure. For example, a timeseries metric might be number of user registrations per day over the last 30 days.
+
+On the metrics page, timeseries metrics will display a value and a trend line.
+
+Like total metrics, timeseries metrics can include filters over any attribute on the data model for the selected measure. For example, a timeseries metric with a filter might be number of user registrations per day over the last 30 days for users in a particular region.
+To create a timeseries metric, make sure your metric's configuration has the **Dimension** set to an attribute, rather than **None**.
+
+
+
+## Metric page
+
+### Viewing metrics
+The metrics page is where you can view all of the metrics in your project. To navigate to the metrics page, click the **Metrics** link in the left sidebar.
+
+Once on the metric page you should see all your metrics listed with information like the metric name, the current value of the metric, and a trend line if the metric is a timeseries metric. 
+
+You can search for a specific metric by name using the search bar at the top of the page. You can also filter the metrics by label, data model, timeseries granularity using the filter bar at the top of the page.
+
+Metrics can also be sorted by a variety of fields by clicking the column header for the field you want to sort by. Clicking the column header again will reverse the sort order.
+
+### Creating a metric
+Metrics are created from [measures](/docs/data-modeling/measures) on a data model. So before you can create a metric, you need [add at least one data model](/docs/data-modeling/add-data-model) to your project.
+Once you have a data model, you can create a metric by following these steps:
+
+1. Navigate to the metrics page from **Metrics** link in the left sidebar.
+2. Click the **Create metrics** button in the top right of the metrics page.
+3. Select one or more measures from the list of available measures across your data models. Once you have selected your measures, click the **Create metrics** button at the bottom of the list of measures.
+4. Your new metric will appear on the metrics page, named after the measure it is based on. Hashboard tries to automatically configure your metric based on the information in your data model.
+5. To refine your metric, continue on to the next section on editing metrics.
+
+### Editing metrics
+1. If not already on the metrics page, navigate to the metrics page from **Metrics** link in the left sidebar.
+2. Find the metric you want to edit and click the more menu (three dots) button on the right side of the metric row.
+3. Select **Edit** from the menu.
+4. The metric editor will appear. From here you can edit the various aspects of the metric.
+    - **Name** - The name of the metric. 
+    - **Description** - A description of the metric.
+    - **Labels** - Labels are used to categorize or tag similar metrics. 
+    For example, you might have a label for each department in your organization. Metrics are also filterable by label on the metrics page.
+    - **Model** - The data model the metric is based on.
+    - **Measure** - The measure the metric is based on.
+    - **Dimension** - The dimension of the metric. This is the attribute on the data model that the metric is grouped by. 
+    For example, if you have a timeseries metric for number of user registrations per day, the dimension would be the date attribute on the user registrations data model.
+    - **Granularity** - The granularity of the metric. This is the time period that the metric is grouped by. 
+    For example, if you have a timeseries metric for number of user registrations per day, the granularity would be day.
+    - **Filters** - Filters are used to limit the data that is included in the metric. 
+    For example, you might want to limit a metric to only include data for a particular region. Filters can be added for any attribute on the data model. 
+    - **Show the last** - The number of time periods to include in the metric. 
+    For example, if you have a timeseries metric for number of user registrations per day, and you set the granularity to day and the show the last to 30, the metric will include the last 30 days of data. 
+    - **Display current (incomplete)** - Whether or not to include the current time period in the metric. 
+    For example, if you have a timeseries metric for number of user registrations per day, and you set the granularity to day and show the last 30 days, and setting this toggle to true the metric will include the last 30 days of data plus the current day even if that current period is still in progress.
+    - **Goal** - The goal of the metric. This is the target value for the metric. Setting a value and comparison type will cause trend line include a a goal line.
+5. Once you have finished editing the metric, click the **Save** button at the bottom of the metric editor.
+6. Your metric will be updated with the new configuration.
+
+### Trashing and deleting metrics
+1. If not already on the metrics page, navigate to the metrics page from **Metrics** link in the left sidebar.
+2. Find the metric you want to edit and click the more menu (three dots) button on the right side of the metric row.
+3. Select **Move to trash** from the menu.
+4. A confirmation dialog will appear. Click the **Move to trash** button to confirm.
+5. The metric will be moved to the trash. To permanently delete the metric, navigate to the **Trash** page and delete the metric from there with the **Delete permanently** button. Optionally you can restore the metric from the trash by clicking the **Restore** button.
+
+## Exploring metrics
+
+Metrics are a great place to start exploring your data. You can use the metrics page to quickly view and compare metrics across your organization. 
+
+Often though, you may want to explore your metrics in more detail. For example, you might want to see the underlying data that makes up a metric, or you might want to see how the metric might change if you changed the filters.
+Clicking the metric from the metrics page will take you to the **Date Explorer** where you can explore the metric in more detail. 
+When you first arrive in the **Data Explorer** from the metrics page, you will see the metric you clicked on selected in the the [Data Tray](/docs/visualizing-data/data-tray). From the Data Tray you can quickly switch to view another metric
+from the the same data model by clicking on the metric in the Data Tray. 
+
+As you make changes in the Data Explorer, like adding new filters, breakouts, or trellises you will see the metric is no longer selected in the Data Tray. 
+This is because your current [exploration](/docs/visualizing-data/explorations) has diverged from the metric's configuration. You can click the metric in the Data Tray at any time to go back to the metric's configuration.
+
+## Metrics in dashboards
+
+With metrics, you can skip the configuration of a dashboard [metric tile](/docs/dashboards/metrics) by populating a metric tile's configuration from a metric.
+To copy a metric's configuration into a metric tile, follow these steps:
+1. Navigate to the dashboard you want to update.
+2. Click the **Edit** button in the top right of the dashboard.
+3. Find the existing metric tile you wish to update, or create a new metric tile.
+4. Open the metric tile's configuration by clicking the **Configuration** button in the top right of the metric tile.
+5. Expand the **Copy metric configuration** section and select your metric from the list of available metrics.
+6. With your metric selected, click the **Copy config** button.
+7. Your metric tile's configuration will be updated with the configuration from your metric. You can open the metric tile's configuration to review the settings or make additional changes.
+8. Once you have finished editing the dashboard, click the **Save** button in the top right of the dashboard.

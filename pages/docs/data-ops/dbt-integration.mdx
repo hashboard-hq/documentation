@@ -1,10 +1,11 @@
 import { Steps } from 'nextra-theme-docs'
+import { Callout } from "nextra-theme-docs";
 
 # dbt Integration
 
 ## Overview
 
-Hashboard can import models directly from dbt by specifying metrics in your dbt yaml file. Hashboard will automatically sync dbt documentation and keep metrics in sync with downstream dashboards (whether they are checked into version control or not). The Hashboard dbt integration can also be integrated in CI/CD workflows.
+Hashboard can import models directly from dbt by specifying measures in your dbt yaml file. Hashboard will automatically sync dbt documentation and keep measures in sync with downstream dashboards (whether they are checked into version control or not). The Hashboard dbt integration can also be integrated in CI/CD workflows.
 
 <Steps>
 
@@ -27,7 +28,7 @@ models:
 
 ### Define model information
 
-The simplest example of a Hashboard model just defines a metric.  Hashboard models must include the `glean` key in the dbt model.
+The simplest example of a Hashboard model just defines a measure.  Hashboard models must include the `glean` key in the dbt model.
 
 ```yaml filename="models/schema.yml" copy
 version: 2
@@ -51,6 +52,12 @@ models:
             name: Order Attribution Records
             aggregate: row_count
 ```
+
+<Callout type="warning">
+  Hashboard previously used the term **metric** to refer to what is now called a **measure**. 
+  At the moment our configuration files still refer to `type: metric` when creating measures inside a data model. 
+  We plan to update the schema of these configuration files in the future to use the term **measure** instead of **metric**.
+</Callout>
 
 ### Build your Hashboard models
 
@@ -121,7 +128,7 @@ Hashboard will include each dbt column as an attribute in the corresponding Hash
             primaryKey: true
 ```
 
-To add Hashboard metrics (or other attributes not present in the dbt model) to the imported model, you can add a `cols` field to the dbt model's `meta.glean` configuration:
+To add Hashboard measures (or other attributes not present in the dbt model) to the imported model, you can add a `cols` field to the dbt model's `meta.glean` configuration:
 
 ```yaml
 models:
@@ -134,6 +141,11 @@ models:
             name: Daily Active Users
             sql: COUNT(DISTINCT customer_id) / COUNT(DISTINCT create_at)
 ```
+<Callout type="warning">
+  Hashboard previously used the term **metric** to refer to what is now called a **measure**. 
+  At the moment our configuration files still refer to `type: metric` when creating measures inside a data model. 
+  We plan to update the schema of these configuration files in the future to use the term **measure** instead of **metric**.
+</Callout>
 
 Hashboard configuration in your dbt schema file has access to the same [templating and macros](https://docs.getdbt.com/docs/build/jinja-macros) as your dbt configuration. You could, for example, configure the Hashboard data connection based on your dbt target:
 

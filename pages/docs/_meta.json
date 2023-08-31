@@ -1,6 +1,7 @@
 {
   "getting-started": { "title": "Getting Started" },
   "data-modeling": { "title": "Data Models" },
+  "metrics": { "title": "Metrics" },
   "database-connections": { "title": "Database Connections" },
   "visualizing-data": { "title": "Data Explorer" },
   "sharing-data-externally": { "title": "Sharing Data Externally" },
