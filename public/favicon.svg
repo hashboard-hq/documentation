@@ -1,17 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="32px" height="32px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#F0326E;}
-	.st1{fill:#3A3134;}
-	.st2{fill:#F7AA35;}
-  @media (prefers-color-scheme: dark) {
-    #bottomLeftTriangle {
-      fill: white;
-    }
-  }
-</style>
-<path class="st0" d="M10.7,10.7H0L10.7,0V10.7z"/>
-<path id="bottomLeftTriangle" class="st1" d="M10.7,21.3V10.7H0V32h21.3V21.3H10.7z"/>
-<path class="st2" d="M10.7,0v10.7h10.7v10.7V32L32,21.3V0H10.7z"/>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="2.66669" y="2.66675" width="7.61887" height="26.6667" rx="0.666667" fill="#FF4433"/>
+<rect x="21.7144" y="2.66675" width="7.61887" height="26.6667" rx="0.666667" fill="#50B4CD"/>
+<rect x="12.1906" y="2.66675" width="7.61887" height="11.8519" rx="0.666667" fill="#FFB4E0"/>
+<rect x="12.1906" y="16.4939" width="7.61887" height="12.8395" rx="0.666667" fill="#235564"/>
 </svg>
