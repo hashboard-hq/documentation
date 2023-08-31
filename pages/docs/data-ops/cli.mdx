@@ -4,28 +4,6 @@ import { Callout, Card, Cards } from "nextra-theme-docs";
 
 The Hashboard CLI allows you to create Preview and Deploy Builds directly from your terminal or continuous integration system.
 
-## Using environment variables
-
-You can use environment variables to dynamically populate Hashboard configuration files with different values at runtime.
-
-When creating a Build using local files, the CLI will replace placeholders of the form `${ENV_VAR_NAME}` with the corresponding environment variable. For example, if your model file contains:
-
-```yaml
-hb_version: "1.0"
-name: My Data Model
-source:
-  connectionName: ${DATABASE_CONNECTION_NAME}
-  physicalName: test_table
-```
-
-...then you can preview a Build against your `dev` database by running:
-
-```bash
-$ DATABASE_CONNECTION_NAME=dev hb preview
-```
-
-Environment variable substitution is not yet supported for Builds that are triggered via a git revision.
-
 ## Recommended workflows
 
 The CLI allows you to integrate Hashboard into your existing development and deployment process. As an example, here is a typical workflow that we use when making changes to Hashboard resources or upstream data:
@@ -38,29 +16,3 @@ The CLI allows you to integrate Hashboard into your existing development and dep
 6. Send a Pull Request for all the pending changes, including a link to your Preview Build.
 7. Merge the Pull Request into your `main` git branch.
 8. Run `hb deploy --git-revision=main` to deploy your new Hashboard resources to your project.
-
-## Continuous integration
-
-You can invoke the Hashboard CLI in a continuous integration system to automatically generate previews or deploy your project.
-
-For example, if you use GitHub, the following GitHub action will generate a Build Preview of the local `hashboard` directory whenever you send a pull request:
-
-```yaml
-name: hashboard-preview
-on: [pull_request]
-jobs:
-  create-hashboard-preview:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: pip install hashboard-cli
-      - run: cd hashboard && hb preview
-    env:
-      HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID_PROD }}
-      HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID_PROD }}
-      HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN_PROD }}
-```
-
-## dbt Utility
-
-`hb preview` and `hb deploy` can optionally accept a flag, `--dbt`, which runs `dbt parse` and then uses the resulting manifest for the corresponding Hashboard build. See the [dbt integration documentation](./dbt-integration.mdx) for more information about the Hashboard dbt integration.

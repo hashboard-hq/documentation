@@ -1,8 +1,12 @@
 {
   "quickstart": { "title": "CLI Quickstart" },
+  "managing-resources-with-code": { "title": "" },
   "cli": { "title": "Using the Glean CLI" },
-  "yaml-editor": { "title": "Using the YAML Editor" },
+  "dbt-integration": { "title": "dbt Integration" },
+  "git-integration": { "title": "Git Integration" },
   "resource-identifiers": { "title": "Resource Identifiers" },
+  "environment-variables": {},
+  "continuous-integration": {},
   "config-schema": { "title": "Configuration Schemas" },
-  "dbt-integration": { "title": "dbt Integration" }
+  "yaml-editor": { "title": "Using the YAML Editor" }
 }

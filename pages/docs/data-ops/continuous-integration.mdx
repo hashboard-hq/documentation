@@ -1,0 +1,21 @@
+## Continuous integration
+
+Hashboard can serve to run continuous integration on your Business Intelligence dashboards, this can be integrated with git and dbt workflows in Glean.  You can invoke the Hashboard CLI in a continuous integration system to automatically generate previews or deploy your project.
+
+For example, if you use GitHub, the following GitHub action will generate a Build Preview of the local `hashboard` directory whenever you send a pull request:
+
+```yaml
+name: hashboard-preview
+on: [pull_request]
+jobs:
+  create-hashboard-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: pip install hashboard-cli
+      - run: cd hashboard && hb preview
+    env:
+      HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID_PROD }}
+      HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID_PROD }}
+      HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN_PROD }}
+```
