@@ -12,7 +12,12 @@ Hashboard allows you to represent your resources as configuration files, which c
 
 ## Code-based Business Intelligence in Hashboard
 
-You can define one or more of your Hashboard resources using **configuration files**. A configuration file contains a complete specification of a resource. For instance, a Model configuration file contains information about which database connection to use, the name of the underlying database table, a list of attributes and metrics, etc.
+- The Hashboard configuration files do not yet support every feature that is available in the Hashboard web application.
+- If you build resources from a Git repository, users are still able to edit those resources through the Hashboard UI. When you re-deploy these resources with your DataOps configuration files, any changes made through the Hashboard UI will be overwritten.
+
+## DataOps Basics
+
+To use DataOps, you define one or more of your Hashboard resources using **configuration files**. A configuration file contains a complete specification of a resource. For instance, a Model configuration file contains information about which database connection to use, the name of the underlying database table, a list of attributes and measures, etc.
 
 Using a set of configuration files, you create a **Build**. There are two different kinds of Builds:
 
