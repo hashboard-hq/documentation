@@ -1,7 +1,7 @@
 {
   "quickstart": { "title": "CLI Quickstart" },
-  "managing-resources-with-code": { "title": "" },
-  "cli": { "title": "Using the Hashboard CLI" },
+  "managing-resources-with-code": { "title": "Managing Resources With Code" },
+  "cli": { "title": "Using the CLI" },
   "dbt-integration": { "title": "dbt Integration" },
   "git-integration": { "title": "Git Integration" },
   "resource-identifiers": { "title": "Resource Identifiers" },
