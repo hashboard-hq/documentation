@@ -1,6 +1,6 @@
 {
   "quickstart": { "title": "CLI Quickstart" },
-  "managing-resources-with-code": { "title": "" },
+  "managing-resources-with-code": { "title": "Managing Resources With Code" },
   "cli": { "title": "Using the Glean CLI" },
   "dbt-integration": { "title": "dbt Integration" },
   "git-integration": { "title": "Git Integration" },
