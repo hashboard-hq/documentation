@@ -107,7 +107,7 @@ export default {
   logoLink: "https://hashboard.com",
   useNextSeoProps: () => ({ titleTemplate: "Hashboard - %s" }),
   docsRepositoryBase:
-    "https://github.com/glean-io/documentation/tree/main/",
+    "https://github.com/hashboard-hq/documentation/tree/main/",
   darkMode: false,
   nextThemes: { defaultTheme: 'light' },
   primaryHue: 189,
@@ -130,7 +130,7 @@ export default {
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site:domain" content="hashboard.com" />
-        <meta name="twitter:url" content="https://hashboard.com" />
+        <meta name="twitter:url" content="https://twitter.com/hashboardhq" />
         <meta name="og:title" content={title ? title + " – Hashboard" : "Hashboard"} />
         <meta name="apple-mobile-web-app-title" content="Hashboard" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
