@@ -1,0 +1,52 @@
+import { Tabs, Tab, Steps, Callout } from 'nextra-theme-docs'
+
+# Code Reviews for Business Intelligence
+
+Hashboard provides integration with git workflows to allow you to implement your code review processes. The core feature that supports this is the **Preview Build**, enabling you to review changes before they are deployed to your project. For an automated workflow, Hashboard can also be integrated with continuous integration systems to automatically generate preview builds.  This guide assumes you know the basics of git workflows like pushing remote branches and committing your code.
+
+<Steps>
+### Deploy resources to Hashboard
+
+Start by building data models and saved views in the Hashboard UI.  You can then pull them down and deploy them with the command line.  If you've already started deploying resources in Hashboard, you can ignore this step.
+
+```bash
+hb pull --all
+hb deploy
+```
+
+### Stage changes for review
+Either modify the configuration files manually on your local machine, or open the YAML editor in the GUI to learn how to make changes to your local state.  Use the `hb preview` to safely validate and review your changes.
+ 
+### Git-Based workflows and preview
+Add your changes to git, push to a remote branch and open a pull request (in Github, GitLab etc.).
+
+You can create a preview of your changes with two possible workflows:
+1. **files-based workflow** - you can run the CLI from either your local machine or through a github action or gitlab workflow.
+1. **git integration** - you can [configure Hashboard's git integration](/docs/data-ops/git-integration).  To create a preview so that people reviewing your changes can also review what Hashboard will look like after your changes are deployed.
+
+Generate a preview build:
+
+<Tabs items={['files-based workflow', 'git workflow']}>
+  <Tab>
+  Stage your files for change and simply run the preview command:
+  ```bash copy
+  hb preview # optionally with --dbt or other workflows
+  ```
+  </Tab>
+  <Tab>
+  Hashboard can pull down remote branches, or tags or commits using the `--git-revision` option
+  <Callout type="info">
+    Currently the git-based workflow does not support environment variables, you can use a files-based workflow
+  </Callout>
+  ```bash copy
+  hb preview --git-revision=<your branch name>
+  ```
+  </Tab>
+</Tabs>
+
+
+### Automated Continuous Integration workflows
+
+For more information about setting up automated workflows, see the [Continuous Integration](./continuous-integration) guide.
+
+</Steps>

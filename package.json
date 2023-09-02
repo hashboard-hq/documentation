@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "lucide-react": "^0.274.0",
     "next": "^13.2.4",
     "nextra": "^2.2.19",
     "nextra-theme-docs": "^2.2.19",
