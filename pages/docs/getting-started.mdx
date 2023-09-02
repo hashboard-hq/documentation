@@ -1,4 +1,6 @@
-import { Cards, Card, Callout } from "nextra-theme-docs";
+import { Cards, Card } from "/components/Cards";
+import { Terminal, MousePointerSquare } from 'lucide-react';
+import { iconProps } from "/components/Icon"
 
 # Welcome to Hashboard
 
@@ -7,6 +9,6 @@ Hashboard is an interactive data exploration tool that enables anyone in your or
 <br />
 
 <Cards num={2}>
-  <Card arrow title="Quickstart in the App" href="/docs/getting-started/quick-start"/>
-  <Card arrow title="Quickstart from the Command Line" href="/docs/data-ops/quickstart" />
+  <Card arrow icon={<MousePointerSquare {...iconProps}  />} title="Quickstart in the App" href="/docs/getting-started/quick-start" />
+  <Card arrow icon={<Terminal {...iconProps} />} title="Quickstart from the Command Line" href="/docs/data-ops/quickstart" />
 </Cards>

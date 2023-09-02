@@ -1,23 +1,32 @@
-import { Callout, Cards } from "nextra-theme-docs";
+import { Callout } from "nextra-theme-docs";
+import { Card, Cards } from "/components/Cards";
+import { iconProps } from "/components/Icon";
+import { CheckCircle, Users, Send, ScreenShare, IconProps, RefreshCcw } from 'lucide-react';
 
 # Developer Reference
 
 Hashboard allows you to represent your resources as configuration files, which can be stored in a Git repository and deployed to your Hashboard project as part of a change management workflow.
 
-- ✅ **Validate** planned changes to your data warehouse or Hashboard resources to ensure that your views and dashboards don't break
-- 🏗️ **Preview updates** to your Hashboard project before making them visible to the rest of your organization
-- 👥 Use **code reviews** or pull requests to collaborate on proposed changes
-- 🧑‍💻 **Configure Hashboard** using the same tools that you use to develop your backend pipelines
-- 🚦 Use a **continuous integration** system to deploy updates to your Hashboard project
+<Cards num={2}>
+  <Card icon= {<Send {...iconProps} />}  title="Configure Hashboard" href="/docs/data-ops/managing-resources-with-code">
+    Use the same tools that you use to develop your backend pipeline
+  </Card>
+  <Card icon={<CheckCircle {...iconProps} />} title="Validate" href="/">
+    Coordinate planned changes to your data warehouse or Hashboard resources to ensure that your views and dashboards don't break
+  </Card>
+  <Card icon= {<ScreenShare {...iconProps} />} title="Preview updates" href="/docs/data-ops/cli/preview">
+    View changes to your Hashboard project before making them visible to the rest of your organization
+  </Card>
+  <Card icon= {<Users {...iconProps} />} title="Code review" href="/docs/data-ops/code-review">Use code reviews or pull requests to collaborate on proposed changes</Card>
+  <Card icon= {<RefreshCcw {...iconProps} />} title="Continuous integration" href="/docs/data-ops/continuous-integration">CI/CD system to deploy updates to your Hashboard project</Card>
+</Cards>
 
-## Code-based Business Intelligence in Hashboard
 
-- The Hashboard configuration files do not yet support every feature that is available in the Hashboard web application.
-- If you build resources from a Git repository, users are still able to edit those resources through the Hashboard UI. When you re-deploy these resources with your Hashboard configuration files, any changes made through the Hashboard UI will be overwritten.
-
-## Developing BI as Code
+## Code-based Business Intelligence
 
 In Hashboard, you can define one or more of your Hashboard resources using **configuration files**. A configuration file contains a complete specification of a resource. For instance, a Model configuration file contains information about which database connection to use, the name of the underlying database table, a list of attributes and measures, etc.
+
+If you deploy resources with a Hashboard build, users are still able to edit those resources through the Hashboard UI. When you re-deploy these resources with your Hashboard configuration files, any changes made through the Hashboard UI will be overwritten.
 
 Using a set of configuration files, you create a **Build**. There are two different kinds of Builds:
 

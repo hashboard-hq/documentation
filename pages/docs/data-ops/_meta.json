@@ -7,6 +7,7 @@
   "resource-identifiers": { "title": "Resource Identifiers" },
   "environment-variables": {},
   "continuous-integration": {},
+  "code-review": {},
   "config-schema": { "title": "Configuration Schemas" },
   "yaml-editor": { "title": "Using the YAML Editor" }
 }
