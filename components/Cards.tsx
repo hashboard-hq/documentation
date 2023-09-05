@@ -2,6 +2,8 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 
+// This is just a fork of the Nextra card component that allows us to have content inside of cards
+
 const classes = {
   cards: cn(
     'hashboard-card nextra-cards nx-mt-4 nx-gap-4 nx-grid',
