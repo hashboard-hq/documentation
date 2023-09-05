@@ -110,7 +110,7 @@ export default {
     "https://github.com/hashboard-hq/documentation/tree/main/",
   darkMode: false,
   nextThemes: { defaultTheme: 'light' },
-  primaryHue: 189,
+  primaryHue: 199,
   sidebar: { defaultMenuCollapseLevel: 4, toggleButton: true },
   head: function useHead() {
     const { title } = useConfig();
