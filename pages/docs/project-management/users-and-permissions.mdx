@@ -50,14 +50,14 @@ one default role selected at any given time, so to swap default roles, add a sec
 
 ## System provided roles
 
-There are four roles in Hashboard with increasing levels of permissions.
+There are four roles in Hashboard with increasing levels of permissions. When adding a new user, our system-provided default role is `Editor`. 
 
-| Role         | Description                                                                                                       |
-| ------------ | ----------------------------------------------------------------------------------------------------------------- |
-| Owner        | Owners can manage members in a project and manage data connections and manage data connection credentials.        |
-| Editor       | Editors can manage data models, both creating and editing existing data models.                                   |
-| Collaborator | Collaborators can interact with shared views, query data sources, explore data and create new saved explorations. |
-| Viewer       | Viewers can interact with shared views, query data sources, and explore data.                                     |
+| Role         | Description                                                                                                            |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| Owner        | Owners can manage members in a project.                                                                                |
+| Editor       | Editors can manage data models and data connections, both creating and editing existing data models & data connections.|
+| Collaborator | Collaborators can interact with shared views, query data sources, explore data and create new saved explorations.      |
+| Viewer       | Viewers can interact with shared views, query data sources, and explore data.                                          |
 
 <Callout type="info">
   **What permission do I need to `Download underlying data`?**— Users need a role with the `READ_RAW_DATA` permission to download underlying data. 
