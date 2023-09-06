@@ -25,9 +25,9 @@ Full documentation of all configuration files can be found for each resource typ
 - [Color Palettes](/docs/data-ops/config-schema/Color-Palette)
 - [Homepage Launchpad](/docs/data-ops/config-schema/Homepage-Launchpad)
 
-
 <Callout type="info">
-**Exporting configuration files** - use the [hb pull](/docs/data-ops/cli/pull) command.
+  **Exporting configuration files** - use the [hb pull](/docs/data-ops/cli/pull)
+  command.
 </Callout>
 
 ### Migrating existing resources to code
@@ -43,3 +43,7 @@ the file structure of your project.
 ### Code managed resources
 
 To protect specific resources to only be editable with the Hashboard deployments, add the `preventUpdatesFromUI` flag set as `true` to any config. This prevents users from unintentionally updating critical resources from the Hashboard web application and gives your team greater control over valuable long lived resources that are core to your business needs.
+
+### Syncing resources
+
+To sync your local config files with edits made to resources via the UI, use the [pull command](/docs/data-ops/cli/pull)
