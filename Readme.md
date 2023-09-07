@@ -12,12 +12,16 @@ cd documentation
 
 npm install
 
+# Run in watch mode. Warning: search will not work in watch mode.
 npm run dev
 ```
 
 ## Building production versions of the docs
 
 ```bash
-# this command will build the entire site into the `site` directory as files
+# This command will build the entire site into the `site` directory as files
 npm run build
+
+# Serve the site. The search should work.
+npm run start
 ```
