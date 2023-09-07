@@ -1,17 +1,94 @@
-import { Callout, Card, Cards } from "nextra-theme-docs";
+import { Callout, Steps } from "nextra-theme-docs";
+import { Card, Cards } from "/components/Cards";
+import { iconProps } from "/components/Icon";
+import {
+  Search,
+  FileUp,
+  FileDown,
+  Key,
+  DatabaseZap,
+  Database,
+  Table,
+  UploadCloud,
+} from "lucide-react";
 
 # Using the Hashboard CLI
 
 The Hashboard CLI allows you to create Preview and Deploy Builds directly from your terminal or continuous integration system.
 
+Check out the [Quickstart guide](quickstart) to learn how to set up your CLI client and the [schema documentation](config-schema) to learn more about how specific resources are defined in Hashboard.
+
+## Hashboard commands
+
+<Cards num={2}>
+  <Card
+    icon={<Search {...iconProps} />}
+    title="Preview"
+    href="./cli/preview"
+  >
+    View changes before publishing to your project.
+  </Card>
+  <Card
+    icon={<FileUp {...iconProps} />}
+    title="Deploy"
+    href="./cli/deploy"
+  >
+    Update your Hashboard resources.
+  </Card>
+  <Card
+    icon={<FileDown {...iconProps} />}
+    title="Pull"
+    href="./cli/pull"
+  >
+    Download and sync config files from existing resources.
+  </Card>
+    <Card
+    icon={<Key {...iconProps} />}
+    title="Token"
+    href="./cli/token"
+  >
+    Download token to authenticate your CLI client.
+  </Card>
+  <Card
+    icon={<DatabaseZap {...iconProps} />}
+    title="Cache"
+    href="./cli/cache"
+  >
+    Managed cached resource data
+  </Card>
+  <Card
+    icon={<Database {...iconProps} />}
+    title="Databases"
+    href="./cli/databases"
+  >
+    List available database connections
+  </Card>
+  <Card
+    icon={<Table {...iconProps} />}
+    title="Tables"
+    href="./cli/tables"
+  >
+    List available tables in a database
+  </Card>
+
+  <Card
+    icon={<UploadCloud {...iconProps} />}
+    title="Upload"
+    href="./cli/upload"
+  >
+    Upload data files directly to DuckDB database connections
+  </Card>
+</Cards>
+
 ## Recommended workflows
 
-The CLI allows you to integrate Hashboard into your existing development and deployment process. As an example, here is a typical workflow that we use when making changes to Hashboard resources or upstream data:
+The CLI allows you to integrate Hashboard into your existing development and deployment process. As an example, below is a recommended workflow for making changes to Hashboard resources or upstream data:
 
 1. Store your Hashboard configuration files in a git repo alongside your data pipeline code.
 2. Run your pipelines to populate test data into a separate database or schema.
-3. Adjust your Hashboard configuration files as necessary to reflect your intended changes.
-4. Run `hb preview` to create a Preview Build, adjusting the `source` section of your model(s) to point at your test dataset.
+   a. If you use dbt for your data pipline check out the [dbt integration]() documentation to see how to seamlessly combine your dbt and Hashboard workflows
+3. Adjust your Hashboard [configuration files]() as necessary to reflect your intended changes.
+4. Run `hb preview` to create a [Preview Build](), adjusting the `source` section of your model(s) to point at your test dataset.
 5. Make any necessary adjustments in the Preview and re-export your new configuration files.
 6. Send a Pull Request for all the pending changes, including a link to your Preview Build.
 7. Merge the Pull Request into your `main` git branch.

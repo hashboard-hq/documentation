@@ -2,7 +2,7 @@ import { Callout, Steps } from "nextra-theme-docs";
 
 # CLI Quickstart
 
-The Hashboard CLI lets you build your Hashboard resources from configuration files, with [preview](./cli/preview) builds and [deployments](./cli/deploy).
+The Hashboard CLI lets you build your Hashboard resources from configuration files, with preview builds and deployments.
 
 <Steps>
 ### Install the Hashboard cli
@@ -13,7 +13,7 @@ pip install hashboard-cli
 
 ### Signup and auth
 
-First signup for an account by clicking 'get access' on [hashboard.com](https://hashboard.com) or you can signup and authenticate with a single command:
+First signup for an account by clicking 'Get started' on [hashboard.com](https://hashboard.com) or you can signup and authenticate with a single command:
 
 ```bash copy filename="signup and auth via cli"
 hb signup
@@ -24,6 +24,10 @@ The `token` command will take you through a web-based auth flow and download you
 ```bash filename="if you signed up on the web" copy
 hb token
 ```
+
+### Set up integrations
+
+Hashboard integrates seamlessly with other tools so you can easily manage your data and your dashboards in a single workflow. Read our documentation on how to set up integrations for [dbt](./dbt-integration) and [Git](./git-integration) to connect Hashboard with your data pipeline.
 
 ### Pull resources or build a sample project
 
@@ -41,7 +45,7 @@ You can now edit your resources as code and check them into git for version cont
 
 ### Deploy your changes
 
-Use the [deploy command](./cli/deploy) to write your changes back to your Hashboard project. By default you'll be able to preview your changes before they're published.
+Use the [deploy command](./cli/deploy) to write your changes back to your Hashboard project. By default you'll be able to [preview](./cli/preview) your changes before they're published.
 
 ```bash copy
 hb deploy

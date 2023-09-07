@@ -1,30 +1,67 @@
 import { Callout } from "nextra-theme-docs";
 import { Card, Cards } from "/components/Cards";
 import { iconProps } from "/components/Icon";
-import { CheckCircle, Users, Send, ScreenShare, IconProps, RefreshCcw } from 'lucide-react';
+import {
+  CheckCircle,
+  Users,
+  Terminal,
+  TerminalSquare,
+  ScreenShare,
+  IconProps,
+  RefreshCcw,
+  FileTerminal,
+} from "lucide-react";
 
 # Developer Reference
 
 Hashboard allows you to represent your resources as configuration files, which can be stored in a Git repository and deployed to your Hashboard project as part of a change management workflow.
 
 <Cards num={2}>
-  <Card icon= {<Send {...iconProps} />}  title="Configure Hashboard" href="/docs/data-ops/managing-resources-with-code">
-    Use the same tools that you use to develop your backend pipeline to manage your BI tool
+  <Card
+    icon={<TerminalSquare {...iconProps} />}
+    title="Configure Hashboard from the CLI"
+    href="/docs/data-ops/quickstart"
+  >
+    Use the same tools that you use to develop your backend pipeline to manage
+    your BI tool
   </Card>
-  <Card icon={<CheckCircle {...iconProps} />} title="Validate" href="/docs/data-ops/cli/preview">
-    Coordinate planned changes to your data warehouse or Hashboard resources to ensure that your views and dashboards don't break
+  <Card
+    icon={<FileTerminal {...iconProps} />}
+    title="Manage resources"
+    href="/docs/data-ops/managing-resources-with-code"
+  >
+    Define and update your Hashboard resources as code.
   </Card>
-  <Card icon= {<ScreenShare {...iconProps} />} title="Preview updates" href="/docs/data-ops/cli/preview">
-    View changes to your Hashboard project before making them visible to the rest of your organization
+  <Card
+    icon={<Terminal {...iconProps} />}
+    title="Explore Hashboard commands"
+    href="/docs/data-ops/cli"
+  >
+    Master Hashboard's CLI with these essential commands.
   </Card>
-  <Card icon= {<Users {...iconProps} />} title="Code review" href="/docs/data-ops/code-review">
+  <Card
+    icon={<CheckCircle {...iconProps} />}
+    title="Validate and preview updates"
+    href="/docs/data-ops/cli/preview"
+  >
+    Coordinate and view planned changes to your data warehouse or Hashboard
+    resources to ensure that your views and dashboards don't break.
+  </Card>
+  <Card
+    icon={<Users {...iconProps} />}
+    title="Code review"
+    href="/docs/data-ops/code-review"
+  >
     Use code reviews or pull requests to collaborate on proposed changes
   </Card>
-  <Card icon= {<RefreshCcw {...iconProps} />} title="Continuous integration" href="/docs/data-ops/continuous-integration">
+  <Card
+    icon={<RefreshCcw {...iconProps} />}
+    title="Continuous integration"
+    href="/docs/data-ops/continuous-integration"
+  >
     Automate in a CI/CD system to deploy updates to your Hashboard project
   </Card>
 </Cards>
-
 
 ## Code-based Business Intelligence
 
@@ -43,9 +80,10 @@ Using a set of configuration files, you create a **Build**. There are two differ
   delete and create resources in Hashboard to leave your project in a consistent
   state. For example, if you delete a column in a model configuration file, all
   saved explorations that refer to that column will be automatically deleted (as
-  happens if you delete a column through the user interface).  Pull the [configuration](/docs/data-ops/cli/pull) of one
-  or more of your resources to your local environment or a Git repository. Then,
-  you can create a Build using the [Hashboard command-line interface
+  happens if you delete a column through the user interface). Pull the
+  [configuration](/docs/data-ops/cli/pull) of one or more of your resources to
+  your local environment or a Git repository. Then, you can create a Build using
+  the [Hashboard command-line interface
   (CLI)](/docs/data-ops/using-the-hashboard-cli), or through the Hashboard web
   application by connecting your account to a [Git
   repository](/docs/data-ops/git-integration).
