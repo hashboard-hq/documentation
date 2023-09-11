@@ -1,4 +1,6 @@
 import { Callout } from "nextra-theme-docs";
+import Iframe from "/components/Iframe";
+
 
 # Create Retention Curves
 
@@ -18,12 +20,7 @@ For retention curves, it's oftentimes useful to add experiments as attributes:
 did you try something in the product to retain users more effectively? Maybe a
 new onboarding flow, a new user flow?
 
-<iframe
-  width="100%"
-  height="500px"
-  frameBorder={0}
-  src="https://demo.hashboard.com/app/sv/5c2c01a9-a45d-385b-b371-1cf13bed5deb?viewMode=embed"
-/>
+<Iframe src="https://demo.hashboard.com/app/sv/5c2c01a9-a45d-385b-b371-1cf13bed5deb" /> 
 
 For this walk-through, we're going to look at the user engagement on the tech
 news aggregation website Hacker News. The dataset is available on BigQuery's
@@ -148,12 +145,7 @@ A few notes on the resulting columns:
 
 ## Create retention curves
 
-<iframe
-  width="100%"
-  height="500px"
-  frameBorder={0}
-  src="https://demo.hashboard.com/app/sv/5c2c01a9-a45d-385b-b371-1cf13bed5deb?viewMode=embed"
-/>
+<Iframe src="https://demo.hashboard.com/app/sv/5c2c01a9-a45d-385b-b371-1cf13bed5deb" /> 
 
 1. Change the chart type to a `line`
 2. Select `month_number` as the x-axis variable
@@ -171,12 +163,7 @@ A few notes on the resulting columns:
 
 ## Create retention table
 
-<iframe
-  width="100%"
-  height="500px"
-  frameBorder={0}
-  src="https://demo.hashboard.com/app/sv/05d6b182-b7ae-3f36-81b8-a97b0f65e391?viewMode=embed"
-/>
+<Iframe src="https://demo.hashboard.com/app/sv/05d6b182-b7ae-3f36-81b8-a97b0f65e391" /> 
 
 1. Make sure you add the Active Users measure specified above.
 2. Select a `pivot table` as your visualization type from the chart dropdown on
