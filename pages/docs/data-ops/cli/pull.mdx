@@ -1,26 +1,28 @@
 import { Callout } from "nextra-theme-docs";
 
-# Hashboard pull command
+# `pull`
 
-`hb pull` is a utility for getting resource configuration files from the web UI to a local workspace. You can use it to migrate resources to a code-based workflow. If you already have local files that correspond with Hashboard resources, `hb pull` will update the local versions of those files.
+The `pull` command is a utility for getting resource configuration files from the web UI to a local workspace. You can use it to migrate resources to a code-based workflow. If you already have local files that correspond with Hashboard resources, `hb pull` will update the local versions of those files.
 
-## Update resources and dev workflow
+## Updating resources and dev workflow
 
-The default behavior of `pull` is to only update resources that were created with the `hb` command. For example, if you originally built four models with the `hb` command and you run `hb pull` from an empty directory, you'll only pull those four model files. You won't get any additional resources built in the UI.
+The default behavior of `pull` is to only update resources that were created through the Hashboard CLI (i.e. any `hb` command).
+
+For example: let's say you originally built four models with the CLI and another two models in the UI. If you run `hb pull` from an empty directory, you'll only pull those four model files. You won't get the two UI-built models, or any additional resources built in the UI for that matter.
 
 ## `pull` resources originally built in the UI
 
-You can also pull resources that were not built with the `hb` command. If you want to pull down a resource that was built in the UI, you have two options:
+You can also pull resources that were not built with the CLI. If you want to pull down a resource that was built in the UI, you have two options:
 
-### 1. pull every resource with `--all`
+### 1. Pull all resources
 
-You can use the all flag to get ever single Hashboard resource, regardless of whether it was created with the `hb` command or not.
+You can use the `--all` flag to get every single Hashboard resource regardless of whether it was created with the CLI.
 
 ```bash copy
 hb pull --all
 ```
 
-### 2. pull a specific resource with a GRN
+### 2. Pull a specific resource with a GRN
 
 You can pull down a specific resource by its [Global Resource Name](/docs/data-ops/resource-identifiers).
 
@@ -36,14 +38,18 @@ You can pull down a specific resource by its [Global Resource Name](/docs/data-o
 # pull by a specific grn
 hb pull m:s3AdinvBhsdJ:
 
-## or pull by alias
+# alternatively, pull by alias
 hb pull m::my_sales_model
 ```
 
-## Managing dbt state with pull
+## Managing dbt state with `pull`
 
-The behavior of Hashboard pull is a bit different when used for dbt models. We cannot update models automatically inside of dbt files (since there could be jinja that we can't decompile). Instead of updating resources in place, we'll create new model files outside of your dbt project. This lets you to inspect the configuration and merge it into your dbt files.
+The behavior of `hb pull` is a bit different when used for dbt models. We cannot update models automatically inside of dbt files (since there could be jinja that we can't decompile).
+
+Instead of updating resources in place, we'll create new model files outside of your dbt project. This lets you inspect the configuration and merge it into your dbt files.
 
 ## Config format used in `pull`
 
-Hashboard pull uses the most verbose (and specific) possible format of a resource. Some configuration that is just defaulted or configured by Hashboard will be exported. For example, if you export a resource it will default to being exported with a `pinned` grn. You can remove the grn to allow you to deploy the resource across different projects (or use an alias so that the resource is not bound to a specific instance in a single project).
+`hb pull` uses the most verbose (and specific) possible format of a resource. Some configuration that is just defaulted or configured by Hashboard will be exported.
+
+For example: if you export a resource, it will default to being exported with a `pinned` [GRN](/docs/data-ops/resource-identifiers). You can remove the GRN to enable deploying the resource across different projects (or use an alias so that the resource is not bound to a specific instance in a single project).
