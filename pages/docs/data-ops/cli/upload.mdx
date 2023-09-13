@@ -2,11 +2,11 @@ import { Callout, Steps } from "nextra-theme-docs";
 
 # Hashboard upload command
 
-The upload command allows you to upload files directly to a DuckDB database connection that can be queried using DuckDB or used as the
-basis for a data model. To learn about how to configure a DuckDB connection please visit the [database connection reference](/docs/database-connections/duckdb). To see the names of the database connections available in your project use the [databases command](./databases).
+The upload command allows you to upload files directly to Hashboard that can be queried using [DuckDB](/docs/database-connections/duckdb) and used as the
+basis for a data model.
 
 ```bash copy
-hb upload [database connection name] [filepath]
+hb upload [filepaths...]
 ```
 
 Currently Hashboard supports uploading data as csv, tsv, json, or parquet files. These tables can be referenced when building out [model configurations](/docs/data-ops/config-schema/data-models).
