@@ -17,16 +17,16 @@ hb deploy
 ### Stage changes for review
 Either modify the configuration files manually on your local machine, or open the YAML editor in the GUI to learn how to make changes to your local state.  Use the `hb preview` to safely validate and review your changes.
  
-### Git-Based workflows and preview
-Add your changes to git, push to a remote branch and open a pull request (in GitHub, GitLab etc.).
+### Git-based workflows and preview
+Add your changes to Git, push to a remote branch and open a pull request (in GitHub, GitLab etc.).
 
 You can create a preview of your changes with two possible workflows:
-1. **files-based workflow** - you can run the CLI from either your local machine or through a github action or gitlab workflow.
-1. **git integration** - you can [configure Hashboard's git integration](/docs/data-ops/git-integration) and have Hashboard pull from git directly.
+1. **Files-based workflow:** Run the CLI from either your local machine or through a GitHub action or GitLab workflow.
+1. **Git integration:** [Configure Hashboard's Git integration](/docs/data-ops/git-integration) and have Hashboard pull from Git directly.
 
 Generate a preview build:
 
-<Tabs items={['files-based workflow', 'git workflow']}>
+<Tabs items={['Files-based workflow', 'Git workflow']}>
   <Tab>
   Stage your files and run the preview command:
   ```bash copy
@@ -36,7 +36,7 @@ Generate a preview build:
   <Tab>
   Hashboard can pull down remote branches, tags or commits using the `--git-revision` option.
   <Callout type="info">
-    Currently the git-based workflow does not support environment variables, you can use a files-based workflow
+    Currently, the Git workflow does not support environment variables. To use these, use the files-based workflow instead.
   </Callout>
   ```bash copy
   hb preview --git-revision=<your branch name>

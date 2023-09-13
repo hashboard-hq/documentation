@@ -5,43 +5,52 @@ import { Callout, Steps } from "nextra-theme-docs";
 The Hashboard CLI lets you build your Hashboard resources from configuration files, with preview builds and deployments.
 
 <Steps>
-### Install the Hashboard cli
+### Install the Hashboard CLI
 
 ```bash copy
 pip install hashboard-cli
 ```
 
-### Signup and auth
+### Sign up or log in
 
-First signup for an account by clicking 'Get started' on [hashboard.com](https://hashboard.com) or you can signup and authenticate with a single command:
+#### New users
 
-```bash copy filename="signup and auth via cli"
+You can sign up for a new Hashboard account with a single command:
+
+```bash copy
 hb signup
 ```
 
-The `token` command will take you through a web-based auth flow and download your access token to the default token location at ~/.hashboard/hb_access_key.json - you can also specify the token location with the environment variable `HASHBOARD_CREDENTIALS_FILEPATH`.
+Alternatively, click <strong>Get started</strong> on [hashboard.com](https://hashboard.com) to create an account through our website.
 
-```bash filename="if you signed up on the web" copy
+#### Existing users
+
+The `token` command will take you through a web-based authentication flow and download a new access key for you. This will be stored at
+the default filepath `~/.hashboard/hb_access_key.json`.
+
+```bash copy
 hb token
 ```
 
+For information about how to store this token at a different filepath, see the `token` [documentation](/docs/data-ops/cli/token).
+
 ### Set up integrations
 
-Hashboard integrates seamlessly with other tools so you can easily manage your data and your dashboards in a single workflow. Read our documentation on how to set up integrations for [dbt](./dbt-integration) and [Git](./git-integration) to connect Hashboard with your data pipeline.
+Hashboard integrates seamlessly with other tools so you can easily manage your data and dashboards with a single workflow. Read our documentation on how to set up integrations for [dbt](./dbt-integration) and [Git](./git-integration) to connect Hashboard to your data pipeline.
 
 ### Pull resources or build a sample project
 
-If you've created data models, saved explorations or dashboards via the Hashboard GUI you can get started iterating on those resources as code using the [pull command](./cli/pull). `hb pull --all` will write the configs of all the resources in your project to your current directory.
+If you've created data models, saved explorations or dashboards via the Hashboard GUI you can get started iterating on those resources as code using the [pull command](./cli/pull). `hb pull --all` will pull the configs of all resources in your project into your current directory.
 
 ```bash copy
 hb pull --all
 ```
 
-To get started with sample data check out our [example projects on github](https://github.com/hashboard-hq/examples).
+To get started with sample data, check out our [example projects on GitHub](https://github.com/hashboard-hq/examples).
 
 ### Edit resources
 
-You can now edit your resources as code and check them into git for version control. Visit the [schema reference](./config-schema) to learn about how to define Hashboard resource configurations.
+You can now edit your resources as code and check them into Git for version control. Visit the [schema reference](./config-schema) to learn about how to define Hashboard resource configurations.
 
 ### Deploy your changes
 

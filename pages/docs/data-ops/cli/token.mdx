@@ -1,14 +1,25 @@
 # Hashboard token command
 
-The token command lets you authenticate the CLI.  You can also go to your [`Settings`](https://hashboard.com/app/p/settings#access_keys) in the web UI to create and manager your access tokens.
+The `token` command lets you authenticate the CLI. It will take you through a web-based authentication flow and download a new access key for you.
+
+You can also go to your [`Settings`](https://hashboard.com/app/p/settings#access_keys) in the web UI to create and manage your access keys.
 
 ```bash copy
 hb token
 ```
 
-By default, the CLI expects your Access Key to be located at `~/.hashboard/hb_access_key.json`. You can override this by:
+The created access key will be saved to `~/.hashboard/hb_access_key.json` which is where the CLI looks for your credentials by default.
 
-- Setting the `HASHBOARD_CREDENTIALS_FILEPATH` environment variable to a different filepath
-- Using the `--credentials-filepath` command-line option to use a different filepath
-- Setting the `HASHBOARD_PROJECT_ID`, `HASHBOARD_ACCESS_KEY_ID`, and `HASHBOARD_SECRET_ACCESS_KEY_TOKEN` environment variables to the respective values stored in your Access Key file.
+If you'd like to store this at a different filepath, you can do so by either:
+
+- Setting the `HASHBOARD_CREDENTIALS_FILEPATH` environment variable.
+```bash copy
+export HASHBOARD_CREDENTIALS_FILEPATH=your/absolute/filepath
+hb token
+```
+
+- Using the `--credentials-filepath` command-line option.
+```bash copy
+hb --credentials-filepath your/absolute/filepath token
+```
 
