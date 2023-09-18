@@ -5,7 +5,14 @@
   },
   "product-roadmap": {
     "title": "Roadmap",
-    "type": "page"
+    "type": "page",
+     "theme": {
+      "breadcrumb": false,
+      "footer": false,
+      "sidebar": false,
+      "toc": false,
+      "pagination": false
+    }
   },
   "changelog": {
     "title": "Changelog",
