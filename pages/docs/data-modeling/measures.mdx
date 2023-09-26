@@ -42,6 +42,18 @@ To add a custom measure:
 2. Under the Measures section click the `+ Add Custom Measure` button.
 3. Enter your aggregation and click the 🔄 button to test the SQL.
 
+### Deriving measures from other measures
+
+Custom measures can refer to other measures to avoid duplicating logic.
+For instance, a **Profit** measure could be defined by deducting **Costs** from **Revenue**.
+
+```sql filename="SQL for Profit measure"
+{{ revenue }} - {{ cost }}
+```
+
+SQL can reference other measures by surrounding the measure's `alias` in curly braces.
+When querying, Hashboard will expand references to their full definitions.
+
 ### Using joined columns in measure SQL
 
 It's possible to write custom measure SQL that utilizes columns from joined models. However, if you write the following query:
@@ -54,7 +66,7 @@ and the `id` column is not unique across joined models, the SQL won't be valid. 
 
 1. Set an `alias` field on the model that owns the column you are trying to reference. This can be done via the YML Editor in the UI, or via Data Ops:
 
-```
+```yaml filename="customers.yml"
 alias: customers_model
 ```
 
