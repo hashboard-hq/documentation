@@ -1,0 +1,34 @@
+import { Steps, Callout } from "nextra-theme-docs";
+
+# Setting Up Email or Slack Alerts
+
+Create alerting to stay updated on key activity.
+
+<Steps>
+
+### Choose your alerting cadence
+
+Determine if you want `Daily`, `Weekly`, or `Monthly` alerting.
+
+### Data Visualization
+
+Create a saved exploration that aligns with your alert frequency.
+
+Utilize table visualizations for the best results.
+
+<Callout type="info">
+    For daily alerts on new accounts, filter to show accounts created *yesterday* for comprehensive data.
+</Callout>
+
+### Setup the notification
+
+- Click `Share` and select either `Email` or `Slack`.
+- Opt for `Schedule Recurring Report`.
+- Hit `Set Schedule` and match the frequency with your data filter.
+- Ensure `Skip Reports with Empty Data` is checked.
+
+<Callout type="info">
+    Alerts are generated based on your set frequency, but notifications are only sent when relevant data is found, keeping you informed without cluttering your inbox or Slack.
+</Callout>
+
+</Steps>
