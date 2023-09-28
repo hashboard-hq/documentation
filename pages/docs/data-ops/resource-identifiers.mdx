@@ -73,8 +73,9 @@ This allows you to reference resources independently of how you structure your f
 
 ### Referencing dbt models
 
-When referencing models imported by the [dbt integration](./dbt-integration.mdx), the standard GRN format is valid. 
+When referencing models imported by the [dbt integration](./dbt-integration.mdx), the standard GRN format is valid.
 It is also possible to reference dbt models using the unique identifier of the dbt node representing the model:
+
 ```bash
 dbt::dbtuniqueid
 ```

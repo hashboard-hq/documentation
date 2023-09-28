@@ -1,8 +1,8 @@
 ---
-description: In Hashboard, you can calculate percentile metrics like P50, P90, P95, and P99, across different databases like BigQuery, Snowflake, PostgreSQL, and DuckDB. 
+description: In Hashboard, you can calculate percentile metrics like P50, P90, P95, and P99, across different databases like BigQuery, Snowflake, PostgreSQL, and DuckDB.
 ---
 
-import { Tabs, Tab } from 'nextra-theme-docs';
+import { Tabs, Tab } from "nextra-theme-docs";
 
 # Calculating Percentiles like p90 in BigQuery, Snowflake
 
@@ -10,25 +10,28 @@ In Hashboard, you can calculate percentile metrics like P50, P90, P95, and P99, 
 
 ## When to use percentile metrics
 
-Percentiles are useful for understanding distributions of numerical data, such as latencies or durations. Percentile metrics can provide insights into performance, and other key indicators.  They're useful when you have a skewed distribution or when it's particularly important to understand outliers.  For example, for a website, knowing that the average latency is 200 miliseconds is useful, but it's also useful to know how slow a 5% or 1% of your worst response are.  Are they 1 second or 10 seconds?
+Percentiles are useful for understanding distributions of numerical data, such as latencies or durations. Percentile metrics can provide insights into performance, and other key indicators. They're useful when you have a skewed distribution or when it's particularly important to understand outliers. For example, for a website, knowing that the average latency is 200 miliseconds is useful, but it's also useful to know how slow a 5% or 1% of your worst response are. Are they 1 second or 10 seconds?
 
 ## Setting up Percentile Metrics
 
-1. Navigate to the **Data Model** tab within Hashboard and Open the data model you want to edit. 
-2. Click **Add Custom Measure** from the measure section. 
+1. Navigate to the **Data Model** tab within Hashboard and Open the data model you want to edit.
+2. Click **Add Custom Measure** from the measure section.
 3. Name the measure and add code according to your dialect:
 
 <Tabs items={['BigQuery', 'Snowflake', 'PostgreSQL', 'DuckDB']}>
   <Tab>
 
 To calculate any percentile in BigQuery use the following sql, replacing `90` with your desired percentile:
+
 ```sql
 approx_quantiles(duration, 100)[OFFSET(90)]
 ```
+
   </Tab>
   <Tab>
 
 For Snowflake, use this SQL code in the **Code Editor**, replacing `0.9` with the desired percentile as a decimal:
+
 ```sql
 PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY duration)
 ```
@@ -37,6 +40,7 @@ PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY duration)
   <Tab>
 
 In PostgreSQL, input the following SQL code into the **Code Editor**, altering `0.9` to match your desired percentile as a decimal:
+
 ```sql
 PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY duration)
 ```
@@ -45,6 +49,7 @@ PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY duration)
   <Tab>
 
 For DuckDB, use this SQL code, replacing `0.9` with your chosen percentile as a decimal:
+
 ```sql
 QUANTILE(duration, 0.9)
 ```

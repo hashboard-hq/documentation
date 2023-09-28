@@ -2,11 +2,11 @@
 description: The preview command is a safe way to see what Hashboard configuration files will look like inside of Hashboard without affecting the state of the BI tool
 ---
 
-import { Cards, Card, Steps } from 'nextra-theme-docs'
+import { Cards, Card, Steps } from "nextra-theme-docs";
 
 # Hashboard `preview` command
 
-The `preview` command is a safe way to see what Hashboard configuration files will look like inside of Hashboard without affecting the state of the BI tool. `hb preview` makes forking and experimenting with Hashboard from the command line cheap and easy.  A preview goes through the following steps:
+The `preview` command is a safe way to see what Hashboard configuration files will look like inside of Hashboard without affecting the state of the BI tool. `hb preview` makes forking and experimenting with Hashboard from the command line cheap and easy. A preview goes through the following steps:
 
 1. Validates local Hashboard configuration files and dbt configuration (if using `--dbt`)
 2. Validates that the data warehouse schema is in sync with your data models
@@ -14,12 +14,22 @@ The `preview` command is a safe way to see what Hashboard configuration files wi
 4. Provides you with a list of all managed resources that are changed—either created, updated, deleted or unchanged
 
 The `preview` command works with dbt and Git workflows.
+
 <br />
 <Cards>
-  <Card arrow icon=" " title="dbt workflows" href="/docs/data-ops/dbt-integration" />
-  <Card arrow icon=" " title="Git workflows" href="/docs/data-ops/git-integration" />
+  <Card
+    arrow
+    icon=" "
+    title="dbt workflows"
+    href="/docs/data-ops/dbt-integration"
+  />
+  <Card
+    arrow
+    icon=" "
+    title="Git workflows"
+    href="/docs/data-ops/git-integration"
+  />
 </Cards>
-
 
 ## Previewing resources
 
@@ -62,14 +72,14 @@ Details: https://hashboard.com/app/p/builds/16LDUF46wuCwM8B2
 ### Open the build
 
 Go to the build preview link at the bottom of the build details, for example `https://hashboard.com/app/p/builds/16LDUF46wuCwM8B2`. The build preview gives a list of resources with preview links.
+
 <br />
 
-<img src="/build.png" style={{maxWidth: "600px" }} />
-
+<img src="/build.png" style={{ maxWidth: "600px" }} />
 
 ### Navigate resource previews
 
-Click any resource to open the preview and start to explore.  The build is added as a URL query parameter so you can share links (or put them in pull requests, for example).  You can navigate through your entire project in the preview mode.
+Click any resource to open the preview and start to explore. The build is added as a URL query parameter so you can share links (or put them in pull requests, for example). You can navigate through your entire project in the preview mode.
 
 <br />
 
