@@ -41,7 +41,7 @@ function analytics() {
       "addSourceMiddleware",
       "addIntegrationMiddleware",
       "setAnonymousId",
-      "addDestinationMiddleware",
+      "addDestinationMiddleware"
     ];
     // Define a factory to create stubs. These are placeholders
     // for methods in Analytics.js so that you never have to wait
@@ -109,11 +109,11 @@ export default {
   docsRepositoryBase:
     "https://github.com/hashboard-hq/documentation/tree/main/",
   darkMode: false,
-  nextThemes: { defaultTheme: 'light' },
+  nextThemes: { defaultTheme: "light" },
   primaryHue: 199,
   sidebar: { defaultMenuCollapseLevel: 4, toggleButton: true },
   head: function useHead() {
-    const { title } = useConfig();
+    const { title, frontMatter } = useConfig();
     return (
       <>
         <meta name="msapplication-TileColor" content="#fff" />
@@ -122,16 +122,25 @@ export default {
         <meta httpEquiv="Content-Language" content="en" />
         <meta
           name="description"
-          content="Explore data with your team with Hashboard"
+          content={
+            frontMatter.description ||
+            "Explore data with your team with Hashboard"
+          }
         />
         <meta
           name="og:description"
-          content="Explore data with your team with Hashboard"
+          content={
+            frontMatter.description ||
+            "Explore data with your team with Hashboard"
+          }
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site:domain" content="hashboard.com" />
         <meta name="twitter:url" content="https://twitter.com/hashboardhq" />
-        <meta name="og:title" content={title ? title + " – Hashboard" : "Hashboard"} />
+        <meta
+          name="og:title"
+          content={title ? title + " – Hashboard" : "Hashboard"}
+        />
         <meta name="apple-mobile-web-app-title" content="Hashboard" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link
@@ -152,8 +161,8 @@ export default {
   footer: {
     component: function useFooter() {
       <script> {analytics()} </script>;
-    },
-  },
+    }
+  }
   //banner: {
   //key: '2.0-release',
   //text: (
