@@ -114,26 +114,16 @@ export default {
   sidebar: { defaultMenuCollapseLevel: 4, toggleButton: true },
   head: function useHead() {
     const { title, frontMatter } = useConfig();
+    const description =
+      frontMatter.description || "Explore data with your team with Hashboard";
     return (
       <>
         <meta name="msapplication-TileColor" content="#fff" />
         <meta name="theme-color" content="#fff" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Language" content="en" />
-        <meta
-          name="description"
-          content={
-            frontMatter.description ||
-            "Explore data with your team with Hashboard"
-          }
-        />
-        <meta
-          name="og:description"
-          content={
-            frontMatter.description ||
-            "Explore data with your team with Hashboard"
-          }
-        />
+        <meta name="description" content={description} />
+        <meta name="og:description" content={description} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site:domain" content="hashboard.com" />
         <meta name="twitter:url" content="https://twitter.com/hashboardhq" />
