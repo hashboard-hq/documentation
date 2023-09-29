@@ -1,17 +1,25 @@
+---
+description: Frequently asked questions, such as "How do I add an image to a dashboard?"
+---
+
 # Frequently Asked Questions
 
 ### How to find attribute tile in attribute tray?
+
 If you have many attributes in your data model it may not be efficient to scroll through the attribute tray to find what you're looking for. The best way to search for a specific attribute is with the [data tray](/docs/visualizing-data/data-tray). You can find the attribute tile by searching and the clicking attribute name in the attributes section in the data tray.
 
 ### How do I create a bar on line chart?
+
 Hashboard allows you to represent multiple series with different chart types. You can click "Controls" to open the controls pane in the Data explorer, and click Y-axis title to configure the Y-axis settings. You can add another Y-axis by clicking "+" sign next to Y-axis section title. You can choose same or different chart type to assign to left or right Y-axis. You can remove Y-axis by clicking "-" next to left or right Y-axis title.
 
 ### How do I create a stacked bar chart?
+
 1. In the control panel, set your chart type to **Bar**.
 2. [Breakout](docs/visualizing-data/breakout#adding-and-removing-a-breakout) by an attribute with multiple values.
 3. After selecting your breakout wait for the chart to refresh. The chart should automatically be stacked.
 
 ### How do I display the top 10 values and an "Other" section?
+
 1. From the Data Explorer, find the attribute you want to display the top 10 values for and [breakout by that attribute](/docs/visualizing-data/breakout#adding-and-removing-a-breakout).
 2. In the control panel, toggle on [dynamic breakouts](/docs/visualizing-data/breakout#dynamic-breakouts) with **Dynamic** toggle.
 3. Update the **Limit** to 10 with and ensure **Show Other** is checked.
@@ -23,6 +31,7 @@ Hashboard allows you to represent multiple series with different chart types. Yo
 2. Upload your CSV as a new data model by following [these steps](/docs/data-modeling/query-data-files).
 
 ### How do I add an image to a dashboard?
+
 1. Open your dashboard in edit mode by navigating to the dashboard and clicking the **Edit** button.
 
 2. Add a [Text](/docs/dashboards/text) block to your dashboard then click into the Text block you added.
@@ -38,27 +47,27 @@ Replace `<image URL>` with your image's actual URL, and provide descriptive alt 
 4. Save your changes with the **Save** button. After saving, your image will be displayed within the Text block.
 
 ### What is causing my Hashboard build to fail?
+
 There are several potential causes for build errors.
 
-- **Incorrect Configuration**: In Hashboard, [Models](/docs/data-ops/config-schema/data-models), [Saved Explorations](/docs/data-ops/config-schema/saved-explorations), 
-[Dashboards](/docs/data-ops/config-schema/dashboards), and [Color Palettes](/docs/data-ops/config-schema/color-palettes) have their own configuration schemas.
-When previewing or deploying builds, make sure that your configuration files contain all of the necessary fields. 
+- **Incorrect Configuration**: In Hashboard, [Models](/docs/data-ops/config-schema/data-models), [Saved Explorations](/docs/data-ops/config-schema/saved-explorations),
+  [Dashboards](/docs/data-ops/config-schema/dashboards), and [Color Palettes](/docs/data-ops/config-schema/color-palettes) have their own configuration schemas.
+  When previewing or deploying builds, make sure that your configuration files contain all of the necessary fields.
 
-- **Invalid or Non-Unique Alias**: If your resources have [aliases](/docs/data-ops/resource-identifiers), it's important to note that there are several criteria they must meet. 
-Specifically, in order for a build to deploy successfully, aliases must be less than 120 characters in length, consist of alphanumeric characters and underscores only, and be unique project-wide.
+- **Invalid or Non-Unique Alias**: If your resources have [aliases](/docs/data-ops/resource-identifiers), it's important to note that there are several criteria they must meet.
+  Specifically, in order for a build to deploy successfully, aliases must be less than 120 characters in length, consist of alphanumeric characters and underscores only, and be unique project-wide.
 
-- **Resource References**: In Hashboard, it is possible to have many resources that reference each other in different ways. 
-These references can be broken by deleting resources, updating aliases, or changing names of database connections, to name a few examples.
-When updating or deleting a resource, be mindful of the possible consequences that can occur downstream its resource lineage.
+- **Resource References**: In Hashboard, it is possible to have many resources that reference each other in different ways.
+  These references can be broken by deleting resources, updating aliases, or changing names of database connections, to name a few examples.
+  When updating or deleting a resource, be mindful of the possible consequences that can occur downstream its resource lineage.
 
+- **dbt errors**: When running a build with a model from dbt, make sure that the dbt project file contains the correct [Hashboard meta fields](/docs/data-ops/dbt-integration).
+  In addition, the --dbt flag must be used when running `hb preview` or `hb deploy` in order for dbt models to be included in the build.
 
-- **dbt errors**: When running a build with a model from dbt, make sure that the dbt project file contains the correct [Hashboard meta fields](/docs/data-ops/dbt-integration). 
-In addition, the --dbt flag must be used when running `hb preview` or `hb deploy` in order for dbt models to be included in the build.
+### How much does Hashboard cost?
 
-
-### How much does Hashboard cost? 
-Hashboard has public pricing options [available here](https://hashboard.com/pricing) 
-We offer free, 30-day trials for the Starter and Team plans. If you'd like to try the product out, you can get started now [here](https://hashboard.com/signup) or talk to [sales.] (href="mailto:sarah@hashboard.com") 
+Hashboard has public pricing options [available here](https://hashboard.com/pricing)
+We offer free, 30-day trials for the Starter and Team plans. If you'd like to try the product out, you can get started now [here](https://hashboard.com/signup) or talk to [sales.] (href="mailto:sarah@hashboard.com")
 
 ### What permission does a user need to to download "Underlying data"?
 
@@ -71,5 +80,5 @@ Color theory is a complex and nuanced topic. Entire books have been written on t
 - **Keep it Consistent**: Maintain consistency in color choices throughout your visualizations. For example, if you use blue to represent a certain category in one visualization, use blue to represent that same category in all of your visualizations.
 - **Use a Limited Palette**: Opt for a limited color palette to avoid overwhelming your audience. Stick to a few key colors that are easily distinguishable and meaningful within the context of your data.
 - **Avoid Red-Green Combinations**: Refrain from using red and green together, as they can be difficult to differentiate for some individuals. If necessary, provide alternative visual cues such as shapes or patterns.
-- **Show progression with gradient palettes**: Use gradients when you want to show a gradual transition or progression between data points. 
+- **Show progression with gradient palettes**: Use gradients when you want to show a gradual transition or progression between data points.
 - **Distinguish categories with distinct color palettes**: Use distinct colors when you want to show a clear distinction between data points.

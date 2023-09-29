@@ -1,4 +1,8 @@
-import { Steps, Tabs, Tab, info, Callout } from 'nextra-theme-docs'
+---
+description: In Hashboard you can manage ephemeral environments for your Business Intelligence dashboards that point to stage and production using preview builds
+---
+
+import { Steps, Tabs, Tab, info, Callout } from "nextra-theme-docs";
 
 # Managing Staging and Production Environments in Hashboard
 
@@ -59,7 +63,7 @@ You can also use any dbt jinja or dbt macros to templatize or switch between dif
 
 ### Creating Dev and Staging Schemas
 
-You can create a development schema within your database and specify this dev or staging schema when building your data pipelines. You can then specify this same schema in your config files. This enables you to maintain a development environment that is separate from your production environment.  These are all possible environments you might want to configure:
+You can create a development schema within your database and specify this dev or staging schema when building your data pipelines. You can then specify this same schema in your config files. This enables you to maintain a development environment that is separate from your production environment. These are all possible environments you might want to configure:
 
 - **production** - the production environment will have your main analytics database and you will use [deploy](/docs/data-ops/cli/deploy) to update production in Hashboard
 - **staging** - your staging environment will point at a schema like `stage` in your database - you will create a new [preview](/docs/data-ops/cli/preview) each time staging changes
@@ -67,12 +71,16 @@ You can create a development schema within your database and specify this dev or
 - **continuous integration environments** - some systems like dbt cloud can create a new schema for each pull request in git, you can again create a new preview environment in hashboard that points at each of these different CI environments
 
 <Callout type="info">
- *Prepending Table Names* - An alternative to creating a separate schema is to prepend your table names with an environment indicator like `dev_`. This allows you to easily distinguish between production and development tables in the same schema.
+  *Prepending Table Names* - An alternative to creating a separate schema is to
+  prepend your table names with an environment indicator like `dev_`. This
+  allows you to easily distinguish between production and development tables in
+  the same schema.
 </Callout>
 
 ### Building Hashboard Previews
 
-Once you have set up your dev schema or prepended your table names, you can build [Hashboard previews](/docs/data-ops/cli/preview) that point to these dev tables. This way, you can test changes and run models in a development environment before promoting them to production.  Also see the guide on [continuous integration](/docs/data-ops/continuous-integration) workflows.
+Once you have set up your dev schema or prepended your table names, you can build [Hashboard previews](/docs/data-ops/cli/preview) that point to these dev tables. This way, you can test changes and run models in a development environment before promoting them to production. Also see the guide on [continuous integration](/docs/data-ops/continuous-integration) workflows.
 
 Each preview acts as it's own ephemeral environment - so you don't just have a single staging environment, but an environment for any change that you can reference.
+
 </Steps>

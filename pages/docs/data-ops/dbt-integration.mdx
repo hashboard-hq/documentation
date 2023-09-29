@@ -1,4 +1,8 @@
-import { Steps, Callout } from 'nextra-theme-docs'
+---
+description: Hashboard can import models directly from dbt by specifying measures in your dbt yaml file.
+---
+
+import { Steps, Callout } from "nextra-theme-docs";
 
 # dbt Integration
 
@@ -13,7 +17,6 @@ Hashboard can import models directly from dbt by specifying measures in your dbt
 You can use the `glean-defaults` key to specify the glean version (which is required) and connection information.
 
 ```yaml filename="dbt_project.yml" copy
-
 models:
   +meta:
     # glean-defaults settings will be merged into each Hashboard model
@@ -27,13 +30,13 @@ models:
 
 ### Define model information
 
-The simplest example of a Hashboard model just defines a measure.  Hashboard models must include the `glean` key in the dbt model.
+The simplest example of a Hashboard model just defines a measure. Hashboard models must include the `glean` key in the dbt model.
 
 ```yaml filename="models/schema.yml" copy
 version: 2
 
 models:
-  # 
+  #
   - name: order_attribution
     description: This model describes how each order is attributed to different marketing touchpoints.
     columns:
@@ -53,9 +56,11 @@ models:
 ```
 
 <Callout type="warning">
-  Hashboard previously used the term **metric** to refer to what is now called a **measure**. 
-  At the moment our configuration files still refer to `type: metric` when creating measures inside a data model. 
-  We plan to update the schema of these configuration files in the future to use the term **measure** instead of **metric**.
+  Hashboard previously used the term **metric** to refer to what is now called a
+  **measure**. At the moment our configuration files still refer to `type:
+  metric` when creating measures inside a data model. We plan to update the
+  schema of these configuration files in the future to use the term **measure**
+  instead of **metric**.
 </Callout>
 
 ### Build your Hashboard models
@@ -74,10 +79,9 @@ hb deploy --dbt
 
 ## Model specification
 
-The `glean-defaults` connection configuration in the example above gets merged into the Hashboard configuration inside each dbt model.  If you don't specify the defaults, you must add the complete connection information in the `meta` key of each dbt model you want imported to Hashboard.  Only dbt models that specify a `glean` key will get built into Hashboard models.  
+The `glean-defaults` connection configuration in the example above gets merged into the Hashboard configuration inside each dbt model. If you don't specify the defaults, you must add the complete connection information in the `meta` key of each dbt model you want imported to Hashboard. Only dbt models that specify a `glean` key will get built into Hashboard models.
 
 ```yaml filename="schema.yml" copy
-
 version: 2
 
 models:
@@ -95,6 +99,7 @@ models:
 ```
 
 Some notes on how models get built from dbt:
+
 - Hashboard will read the dbt manifest file and find all models with a `glean` key specified within the `meta` key.
 - The name of dbt model is imported into Hashboard as the model name (this can be overriden).
 - Columns specified explicitly in the dbt model will become attributes in Hashboard.
@@ -102,6 +107,7 @@ Some notes on how models get built from dbt:
 - You can specify additional attribute configuration in a `meta` key for a column.
 
 How data model source is determined:
+
 - `source` has the same options as the corresponding field of [Hashboard data models](./config-schema/data-models.mdx).
 - Unless otherwise specified, Hashboard automatically infers defaults for the source `physicalName` and `schema`. If no `connectionName` or `connectionId` is specified, Hashboard will try to use a connection whose name is the same as the dbt target database (e.g. `"bigquery"` or `"snowflake"`).
 
@@ -114,17 +120,17 @@ hb preview --dbt-manifest=./target/manifest.json
 Hashboard will include each dbt column as an attribute in the corresponding Hashboard model. You can also add additional fields to the dbt columns to take advantage of Hashboard's more advanced modeling features:
 
 ```yaml
-    # ... as above
-    columns:
-      - name: my_dbt_attribute
-        documentation: this is a dbt attribute
-        tests:
-          - unique
-          - not_null
-        # add additional configuration to this column
-        meta:
-          glean:
-            primaryKey: true
+# ... as above
+columns:
+  - name: my_dbt_attribute
+    documentation: this is a dbt attribute
+    tests:
+      - unique
+      - not_null
+    # add additional configuration to this column
+    meta:
+      glean:
+        primaryKey: true
 ```
 
 To add Hashboard measures (or other attributes not present in the dbt model) to the imported model, you can add a `cols` field to the dbt model's `meta.glean` configuration:
@@ -140,17 +146,20 @@ models:
             name: Daily Active Users
             sql: COUNT(DISTINCT customer_id) / COUNT(DISTINCT create_at)
 ```
+
 <Callout type="warning">
-  Hashboard previously used the term **metric** to refer to what is now called a **measure**. 
-  At the moment our configuration files still refer to `type: metric` when creating measures inside a data model. 
-  We plan to update the schema of these configuration files in the future to use the term **measure** instead of **metric**.
+  Hashboard previously used the term **metric** to refer to what is now called a
+  **measure**. At the moment our configuration files still refer to `type:
+  metric` when creating measures inside a data model. We plan to update the
+  schema of these configuration files in the future to use the term **measure**
+  instead of **metric**.
 </Callout>
 
 Hashboard configuration in your dbt schema file has access to the same [templating and macros](https://docs.getdbt.com/docs/build/jinja-macros) as your dbt configuration. You could, for example, configure the Hashboard data connection based on your dbt target:
 
 ```yaml
 models:
-  - # ... dbt model configuration 
+  - # ... dbt model configuration
     meta:
       glean:
         glean: "1.0"
@@ -169,7 +178,6 @@ Column descriptions will be [automatically synced](../data-modeling/description-
 If all models use the same Hashboard `source`, you can configure a default `source` in the `dbt_project.yml` file:
 
 ```yaml filename="dbt_project.yml"
-
 models:
   the_models:
     +meta: # will be applied to every model in models/the_models
@@ -181,7 +189,6 @@ models:
 To import all dbt models in a folder as Hashboard models, simply add
 
 ```yaml filename="dbt_project.yml"
-
 models:
   the_models:
     +meta:

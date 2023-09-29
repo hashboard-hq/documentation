@@ -1,14 +1,29 @@
-import { Cards, Card } from 'nextra-theme-docs'
+---
+description: The deploy command will update your Hashboard project with changes in your local configuration files.
+---
+
+import { Cards, Card } from "nextra-theme-docs";
 
 # Hashboard `deploy` command
 
 The `deploy` command will update your Hashboard project with changes in your local configuration files.
 
 `hb deploy` works with dbt and Git workflows:
+
 <br />
 <Cards>
-  <Card arrow icon=" " title="dbt workflows" href="/docs/data-ops/dbt-integration" />
-  <Card arrow icon=" " title="Git workflows" href="/docs/data-ops/git-integration" />
+  <Card
+    arrow
+    icon=" "
+    title="dbt workflows"
+    href="/docs/data-ops/dbt-integration"
+  />
+  <Card
+    arrow
+    icon=" "
+    title="Git workflows"
+    href="/docs/data-ops/git-integration"
+  />
 </Cards>
 
 <br />
@@ -29,4 +44,4 @@ hb deploy --git-revision=main
 
 ## Empty builds
 
-By default, Hashboard prevents you from building empty projects, because this is usually a mistake (and could result in the deletion of resources).  To get around this, you can pass in the flag `--allow-dangerous-empty-build`.
+By default, Hashboard prevents you from building empty projects, because this is usually a mistake (and could result in the deletion of resources). To get around this, you can pass in the flag `--allow-dangerous-empty-build`.

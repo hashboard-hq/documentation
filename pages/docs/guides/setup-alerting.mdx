@@ -1,3 +1,7 @@
+---
+description: Setup email and Slack alerting to stay updated on key activities.
+---
+
 import { Steps, Callout } from "nextra-theme-docs";
 
 # Setup email and Slack alerts
@@ -15,7 +19,9 @@ Determine if you want `Daily`, `Weekly`, or `Monthly` alerting.
 Create a saved exploration which filters down to the activity you'd want to be alerted to (e.g. errors or new users added). We recommend starting with a Table visualization for alerting.
 
 <Callout type="info">
-    Add a filter for a time window that aligns with your alert frequency. For example, you might set a filter to `yesterday` if you want a daily alert or `last week` if you want a weekly alert.
+  Add a filter for a time window that aligns with your alert frequency. For
+  example, you might set a filter to `yesterday` if you want a daily alert or
+  `last week` if you want a weekly alert.
 </Callout>
 
 ### Setup the notification
@@ -26,7 +32,8 @@ Create a saved exploration which filters down to the activity you'd want to be a
 - Ensure `Skip Reports with Empty Data` is checked.
 
 <Callout type="info">
-    Reports are generated based on your set frequency, but only sent when relevant data is found, keeping you informed without cluttering your inbox or Slack.
+  Reports are generated based on your set frequency, but only sent when relevant
+  data is found, keeping you informed without cluttering your inbox or Slack.
 </Callout>
 
 </Steps>
