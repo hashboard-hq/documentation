@@ -1,0 +1,79 @@
+# September 27th, 2023
+
+Hello friends of Hashboard -
+
+What a month it’s been! In early September we officially launched as Hashboard AND released major features including advanced data search and the metrics page. 
+
+If you’ve been a long time user of the product, thank you for your continued support! And a very warm welcome to all of the new folks that started their data exploration journeys with us this month. 
+
+\- Carlos
+
+
+## Data Search 🔎
+
+<img
+  src="/product_updates/230927_Data_Search.gif"
+  alt="User viewing Gif of data search console"
+  style={{ maxWidth: "650px" }}
+/>
+
+Discovering insights in your data is now even easier with [Data Search!](https://docs.hashboard.com/docs/visualizing-data/data-search) You can now search across all attributes and measures in your Hashboard project. Type in keywords and we’ll surface the most relevant matches.
+
+Once you choose, either explore directly from the search results or share a link with your team. We take care of the details by filtering based on your previous selections and maintaining the relationships in your data defined by your project models. 
+
+---
+
+## Metrics Page
+
+<img
+  src="/product_updates/230927_Metrics_Page.gif"
+  alt="User viewing a metrics page interacting with trend line"
+  style={{ maxWidth: "650px" }}
+/>
+
+There is now one place in Hashboard to keep your team on track with company wide metrics! 
+
+Check out the [Metrics Page](https://docs.hashboard.com/docs/metrics) in the data library on the left hand nav bar in Hashboard. Assign labels, owners and trend lines to each metric. As always you can explore and share with the click of a button. 
+
+---
+
+## Sign up through the hashboard-cli
+
+Start using Hashboard in under a minute! Open up a terminal and run the following to create a new account:
+
+pip install hashboard-cli && hb signup
+
+Enter your name, project name, and login details, then start exploring your data.
+
+---
+
+## Create CLI access keys with hb token
+
+If you already have a Hashboard account and want to start using [hashboard-cli](https://docs.hashboard.com/docs/data-ops/cli), run the following in a terminal:
+
+pip install hashboard-cli && hb token
+
+This will generate a new personal access key tied to your existing Hashboard project. To pull down the configuration files for resources you’ve already built in the UI, run the following:
+
+hb pull --all
+
+Now, you can enjoy a code-based workflow for building consistent charts. Just change these files, run hb preview and then hb deploy.
+
+For more information, check out our [CLI Quickstart guide.](https://docs.hashboard.com/docs/data-ops/quickstart)
+
+---
+
+## 📚 Other Updates, Blog Posts & More
+
+- **Beam x Hashboard case study** - [Check out](https://hashboard.com/blog/hashboard-x-beam-case-study) how Beam uses Hashboard to empower 60+ customers with self-service data. The secret sauce? BI as code workflows. 
+- **Dervied measures** - [Custom measures](https://docs.hashboard.com/docs/data-modeling/measures#custom-sql-measures) can now refer to other measures to avoid duplicating logic. For instance, a Profit measure could be defined by \{\{ revenue \}\} - \{\{ costs \}\} deducting Costs from Revenue.
+- **Hashboard 🤝 dbt** - We’ll be in San Diego October 16th - 20th at the Coalesce dbt conference. Let us know if you’ll be there, we’d love to [meet you!](https://calendly.com/d/2wf-krc-r5r/meet-w-hashboard-at-coalesce) 
+- **NYC data community** - We had a blast with our NYC based customers and friends yesterday celebrating our launch. Thanks to everyone who came out and for all of the support 🎉
+
+---
+
+👀 Hoping to see something else on our feature release list? Check out our [Product Roadmap](/product-roadmap) and let us know what we’re missing.
+
+You can drop us a [note](mailto:support@hashboard.com?subject=null&body=null) or ping us on Slack with your💡ideas, 🗣 feedback, or 🙋questions. We look forward to👂hearing from you!
+
+[Log into Hashboard](https://hashboard.com/app)
