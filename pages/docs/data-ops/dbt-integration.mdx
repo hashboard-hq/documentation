@@ -14,14 +14,14 @@ Hashboard can import models directly from dbt by specifying measures in your dbt
 
 ### Configure your `dbt_project.yml`
 
-You can use the `glean-defaults` key to specify the glean version (which is required) and connection information.
+You can use the `hashboard-defaults` key to specify the hashboard version (which is required) and connection information.
 
 ```yaml filename="dbt_project.yml" copy
 models:
   +meta:
-    # glean-defaults settings will be merged into each Hashboard model
-    glean-defaults:
-      glean: "1.0"
+    # hashboard-defaults settings will be merged into each Hashboard model
+    hashboard-defaults:
+      hbVersion: "1.0"
       # preventUpdatesFromUI defaults to true, but can be set to false
       preventUpdatesFromUI: false
       source:
@@ -30,7 +30,7 @@ models:
 
 ### Define model information
 
-The simplest example of a Hashboard model just defines a measure. Hashboard models must include the `glean` key in the dbt model.
+The simplest example of a Hashboard model just defines a measure.  Hashboard models must include the `hashboard` key in the dbt model.
 
 ```yaml filename="models/schema.yml" copy
 version: 2
@@ -47,7 +47,7 @@ models:
       - name: touchpoint_id
         description: ID of the marketing touchpoint which led to the order.
     meta:
-      glean:
+      hashboard:
         cols:
           - id: row_count
             type: metric
@@ -79,7 +79,7 @@ hb deploy --dbt
 
 ## Model specification
 
-The `glean-defaults` connection configuration in the example above gets merged into the Hashboard configuration inside each dbt model. If you don't specify the defaults, you must add the complete connection information in the `meta` key of each dbt model you want imported to Hashboard. Only dbt models that specify a `glean` key will get built into Hashboard models.
+The `hashboard-defaults` connection configuration in the example above gets merged into the Hashboard configuration inside each dbt model.  If you don't specify the defaults, you must add the complete connection information in the `meta` key of each dbt model you want imported to Hashboard.  Only dbt models that specify a `hashboard` key will get built into Hashboard models.  
 
 ```yaml filename="schema.yml" copy
 version: 2
@@ -88,10 +88,10 @@ models:
   - name: a_model
     description: model docs here
     meta:
-      glean:
-        glean: "1.0" # Hashboard dbt integration version
+      hashboard:
+        hbVersion: "1.0" # Hashboard dbt integration version
         source:
-          connectionName: snowflake_production # which Hashboard data connection to use, can also be specified globally if you use glean-defaults
+          connectionName: snowflake_production # which Hashboard data connection to use, can also be specified globally if you use hashboard-defaults
     columns:
       - name: a_str
         description: some column documentation
@@ -99,8 +99,7 @@ models:
 ```
 
 Some notes on how models get built from dbt:
-
-- Hashboard will read the dbt manifest file and find all models with a `glean` key specified within the `meta` key.
+- Hashboard will read the dbt manifest file and find all models with a `hashboard` key specified within the `meta` key.
 - The name of dbt model is imported into Hashboard as the model name (this can be overriden).
 - Columns specified explicitly in the dbt model will become attributes in Hashboard.
 - Descriptions on the model will get imported as model documentation.
@@ -129,17 +128,17 @@ columns:
       - not_null
     # add additional configuration to this column
     meta:
-      glean:
+      hashboard:
         primaryKey: true
 ```
 
-To add Hashboard measures (or other attributes not present in the dbt model) to the imported model, you can add a `cols` field to the dbt model's `meta.glean` configuration:
+To add Hashboard measures (or other attributes not present in the dbt model) to the imported model, you can add a `cols` field to the dbt model's `meta.hashboard` configuration:
 
 ```yaml
 models:
   - # ... dbt schema configuration, as above
     meta:
-      glean:
+      hashboard:
         cols:
           - id: daily_active_users
             type: metric
@@ -161,8 +160,8 @@ Hashboard configuration in your dbt schema file has access to the same [templati
 models:
   - # ... dbt model configuration
     meta:
-      glean:
-        glean: "1.0"
+      hashboard:
+        hbVersion: "1.0"
         name: "customers"
         source:
           # configure the source based on the dbt target
@@ -181,7 +180,7 @@ If all models use the same Hashboard `source`, you can configure a default `sour
 models:
   the_models:
     +meta: # will be applied to every model in models/the_models
-      glean-defaults:
+      hashboard-defaults:
         source:
           connectionName: # which Hashboard data connection to use
 ```
@@ -192,12 +191,12 @@ To import all dbt models in a folder as Hashboard models, simply add
 models:
   the_models:
     +meta:
-      glean-defaults:
-        glean: "1.0"
+      hashboard-defaults:
+        hbVersion: "1.0"
         source:
           connectionName: # which Hashboard data connection to use
           # schema is always optional because Hashboard will infer it
           schema: "{{ target.schema }}" # can use jinja substitution here
 ```
 
-This configuration will add the `meta.glean` object to every model in `the_models`, so they will all be imported into Hashboard. You can still add additional metadata for the specific models (such as adding additional metrics).
+This configuration will add the `meta.hashboard` object to every model in `the_models`, so they will all be imported into Hashboard. You can still add additional metadata for the specific models (such as adding additional metrics).
