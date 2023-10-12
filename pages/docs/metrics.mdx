@@ -70,10 +70,10 @@ Once you have a data model, you can create a metric by following these steps:
    - **Description** - A description of the metric.
    - **Labels** - Labels are used to categorize or tag similar metrics.
      For example, you might have a label for each department in your organization. Metrics are also filterable by label on the metrics page.
-   - **Owner** - The person responsible for overseeing and managing the metric is the metric owner. 
-     The specific responsibilities of the metric owner can vary depending on the needs and structure of your organization or team. 
-     For example, in some organizations, the owner may hold a functional role like a VP of Sales and be responsible for high-level sales metrics such as average time-to-close. 
-     In other organizations, the assigned metric owner may be a sales analyst who is responsible for modeling and managing the metric data. 
+   - **Owner** - The person responsible for overseeing and managing the metric is the metric owner.
+     The specific responsibilities of the metric owner can vary depending on the needs and structure of your organization or team.
+     For example, in some organizations, the owner may hold a functional role like a VP of Sales and be responsible for high-level sales metrics such as average time-to-close.
+     In other organizations, the assigned metric owner may be a sales analyst who is responsible for modeling and managing the metric data.
    - **Model** - The data model the metric is based on.
    - **Measure** - The measure the metric is based on.
    - **Dimension** - The dimension of the metric. This is the attribute on the data model that the metric is grouped by.
@@ -111,21 +111,33 @@ This is because your current [exploration](/docs/visualizing-data/explorations) 
 
 ## Metrics in dashboards
 
-With metrics, you can skip the configuration of a dashboard [metric tile](/docs/dashboards/metrics) by populating a metric tile's configuration from a metric.
-To copy a metric's configuration into a metric tile, follow these steps:
+With metrics, you can skip the configuration of a dashboard [metric tile](/docs/dashboards/metrics) by populating a metric tile's configuration from a metric. There are two ways to use metrics to populate metric tiles, the metric can either be linked directly or the metric definition can be copied into a tile. Linked metrics will be updated when the metric definition is updated at the project level while copied metrics provide a starting point for building custom dashboard metric tiles that are only updated when the tile itself is modified.
+
+When using metrics in dashboards, follow these steps:
 
 1. Navigate to the dashboard you want to update.
 2. Click the **Edit** button in the top right of the dashboard.
 3. Find the existing metric tile you wish to update, or create a new metric tile.
-4. Open the metric tile's configuration by clicking the **Configuration** button in the top right of the metric tile.
-5. Expand the **Copy metric configuration** section and select your metric from the list of available metrics.
-6. With your metric selected, click the **Copy config** button.
-7. Your metric tile's configuration will be updated with the configuration from your metric. You can open the metric tile's configuration to review the settings or make additional changes.
+4. Open the metric tile's configuration by clicking the settings icon in the top right of the metric tile.
+
+To link a metric tile to a metric:
+
+5. Click the Linked Metric tab
+6. Select the metric you want to reference from the Linked Metric dropdown
+7. Your metric tile will now display the selected metric, to make changes to the value displayed you can edit the metric definition from the [Metrics page](#metric-page).
 8. Once you have finished editing the dashboard, click the **Save** button in the top right of the dashboard.
+
+To copy a metric's configuration into a metric tile:
+
+5. Click the Custom Metric tab
+6. Expand the **Copy metric configuration** section and select your metric from the list of available metrics.
+7. With your metric selected, click the **Copy config** button.
+8. Your metric tile's configuration will be updated with the configuration from your metric. You can open the metric tile's configuration to review the settings or make additional changes.
+9. Once you have finished editing the dashboard, click the **Save** button in the top right of the dashboard.
 
 ## Metrics as code
 
-Support for defining and controlling metrics as code is coming soon! To learn more about how to code based workflows for Hashboard resources please visit our [developer reference](/docs/data-ops)
+Metrics can be defined and controlled as code, allowing for better version control and recovery. Visit the [Metric schema](/docs/data-ops/config-schema/metrics.mdx) page to learn about how metrics can be defined, to learn more about the basics of code based workflows for Hashboard resources please visit our [developer reference](/docs/data-ops).
 
 <Callout type="warning">
   **Are you looking for measures?** Hashboard previously used the term
