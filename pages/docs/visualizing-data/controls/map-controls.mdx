@@ -1,0 +1,48 @@
+---
+description: An overview of what is available in the control panel for configuring Map visualizations.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Map controls
+
+The following sections are available in the control panel for configuring the Map visualization beta feature.
+
+<Callout type="info">
+  For access to this beta feature, contact the Hashboard support team at support@hashboard.com.
+</Callout>
+
+### Filters
+
+Use this section to apply filters to your dataset. To add a new filter, click the **+** button.
+
+For more information on how to use filters, see the [Filtering](../filter) documentation.
+
+### Measures
+
+Use this section to configure which measure will be displayed in the map. 
+
+Each map region will be colored in proportion to the value of the measure, based on the map color legend.
+
+### Regions
+
+Defines the geographic regions chosen for the map. The following geographic regions can be used for map visualizations:
+- **US State**: represented either as state abbreviations (e.g. "NY") or state names (e.g. "New York").
+- **US County**: represented as county FIPS codes (e.g. "36061") or county names (e.g. "New York County").
+- **US Zip Code**: represented as 5-digit zip codes (e.g. "10001").
+
+Geographic regions are automatically detected based on your attributes. 
+
+To manually set an attribute as Geographic or to change 
+its Geographic type, navigate to the **Model builder**, select the attribute you want to set as Geographic, and select the 
+**Geographic type** dropdown. 
+
+### Map options
+
+Use this section to configure custom visualization options for your map, including:
+
+- **Palette**: Defines color legend for regions.
+- **Use secondary colors**: Toggles between primary & secondary color schemes for color palettes. 
+    If the primary color scheme is toggled, the color legend will interpolate between grey and the primary color in the selected palette;
+    if the secondary color scheme is toggled, the color legend will interpolate between the full range of secondary colors in the selected palette.
+- **Show boundaries**: Toggles the visibility of region boundaries, which can be set to "None", "County", or "State".
