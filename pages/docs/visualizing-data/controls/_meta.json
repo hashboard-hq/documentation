@@ -13,5 +13,8 @@
   },
   "source-data-table-controls": {
     "title": "Source Data Tables"
+  },
+  "map-controls": {
+    "title": "Maps (beta)"
   }
 }
