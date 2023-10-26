@@ -14,8 +14,8 @@
   "duckdb": {
     "title": "DuckDB"
   },
-  "mysql": {
-    "title": "MySQL"
+  "motherduck": {
+    "title": "MotherDuck"
   },
   "postgresql": {
     "title": "PostgreSQL"
