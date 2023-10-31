@@ -1,0 +1,81 @@
+---
+description: Product release notes for October 31st, 2023. Data search,
+---
+
+# October 31st, 2023
+
+Hello friends of Hashboard -
+
+It was great meeting so many of you in San Diego at Coalesce earlier this month! We had a lot of fun with our [Chief Marketing Officer, Arthur](https://www.linkedin.com/posts/hashboardhq_coalesce2023-activity-7121176355253141505-o_ii?utm_source=share&utm_medium=member_desktop) 🐶, and diving into dbt + self-service data with Hashboard.
+
+Speaking of events, [Data Council](https://www.datacouncil.ai/) is accepting speaker proposals until November 8th! I’ll be running the Analytics track again and would love to feature some of you. [Submit your proposals here](https://www.datacouncil.ai/call-for-proposals) under the analytics category and feel free to reach out to chat through your ideas.
+
+\- Carlos
+
+## Dashboard Embeds
+
+<img
+  src="/product_updates/230927_Data_Search.gif"
+  alt="User viewing Gif of data search console"
+  style={{ maxWidth: "650px" }}
+/>
+
+You can now [embed external websites](https://docs.hashboard.com/docs/dashboards/embed) in your Hashboard dashboards (say that fast five times in a row)! To add external content in a dashboard, drag the embed icon from the toolbar onto your dashboard section of choice. Add a URL of the content, hit enter and you’re good to go!
+
+We built this feature so users can link external documentation, walk through videos and more to provide their teams additional context and insights included on the dashboard.
+
+---
+
+## Model Hopping 🐇
+
+<img
+  src="/product_updates/230927_Metrics_Page.gif"
+  alt="User viewing a metrics page interacting with trend line"
+  style={{ maxWidth: "650px" }}
+/>
+
+You can now easily explore and filter other models and data in your project by selecting the → icon in the [attribute tray](https://docs.hashboard.com/docs/visualizing-data/attribute-tray#exploring-further-from-the-attribute-tray), from a [tooltip](https://docs.hashboard.com/docs/visualizing-data/chart-interactions#exploring-further-from-the-tooltip) or from the [data tray](https://docs.hashboard.com/docs/visualizing-data/data-tray). This will allow you to dive into a new exploration with a filter reflecting the current values automatically applied.
+
+---
+
+## Sign up through the hashboard-cli
+
+Start using Hashboard in under a minute! Open up a terminal and run the following to create a new account:
+
+pip install hashboard-cli && hb signup
+
+Enter your name, project name, and login details, then start exploring your data.
+
+---
+
+## MotherDuck Integration
+
+We added another database to our list of connectors! If you’re unfamiliar, MotherDuck is a collaborative serverless analytics platform based on DuckDB, an analytics engine optimized for online analytical processing (OLAP) on your personal machine.
+
+If you require analyzing datasets across multiple external sources in a quick and cost-effective way, MotherDuck could be a great solution. [Check out an example](https://hashboard.com/blog/analyzing-9-million-healthcare-insurance-claims-with-motherduck-and-hashboard) of how we analyzed 9 million healthcare insurance claims with MotherDuck and Hashboard. Looking for other connectors? [Check out our full list of compatible databases](https://docs.hashboard.com/docs/database-connections) here.
+
+---
+
+## Lessons Learned from our AI Beta 🪄🧠
+
+Earlier this year we launched an AI Assistant Beta (many thanks to our tester users!) with the idea that it would accelerate users’ data exploration journeys.
+
+We observed that most users tried it out a couple times and never came back. After analyzing the data [we found there were four main failure modes](https://hashboard.com/blog/using-ai-for-data-analysis-expectations-vs-reality), including users overestimating the capabilities and confusion around data filtering.
+
+We pivoted this work to adding more natural language capabilities to our recently [launched Data Search](https://docs.hashboard.com/docs/visualizing-data/data-search) feature, which has a more precise interface and works across all the datasets in Hashboard projects. We’d love your feedback on this as we’re still iterating on AI features!
+
+---
+
+## 📚 Other Updates, Blog Posts & More
+
+- **Data engineers building dashboards?!** - If you’re feeling out of your league, we’ve got your back. [Check out this blueprint](https://hashboard.com/blog/data-engineers-guide-to-bi) for the end-to-end process of building a metrics dashboard that will actually get used.
+- **Metrics improvements** - Our metrics just keep getting better! You can now manage them [in code](https://docs.hashboard.com/docs/metrics#metrics-as-code), assign and sort
+- **Quality of life improvements** - Our team has been working hard behind the scenes, with recent investments in improved data upload workflows including BigQuery JSON key files, revamped sharing workflows and guided onboarding experiences.
+
+---
+
+👀 Hoping to see something else on our feature release list? Check out our [Product Roadmap](/product-roadmap) and let us know what we’re missing.
+
+You can drop us a [note](mailto:support@hashboard.com?subject=null&body=null) or ping us on Slack with your💡ideas, 🗣 feedback, or 🙋questions. We look forward to👂hearing from you!
+
+[Log into Hashboard](https://hashboard.com/app)
