@@ -37,9 +37,9 @@ Attributes can be configured with the following optional settings:
 
 To add a custom SQL attribute:
 
-1. Go to the [Add Data Model](/docs/data-modeling/add-data-model) workflow by creating a new data model or editing an existing model.
+1. [Create or edit the Data Model](/docs/data-modeling/add-data-model) that you want to add the custom attribute to.```
 2. Under the Attributes section click the `+ Add Custom Attribute` button.
-3. Enter your aggregation and click the 🔄 button to test the SQL.
+3. Enter your selection SQL and click the 🔄 button to test the SQL.
 
 
 ### Deriving attributes from other attributes
@@ -50,7 +50,7 @@ Custom attributes can refer to other attributes to avoid duplicating logic.
 UPPER({{ city_attribute }})
 ```
 
-SQL can reference other attributes by surrounding their `alias` in curly braces. When querying, Hashboard will expand references to their full definitions.
+SQL can reference other attributes by surrounding their `alias` in double curly braces. When querying, Hashboard will expand references to their full definitions.
 
 ### Using joined columns in custom SQL
 
