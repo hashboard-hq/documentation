@@ -46,11 +46,11 @@ To add a custom SQL attribute:
 
 Custom attributes can refer to other attributes to avoid duplicating logic.
 
-```sql filename="SQL for Profit measure"
+```sql filename="SQL for uppercase city name"
 UPPER({{ city_attribute }})
 ```
 
-SQL can reference other attributes by surrounding theis `alias` in curly braces. When querying, Hashboard will expand references to their full definitions.
+SQL can reference other attributes by surrounding their `alias` in curly braces. When querying, Hashboard will expand references to their full definitions.
 
 ### Using joined columns in custom SQL
 
