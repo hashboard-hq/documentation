@@ -8,6 +8,8 @@ Attributes are one of the main building blocks of data models in Hashboard. They
 
 You can setup and update attributes from the [Add Data Model](/docs/data-modeling/add-data-model) workflow.
 
+Attributes can either be directly added based on a column on the underlying table or query, or you can write custom SQL attributes. The latter can be useful for things like combining pre-existing columns into something more useful, e.g. `CONCAT(first_name, ' ', last_name)`.
+
 ## Types
 
 The following attribute types are supported in Hashboard:
@@ -30,3 +32,26 @@ Attributes can be configured with the following optional settings:
 - **Primary key**: This can be set on any unique string or numeric attribute to enable joining to another model. See [Model Joins](/docs/data-modeling/model-joins) for more info.
 - **Binning**: A default bin width for the attribute - when doing data explorations, this will be used to automatically group numeric values into buckets.
 - **Make attribute hidden**: When selected, this attribute will be hidden by default from the [attribute tray](/docs/visualizing-data/attribute-tray).
+
+## Custom SQL Attributes
+
+To add a custom SQL attribute:
+
+1. [Create or edit the Data Model](/docs/data-modeling/add-data-model) that you want to add the custom attribute to.```
+2. Under the Attributes section click the `+ Add Custom Attribute` button.
+3. Enter your selection SQL and click the 🔄 button to test the SQL.
+
+
+### Deriving attributes from other attributes
+
+Custom attributes can refer to other attributes to avoid duplicating logic.
+
+```sql filename="SQL for uppercase city name"
+UPPER({{ city_attribute }})
+```
+
+SQL can reference other attributes by surrounding their `alias` in double curly braces. When querying, Hashboard will expand references to their full definitions.
+
+### Using joined columns in custom SQL
+
+See [Using Joined Columns in Custom SQL](./model-joins#using-joined-columns-in-custom-sql) for more info.
