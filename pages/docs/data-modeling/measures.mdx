@@ -46,38 +46,18 @@ To add a custom measure:
 2. Under the Measures section click the `+ Add Custom Measure` button.
 3. Enter your aggregation and click the 🔄 button to test the SQL.
 
-### Deriving measures from other measures
+### Referencing other measures or attributes
 
-Custom measures can refer to other measures to avoid duplicating logic.
-For instance, a **Profit** measure could be defined by deducting **Costs** from **Revenue**.
+Custom measures can refer to other measures or attributes to avoid duplicating logic.
+For instance, a **Profit** measure could be defined by deducting the **Costs** measure from the **Revenue** measure.
 
 ```sql filename="SQL for Profit measure"
 {{ revenue }} - {{ cost }}
 ```
 
-SQL can reference other measures by surrounding the measure's `alias` in curly braces.
+SQL can reference other measures or attributes by surrounding their `alias` in curly braces.
 When querying, Hashboard will expand references to their full definitions.
 
-### Using joined columns in measure SQL
+### Using joined columns in custom SQL
 
-It's possible to write custom measure SQL that utilizes columns from joined models. However, if you write the following query:
-
-```
-count(DISTINCT id)
-```
-
-and the `id` column is not unique across joined models, the SQL won't be valid. This can solved by doing the following:
-
-1. Set an `alias` field on the model that owns the column you are trying to reference. This can be done via the YML Editor in the UI, or via Data Ops:
-
-```yaml filename="customers.yml"
-alias: customers_model
-```
-
-2. Use the alias you just set as a table name in the custom SQL you wrote:
-
-```
-count(DISTINCT customers_model.id)
-```
-
-This should ensure that the custom measure SQL is referencing the column you intended.
+See [Using Joined Columns in Custom SQL](./model-joins#using-joined-columns-in-custom-sql) for more info.

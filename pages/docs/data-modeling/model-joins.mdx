@@ -85,6 +85,24 @@ For example, they'll be added into the attribute tray alongside your pre-existin
   style={{ padding: "20px" }}
 />
 
-## Custom Measures with joined data
+## Using joined columns in custom SQL
 
-It's possible to utilize columns from joined models when defining custom measures. See [Using Joined Columns in Measure SQL](./measures#using-joined-columns-in-measure-sql) for more info.
+It's also possible to write custom SQL that utilizes columns from joined models. However, if you write e.g. the following query:
+
+```
+UPPER(name)
+```
+
+and the `name` column is not unique across joined models, the SQL won't be valid. This can solved by doing the following:
+
+1. Set an `alias` field on the model that owns the column you are trying to reference. This can be done via the YML Editor in the UI, or via Data Ops:
+
+```yaml filename="customers.yml"
+alias: customers_model
+```
+
+2. Use the alias you just set as a table name in the custom SQL you wrote:
+
+```
+UPPER(customers_model.name)
+```
