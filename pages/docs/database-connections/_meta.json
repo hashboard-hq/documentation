@@ -23,6 +23,9 @@
   "snowflake": {
     "title": ""
   },
+  "role-based-credentials": {
+    "title": "Role-Based Database Credentials"
+  },
   "_template": {
     "display": "hidden"
   }
