@@ -111,7 +111,7 @@ export default {
   darkMode: false,
   nextThemes: { defaultTheme: "light" },
   primaryHue: 199,
-  sidebar: { defaultMenuCollapseLevel: 4, toggleButton: true },
+  sidebar: { defaultMenuCollapseLevel: 1, toggleButton: true },
   head: function useHead() {
     const { title, frontMatter } = useConfig();
     const description =
