@@ -23,7 +23,7 @@ const nextJsConfig = {
       permanent: false,
     },
     // TODO: works for now, automatically redirect to latest post
-    { source: "/changelog", destination: "/changelog/2023_09_27", permanent: false },
+    { source: "/changelog", destination: "/changelog/2023_11_30", permanent: false },
 
 
     // redirects for backwards compatibility:
