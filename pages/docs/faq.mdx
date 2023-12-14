@@ -82,3 +82,11 @@ Color theory is a complex and nuanced topic. Entire books have been written on t
 - **Avoid Red-Green Combinations**: Refrain from using red and green together, as they can be difficult to differentiate for some individuals. If necessary, provide alternative visual cues such as shapes or patterns.
 - **Show progression with gradient palettes**: Use gradients when you want to show a gradual transition or progression between data points.
 - **Distinguish categories with distinct color palettes**: Use distinct colors when you want to show a clear distinction between data points.
+
+### How can I get column documentation from my database or dbt into Hashboard?
+
+There are two ways to get column documentation into Hashboard from dbt:
+1) You can use the [Hashboard dbt integration](docs/data-ops/dbt-integration).  The integration allows you to build hashboard models directly from dbt models with our cli.  Any model built this way will automatically pull in dbt documentation on each build.
+2) You can use dbt's [persist_docs](https://docs.getdbt.com/reference/resource-configs/persist_docs) to push column definitions from dbt into your warehouse.  Then use Hashboard's [database column description sync](docs/data-modeling/description-syncing).
+
+You can also document columnd directly by editing measures and attributes [in the model](docs/data-modeling).
