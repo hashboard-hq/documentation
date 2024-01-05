@@ -1,1 +1,6 @@
-{}
+{
+  "quick-start": { "title": "Quick Start" },
+  "project-search": { "title": "Project Search" },
+  "product-overview": { "title": "Detailed Product Overview" },
+  "security": { "title": "Security" }
+}
