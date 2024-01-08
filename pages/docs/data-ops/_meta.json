@@ -8,6 +8,9 @@
   "cli": {
     "title": "Using the CLI"
   },
+  "using-code-to-automate-bi-from-dbt": {
+    "title": "Using code to automate BI deployments from dbt"
+  },
   "dbt-integration": {
     "title": "dbt Integration"
   },
