@@ -4,6 +4,7 @@
   "metrics": { "title": "Metrics" },
   "database-connections": { "title": "Database Connections" },
   "visualizing-data": { "title": "Data Explorer" },
+  "project-search": { "title": "Project Search" },
   "sharing-data-externally": { "title": "Sharing Data Externally" },
   "dashboards": { "title": "Dashboards" },
   "data-ops": { "title": "Developer Reference" },
