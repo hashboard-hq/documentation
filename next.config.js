@@ -22,7 +22,9 @@ const nextJsConfig = {
       destination: "/docs/database-connections/mysql",
       permanent: false,
     },
-    { source: "/changelog", destination: "https://hashboard.com/changelog", permanent: false },
+    // TODO: works for now, automatically redirect to latest post
+    { source: "/changelog", destination: "/changelog/2023_11_30", permanent: false },
+
 
     // redirects for backwards compatibility:
     { source: "/docs/dashboards/Overview", destination: "/docs/dashboards/", permanent: false },
