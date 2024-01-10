@@ -1,0 +1,41 @@
+import { Callout } from "nextra-theme-docs";
+
+# Adhoc Modeling
+
+When exploring your data, you may want to [breakout](/docs/visualizing-data/breakout), [filter](/docs/visualizing-data/filter), or measure something that isn't directly present on your data model. This is where **Adhoc Modeling** comes in!
+
+## What is Adhoc Modeling?
+
+
+With Adhoc Modeling, you can define custom SQL measures and attributes within a given exploration. We call these **adhoc measures** and **adhoc attributes**, respectively.
+
+These adhocs behave just like [model measures](/docs/data-modeling/measures) or [model attributes](/docs/data-modeling/attributes), with the key difference that they are only present on the exploration in question -- not the underlying model.
+
+
+## Adding adhoc measures and attributes
+
+Adhoc measures and attributes can be defined from the data tray:
+
+- Click the `+` icon at the top of the measures or attributes list, respectively.
+- Define a label and a SQL statement for the adhoc.
+- Click `Add`.
+
+## Using adhoc measures and attributes
+
+Adhoc measures and attributes can used just like any other measure or attribute within the Explore page! They're shown with an orange icon in the data tray to differentiate them from the underlying model attributes.
+
+<Callout type="info">
+Note - adhocs are limited to direct usage within explorations only. This means they cannot be applied as dashboard filters, or used with project metrics.
+</Callout>
+
+
+## Persisting adhoc measures and attributes to the model
+
+After using an adhoc measure or attribute, you may want to add it to the underlying model. This can be done within the data tray by clicking `...` next to the relevant attribute or measure, and clicking `Persist to model`.
+
+
+## Permissions
+
+Creating and updating adhoc measures and attributes is gated on the `CREATE_OR_UPDATE_ADHOC_MODEL_COLUMNS` permission. Usage of pre-existing adhoc measures and attributes is only gated on the usual permissions for exploring data on the model in question.
+
+Because adhoc attributes and measures execute SQL against your database, which could potentially read data outside of the current data model, **you should only grant this permission to people you trust with access to your database**.
