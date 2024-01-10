@@ -1,8 +1,8 @@
 ---
-description: An overview of what is available in the control panel for configuring Table visualizations.
+description: An overview of what is available for configuring Table visualizations.
 ---
 
-# Table controls
+# Table Controls
 
 Table visualizations can be configured both in the control panel, and directly via controls on the table.
 
@@ -37,15 +37,18 @@ Additional options:
 
 This section allows you to group your data based on the values of an attribute. Tables can have up to one Color Breakout applied. For additional information about Breakouts, see the [Breakout](../breakout) documentation.
 
+### Columns
+
+Add columns to pivot your table by. You can add any number of columns as long as each column is not already used in `rows` or as a `breakout`, and reorder columns to determine the level at which they are nested.
+
 ### Measures
 
 Use this section to configure which measures will be displayed in the table.
 
-## Column Configuration
+## Header Configurations
 
 You can edit individual columns by clicking on their headers in the table.
 Many common actions, such as sorting, are available in these menus.
-You can also add new columns using the `+` button on the right edge of the table.
 
 ### Calculating Row/Column Summaries
 
@@ -57,3 +60,7 @@ Summaries are currently all calculated post-aggregation, after querying your
 database.
 
 ![a pivoted table with summarized rows and columns](/visualizing_data/table-summaries.png)
+
+### Measure Filters
+
+Click the header of a measure column to add a post-aggregation filter to it. This filter out any rows that don't match the post-aggregation filter condition.
