@@ -21,20 +21,22 @@ Databricks can be especially useful for machine learning/artificial intelligence
 You can find it by clicking the "SQL Warehouses" link in the left sidebar of your Databricks workspace. 
 You can find instructions on how to create or configure a warehouse [here](https://docs.databricks.com/en/compute/sql-warehouse/create-sql-warehouse.html).
 3. Generate a [personal access token](https://docs.databricks.com/en/dev-tools/auth/pat.html#pat-user) in Databricks for a user with access to the data you want to query:
-    * In the right corner of your Databricks workspace, click the user icon and navigate to "User Settings".
+    * In the top right corner of your Databricks workspace, click the user icon and navigate to "User Settings".
     * In the left pane, click into the "Developer" controls. Click the "Manage" button in the "Access tokens" section.
     * Click "Generate New Token". You will be asked to configure the token's lifespan. Finally, click "Generate".
     * Copy the token and save it somewhere safe. You will not be able to access it again.
-4. Clicking the name of your warehouse in the "SQL Warehouses" page and then selecting the "Connection details" tab, you can find the hostname and HTTP path of your warehouse.
+4. In the sidebar of your workspace, click on "SQL Warehouses" under the "SQL" section. 
+You will see a list of your warehouses. Click on the name of the warehouse you want to connect to.
+Then, navigating to the "Connection details" tab, you can find the hostname and HTTP path of your warehouse.
 5. In Hashboard, go to the [Data sources](https://hashboard.com/app/p/data-sources) page.
 6. Click `+ Add connection`, select `Databricks` and fill out the fields below.
 
 ### Settings
 
 - **Connection Name:** A nickname for your connection. Not used to connect to your database.
-- **Host**: The server hostname of the SQL warehouse. Can be found in the Connection Details tab of your SQL warehouse.
+- **Host**: The server hostname of the SQL warehouse. Can be found in the Connection Details tab of your SQL warehouse (see above for instructions), or as the URL of your Databricks workspace (excluding "https://"). Example: `my-host-name.cloud.databricks.com`
 - **Port**: _(optional)_ The port to connect to. Set to 443 by default.
-- **HTTP path**: The HTTP path of the SQL warehouse. Can be found in the Connection Details tab of your SQL warehouse.
+- **HTTP path**: The HTTP path of the SQL warehouse.  Can be found in the Connection Details tab of your SQL warehouse (see above for instructions). Example: `/sql/1.0/warehouses/my-http-path`
 - **Access token**: A personal access token generated in Databricks for a user with access to the data you want to query.
 - **Catalog**: The [Databricks catalog](https://docs.databricks.com/en/data-governance/unity-catalog/index.html) within the warehouse to connect to.
 - **Schema**: _(optional)_ The schema to use for the connection. If no schema is set, all schemas in the catalog will be available.
