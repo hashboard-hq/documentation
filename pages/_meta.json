@@ -16,7 +16,8 @@
     }
   },
   "changelog": {
-    "title": "Changelog",
+    "title": "Changelog ↗",
+    "href": "https://hashboard.com/changelog",
     "type": "page"
   },
   "get-access": {
