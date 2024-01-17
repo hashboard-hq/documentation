@@ -1,0 +1,50 @@
+---
+description: Overview of how to configure data access and governance perimssions in Hashboard
+---
+
+# Hashboard Permissions Overview
+
+Hashboard offers a highly customizable security model that can be tailored to meet the specific needs of your organization.
+
+## Key Considerations
+
+Before configuring permissions in Hashboard, it is useful to think through your overall security model and how you would like to control **data access** and **governance**.
+
+**Data Access**: Decide which data sources your user groups can see, and at what granularity.
+
+Your data access strategy addresses questions like:
+- Which users should be able to execute raw SQL queries against your data source(s)?
+- Do specific databases, schemas, tables, columns, or rows contain sensitive data that requires limited access?
+- Are there any users that should only be allowed to see aggregated data and not the unaggregated source data?
+
+**Governance**: Decide who should be able to modify models, metrics, explorations, and dashboards within Hashboard.
+
+Your governance strategy addresses questions like:
+- Which teams will be able to create and modify my core Hashboard models and dashboards? 
+- Are there specific resources in Hashboard that I don't want to be modified by certain user groups?
+- Are there any change management processes or policies that my Hashboard resources need to comply with?
+
+Note that it is normal for your Data Access and Governance strategies to not entirely overlap. For instance, you might want to grant your data analysts raw SQL access without allowing them to modify some core metric definitions owned by your upstream data team.
+
+## Implementation
+
+Once your high-level strategy is defined, you can use one or more of Hashboard's permissioning features to implement it:
+
+| Feature                      | Description                                                                                                       | Applicability          |
+|------------------------------|-------------------------------------------------------------------------------------------------------------------|------------------------|
+| **[Role-based Access Controls](/docs/project-management/users-and-permissions#system-provided-roles)** | Define roles in Hashboard and assign specific governance and access rules to these roles, enforced by Hashboard.     | Data Access, Governance |
+| **[Role-based Database Credentials](/docs/database-connections/role-based-credentials)** | Vary database credentials for specific users to enforce data access rules.                                         | Data Access            |
+| **[Model Definitions](/docs/data-modeling)**        | Create different models for various use cases and control access using Role-based Access Controls.                | Data Access, Governance             |
+| **[Public Links](/docs/sharing-data-externally/public-links)**          | Exposes a specific dashboard or saved exploration to anybody who knows its URL. | Data Access |
+| **[Partner Projects](/docs/sharing-data-externally/partner-projects)**          | Implement broad security isolation by providing an entirely separate stack of credentials and templated resources to a group of users. | Data Access, Governance |
+
+
+## Controlling Data Access
+
+The below diagram summarizes the different ways you can control data access in Hashboard:  
+
+<img src="/images/data_access_diagram.png" style={{ maxWidth: "650px" }} />
+
+## Getting Help
+
+The Hashboard team is happy to help design your permissioning strategy. Contact us any time in your support channel to set up a working session.
