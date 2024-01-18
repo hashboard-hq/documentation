@@ -8,6 +8,9 @@
   "clickhouse": {
     "title": "ClickHouse (Beta)"
   },
+  "databricks": {
+    "title": "Databricks"
+  },
   "mysql": {
     "title": "MySQL"
   },
