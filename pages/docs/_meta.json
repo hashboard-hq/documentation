@@ -5,6 +5,7 @@
   "database-connections": { "title": "Database Connections" },
   "visualizing-data": { "title": "Data Explorer" },
   "project-search": { "title": "Project Search" },
+  "sql-runner": { "title": "SQL Runner" },
   "sharing-data-externally": { "title": "Sharing Data Externally" },
   "dashboards": { "title": "Dashboards" },
   "users-and-permissions": { "title": "Users and Permissions" },
