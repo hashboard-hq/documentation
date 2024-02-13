@@ -45,8 +45,11 @@ to role identifier($hashboard_role);
 -- grant Hashboard access to database
 grant MONITOR, USAGE  on database identifier($database_name) to role identifier($hashboard_role);
 grant USAGE on all schemas in database identifier($database_name) to role identifier($hashboard_role);
+grant USAGE on future schemas in database identifier($database_name) to role identifier($hashboard_role);
 grant SELECT on all tables in database identifier($database_name) to role identifier($hashboard_role);
 grant SELECT on future tables in database identifier($database_name) to role identifier($hashboard_role);
+grant SELECT on all views in database identifier($database_name) to role identifier($hashboard_role);
+grant SELECT on future views in database identifier($database_name) to role identifier($hashboard_role);
 ```
 
 ## Create a Snowflake database connection in Hashboard
