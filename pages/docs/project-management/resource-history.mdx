@@ -2,7 +2,7 @@
 description: View previous versions of your project resources with immutable resources.
 ---
 
-# Resource History
+# Resource history
 
 Your project's resource history allows you to review how the configuration of your resources resources has changed, alongside who made the change and when.
 
@@ -14,11 +14,46 @@ The following resource types are currently tracked in your project's resource hi
 - [Color Palettes](/docs/data-ops/config-schema/Color-Palette)
 - [Homepage Launchpad](/docs/data-ops/config-schema/Homepage-Launchpad)
 
-## Individual resource history
+## Specific resource version history
 
+When viewing data models, saved explorations, dashboards and metrics, you can quickly view the history of that resource over time.
+- For a specific **data models**, **saved explorations**, or **dashboards** you can view the history of that resource by navigating to the appropriate page from the 
+    data library in the left side navigation sidebar, clicking the resource you want to view, selecting the more (three dots) menu, then selecting the "Version history" menu item.
+- For a specific **metric**, you can view the history of that metric by navigating to the metrics page in the data 
+    library, selecting the more (three dots) menu of that specific metric, then selecting the "Version history" menu item.
+
+When viewing the history of a resource, each change is shown as a comparison against the previous version. Each change also has a 
+timestamp, whether the resource was created, updated, or deleted in that change, and the user that made the change.
+
+#### Who can access specific resource version history?
+If a user has permissions to view a resource, they are allowed to view the specific resource version history for that resource.
 
 ## Project-level resource history
 
+In addition to viewing the history for a specific resource, users with the proper permissions can view the history all resources across their project
+in a single place.
+
+To view the project-level resource history page, click the more (three dots) menu in the left navigation sidebar, then click the "Resource history"
+menu item.
+
+This page groups changes to resources that were made at the same time, such as updates to resources using code or updates to model that impacted
+dependent resources. 
+
+To view the visual diffs for a grouped change, click on the specific row in the table and a modal will appear with the diffs for each resource.
+
+#### Who can access project-level resource history?
+If a user has permission to build resources from code (the `CREATE_DATA_MODEL_REPO_BUILD` permission), they are allowed to view the project-level resource history.
 
 
+## "Additional changes detected" warning
 
+When changes are shown in comparison to the previous version of the resource, sometimes there are changes that are shown in the comparison.
+
+The visual diff of a resource is based on the Hashboard [configuration schema](/docs/data-ops/config-schema). These schemas do not encompass
+all possible changes for resource. Some changes not described in the configuration schemas are:
+- Private status
+- Trashed status
+- [Public link](/docs/sharing-data-externally/public-links) status
+
+When visual diff of a resource indicated that nothing has changed, but one of these changes not described in the configuration scehamas is present,
+we will show a warning along side a human-readable explanation of what has changed.
