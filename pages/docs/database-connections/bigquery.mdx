@@ -57,7 +57,32 @@ account JSON key file into this field. See the
 
 - **Connection Name:** A name for this database connection. If you use the [CLI](/docs/data-ops/cli),
   you can use the connection name to refer to this database.
-- **Project Name:** _(optional)_ The GCP project. This is optional since it's usually also
-  included in the below key file.
 - **JSON Key:** BigQuery service accounts use a JSON file as a credential. The entire contents
   of this file needs to be copied and pasted into this field.
+
+## Authenticating to BigQuery via OAuth
+
+When creating a new [BigQuery Cost Analyzer project](https://bigquerycost.com), you will be prompted to authenticate via OAuth
+using your Google account. This allows Hashboard to create BigQuery data connections using your Google account's credentials.
+
+Currently there is no other way to authenticate via OAuth in Hashboard.
+
+### Converting to a service account
+
+OAuth credentials are tied to a specific user's Google account. This is convenient for 
+fast setup, but isn't ideal for long-term use, especially when new users are added to the project. 
+
+All users in the project will be able to query the BigQuery project while authenticated as the user who created the OAuth credentials. 
+This might allow users to query data that they should not have access to.
+
+If you are adding new users to your Hashboard project, you should convert your 
+OAuth credentials to a service account using the following steps:
+
+1. To create a service account, follow the steps in the 
+   [Create a BigQuery service account](#create-a-bigquery-service-account) section above.
+2. In Hashboard, go to the [Data sources](https://hashboard.com/app/p/data-sources) page.
+3. Click on the **Edit** button for the BigQuery connection that you want to convert. 
+   - You should see an alert that says: "This connection was initially authenticated via OAuth. 
+   To update it, upload service account credentials below."
+4. Fill out the **JSON Key** field using the service account JSON key file that you created in step 1, 
+   either by uploading the file directly or pasting its contents into the text field.
