@@ -23,3 +23,16 @@ $ DATABASE_CONNECTION_NAME=dev hb preview
 ```
 
 Environment variable substitution is not yet supported for Builds that are triggered via a git revision.
+
+### Escaping dollar signs
+
+If you want to include a literal '$' in your configuration file (i.e. not as a placeholder for an environment variable), you can escape it by doubling it up. For example:
+
+```yaml
+hb_version: "1.0"
+name: Revenue
+description: This year's revenue in $$
+...
+```
+
+...will create a resource with description `This year's revenue in $`.
