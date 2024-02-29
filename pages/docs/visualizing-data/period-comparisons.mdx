@@ -1,0 +1,18 @@
+import { Callout } from "nextra-theme-docs";
+
+
+# Period-over-period Comparisons
+
+Period-over-period comparisons allow you to compare timeseries data from different periods of time. They can be configured via the control panel on the right-hand side of the Data Explorer, under the `Compare` heading.
+
+Currently, Hashboard supports `Previous Year`, `Previous Month`, and `Previous Week` comparisons.
+
+Comparisons will be applied as a breakout to your chart, as follows:
+
+![Period Comparison Example](/visualizing_data/period-comparison.png)
+
+<Callout type="info">
+    Note - In order to effectively compare across periods, your chart granularity (daily, weekly, monthly, etc) 
+    must be **equal or narrower** than the period you're comparing. 
+</Callout>
+
