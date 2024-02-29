@@ -2,6 +2,8 @@
 description: Share saved explorations and dashboards directly to Slack channels with added notes and context
 ---
 
+import { Callout } from "nextra-theme-docs";
+
 # Sharing to Slack
 
 `Owners` can connect their Hashboard project to any Slack workspace. This lets users in your project
@@ -24,6 +26,23 @@ can share saved explorations and dashboards to Slack. By default, this is restri
 2. Click the `Share` dropdown at the top right corner and select the `Share to Slack` option.
 3. In the modal that opens, select the Slack channels you'd like to share to and optionally enter a comment with any context. Only public channels, and private channels to which you've specifically added the Hashboard app for Slack, will appear.
 4. Click `Send` and your report will appear in Slack within the next minute or so.
+
+## File types
+
+Slack reports can be sent as either images or PDF files, configured with the "File type" dropdown when sharing a resource to Slack.
+
+Images are included inline in the Slack message, whereas PDF files are uploaded as a separate file into your Slack channel.
+In general, images are easier to read from the Slack desktop app, but Slack will render them at low resolution when viewed on mobile devices.
+You can experiment with the different file formats to see what works best for the Saved Exploration or Dashboard you are sharing.
+
+Since it involves file uploads, PDF reports can only be shared to channels that have the @hashboard app as a member.
+
+<Callout type="warning">
+  If you installed the Hashboard Slack app prior to February 28, 2024, you will
+  need to re-install it to enable the PDF file type option. To do so, navigate
+  to your [`Project Settings`](https://hashboard.com/app/p/settings), scroll
+  down to the "Slack" section of "Integrations", and click "Reinstall".
+</Callout>
 
 ## Interacting in Slack
 
