@@ -1,0 +1,20 @@
+import { Callout } from "nextra-theme-docs";
+
+
+# Period-over-period Comparisons
+
+Period-over-period comparisons allow you to compare timeseries data from different periods of time. They can be configured via the control panel on the right-hand side of the Data Explorer, under the `Compare` heading.
+
+Currently, Hashboard supports `Previous Year`, `Previous Month`, and `Previous Week` comparisons. Year and month comparisons are calendar based, so e.g. applying a `Previous Year` comparison to a chart showing monthly data for April 2022, May 2022, and June 2022 will compare to data from April 2021, May 2021, and June 2021, respectively.
+
+All period comparisons are done in a single SQL query, which you can see via `Inspect -> View SQL Query` in the upper right hand corner, or by opening the [SQL Runner](/docs/sql-runner).
+
+Comparisons will be applied as a breakout to your chart, as follows:
+
+![Period Comparison Example](/visualizing_data/period-comparison.png)
+
+<Callout type="info">
+    Note - In order to effectively compare across periods, your chart granularity (daily, weekly, monthly, etc) 
+    must be **equal or narrower** than the period you're comparing. 
+</Callout>
+

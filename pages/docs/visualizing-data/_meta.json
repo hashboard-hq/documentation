@@ -9,5 +9,7 @@
   "chart-menu": "Chart Menu",
   "data-tray": "Data Tray",
   "filter": "Filtering Data",
-  "adhoc-modeling": "Adhoc Modeling"
+  "adhoc-modeling": "Adhoc Modeling",
+  "period-comparisons": "Period-over-period Comparisons",
+  "data-search": "Data Search"
 }
