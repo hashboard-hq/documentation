@@ -4,9 +4,13 @@ description: Hashboard can serve to run continuous integration on your Business 
 
 ## Continuous integration
 
-Hashboard can serve to run continuous integration on your Business Intelligence dashboards, this can be integrated with git and dbt workflows in Hashboard. You can invoke the Hashboard CLI in a continuous integration system to automatically generate previews or deploy your project.
+By combining Hashboard's CLI and preview features, you can integrate your entire BI stack into a continuous integration workflow.
 
-For example, if you use GitHub, the following GitHub action will generate a Build Preview of the local `hashboard` directory whenever you send a pull request:
+### Automatically generating Hashboard change previews
+
+Once you have defined and deployed core Hashboard resources [as code](./managing-resources-with-code.mdx), you can start using [Preview Builds](./cli/preview.mdx) to test and validate proposed changes to those resources.
+
+You can automate the creation of Preview Builds from any command line environment. For example, if you use GitHub, the following GitHub action will generate a Build Preview of the local `hashboard` directory whenever you send a pull request:
 
 ```yaml
 name: hashboard-preview
@@ -22,4 +26,135 @@ jobs:
       HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID_PROD }}
       HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID_PROD }}
       HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN_PROD }}
+```
+
+### CI workflow for Hashboard and dbt
+
+You can combine [dbt](./dbt-integration.mdx), [Preview Builds](./cli/preview.mdx), and [environment variables](./environment-variables.mdx) to create complex end-to-end CI workflows.
+
+Suppose you have an existing workflow that runs your `dbt` pipelines automatically for every pull request, targeting a schema based on the pull request ID. Here is one way to introduce your Hashboard resources into this workflow:
+
+1. Store your Hashboard model yml files alongside your `dbt` models, in its own `hashboard/` directory
+2. Use an environment variable, `$DBT_SCHEMA`, when defining your models' data sources:
+
+```yaml
+source:
+  connectionName: bigquery
+  physicalName: sales
+  schema: ${DBT_SCHEMA}
+```
+
+3. Modify your GitHub action to generate a Hasboard Preview Build after running dbt, with `DBT_SCHEMA` set to the newly created target schema.
+
+This will now provide you with a preview of your entire Hashboard project, using the data from your staged dbt pipeline.
+
+Here is a sample GitHub action for this workflow, using dbt and BigQuery, to get you started:
+
+```yaml
+# Runs the dbt pipeline against a new dataset, then creates a preview build in Hashboard.
+name: hashboard-preview
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [main]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+env:
+  BQ_DATASET_NAME: "ci_pr_${{ github.event.pull_request.number }}"
+  BQ_DATASET_DESCRIPTION: "${{ github.event.pull_request.title}} (${{github.event.pull_request.html_url}})"
+  PYTHONIOENCODING: ascii
+
+jobs:
+  create-preview:
+    name: "Run dbt pipeline and create Hashboard preview"
+    concurrency:
+      group: preview-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.merged }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Install Python 3.9"
+        id: install-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9.16"
+
+      - name: "Install dependencies"
+        run: |
+          pip install --upgrade --upgrade-strategy eager -r requirements.txt
+          dbt deps
+          dbt --version
+
+      - id: "auth"
+        name: "Authenticate with Google Cloud"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: "Set up Google Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
+
+      - name: "Create BigQuery dataset"
+        run: |
+          bq rm -f -r $GCP_PROJECT:$BQ_DATASET_NAME
+          bq --location=US mk --description="$BQ_DATASET_DESCRIPTION" "$GCP_PROJECT:$BQ_DATASET_NAME"
+
+      - name: dbt seed
+        id: dbt-seed
+        run: |
+          dbt seed --target=github | tee out.txt
+          grep -q "WARN=0 ERROR=0 SKIP=0" out.txt
+
+      - name: dbt run
+        id: dbt-run
+        run: |
+          dbt run --target=github --full-refresh | tee out.txt
+          grep -q "WARN=0 ERROR=0 SKIP=0" out.txt
+
+      - name: dbt test
+        id: dbt-test
+        run: |
+          dbt test --target=github | tee out.txt
+          grep -q "WARN=0 ERROR=0 SKIP=0" out.txt
+
+      - name: Generate Hashboard preview
+        id: generate-preview
+        env:
+          HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
+          HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
+          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
+        run: |
+          DBT_SCHEMA="$BQ_DATASET_NAME" hb preview ./hashboard | tee output.txt
+          grep -q Details output.txt
+          if [ $? -eq 0 ]; then
+            RESULT=`grep Details output.txt | sed 's/Details/Hashboard preview build succeeded/'`
+          else
+            RESULT=`echo "Preview Build failed. See the GitHub action logs for more details."`
+          fi
+          echo "result=$RESULT" >> $GITHUB_OUTPUT
+
+      - uses: actions/github-script@v6
+        name: "Comment on the pull request"
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${{ steps.generate-preview.outputs.result }}`
+            })
+
+      - id: set-appropriate-exit-code
+        name: "Set exit code"
+        run: echo ${{ steps.generate-preview.outputs.result }} | grep succeeded
 ```
