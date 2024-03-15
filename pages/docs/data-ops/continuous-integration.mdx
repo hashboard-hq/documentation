@@ -4,7 +4,7 @@ description: Hashboard can serve to run continuous integration on your Business 
 
 ## Continuous integration
 
-By combining Hashboard's CLI and preview features, you can integrate your entire BI stack into a continuous integration workflow.
+By combining Hashboard's CLI and preview features, you can integrate your entire BI stack into a continuous integration workflow. You can even preview data changes in upstream pipelines and see how they will affect your dashboards and reporting.
 
 ### Automatically generating Hashboard change previews
 
@@ -43,6 +43,8 @@ source:
   physicalName: sales
   schema: ${DBT_SCHEMA}
 ```
+
+You can also configure this in the `hashboard-defaults` section of your `dbt_project.yml` when using the [dbt integration](./dbt-integration#configure-your-dbt_projectyml).
 
 3. Modify your GitHub action to generate a Hasboard Preview Build after running dbt, with `DBT_SCHEMA` set to the newly created target schema.
 
