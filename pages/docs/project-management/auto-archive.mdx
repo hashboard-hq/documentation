@@ -1,0 +1,24 @@
+---
+description: Auto archive allow you to automatically move to trash resources that have not been viewed based on your settings.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Auto archive
+
+Auto archive allow you to automatically move to trash resources that have not been viewed based on your settings.
+
+## Settings
+
+- Days: Set the time frame for automatically moving unused resources to trash. By default, resources are moved after 30 days of inactivity.
+- Exclude resources based on status: You can control which resources shouldn't be moved to trash based on their status (Exploratory, In Progress, Verified, Archive, No status).
+- Exclude resources based on User owner: You can control which resources shouldn't be moved to trash base on their user owner.
+- Exclude resources based on type: You can control which resources shouldn't be moved to trash based on their type, currently the resources allowed to be auto-trased are: Saved explorations, Dashboards and Collections.
+
+## Test
+
+You can validate which resources meet your configured settings. Clicking the 'Test' button will display those resources. Additionally, you have the option to manually move those resources to trash.
+
+<Callout type="info">
+  The automatic process occurs every night at midnight.
+</Callout>
