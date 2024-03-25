@@ -11,14 +11,22 @@ Auto archive allow you to automatically move to trash resources that have not be
 ## Settings
 
 - Days: Set the time frame for automatically moving unused resources to trash. By default, resources are moved after 30 days of inactivity.
-- Exclude resources based on status: You can control which resources shouldn't be moved to trash based on their status (Exploratory, In Progress, Verified, Archive, No status).
-- Exclude resources based on User owner: You can control which resources shouldn't be moved to trash base on their user owner.
+- Exclude resources based on [status](/docs/project-management/resource-metadata#status): You can control which resources shouldn't be moved to trash based on their status (Exploratory, In Progress, Verified, Archive, No status).
+- Exclude resources based on User [owner](/docs/project-management/resource-metadata#owner): You can control which resources shouldn't be moved to trash base on their user owner.
 - Exclude resources based on type: You can control which resources shouldn't be moved to trash based on their type, currently the resources allowed to be auto-trased are: Saved explorations, Dashboards and Collections.
 
-## Test
+## Preview
 
-You can validate which resources meet your configured settings. Clicking the 'Test' button will display those resources. Additionally, you have the option to manually move those resources to trash.
+You can validate which resources meet your configured settings. Clicking the 'Preview' button will display those resources. Additionally, you have the option to manually move those resources to trash.
 
 <Callout type="info">
-  The automatic process occurs every night at midnight.
+  The automatic process occurs every night at 2am EST.
 </Callout>
+
+## Built-in rules
+
+- Only empty Collections get auto-trashed.
+- Saved explorations and dashboards with a scheduled report won't get auto trashed.
+- Saved explorations used in a dashboard won't get trashed.
+- Resources publicly shared won't get trashed.
+- DataOps resources are excluded.
