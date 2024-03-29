@@ -1,0 +1,32 @@
+---
+description: Auto archive allow you to automatically move resources to the trash that have not been recently viewed.
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Auto archive
+
+Auto archive allow you to automatically move resources to the trash that have not been recently viewed.
+
+## Settings
+
+- Days: Set the time frame for automatically moving unused resources to the trash. By default, resources are moved after 30 days without any views by users of your project.
+- Exclude resources based on [status](/docs/project-management/resource-metadata#status): You can control which resources shouldn't be moved to the trash based on their status (Exploratory, In Progress, Verified, Archive, No status).
+- Exclude resources based on User [owner](/docs/project-management/resource-metadata#owner): You can control which resources shouldn't be moved to the trash base on their user owner.
+- Exclude resources based on type: You can control which resources shouldn't be moved to the trash based on their type, currently the resources allowed to be auto-archived are: Saved explorations, Dashboards and Collections.
+
+## Preview
+
+You can validate which resources meet your configured settings clicking the 'Run now' button.
+
+<Callout type="info">
+  The automatic process occurs every night at 2am EST.
+</Callout>
+
+## Built-in rules
+
+- Only empty Collections get auto-archived.
+- Saved explorations and Dashboards with a scheduled report won't get auto-archived.
+- Saved explorations used in a dashboard won't get auto-archived.
+- Resources publicly shared won't get auto-archived.
+- DataOps resources won't get auto-archived.
