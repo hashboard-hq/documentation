@@ -1,0 +1,42 @@
+---
+description: The databases command allows you to see a list of all available database connections when developing Hashboard resources via the CLI.
+---
+
+import { Callout, Steps } from "nextra-theme-docs";
+
+# Hashboard `datasources` command
+
+The `datasources` command allows to perform various functions related to your Hashhboard data sources.
+
+### `hb datasources ls`
+List all your existing data sources for a given project in Hashboard.
+
+```bash copy
+hb datasources ls
+
+Successfully logged in to Pizza Bytes
+
+🗒  Available data connections 
++--------------------------+----------------------+------------------+
+| Data connection name     | Data connection type | ID               |
++--------------------------+----------------------+------------------+
+| Snowflake db connection  | snowflake            | BNwVyrQ3FY4qejuU |
+| Bigquery db connection   | big_query            | 92hu4Ff8QZ79JCNO |
+| Databricks db connection | databricks           | 53FmRprC_7USlpn_ |
++--------------------------+----------------------+------------------+
+
+```
+You can explore data sources further using the [`tables`](./tables) command and upload files directly to Hashboard using the `datasources upload` command described below. To configure new connections check out the [Hashboard guide](/docs/database-connections) for connecting to your database.
+
+
+### `hb datasources upload`
+Upload files directly to Hashboard that can be queried using [DuckDB](/docs/database-connections/duckdb) and used as the
+basis for a data model.
+
+```bash copy
+hb databases upload [filepaths...]
+```
+
+Currently Hashboard supports uploading data as csv, tsv, json, or parquet files. These tables can be referenced when building out [model configurations](/docs/data-ops/config-schema/data-models).
+
+
