@@ -5,7 +5,7 @@
   "pull": "pull",
   "token": "token",
   "cache": "cache",
-  "datasources": "datasources",
+  "datasource": "datasource",
   "tables": "tables",
   "upload": "upload"
 }

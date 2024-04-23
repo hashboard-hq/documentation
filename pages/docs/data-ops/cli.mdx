@@ -42,8 +42,8 @@ Check out the [Quickstart guide](quickstart) to learn how to set up your CLI cli
   </Card>
   <Card
     icon={<Database {...iconProps} />}
-    title="Data sources"
-    href="./cli/datasources"
+    title="Datasource"
+    href="./cli/datasource"
   >
     List existing data sources and upload file-based data.
   </Card>
@@ -57,7 +57,7 @@ Check out the [Quickstart guide](quickstart) to learn how to set up your CLI cli
 The CLI allows you to integrate Hashboard into your existing development and deployment process. As an example, below is a recommended workflow for making changes to Hashboard resources or upstream data:
 
 1. Store your Hashboard configuration files in a git repo alongside your data pipeline code.
-2. Run your pipelines to populate test data into a separate database or schema. If you use dbt for your data pipline check out the [dbt integration]() documentation to see how to seamlessly combine your dbt and Hashboard workflows.
+2. Run your pipelines to populate test data into a separate database or schema. If you use dbt for your data pipeline check out the [dbt integration]() documentation to see how to seamlessly combine your dbt and Hashboard workflows.
 3. Adjust your Hashboard [configuration files]() as necessary to reflect your intended changes.
 4. Run `hb preview` to create a [Preview Build](), adjusting the `source` section of your model(s) to point at your test dataset.
 5. Make any necessary adjustments in the Preview and re-export your new configuration files.

@@ -6,7 +6,7 @@ import { Callout, Steps } from "nextra-theme-docs";
 
 # Hashboard `tables` command
 
-The `tables` command allows you to see a list of all available tables within a specific data source when developing Hashboard resources via the CLI. To see the names of the data sources available in your project use the [`datasources ls`](./datasources#hb-datasources-ls) command.
+The `tables` command allows you to see a list of all available tables within a specific data source when developing Hashboard resources via the CLI. To see the names of the data sources available in your project use the [`datasource ls`](./datasource#hb-datasource-ls) command.
 
 ```bash copy
 hb tables [data source connection name]
@@ -23,4 +23,4 @@ Successfully logged in to Pizza Bytes
 
 ```
 
-These tables can be referenced when building out [model configurations](/docs/data-ops/config-schema/data-models). If you have a DuckDB connection you can upload files to use as tables directly from the CLI using the [`datasources upload`](./datasources#hb-datasources-upload) command.
+These tables can be referenced when building out [model configurations](/docs/data-ops/config-schema/data-models). If you have a DuckDB connection you can upload files to use as tables directly from the CLI using the [`datasource upload`](./datasource#hb-datasource-upload) command.
