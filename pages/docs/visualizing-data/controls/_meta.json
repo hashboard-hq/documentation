@@ -11,6 +11,9 @@
   "horizontal-bar-controls": {
     "title": "Horizontal Bar Charts"
   },
+  "pie-controls": {
+    "title": "Pie charts"
+  },
   "source-data-table-controls": {
     "title": "Source Data Tables"
   },
