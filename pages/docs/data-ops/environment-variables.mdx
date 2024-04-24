@@ -2,11 +2,17 @@
 description: You can use environment variables to dynamically populate Hashboard configuration files with different values at runtime.
 ---
 
-# Using environment variables
+import { Callout } from "nextra-theme-docs";
 
-You can use environment variables to dynamically populate Hashboard configuration files with different values at runtime. At this time this only works with the CLI and not if you trigger builds from the App with our git integration.
+# Environment variables
 
-When creating a Build using local files, the CLI will replace placeholders of the form `${ENV_VAR_NAME}` with the corresponding environment variable. For example, if your model file contains:
+You can use environment variables to dynamically populate Hashboard configuration files with different values across deployments.
+
+## Using environment variables
+
+Environment variable substitution happens at build-time, when you create a Preview or Deploy build.
+
+For example, if your model file contains:
 
 ```yaml
 hb_version: "1.0"
@@ -22,7 +28,33 @@ source:
 $ DATABASE_CONNECTION_NAME=dev hb preview
 ```
 
-Environment variable substitution is not yet supported for Builds that are triggered via a git revision.
+Environment variables are resolved in the following order:
+
+1. Local environment variables in your shell, if using the [Hashboard CLI](./cli)
+2. [Default environment variables](#setting-default-environment-variables) set on the project you are deploying to
+
+If after both steps, there are still unresolved environment variables in any of your config files,
+an error will be raised and your build will not succeed.
+
+<Callout type="warning">
+  **Do not use Hashboard environment variables to store secrets or sensitive values**.
+
+Environment variable values are substituted directly into your `yml` configurations, which will be visible by
+anybody that has access to that resource in Hashboard. This means you should not use environment variable substitution
+for anything that you wouldn't be comfortable directly adding to your `yml` file.
+
+</Callout>
+
+### Setting default environment variables
+
+You can use the Hashboard UI to configure default environment variables for your project. These values will be used
+by default for variable substitution in any Preview and Deploy builds deployed to that project.
+
+To set project environment variables:
+
+1. Navigate to the [`DataOps`](https://hashboard.com/app/p/data-ops) page using the link in the "More" menu of the navigation bar.
+2. Scroll down to the [`Environment Variables`](https://hashboard.com/app/p/data-ops#environment_variables) section.
+3. Configure the name and value for each of your environment variables, and then click `Save`.
 
 ### Escaping dollar signs
 
@@ -32,7 +64,6 @@ If you want to include a literal '$' in your configuration file (i.e. not as a p
 hb_version: "1.0"
 name: Revenue
 description: This year's revenue in $$
-...
 ```
 
 ...will create a resource with description `This year's revenue in $`.
