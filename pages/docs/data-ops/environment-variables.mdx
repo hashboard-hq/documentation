@@ -32,7 +32,7 @@ $ DATABASE_CONNECTION_NAME=dev hb preview
 Environment variables are resolved in the following order:
 
 1. Local environment variables in your shell, if using the [Hashboard CLI](./cli)
-2. [Default environment variables](#setting-default-environment-variables) set on the project you are deploying to
+2. [Default environment variables](#setting-default-environment-variables) set on the project you are deploying to. This applies to builds triggered both through the CLI and through the Hashboard [Git integration](./git-integration).
 
 If after both steps, there are still unresolved environment variables in any of your config files,
 an error will be raised and your build will not succeed.
