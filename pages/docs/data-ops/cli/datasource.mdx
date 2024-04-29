@@ -26,8 +26,55 @@ Successfully logged in to Pizza Bytes
 +--------------------------+----------------------+------------------+
 
 ```
-You can explore data sources further using the [`tables`](./tables) command and upload files directly to Hashboard using the `datasource upload` command described below. To configure new connections check out the [Hashboard guide](/docs/database-connections) for connecting to your database.
+You can explore data sources further using the [`tables`](./tables) command. 
 
+To create data sources using the CLI, you can either upload files directly to Hashboard using the `datasource upload` command described below, or configure a connection to 
+a data warehouse using the `datasource create` command described below.
+
+Also see the [Hashboard guide](/docs/database-connections) for more information about connecting to your database.
+
+### `hb datasource create`
+A group of commands for creating Hashboard data sources.
+
+Available subcommands:
+- [Athena](/docs/database-connections/athena): `hb datasource create athena` 
+- [BigQuery](/docs/database-connections/bigquery): `hb datasource create bigquery`
+- [Clickhouse](/docs/database-connections/clickhouse): `hb datasource create clickhouse`
+- [Databricks](/docs/database-connections/databricks): `hb datasource create databricks`
+- [Motherduck](/docs/database-connections/motherduck): `hb datasource create motherduck`
+- [MySQL](/docs/database-connections/mysql): `hb datasource create mysql`
+- [PostgreSQL](/docs/database-connections/postgresql): `hb datasource create postgres`
+- [Redshift](/docs/database-connections/redshift): `hb datasource create redshift`
+- [Snowflake](/docs/database-connections/snowflake): `hb datasource create snowflake`
+
+Each subcommand takes a set of arguments that are specific to the data source type. For more information, run `hb datasource create [data_source_type] --help`.
+
+```bash copy
+hb datasource create [data_source_type] [arguments...]
+```
+
+For example, to create a new Snowflake data source, you would run:
+
+### `hb datasource update`
+A group of commands for updating Hashboard data sources. The available subcommands are the same as in `hb datasource create`.
+
+The arguments for each subcommand are specific to the data source type, and identical to the arguments required for `hb datasource create`, 
+except for `id`, which is required for each data source type. To find the `id` of a data source, run `hb datasource ls`.
+
+```bash copy
+hb datasource create [data_source_type] [id] [arguments...]
+```
+
+### `hb datasource test`
+Test an existing Hashboard data connection by providing its name.
+```bash copy
+hb datasource test bigquery_connection      
+
+Successfully logged in to Pizza Bytes
+
+🔍 Testing connection to bigquery_connection...
+🎉 Successfully connected to bigquery_connection.
+```
 
 ### `hb datasource upload`
 Upload files directly to Hashboard that can be queried using [DuckDB](/docs/database-connections/duckdb) and used as the
