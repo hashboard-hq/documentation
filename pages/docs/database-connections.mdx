@@ -28,6 +28,8 @@ Fill out the remaining credentials as they'll be accessed by your bastion host, 
 
 ## Create a database connection
 
+There are two ways to create a database connection in Hashboard: using the web interface or the CLI. Follow these steps to create a database connection through the UI:
+
 1. Go to the [Data sources](https://hashboard.com/app/p/data-sources) page using the link in the project dropdown
 2. Click `+ Add connection`
 3. Select the type of database
@@ -41,3 +43,7 @@ Fill out the remaining credentials as they'll be accessed by your bastion host, 
   will be made available in the [Add Data
   Model](/docs/data-modeling/add-data-model) workflow
 </Callout>
+
+As an alternative, you can create a database connection using the CLI using the `hb datasource create` command.
+For more information, see the [CLI documentation](/docs/data-ops/cli/datasource).
+

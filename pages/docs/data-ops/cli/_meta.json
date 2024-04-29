@@ -6,6 +6,5 @@
   "token": "token",
   "cache": "cache",
   "datasource": "datasource",
-  "tables": "tables",
-  "upload": "upload"
+  "tables": "tables"
 }
