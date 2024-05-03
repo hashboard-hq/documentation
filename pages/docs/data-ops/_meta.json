@@ -28,5 +28,8 @@
   },
   "yaml-editor": {
     "title": "Using the YAML Editor"
+  },
+  "python-sdk": {
+    "title": "Python SDK (Hashquery)"
   }
 }
