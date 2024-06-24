@@ -1,0 +1,60 @@
+---
+description: Configure an activity schema to enable event analytics such as funnel and retention analysis.
+---
+
+import { Steps, Callout } from "nextra-theme-docs";
+
+# Event Analytics
+
+The core job of a BI tool is to encapsulate business logic, make it reusable, and expose this logic in a useable way to end users.
+
+In general, BI tools are organized around a similar set of ideas:
+
+- How things should be aggregated, [Measures](/docs/data-modeling/measures)
+- What the aggregations should be grouped and filtered by, [Attributes](/docs/data-modeling/attributes)
+
+This model works for many analyses with simple aggregations, groupings, and filters; but it quickly becomes limiting for more complex types of analyses such as product analytics.
+
+The semantics of product analytics, also known as event analytics or sequence analysis, is not “measures” and “attributes”. The core semantics for events are “entities”, “time”, and “sequences”.
+
+By adding a bit of additional configuration to define these concepts in an existing data model, you can begin interactively analyzing funnels in Hashboard. These new capabilities inherit all the relevant functionality of the model, including their joined relations. You can save event analytic explorations and add them to dashboards, just like you would with any other exploration.
+
+## Set Up and Usage
+
+<Steps>
+
+### Configure the event properties
+
+In the Model Builder, select "Advanced Configuration" and use the dropdowns to configure the following properties:
+
+- **Timestamp**
+  - Events will be ordered by this attribute. Typically this is a timestamp representing when an event was detected.
+- **Entity**
+  - Event sequences will be segmented by this attribute. This will be the entity that "moves through" a funnel. This should be a unique identifier maintained across a series of events, such as user_id or session_id.
+- **Event name**
+  - The most common attribute used to differentiate events. Typically this is a named identifier for the event, such as event_name or event_type.
+  - Users will still be able to match to custom event patterns based on attributes other than (or in addition to) this key. This just provides a convenience for the most common way to match events in your data.
+
+### Pre-define event sequences _Optional_
+
+It is helpful to align your organization on the definitions of common funnels. This is especially important when you have many different event types or require qualifying events with specific filters.
+
+You can add a predefined sequence by clicking `+ Add new sequence`. Each step in the sequence can simply be defined as simply the event name or you can click the configuration icon to use any set of filters to define that step.
+
+Additionally, you can configure the time window in which the sequence must be completed within to qualify as a successful conversion.
+
+You may add as many predefined sequences as you wish.
+
+<Callout type="info">
+  Using a standardized namespace for related funnels and subfunnels can be
+  useful. For example names like `onboarding`, `onboarding/email confirmation`,
+  and `onboarding/project configuration` can be used to define a high level
+  sequence, as well as subsequences within in each step of the high level
+  funnel.
+</Callout>
+
+### Exploring event analytics
+
+Once you've set up the data model for event analytics, you will see new options in the chart type selector in the Data Explorer. Selecting one of these new chart types will surface your event configuration as well as your predefined sequences for self service users.
+
+</Steps>

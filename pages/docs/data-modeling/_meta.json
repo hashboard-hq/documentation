@@ -4,6 +4,7 @@
   "attributes": {},
   "description-syncing": {},
   "model-joins": {},
+  "event-analytics": {},
   "best-practices": {},
   "query-data-files": { "title": "Uploading Files" },
   "caching": {}
