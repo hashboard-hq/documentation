@@ -5,5 +5,8 @@
   "collections": {},
   "invite-links": {},
   "single-sign-on": {},
-  "demo-projects": {}
+  "demo-projects": {},
+  "drafts": {
+    "display": "hidden"
+  }
 }
