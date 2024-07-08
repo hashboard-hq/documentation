@@ -1,0 +1,72 @@
+---
+description: Hashboard drafts allow you to stage changes to your project safely and apply them in a single operation when you're ready. 
+---
+
+# Drafts
+
+Drafts are a way to test or propose changes to your Hashboard project safely. 
+Drafted resources can be created, updated, and deleted, and can be applied to your project in a single operation. 
+
+## Creating a draft
+Drafts live in the [Drafts page](https://hashboard.com/app/p/drafts) within a project. 
+
+To create a draft, click the `New draft` button. You will be navigated into a new draft titled `[Your name]'s draft`. 
+
+While in a draft, you'll see an orange button at the top of the page with the name of the draft. 
+This means you're safe to interact with the project and make changes to resources, knowing that they will not be applied to your project until you're ready.
+
+Clicking that button will navigate you out of the draft and into the draft details page.
+On the draft details page, you can rename your draft, set its description, see resources that the draft has modified, and see the validation status of the draft.
+
+### Permissions
+
+Drafts are public and shared across a project. Any user within a project can enter a draft. 
+
+However, certain permissions are required to create and apply drafts:
+* To create a draft, a user must have one of the following permissions: `CREATE_DATA_MODEL`, `CREATE_SAVED_VIEW`, `CREATE_METRIC`, or `CREATE_DASHBOARD`.
+* To apply a draft to a project, a user must have the `CREATE_DATA_MODEL_REPO_BUILD` permisison.
+
+While in a draft, users have the same permissions within draft mode as they do when interacting with other project resources. 
+For example, if a user does not have permission to edit a model, they will still not be able to edit a model in a draft.
+
+### Resources that can be drafted
+
+The following resources can be created, updated, and deleted within a draft:
+* Data models
+* Saved explorations
+* Metrics
+* Dashboards
+* Homepage launchpads
+
+Notably, while in a draft, you cannot make changes to:
+* Data sources
+* Collections
+* Project settings
+* Users and permissions
+
+
+## Validating drafts
+
+When developing a draft, it's possible that the draft may enter an invalid state. 
+
+Similar to a merge conflict in Git, this can happen if changes are made to the project that are incompatible with the changes in the draft.
+
+You can see the validation status of your draft on that draft details page. 
+* **Warnings** do not block the draft from being applied, but should be reviewed. 
+* **Errors** block the draft from being applied. This typically means that there is a resource within the draft that has a critical dependency that cannot be resolved – 
+ for example, a drafted saved exploration that references a model that has been trashed within the base project.
+* **No errors or warnings** means that the draft is in a valid state and can be applied to the project.
+
+## Applying drafts
+
+When you're ready to apply your draft to your project, click the `Apply` button. 
+
+If there are no validation errors, you will see a list of resources being changed.
+Review these changes carefully, as it is possible for changes within the draft to propagate and create additional changes to resources in the project. 
+If new changes are present, they will be marked with a red warning icon. 
+
+After clicking the `Apply` button, the draft will be applied to your project, and your drafted changes will be merged into your project.
+A green checkmark will appear next to the name of the draft to indicate that the application was successful. 
+
+If there are validation errors, you have the choice to either go back into the draft and resolve the errors, or start a new draft from scratch.
+
