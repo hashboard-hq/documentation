@@ -1,28 +1,28 @@
 ---
-description: Hashboard drafts allow you to stage changes to your project safely and apply them in a single operation when you're ready. 
+description: Hashboard project drafts allow you to stage changes to your project safely and apply them in a single operation when you're ready. 
 ---
 
-# Drafts
+# Project drafts
 
-Drafts are a way to test or propose changes to your Hashboard project safely. 
+Project drafts are a way to test or propose changes to your Hashboard project safely. 
 Drafted resources can be created, updated, and deleted, and can be applied to your project in a single operation. 
 
-## Creating a draft
-Drafts live in the [Drafts page](https://hashboard.com/app/p/drafts) within a project. 
+## Creating a project draft
+Project drafts live in the [Project drafts page](https://hashboard.com/app/p/drafts) within a Hashboard project. 
 
-To create a draft, click the `New draft` button. You will be navigated into a new draft titled `[Your name]'s draft`. 
+To create a project draft, click the `New draft` button. You will be navigated into a new draft titled `[Your name]'s project draft`. 
 
-While in a draft, you'll see an orange button at the top of the page with the name of the draft. 
+While in a project draft, you'll see an orange button at the top of the page with the name of the draft. 
 This means you're safe to interact with the project and make changes to resources, knowing that they will not be applied to your project until you're ready.
 
 Clicking that button will navigate you out of the draft and into the draft details page.
-On the draft details page, you can rename your draft, set its description, see resources that the draft has modified, and see the validation status of the draft.
+On the draft details page, you can rename the project draft, set its description, see resources that the draft has modified, and see the validation status of the draft.
 
 ### Permissions
 
-Drafts are public and shared across a project. Any user within a project can enter a draft. 
+Project drafts are public and shared across a project. Any user within a project can enter a draft. 
 
-However, certain permissions are required to create and apply drafts:
+However, certain permissions are required to create and apply project drafts:
 * To create a draft, a user must have one of the following permissions: `CREATE_DATA_MODEL`, `CREATE_SAVED_VIEW`, `CREATE_METRIC`, or `CREATE_DASHBOARD`.
 * To apply a draft to a project, a user must have the `CREATE_DATA_MODEL_REPO_BUILD` permisison.
 
@@ -31,23 +31,23 @@ For example, if a user does not have permission to edit a model, they will still
 
 ### Resources that can be drafted
 
-The following resources can be created, updated, and deleted within a draft:
+The following resources can be created, updated, and deleted within a project draft:
 * Data models
 * Saved explorations
 * Metrics
 * Dashboards
 * Homepage launchpads
 
-Notably, while in a draft, you cannot make changes to:
+Notably, while in a project draft, you cannot make changes to:
 * Data sources
 * Collections
 * Project settings
 * Users and permissions
 
 
-## Validating drafts
+## Validating project drafts
 
-When developing a draft, it's possible that the draft may enter an invalid state. 
+When developing a project draft, it's possible that the draft may enter an invalid state. 
 
 Similar to a merge conflict in Git, this can happen if changes are made to the project that are incompatible with the changes in the draft.
 
@@ -57,9 +57,9 @@ You can see the validation status of your draft on that draft details page.
  for example, a drafted saved exploration that references a model that has been trashed within the base project.
 * **No errors or warnings** means that the draft is in a valid state and can be applied to the project.
 
-## Applying drafts
+## Applying project drafts
 
-When you're ready to apply your draft to your project, click the `Apply` button. 
+When you're ready to apply your project draft to your project, click the `Apply` button. 
 
 If there are no validation errors, you will see a list of resources being changed.
 Review these changes carefully, as it is possible for changes within the draft to propagate and create additional changes to resources in the project. 
