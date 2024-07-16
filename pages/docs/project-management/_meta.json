@@ -6,5 +6,5 @@
   "invite-links": {},
   "single-sign-on": {},
   "demo-projects": {},
-  "project-drafts": {}
+  "drafts": { "title": "Project Drafts" }
 }
