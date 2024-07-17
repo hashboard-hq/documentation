@@ -108,7 +108,7 @@ export default {
   useNextSeoProps: () => ({ titleTemplate: "Hashboard - %s" }),
   docsRepositoryBase:
     "https://github.com/hashboard-hq/documentation/tree/main/",
-  darkMode: false,
+  darkMode: true,
   nextThemes: { defaultTheme: "light" },
   primaryHue: 199,
   sidebar: { defaultMenuCollapseLevel: 1, toggleButton: true },
