@@ -39,41 +39,46 @@ To create a timeseries metric, make sure your metric's configuration has the **D
 
 ## Metric page
 
-### Viewing metrics
+The Metrics page has two different modes, divided into two tabs— the Metric tree tab and the Metric library tab.
 
-The metrics page is where you can view all of the metrics in your project. To navigate to the metrics page, click the **Metrics** link in the left sidebar.
+### Metric tree
 
-Once on the metric page you should see all your metrics listed with information like the metric name, the current value of the metric, and a trend line if the metric is a timeseries metric.
+The metric tree is a structured way to visualize and understand the relationships between your business metrics. By organizing metrics into a 
+hierarchical tree structure, you can easily see how lower-level driver metrics contribute to top-line metrics. This tool helps diagnose performance issues 
+and attribute variations in key metrics to specific drivers.
+
+#### Types of metric tree metrics
+ - Top-line metrics: Your primary business goals. Sometimes called North Star metrics.
+ - Driver metrics: Metrics that contribute to the output of another metric. Driver metrics can be inputs for top-line metrics or intermediate driver metrics.
+
+#### Creating your metric tree
+	1. Navigate to the Metric tree: Access the Metric tree from the Metrics page by selecting the Metric Tree tab.
+	2. Identify Top-Line Metrics: Start by selecting your the top-line metrics, which represent your primary business goals.
+	3. Add Driver Metrics: Click on the more menu of any top-line metric to reveal the option to add one or more driver metrics. 
+
+
+### Metric library
+
+The metrics library is where you can view all of the metrics in your project. To navigate to the Metrics library, click the **Metrics** link in the left sidebar and select the **Metrics library** tab.
+
+Once on the Metric library tab you should see all your metrics listed with information like the metric name, the current value of the metric, and a trend line if the metric is a timeseries metric.
 
 You can search for a specific metric by name using the search bar at the top of the page. You can also filter the metrics by label, data model, timeseries granularity using the filter bar at the top of the page.
 
 Metrics can also be sorted by a variety of fields by clicking the column header for the field you want to sort by. Clicking the column header again will reverse the sort order.
 
-### Creating a metric
+## Defining your metrics
+
+### Creating and editing a metric
 
 Metrics are created from [measures](/docs/data-modeling/measures) on a data model. So before you can create a metric, you need [add at least one data model](/docs/data-modeling/add-data-model) to your project.
 Once you have a data model, you can create a metric by following these steps:
 
-1. Navigate to the metrics page from **Metrics** link in the left sidebar.
-2. Click the **Create metrics** button in the top right of the metrics page.
-3. Select one or more measures from the list of available measures across your data models. Once you have selected your measures, click the **Create metrics** button at the bottom of the list of measures.
-4. Your new metric will appear on the metrics page, named after the measure it is based on. Hashboard tries to automatically configure your metric based on the information in your data model.
-5. To refine your metric, continue on to the next section on editing metrics.
-
-### Editing metrics
-
-1. If not already on the metrics page, navigate to the metrics page from **Metrics** link in the left sidebar.
-2. Find the metric you want to edit and click the more menu (three dots) button on the right side of the metric row.
-3. Select **Edit** from the menu.
-4. The metric editor will appear. From here you can edit the various aspects of the metric.
+1. Navigate to the metrics page from **Metrics** link in the left sidebar and select the Metric library tab.
+2. Click the **New metric** button in the top right of the metrics page.
+3. The metric dialog with open will appear. From here you can configure the various aspects of the metric.
    - **Name** - The name of the metric.
    - **Description** - A description of the metric.
-   - **Labels** - Labels are used to categorize or tag similar metrics.
-     For example, you might have a label for each department in your organization. Metrics are also filterable by label on the metrics page.
-   - **Owner** - The person responsible for overseeing and managing the metric is the metric owner.
-     The specific responsibilities of the metric owner can vary depending on the needs and structure of your organization or team.
-     For example, in some organizations, the owner may hold a functional role like a VP of Sales and be responsible for high-level sales metrics such as average time-to-close.
-     In other organizations, the assigned metric owner may be a sales analyst who is responsible for modeling and managing the metric data.
    - **Model** - The data model the metric is based on.
    - **Measure** - The measure the metric is based on.
    - **Dimension** - The dimension of the metric. This is the attribute on the data model that the metric is grouped by.
@@ -87,7 +92,7 @@ Once you have a data model, you can create a metric by following these steps:
    - **Display current (incomplete) time period** - Whether or not to include the current time period in the metric.
      For example, if you have a timeseries metric for number of user registrations per day, and you set the granularity to day and show the last 30 days, and setting this toggle to true the metric will include the last 30 days of data plus the current day even if that current period is still in progress.
    - **Goal** - The goal of the metric. This is the target value for the metric. Setting a value and comparison type will cause trend line include a a goal line.
-5. Once you have finished editing the metric, click the **Save** button at the bottom of the metric editor. Your metric will be updated with the new configuration.
+4. Once you have finished configuring the metric, click the **Save** button.
 
 ### Trashing and deleting metrics
 
