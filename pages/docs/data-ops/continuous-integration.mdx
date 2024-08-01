@@ -136,14 +136,21 @@ jobs:
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
         run: |
-          DBT_SCHEMA="$BQ_DATASET_NAME" hb preview ./hashboard | tee output.txt
-          grep -q Details output.txt
-          if [ $? -eq 0 ]; then
-            RESULT=`grep Details output.txt | sed 's/Details/Hashboard preview build succeeded/'`
+          DBT_SCHEMA="$BQ_DATASET_NAME" hb preview --dbt ./hashboard | tee output.txt
+          EXIT_CODE=${PIPESTATUS[0]}
+
+          if [ $EXIT_CODE -eq 0 ]; then
+            RESULT=$(awk -F'[/ ]' '/Follow build in web app:/ {print "\nhttps://hashboard.com/app/p/builds/"$(NF)"\n"}' output.txt && awk '/Build .* completed successfully/{flag=1} flag' output.txt)
           else
-            RESULT=`echo "Preview Build failed. See the GitHub action logs for more details."`
+            ERRORS=$(awk '/Errors encountered when creating your build/,EOF' output.txt)
+            BUILD_ID=$(awk -F'[/ ]' '/Follow build in web app:/ {print $(NF)}' output.txt)
+            RESULT=$(printf "%s\nhttps://hashboard.com/app/p/builds/%s" "$ERRORS" "$BUILD_ID")
           fi
-          echo "result=$RESULT" >> $GITHUB_OUTPUT
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "log<<$EOF" >> $GITHUB_OUTPUT
+          echo "$RESULT" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
+          echo "exitCode=$EXIT_CODE" >> $GITHUB_OUTPUT
 
       - uses: actions/github-script@v6
         name: "Comment on the pull request"
@@ -153,10 +160,10 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `${{ steps.generate-preview.outputs.result }}`
+              body: `${{ steps.generate-preview.outputs.log }}
             })
 
       - id: set-appropriate-exit-code
         name: "Set exit code"
-        run: echo ${{ steps.generate-preview.outputs.result }} | grep succeeded
+        run: exit "${{ steps.generate-preview.outputs.exitCode }}"
 ```
