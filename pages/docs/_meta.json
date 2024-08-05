@@ -1,9 +1,10 @@
 {
   "getting-started": { "title": "Getting Started" },
-  "data-modeling": { "title": "Data Models" },
-  "metrics": { "title": "Metrics" },
   "database-connections": { "title": "Database Connections" },
+  "data-modeling": { "title": "Data Models" },
   "visualizing-data": { "title": "Data Explorer" },
+  "metrics": { "title": "Metrics" },
+  "event-analytics": { "title": "Event Analytics" },
   "project-search": { "title": "Project Search" },
   "sql-runner": { "title": "SQL Runner" },
   "sharing-data-externally": { "title": "Sharing Data Externally" },

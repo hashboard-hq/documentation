@@ -1,0 +1,19 @@
+# How are conversion rates computed?
+
+Conversion rates in Hashboard are measured using the following formula:
+
+$$$
+rate = \frac{converted\_count}{started\_count}
+$$$
+
+Where `started_count` is the # of entities who matched the first step of the funnel within the given time bucket (e.g. month), and `converted_count` is the # of entities who matched all steps of the funnel in order, within the time limit, starting in the given time bucket.
+
+Hashboard uses to following logic to compute this:
+- For each time bucket (e.g. month), Hashboard will attempt to match at most one funnel per entity. Time bucketing is based on the **first step** in the funnel.
+    - This means that Hashboard will re-evaluate a given entity for each time bucket, e.g. `user1` might count toward the conversion rate once in January **and** once in February.
+- We always attempt to match the first step (chronologically) following the preceding step.
+- Hashboard does not require the funnel to be completed within the time bucket it started in to count as a conversion -- instead, a time limit can be defined on the funnel configuration.
+
+The following diagram outlines some examples of how a daily conversion rate might be computed:
+
+![Conversion rates diagram](/event_analytics/conversion-rates.png)
