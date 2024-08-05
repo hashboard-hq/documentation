@@ -29,6 +29,11 @@ With custom calculations, you can nest formulas within each other and reference 
   you will see your measure side-by-side with the new calculation.
 </Callout>
 
+<Callout type="info">
+  `Null` values in the calculation will be treated as `0`. In window functions such as 
+  Rolling sum and Rolling average, they will not be included in the size of the window.
+</Callout>
+
 ## Add a quick calculation to a saved exploration
 
 1. Start exploring a `data model` or `saved exploration`.
