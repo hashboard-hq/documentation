@@ -3,6 +3,7 @@ const nextra = require("nextra");
 const nextraDocsConfig = {
   theme: "nextra-theme-docs",
   themeConfig: "./theme.config.jsx",
+  latex: true
 };
 
 const nextJsConfig = {
