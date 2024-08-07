@@ -32,7 +32,7 @@ You can also use any dbt jinja or dbt macros to templatize or switch between dif
         type: attribute
         physicalName: sent_at
       - id: bounce_rate
-        type: metric
+        type: measure
         name: bounce rate
         formattingOptions:
           fixedDecimals: 0
@@ -42,23 +42,18 @@ You can also use any dbt jinja or dbt macros to templatize or switch between dif
   </Tab>
   <Tab>
   ```yaml dbt_project.yml copy {11}
-  
-  models:
-    +meta:
-      # hashboard-defaults settings will be merged into each Hashboard model
-      hashboard-defaults:
-        hbVersion: "1.0"
-        # preventUpdatesFromUI defaults to true, but can be set to false
-        preventUpdatesFromUI: false
-        source:
-          connectionName: bigquery-prod # you could also toggle the db connection
-          schema: "{{ target.schema }}"
-          # or you could do an env variable:
-          # schema: "{{ env_var('HB_SCHEMA_ENV') }}"
-          # OR a macro:
-          # schema: "{{ my_custom_macro(env) }}"
-  ```
-  </Tab>
+
+models:
++meta: # hashboard-defaults settings will be merged into each Hashboard model
+hashboard-defaults:
+hbVersion: "1.0" # preventUpdatesFromUI defaults to true, but can be set to false
+preventUpdatesFromUI: false
+source:
+connectionName: bigquery-prod # you could also toggle the db connection
+schema: "{{ target.schema }}" # or you could do an env variable: # schema: "{{ env_var('HB_SCHEMA_ENV') }}" # OR a macro: # schema: "{{ my_custom_macro(env) }}"
+
+```
+</Tab>
 </Tabs>
 
 ### Creating Dev and Staging Schemas
@@ -71,10 +66,10 @@ You can create a development schema within your database and specify this dev or
 - **continuous integration environments** - some systems like dbt cloud can create a new schema for each pull request in git, you can again create a new preview environment in hashboard that points at each of these different CI environments
 
 <Callout type="info">
-  *Prepending Table Names* - An alternative to creating a separate schema is to
-  prepend your table names with an environment indicator like `dev_`. This
-  allows you to easily distinguish between production and development tables in
-  the same schema.
+*Prepending Table Names* - An alternative to creating a separate schema is to
+prepend your table names with an environment indicator like `dev_`. This
+allows you to easily distinguish between production and development tables in
+the same schema.
 </Callout>
 
 ### Building Hashboard Previews
@@ -84,3 +79,4 @@ Once you have set up your dev schema or prepended your table names, you can buil
 Each preview acts as it's own ephemeral environment - so you don't just have a single staging environment, but an environment for any change that you can reference.
 
 </Steps>
+```
