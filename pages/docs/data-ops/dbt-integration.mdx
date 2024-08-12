@@ -56,18 +56,10 @@ models:
       hashboard:
         cols:
           - id: row_count
-            type: metric
+            type: measure
             name: Order Attribution Records
             aggregate: row_count
 ```
-
-<Callout type="warning">
-  Hashboard previously used the term **metric** to refer to what is now called a
-  **measure**. At the moment our configuration files still refer to `type:
-  metric` when creating measures inside a data model. We plan to update the
-  schema of these configuration files in the future to use the term **measure**
-  instead of **metric**.
-</Callout>
 
 ### Build your Hashboard models
 
@@ -148,18 +140,10 @@ models:
       hashboard:
         cols:
           - id: daily_active_users
-            type: metric
+            type: measure
             name: Daily Active Users
             sql: COUNT(DISTINCT customer_id) / COUNT(DISTINCT create_at)
 ```
-
-<Callout type="warning">
-  Hashboard previously used the term **metric** to refer to what is now called a
-  **measure**. At the moment our configuration files still refer to `type:
-  metric` when creating measures inside a data model. We plan to update the
-  schema of these configuration files in the future to use the term **measure**
-  instead of **metric**.
-</Callout>
 
 Hashboard configuration in your dbt schema file has access to the same [templating and macros](https://docs.getdbt.com/docs/build/jinja-macros) as your dbt configuration. You could, for example, configure the Hashboard data connection based on your dbt target:
 
