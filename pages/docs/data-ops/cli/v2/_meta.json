@@ -1,12 +1,10 @@
 {
   "credentials": "Credentials",
-  "build": "build",
+  "preview": "preview",
+  "deploy": "deploy",
   "pull": "pull",
   "token": "token",
   "cache": "cache",
   "datasource": "datasource",
-  "tables": "tables",
-  "v3": {
-    "title": "v3 (beta)"
-  }
+  "tables": "tables"
 }

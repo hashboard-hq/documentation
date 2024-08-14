@@ -15,19 +15,11 @@ The Hashboard CLI lets you build your Hashboard resources from configuration fil
 pip install hashboard-cli
 ```
 
-### Sign up or log in
+### Create a Hashboard project, if necessary
 
-#### New users
+If you are a new Hashboard user, go to [hashboard.com/getAccess](https://hashboard.com/getAccess) to create an account.
 
-You can sign up for a new Hashboard account with a single command:
-
-```bash copy
-hb signup
-```
-
-Alternatively, click <strong>Get started</strong> on [hashboard.com](https://hashboard.com) to create an account through our website.
-
-#### Existing users
+### Authenticate your CLI client
 
 The `token` command will take you through a web-based authentication flow and download a new access key for you. This will be stored at
 the default filepath `~/.hashboard/hb_access_key.json`.
@@ -38,13 +30,13 @@ hb token
 
 For information about how to store this token at a different filepath, see the [`token`](/docs/data-ops/cli/token) documentation.
 
-### Set up integrations
+### Connect data sources and set up integrations
 
-Hashboard integrates seamlessly with other tools so you can easily manage your data and dashboards with a single workflow. Read our documentation on how to set up integrations for [dbt](./dbt-integration) and [Git](./git-integration) to connect Hashboard to your data pipeline.
+Hashboard integrates seamlessly with other tools so you can easily manage your data and dashboards with a single workflow. Read our documentation on how to integrate [dbt](./dbt-integration) to connect Hashboard to your data pipeline.
 
 ### Pull resources or build a sample project
 
-If you've created data models, saved explorations or dashboards via the Hashboard GUI you can get started iterating on those resources as code using the [`pull`](./cli/pull) command. `hb pull --all` will pull the configs of all resources in your project into your current directory.
+If you've created data models, saved explorations or dashboards via the Hashboard GUI, you can get started iterating on those resources as code using the [`pull`](./cli/pull) command. `hb pull --all` will pull the configs of all resources in your project into your current directory.
 
 ```bash copy
 hb pull --all
@@ -56,12 +48,12 @@ To get started with sample data, check out our [example projects on GitHub](http
 
 You can now edit your resources as code and check them into Git for version control. Visit the [schema reference](./config-schema) to learn about how to define Hashboard resource configurations.
 
-### Deploy your changes
+### Preview and apply your changes
 
-Use the [`deploy`](./cli/deploy) command to write your changes back to your Hashboard project. By default you'll be able to [`preview`](./cli/preview) your changes before they're published.
+Use the [`build`](./cli/build) command to write your changes back to your Hashboard project. You'll be able to preview your changes before they're applied.
 
 ```bash copy
-hb deploy
+hb build
 ```
 
 </Steps>
