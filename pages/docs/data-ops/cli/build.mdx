@@ -1,0 +1,92 @@
+---
+description: Creating Hashboard builds for code-controlled business intelligence
+---
+
+import { Cards, Card, Steps } from "nextra-theme-docs";
+
+# Hashboard `build` command
+
+The `build` command is the primary command you can use to create, update, and delete Hashboard resources using code.
+
+A Hashboard build is a collection of changes that you've defined as code and can be validated, previewed, and applied to your project. Builds make forking and
+experimenting with Hashboard from the command line cheap and easy.
+
+(diagram)
+
+When you create a build, Hashboard will do the following:
+
+1. Validate your Hashboard configuration files and dbt configuration (if using the dbt integration)
+2. Validate that any models in the build are compatible with their underlying data sources
+3. Provide you with a link to the build summary, where you can see details of the proposed changes, preview them, and apply them to your project
+
+<br />
+<Cards>
+  <Card
+    arrow
+    icon=" "
+    title="dbt workflows"
+    href="/docs/data-ops/dbt-integration"
+  />
+  <Card
+    arrow
+    icon=" "
+    title="Git workflows"
+    href="/docs/data-ops/git-integration"
+  />
+</Cards>
+
+## Creating a build and previewing changes
+
+<Steps>
+### run `hb preview`
+
+```bash {30}
+# from the root of your dbt directory
+$ hb preview --dbt
+
+🐇 Running `dbt parse` to generate a manifest file.
+
+dbt parse
+--- dbt output ---
+17:15:10  Running with dbt=1.5.1
+17:15:10  Performance info: target/perf_info.json
+--- end of dbt output ---
+
+✅ Using manifest file at target/manifest.json
+
+🏗️  Creating preview build...
+
+Successfully logged in to Customer A
+Project id: ef97b962-5146-442c-9342-2270ed330b65
+Access key id: 9df02f73-7c9c-41f5-9d09-9d938e35ad63
+📦 Build 16LDUF46wuCwM8B2 created successfully.
+
+Unchanged:
+*  Model - order_attribution
+*  Model - products
+*  Model - customers
+*  Model - orders
+*  Model - campaigns
+*  Model - sales
+*  Model - marketing_touchpoints
+
+Details: https://hashboard.com/app/p/builds/16LDUF46wuCwM8B2
+```
+
+### Open the build
+
+Go to the build preview link at the bottom of the build details, for example `https://hashboard.com/app/p/builds/16LDUF46wuCwM8B2`. The build preview gives a list of resources with preview links.
+
+<br />
+
+<img src="/build.png" style={{ maxWidth: "600px" }} />
+
+### Navigate resource previews
+
+Click any resource to open the preview and start to explore. The build is added as a URL query parameter so you can share links (or put them in pull requests, for example). You can navigate through your entire project in the preview mode.
+
+<br />
+
+<img src="/preview.png" />
+
+</Steps>

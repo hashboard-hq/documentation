@@ -6,16 +6,37 @@ import { Callout } from "nextra-theme-docs";
 
 # Managing Resources With Code
 
-## The build process
+## Code management lifecycle
+
+Managing resources with code in Hashboard follows this lifecycle:
+
+1. You create a **build** that bundles together proposed changes to your resources
+2. Hashboard **validates** that your changes will not break anything in your project.
+3. You and/or the relevant reviewers **preview** the changes in your build to ensure they are having the intended impact.
+4. Your build is **applied** to your project, which deploys your changes to your users.
+
+Below is more detail on each of these steps of the process.
+
+### Creating a build
+
+Create a Hashboard build by defining one or more Hashboard yml [configuration files](#hashboard-configuration-files) in your filesystem and passing them into the [`hb build`](./cli/build) command.
+
+Hashboard builds automatically propagate any changes necessary to keep your project consistent. This includes:
+
+- **Updating downstream resources.** If a column is changed, it will be updated in all dependent items (regardless of whether the dependent items are part of your build) - so changes like name updates will be correctly reflected everywhere.
+- **Cleaning up defunct resources.** If any Models, Attributes, or Measures are deleted, all dependent items that relied on that Model or Column will also be deleted.
+
+### Build validation
 
 Here is a high-level description of what actually happens during the build process:
 
-- **Create resources.** For models that you check in that do not currently exist, the model is created from scratch from your configuration file and from the database. This means that the base table and all the columns must still exist in the database for the build to succeed.
-- **Update resources.** If a column is changed, it will be updated in all dependent items (regardless of whether the dependent items were also checked in) - so things like name changes should be correctly reflected.
-- **Clean up resources.** If any columns or models are deleted, all dependent items that relied on that column or model will also be deleted.
 - **Smoke test.** Once the model is built, a single aggregate analytical query will be run against the database to make sure that data aggregation can still be run against the model.
 
 If there is an error while deploying a Data Model, the build process will revert to the previous version of that model, and all dependent resources of that model will not be updated.
+
+### Previewing a build
+
+### Applying a build
 
 ## Hashboard configuration files
 
@@ -51,3 +72,7 @@ To protect specific resources to only be editable with the Hashboard deployments
 ### Syncing resources
 
 To sync your local config files with edits made to resources via the UI, use the [`pull`](/docs/data-ops/cli/pull) command.
+
+## Builds vs. drafts
+
+foo

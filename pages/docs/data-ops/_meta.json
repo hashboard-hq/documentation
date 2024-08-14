@@ -6,7 +6,7 @@
     "title": "Managing Resources With Code"
   },
   "cli": {
-    "title": "Using the CLI"
+    "title": "CLI reference"
   },
   "using-code-to-automate-bi-from-dbt": {
     "title": "Using Code to Automate BI Deployments from dbt"

@@ -71,24 +71,8 @@ Hashboard allows you to represent your resources as configuration files, which c
 
 In Hashboard, you can define one or more of your Hashboard resources using **configuration files**. A configuration file contains a complete specification of a resource. For instance, a Model configuration file contains information about which database connection to use, the name of the underlying database table, a list of attributes and measures, etc.
 
-If you deploy resources with a Hashboard build, users are still able to edit those resources through the Hashboard UI. When you re-deploy these resources with your Hashboard configuration files, any changes made through the Hashboard UI will be overwritten.
+Using a set of configuration files, you create a **build**. A Hashboard build is a collection of changes that you've defined as code. These changes can be **validated**, **previewed**, and **applied** to your project.
 
-Using a set of configuration files, you create a **Build**. There are two different kinds of Builds:
+By default, Hashboard resources that were applied with code can still be edited by users through the Hashboard UI. New versions of your resources can be **pulled** down to your filesystem to keep your codebase in sync. You can also choose to restrict resources to only be changeable through code-based builds.
 
-- A **Preview Build** validates your configuration files and, if successful, provides a URL that will show you what your Hashboard Project will look like if your pending changes are applied.
-- A **Deploy Build** validates your configuration files and, if successful, publishes those changes to your Hashboard Project.
-
-<Callout type="warning">
-  We recommend always first creating a Preview Build to see which resources will
-  be affected prior to running a Deploy. The build process will automatically
-  delete and create resources in Hashboard to leave your project in a consistent
-  state. For example, if you delete a column in a model configuration file, all
-  saved explorations that refer to that column will be automatically deleted (as
-  happens if you delete a column through the user interface). Pull the
-  [configuration](/docs/data-ops/cli/pull) of one or more of your resources to
-  your local environment or a Git repository. Then, you can create a Build using
-  the [Hashboard command-line interface
-  (CLI)](/docs/data-ops/using-the-hashboard-cli), or through the Hashboard web
-  application by connecting your account to a [Git
-  repository](/docs/data-ops/git-integration).
-</Callout>
+Learn more about [managing resources with code](./docs/data-ops/managing-resources-with-code).
