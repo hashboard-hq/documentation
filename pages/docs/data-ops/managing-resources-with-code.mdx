@@ -26,17 +26,35 @@ Hashboard builds automatically propagate any changes necessary to keep your proj
 - **Updating downstream resources.** If a column is changed, it will be updated in all dependent items (regardless of whether the dependent items are part of your build) - so changes like name updates will be correctly reflected everywhere.
 - **Cleaning up defunct resources.** If any Models, Attributes, or Measures are deleted, all dependent items that relied on that Model or Column will also be deleted.
 
+The CLI will provide you with a link to view the details of your build after it is created. You can also see a list of all your previous builds on the [Builds](https://hashboard.com/app/p/data-ops) page.
+
 ### Build validation
 
-Here is a high-level description of what actually happens during the build process:
+After your configuration files are added to a build, Hashboard checks for issues like:
 
-- **Smoke test.** Once the model is built, a single aggregate analytical query will be run against the database to make sure that data aggregation can still be run against the model.
+- Missing or broken dependencies
+- Mismatches between database columns and model definitions
+- SQL errors
 
-If there is an error while deploying a Data Model, the build process will revert to the previous version of that model, and all dependent resources of that model will not be updated.
+Any issues that are found are surfaced as warnings or errors. A build with errors cannot be applied.
 
 ### Previewing a build
 
+Builds can be **previewed** from the build details page, by clicking "Preview" in the top corner or next to any of the resources in the build.
+
+When in a build preview, you are viewing what your project _would look like_ if you were to apply that build. This includes any downstream impacts on resources that are _not_ in your build. For instance, if your build renames an Attribute in a Model, that new name will appear in your build preview when viewing any Saved Exploration or Dashboard that uses data from that model.
+
+Build previews are non-destructive and shareable via their URL. They do not expire, although they may become invalid as the other resources in your project change over time.
+
 ### Applying a build
+
+When you are ready to apply the changes in a build to your project, you can do so by clicking the **Apply** button on the build's details page, or by running
+
+```bash copy
+$ hb build apply
+```
+
+in your CLI. By default, this will apply the most recent build you created in your bash session. You can also provide a build ID to the `build apply` command if desired.
 
 ## Hashboard configuration files
 
@@ -69,10 +87,13 @@ the file structure of your project.
 
 To protect specific resources to only be editable with the Hashboard deployments, add the `preventUpdatesFromUI` flag set as `true` to any config. This prevents users from unintentionally updating critical resources from the Hashboard web application and gives your team greater control over valuable long lived resources that are core to your business needs.
 
-### Syncing resources
+## Builds vs. Project drafts
 
-To sync your local config files with edits made to resources via the UI, use the [`pull`](/docs/data-ops/cli/pull) command.
+Builds and [Project Drafts](/docs/project-management/drafts) serve similar purposes -- they both can be used to stage, test, and apply changes. Here is how they differ:
 
-## Builds vs. drafts
-
-foo
+|                                            | Builds                                          | Project drafts |
+| ------------------------------------------ | ----------------------------------------------- | -------------- |
+| Created from...                            | The CLI or git integration                      | The Hashboard UI         |
+| Can be edited?                             | No -- the changes within a build are immutable. | Yes            |
+| Supports environment variable substitution | Yes                                             | No             |
+| Can be deployed to multiple projects       | Yes                                             | No             |
