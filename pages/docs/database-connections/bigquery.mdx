@@ -42,11 +42,34 @@ account JSON key file into this field. See the
    - `BigQuery Job User`
    - `BigQuery Metadata Viewer`
 
+
 4. Once you've created the service account, click into the service account and
    select the `Keys` tab.
 5. Click `Add Key` and make sure you create a JSON key (not a P12 key). The key
    will be automatically downloaded to your computer - you'll need to open the
    file and copy the contents so you can drop them into Hashboard below.
+
+
+### Dataset-level permissions
+
+If you need to limit the service account to specific datasets, you can do so using the following steps:
+
+(1) Instead of giving the service account the 4 roles mentioned above, just give it the following 2:
+
+- `Bigquery Job User`
+- `Bigquery Read Session User`
+
+(2) Go to the BigQuery console and click on the dataset you want to grant access to
+
+(3) Click "SHARING", and then "Permissions":
+
+![BigQuery Permissions UI](/bq_sharing_perms.png)
+
+(4) Click "Add Principal". Paste in the email from the [IAM > service accounts](https://console.cloud.google.com/iam-admin/serviceaccounts) page as the Principal, and assign it these roles:
+
+   - `BigQuery User`
+   - `BigQuery Data Viewer`
+   - `BigQuery Metadata Viewer`
 
 ## Create BigQuery database connection in Hashboard
 
