@@ -35,12 +35,12 @@ models:
       # preventUpdatesFromUI defaults to false, but can be set to true
       preventUpdatesFromUI: false
       source:
-        connectionName: bigquery-prod # the name of the conneciton in Hashboard
+        connectionName: bigquery-prod # the name of the connection in Hashboard
 ```
 
 ### Define model information
 
-The simplest example of a Hashboard model just defines a measure. Hashboard models must include the `hashboard` key in the dbt model.
+The simplest example of a Hashboard model just defines a measure. Hashboard models must include the `hashboard` key in the dbt model meta.
 
 ```yaml filename="models/schema.yml" copy
 version: 2
@@ -108,7 +108,7 @@ hb build
 2.  For each Hashboard model in the manifest, we run `dbt compile`, which returns a fully qualified reference to where the model would be built in the warehouse, including the deferred schema.
 3.  We use the `dbt compile` results to set the schemas for the Hashboard models in the build.
 
-## Building a subset of models with `dbt --select`
+## Building a subset of models with `--dbt-select`
 
 By default, `hb build` will create a Hashboard build that includes all of the Hashboard models specified in dbt.
 
@@ -153,12 +153,6 @@ How data model source is determined:
 
 - `source` has the same options as the corresponding field of [Hashboard data models](./config-schema/data-models.mdx).
 - Unless otherwise specified, Hashboard automatically infers defaults for the source `physicalName` and `schema`. If no `connectionName` or `connectionId` is specified, Hashboard will try to use a connection whose name is the same as the dbt target database (e.g. `"bigquery"` or `"snowflake"`).
-
-You may then use dbt-core to produce a [Manifest JSON file](https://docs.getdbt.com/reference/artifacts/manifest-json), which should be included with any Hashboard deploy (or preview):
-
-```bash copy
-hb preview --dbt-manifest=./target/manifest.json
-```
 
 Hashboard will include each dbt column as an attribute in the corresponding Hashboard model. You can also add additional fields to the dbt columns to take advantage of Hashboard's more advanced modeling features:
 

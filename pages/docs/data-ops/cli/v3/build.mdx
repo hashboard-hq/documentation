@@ -30,6 +30,10 @@ When you create a build, Hashboard will do the following:
 ## Creating a build and previewing changes
 
 <Steps>
+### Run `hb init`
+
+If you have not already, configure the root of your Hashboard project (and optionally your dbt project) with [`hb init`](/docs/data-ops/cli/v3/init).
+
 ### Create a build: `hb build create`
 
 Run `hb build create` or simply `hb build`.
@@ -38,8 +42,9 @@ Run `hb build create` or simply `hb build`.
 hb build
 ```
 
+This evaluates all files in your current directory, any nested directories, and your dbt models (if you've setup).
+
 ```text
-$ hb build
 🔑 Logged in to your-project-name
 
 ╭─ 📦 Build w9ZLaOUZVXhbxxxx ───────────────────────────╮
@@ -68,7 +73,6 @@ hb build apply
 ```
 
 ```text
-$ hb build apply
 🔑 Logged in to your-project-name
 
 ╭─ 📦 Build w9ZLaOUZVXhbxxxx ───────────────────────────╮
