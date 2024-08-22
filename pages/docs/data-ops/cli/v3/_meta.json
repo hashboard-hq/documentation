@@ -1,4 +1,5 @@
 {
   "init": "init",
-  "build": "build"
+  "build": "build",
+  "dbt-integration": "dbt Workflows"
 }
