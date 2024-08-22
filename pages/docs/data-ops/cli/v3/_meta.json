@@ -1,9 +1,4 @@
 {
-  "credentials": "Credentials",
-  "build": "build",
-  "pull": "pull",
-  "token": "token",
-  "cache": "cache",
-  "datasource": "datasource",
-  "tables": "tables"
+  "init": "init",
+  "build": "build"
 }
