@@ -1,0 +1,39 @@
+---
+description: Initialize the stable root of your Hashboard project and configure the dbt integration
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Hashboard `init` command
+
+The `init` command initializes the root of your Hashboard project by creating a `.hbproject` file in the directory where it is run.
+
+## Stable References for YAML Files
+
+In cases where a Hashboard YAML file does not have a GRN (Global Resource Name), the relative path from the `.hbproject` file to the YAML file is used as a stable reference. This ensures a consistent reference to the YAML file, regardless of where [`hb build`](/docs/data-ops/cli/build) commands are executed.
+
+Once the `hb init` command has created the `.hbproject` file, [`hb build`](/docs/data-ops/cli/build) commands can be safely run in the same directory as the `.hbproject` file or any of its subdirectories.
+
+<Callout type="info">
+  Starting out, we recommend the following project structure with the `.hbproject` file at the root of your repo and two separate directories for your Hashboard and dbt files.
+  
+  ```
+  ├── .hbproject
+  └── hashboard
+    ├── model.yaml
+    └── dashboard.yaml
+  └── dbt
+    └── dbt_project.yml
+  ```
+</Callout>
+
+## Configuring Hashboard's dbt Integration
+
+The `.hbproject` file can store configuration for Hashboard's dbt integration using the `dbt_root` key. This key specifies the path to the root directory of your dbt project.
+
+There are two ways to set the `dbt_root` value:
+
+1. Pass the path to your dbt project root when running the `hb init` command: `hb init --dbt-root /path/to/your/dbt/project/root`
+2. Manually edit the `.hbproject` file and modify the dbt_root key
+
+By setting the `dbt_root` value, Hashboard will always run the dbt integration during [`hb build`](/docs/data-ops/cli/build).
