@@ -86,6 +86,29 @@ The Hashboard dbt integrations support `Defer` for both dbt Core and Cloud when 
   up development and reduce costs.
 </Callout>
 
+### Setup for database deferrals
+
+If you're deferring schemas, rather than databases, there is no additional setup beyond setting up your `dbt_root` with [`hb init`](/docs/data-ops/cli/v3/init).
+
+For database deferrals, Hashboard relies on multiple [database connections](/docs/database-connections), one connection for each database you are building dbt models into.
+
+To ensure Hashboard builds each model with the correct connection for the deferred database, you must specify the relationship between database and connections in the [`.hbproject` file](/docs/data-ops/cli/v3/init) with the `dbt_connections` dictionary.
+
+Example [`.hbproject` file](/docs/data-ops/cli/v3/init):
+
+```yaml copy
+# This file marks the root of your Hashboard project directory. It determines
+# the identity of the resources in your local filesystem
+# and encodes additional project configuration metadata.
+# For additional information please visit docs.hashboard.com.
+dbt_root: ./dbt/
+dbt_connections:
+  - connectionName: name-for-dev-connection
+    databaseName: dev
+  - connectionName: name-for-prod-connection
+    databaseName: production
+```
+
 ### dbt Core
 
 When using dbt Core, you can use the `--dbt-state` flag to pass a state for deferral.
