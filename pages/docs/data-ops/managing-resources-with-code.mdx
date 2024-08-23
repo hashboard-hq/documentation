@@ -6,55 +6,16 @@ import { Callout } from "nextra-theme-docs";
 
 # Managing Resources With Code
 
-## Code management lifecycle
+## The build process
 
-Managing resources with code in Hashboard follows this lifecycle:
+Here is a high-level description of what actually happens during the build process:
 
-1. You create a **build** that bundles together proposed changes to your resources
-2. Hashboard **validates** that your changes will not break anything in your project.
-3. You and/or the relevant reviewers **preview** the changes in your build to ensure they are having the intended impact.
-4. Your build is **applied** to your project, which deploys your changes to your users.
+- **Create resources.** For models that you check in that do not currently exist, the model is created from scratch from your configuration file and from the database. This means that the base table and all the columns must still exist in the database for the build to succeed.
+- **Update resources.** If a column is changed, it will be updated in all dependent items (regardless of whether the dependent items were also checked in) - so things like name changes should be correctly reflected.
+- **Clean up resources.** If any columns or models are deleted, all dependent items that relied on that column or model will also be deleted.
+- **Smoke test.** Once the model is built, a single aggregate analytical query will be run against the database to make sure that data aggregation can still be run against the model.
 
-Below is more detail on each of these steps of the process.
-
-### Creating a build
-
-Create a Hashboard build by defining one or more Hashboard yml [configuration files](#hashboard-configuration-files) in your filesystem and passing them into the [`hb build`](./cli/build) command.
-
-Hashboard builds automatically propagate any changes necessary to keep your project consistent. This includes:
-
-- **Updating downstream resources.** If a column is changed, it will be updated in all dependent items (regardless of whether the dependent items are part of your build) - so changes like name updates will be correctly reflected everywhere.
-- **Cleaning up defunct resources.** If any Models, Attributes, or Measures are deleted, all dependent items that relied on that Model or Column will also be deleted.
-
-The CLI will provide you with a link to view the details of your build after it is created. You can also see a list of all your previous builds on the [Builds](https://hashboard.com/app/p/data-ops) page.
-
-### Build validation
-
-After your configuration files are added to a build, Hashboard checks for issues like:
-
-- Missing or broken dependencies
-- Mismatches between database columns and model definitions
-- SQL errors
-
-Any issues that are found are surfaced as warnings or errors. A build with errors cannot be applied.
-
-### Previewing a build
-
-Builds can be **previewed** from the build details page, by clicking "Preview" in the top corner or next to any of the resources in the build.
-
-When in a build preview, you are viewing what your project _would look like_ if you were to apply that build. This includes any downstream impacts on resources that are _not_ in your build. For instance, if your build renames an Attribute in a Model, that new name will appear in your build preview when viewing any Saved Exploration or Dashboard that uses data from that model.
-
-Build previews are non-destructive and shareable via their URL. They do not expire, although they may become invalid as the other resources in your project change over time.
-
-### Applying a build
-
-When you are ready to apply the changes in a build to your project, you can do so by clicking the **Apply** button on the build's details page, or by running
-
-```bash copy
-$ hb build apply
-```
-
-in your CLI. By default, this will apply the most recent build you created in your bash session. You can also provide a build ID to the `build apply` command if desired.
+If there is an error while deploying a Data Model, the build process will revert to the previous version of that model, and all dependent resources of that model will not be updated.
 
 ## Hashboard configuration files
 
@@ -63,7 +24,7 @@ Hashboard supports configuration files written in YAML or JSON. A Hashboard Buil
 Full documentation of all configuration files can be found for each resource type:
 
 - [Data Models](/docs/data-ops/config-schema/Data-Model)
-- [Saved Explorations](/docs/data-ops/config-schema/saved-explorations)
+- [Saved Explorations](/docs/data-ops/config-schema/saved-exploration)
 - [Dashboards](/docs/data-ops/config-schema/Dashboard)
 - [Color Palettes](/docs/data-ops/config-schema/Color-Palette)
 - [Homepage Launchpad](/docs/data-ops/config-schema/Homepage-Launchpad)
@@ -87,13 +48,6 @@ the file structure of your project.
 
 To protect specific resources to only be editable with the Hashboard deployments, add the `preventUpdatesFromUI` flag set as `true` to any config. This prevents users from unintentionally updating critical resources from the Hashboard web application and gives your team greater control over valuable long lived resources that are core to your business needs.
 
-## Builds vs. Project drafts
+### Syncing resources
 
-Builds and [Project Drafts](/docs/project-management/drafts) serve similar purposes -- they both can be used to stage, test, and apply changes. Here is how they differ:
-
-|                                            | Builds                                          | Project drafts |
-| ------------------------------------------ | ----------------------------------------------- | -------------- |
-| Created from...                            | The CLI or git integration                      | The Hashboard UI         |
-| Can be edited?                             | No -- the changes within a build are immutable. | Yes            |
-| Supports environment variable substitution | Yes                                             | No             |
-| Can be deployed to multiple projects       | Yes                                             | No             |
+To sync your local config files with edits made to resources via the UI, use the [`pull`](/docs/data-ops/cli/pull) command.
