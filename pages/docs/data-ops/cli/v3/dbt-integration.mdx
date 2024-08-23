@@ -18,13 +18,28 @@ Hashboard can import models directly from dbt by specifying measures in your dbt
 
 <Steps>
 
-### Configure your `dbt_root`
+### Configure your `.hbproject` file
+
+If you have not already, configure the root of your Hashboard project and your dbt project with [`hb init`](/docs/data-ops/cli/v3/init).
 
 Set the `dbt_root` key in your Hashboard project file using [`hb init`](/docs/data-ops/cli/v3/init) or (if you've previously run `hb init`) manually editing the `.hbproject` file.
 
+You should also specify the Hashboard connection that maps to your dbt target database with the `dbt_connections` dictionary by manually editing the file.
+
+```yaml filename="example .hbproject file" copy
+# This file marks the root of your Hashboard project directory. It determines
+# the identity of the resources in your local filesystem
+# and encodes additional project configuration metadata.
+# For additional information please visit docs.hashboard.com.
+dbt_root: ./dbt/
+dbt_connections:
+  - connectionName: name-for-dev-connection
+    databaseName: dev
+```
+
 ### Configure your `dbt_project.yml`
 
-You can use the `hashboard-defaults` key to specify the hashboard version (which is required) and connection information.
+You can use the `hashboard-defaults` key to specify the hashboard version (which is required).
 
 ```yaml filename="dbt_project.yml" copy
 models:
@@ -32,10 +47,6 @@ models:
     # hashboard-defaults settings will be merged into each Hashboard model
     hashboard-defaults:
       hbVersion: "1.0"
-      # preventUpdatesFromUI defaults to false, but can be set to true
-      preventUpdatesFromUI: false
-      source:
-        connectionName: bigquery-prod # the name of the connection in Hashboard
 ```
 
 ### Define model information
@@ -94,9 +105,7 @@ For database deferrals, Hashboard relies on multiple [database connections](/doc
 
 To ensure Hashboard builds each model with the correct connection for the deferred database, you must specify the relationship between database and connections in the [`.hbproject` file](/docs/data-ops/cli/v3/init) with the `dbt_connections` dictionary.
 
-Example [`.hbproject` file](/docs/data-ops/cli/v3/init):
-
-```yaml copy
+```yaml filename="example .hbproject file" copy
 # This file marks the root of your Hashboard project directory. It determines
 # the identity of the resources in your local filesystem
 # and encodes additional project configuration metadata.
