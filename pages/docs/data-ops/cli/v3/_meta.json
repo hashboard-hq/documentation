@@ -1,4 +1,5 @@
 {
+  "install": "Install the latest pre-release",
   "init": "init",
   "build": "build",
   "dbt-integration": "dbt Workflows"
