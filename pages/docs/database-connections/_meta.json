@@ -6,7 +6,7 @@
     "title": "BigQuery (GCP)"
   },
   "clickhouse": {
-    "title": "ClickHouse (Beta)"
+    "title": "ClickHouse"
   },
   "databricks": {
     "title": "Databricks"
