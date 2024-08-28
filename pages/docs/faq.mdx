@@ -4,11 +4,21 @@ description: Frequently asked questions, such as "How do I add an image to a das
 
 # Frequently Asked Questions
 
-### How to find attribute tile in attribute tray?
+### How does Hashboard handle timezones?
+
+Hashboard does not localize timestamps beyond any transformations applied by your database when executing SQL.
+
+Timezone manipulations can be complex and may cause surprises when aggregating and filtering your data. For the most consistent results, we recommend that your data pipelines convert timestamps into your desired reporting timezone and then persist the final data as a timezone-unaware datetime. This will ensure that date truncation and time filtering is always done with respect to your reporting timezone.
+
+If using timezone-aware datetimes, be aware that your database settings may impact how datetimes are displayed, aggregated, and filtered; we recommend validating the behavior of your timestamps in Hashboard on initial setup and whenever these settings are changed.
+
+If you require reporting to handle displaying information in different timezones, create additional localized timezone unaware columns, e.g. `datetime_eastern`, and add them as additional attributes to your model.
+
+### How to find an attribute tile in the attribute tray?
 
 If you have many attributes in your data model it may not be efficient to scroll through the attribute tray to find what you're looking for. The best way to search for a specific attribute is with the [data tray](/docs/visualizing-data/data-tray). You can find the attribute tile by searching and the clicking attribute name in the attributes section in the data tray.
 
-### How do I create a bar on line chart?
+### How do I create a line over bar chart?
 
 Hashboard allows you to represent multiple series with different chart types. You can click "Controls" to open the controls pane in the Data explorer, and click Y-axis title to configure the Y-axis settings. You can add another Y-axis by clicking "+" sign next to Y-axis section title. You can choose same or different chart type to assign to left or right Y-axis. You can remove Y-axis by clicking "-" next to left or right Y-axis title.
 
@@ -67,7 +77,7 @@ There are several potential causes for build errors.
 ### How much does Hashboard cost?
 
 Hashboard has public pricing options [available here](https://hashboard.com/pricing)
-We offer free, 30-day trials for the Starter and Team plans. If you'd like to try the product out, you can get started now [here](https://hashboard.com/signup) or reach out to our team at sales@hashboard.com 
+We offer free, 30-day trials for the Starter and Team plans. If you'd like to try the product out, you can get started now [here](https://hashboard.com/signup) or reach out to our team at sales@hashboard.com
 
 ### What permission does a user need to to download "Underlying data"?
 
@@ -86,7 +96,8 @@ Color theory is a complex and nuanced topic. Entire books have been written on t
 ### How can I get column documentation from my database or dbt into Hashboard?
 
 There are two ways to get column documentation into Hashboard from dbt:
-1) You can use the [Hashboard dbt integration](docs/data-ops/dbt-integration).  The integration allows you to build hashboard models directly from dbt models with our cli.  Any model built this way will automatically pull in dbt documentation on each build.
-2) You can use dbt's [persist_docs](https://docs.getdbt.com/reference/resource-configs/persist_docs) to push column definitions from dbt into your warehouse.  Then use Hashboard's [database column description sync](docs/data-modeling/description-syncing).
+
+1. You can use the [Hashboard dbt integration](docs/data-ops/dbt-integration). The integration allows you to build hashboard models directly from dbt models with our cli. Any model built this way will automatically pull in dbt documentation on each build.
+2. You can use dbt's [persist_docs](https://docs.getdbt.com/reference/resource-configs/persist_docs) to push column definitions from dbt into your warehouse. Then use Hashboard's [database column description sync](docs/data-modeling/description-syncing).
 
 You can also document columnd directly by editing measures and attributes [in the model](docs/data-modeling).
