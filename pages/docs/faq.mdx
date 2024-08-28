@@ -8,7 +8,9 @@ description: Frequently asked questions, such as "How do I add an image to a das
 
 Hashboard does not use timezone and UTC offset information in warehouse datatypes to localize filters or chart displays.
 
-To prepare datetime data for consumption in Hashboard, we recommend storing it in a timezone unaware datatype for a specific localization. For example create a column named `datetime_UTC` with a [`DATETIME`](https://docs.snowflake.com/en/sql-reference/data-types-datetime#datetime) or [`TIMESTAMP_NTZ`](https://docs.snowflake.com/en/sql-reference/data-types-datetime#timestamp-ltz-timestamp-ntz-timestamp-tz) type in Snowflake.
+Timezone manipulations can be complex and may cause surprises when aggregating and filtering your data. For the most consistent results, we recommend that your data pipelines convert timestamps into your desired reporting timezone and then persist the final data as a timezone-unaware datetime. This will ensure that date truncation and time filtering is always done with respect to your reporting timezone.
+
+If using timezone-aware datetimes, be aware that your database settings may impact how datetimes are displayed, aggregated, and filtered; we recommend validating the behavior of your timestamps in Hashboard on initial setup and whenever these settings are changed.
 
 If you require reporting to handle displaying information in different timezones, create additional localized timezone unaware columns, e.g. `datetime_eastern`, and add them as additional attributes to your model.
 
