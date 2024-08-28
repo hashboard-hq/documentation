@@ -6,7 +6,7 @@ description: Frequently asked questions, such as "How do I add an image to a das
 
 ### How does Hashboard handle timezones?
 
-Hashboard does not use timezone and UTC offset information in warehouse datatypes to localize filters or chart displays.
+Hashboard does not localize timestamps beyond any transformations applied by your database when executing SQL.
 
 Timezone manipulations can be complex and may cause surprises when aggregating and filtering your data. For the most consistent results, we recommend that your data pipelines convert timestamps into your desired reporting timezone and then persist the final data as a timezone-unaware datetime. This will ensure that date truncation and time filtering is always done with respect to your reporting timezone.
 
