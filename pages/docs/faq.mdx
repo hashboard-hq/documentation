@@ -14,8 +14,6 @@ If using timezone-aware datetimes, be aware that your database settings may impa
 
 If you require reporting to handle displaying information in different timezones, create additional localized timezone unaware columns, e.g. `datetime_eastern`, and add them as additional attributes to your model.
 
-Our filters and aggregations rely on truncation methods, so they will "just work" based on whichever localized attribute you have selected.
-
 ### How to find an attribute tile in the attribute tray?
 
 If you have many attributes in your data model it may not be efficient to scroll through the attribute tray to find what you're looking for. The best way to search for a specific attribute is with the [data tray](/docs/visualizing-data/data-tray). You can find the attribute tile by searching and the clicking attribute name in the attributes section in the data tray.
