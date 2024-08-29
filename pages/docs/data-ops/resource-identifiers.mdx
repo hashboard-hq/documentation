@@ -48,7 +48,6 @@ The following are all valid GRNs:
 ```bash
 sv:6yYdOIMG9hCAAHqB
 m:RNuzTq-85qzAFKJ8:2018_sales
-dsb:SV9nqwUHWmyk1zka
 dsb::daily_active_users
 
 # some GRNs have longer IDs:
@@ -72,17 +71,6 @@ the Hashboard web app to be code-controlled, without recreating it.
 Anywhere you specify a filepath in a Hashboard config, you may instead specify a GRN.
 This allows you to reference resources independently of how you structure your files.
 
-### Referencing dbt models
-
-When referencing models imported by the [dbt integration](./dbt-integration.mdx), the standard GRN format is valid.
-It is also possible to reference dbt models using the unique identifier of the dbt node representing the model:
-
-```bash
-dbt::dbtuniqueid
-```
-
-For example:
-
-```bash
-dbt::model.jaffle_shop.orders
-```
+For human readable references we recommend setting the `alias` field in the config you wish
+to reference and use the double colon `type::alias` syntax where you would otherwise use
+filepath or id references.
