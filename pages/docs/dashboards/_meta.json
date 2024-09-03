@@ -1,6 +1,7 @@
 {
   "filters": "Filters",
-  "metrics": "Metric Tiles",
-  "saved-explorations": "Saved Explorations",
-  "text": "Text & MarkDown"
+  "metrics": "Metric blocks",
+  "saved-explorations": "Exploration blocks",
+  "text": "Text & MarkDown blocks",
+  "embed": "Embed blocks"
 }

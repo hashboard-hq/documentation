@@ -2,37 +2,92 @@
 description: Select any saved exploration and add it to a dashboard
 ---
 
-# Saved Explorations
+# Exploration blocks
 
-Drag the chart icon from the toolbar onto your dashboard, then select any saved
-exploration to add it to the dashboard.
+## Saved exploration blocks
 
-![Adding saved exploration to dashboard](/dashboards/add-saved-view.gif)
+You can use an existing saved exploration as a block on your dashboard.
+Changes to the saved exploration are reflected in all blocks using that saved exploration.
 
-## Configuration
+### Adding a saved exploration to your dashboard
 
-### Label
+To add a saved exploration block to your dashboard, drag the chart icon from the toolbar onto your dashboard,
+then select any existing saved exploration from the select dropdown.
+
+### Edit a saved exploration from your dashboard
+
+To edit a saved exploration from your dashboard, hover over the saved exploration block and use the
+block's more menu to select "Edit saved exploration". You will be redirected away from the dashboard to
+a page where you can make changes to the saved exploration. When you are done making changes, use the
+Save button to save your changes and return to the dashboard. Note, these changes will be reflected in any
+dashboard with a saved exploration block referencing that saved exploration.
+
+## Custom exploration blocks
+
+You can also create explorations in your dashboard that are specific to that dashboard.
+Changing the exploration on these blocks will not affect any other dashboard or block.
+
+### Adding a custom exploration to your dashboard
+
+There are multiple ways to get started with a new custom exploration block:
+
+##### Based on a saved exploration
+
+To add a custom exploration based on a saved exploration, drag the chart icon from the toolbar onto your dashboard,
+then with the "Saved exploration" tab of the modal selected, select the saved exploration you want to base your custom exploration on
+from the select dropdown. Next, check the option to "Add as custom" and then click the "Add to dashboard" button.
+
+##### Based on a data model
+
+To add a custom exploration based on a data model, drag the chart icon from the toolbar onto your dashboard,
+then with the "Custom exploration" tab of the modal selected, select the data model you want to use as the basis for your custom exploration.
+Click the "Start exploration" button, create your exploration in the explore view, and then click the "Apply to dashboard" button.
+
+##### Based on an exploration link
+
+To add a custom exploration based on an exploration link, drag the chart icon from the toolbar onto your dashboard,
+then with the "Custom exploration" tab of the modal selected, copy a exploration link into the input field.
+Then click the "Add to dashboard" button.
+
+### Edit a custom exploration block
+
+##### Edit with the data explorer
+
+To edit a custom exploration block, first make sure you are in the edit mode of the dashboard.
+Then hover over the custom exploration block and and click the edit button that appears in the top right corner of the block.
+You will be redirected away from the dashboard to a page where you can make changes to the exploration.
+When you are done making changes, use the "Apply to dashboard" button to return to the dashboard.
+
+##### Edit with the code editor
+
+To edit a custom exploration block, first make sure you are in the edit mode of the dashboard. Open the dashboard
+code editor by clicking the "Code" button in the dashboard's toolbar.
+This will open the code editor alongside your dashboard and you are edit the specific options of exploration block you want to edit.
+
+## Block configuration options
+
+##### Label
 
 By default, the label of the chart will be the same as the name of the saved exploration.
 You can override the label when displayed on the dashboard by setting the text here.
 
-### Ignore Dashboard Filters
+##### Ignore Dashboard Filters
 
 Check this box if you want this saved exploration to ignore
 [dashboard filters](/docs/dashboards/filters). When this is set, only the filters from the
 saved exploration will be used.
 
-### Legend
+##### Legend
 
 Change where the legend is placed. You can select `Inherit from Saved Exploration` to match
 legend placement with the saved exploration.
 
-### Axis Labels
+##### Axis Labels
 
 Change whether the axis of the chart are shown or hidden. You can select
 "Inherit from Saved Exploration" to match axis label with the saved exploration.
 
-### Automatic Color Syncing
+##### Automatic Color Syncing
 
 If multiple charts on the page define series over the same
 [attribute](/docs/data-modeling/#the-components-of-a-data-model)

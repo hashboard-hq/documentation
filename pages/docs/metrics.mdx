@@ -43,19 +43,20 @@ The Metrics page has two different modes, divided into two tabs— the Metric t
 
 ### Metric tree
 
-The metric tree is a structured way to visualize and understand the relationships between your business metrics. By organizing metrics into a 
-hierarchical tree structure, you can easily see how lower-level driver metrics contribute to top-line metrics. This tool helps diagnose performance issues 
+The metric tree is a structured way to visualize and understand the relationships between your business metrics. By organizing metrics into a
+hierarchical tree structure, you can easily see how lower-level driver metrics contribute to top-line metrics. This tool helps diagnose performance issues
 and attribute variations in key metrics to specific drivers.
 
 #### Types of metric tree metrics
- - Top-line metrics: Your primary business goals. Sometimes called North Star metrics.
- - Driver metrics: Metrics that contribute to the output of another metric. Driver metrics can be inputs for top-line metrics or intermediate driver metrics.
+
+- Top-line metrics: Your primary business goals. Sometimes called North Star metrics.
+- Driver metrics: Metrics that contribute to the output of another metric. Driver metrics can be inputs for top-line metrics or intermediate driver metrics.
 
 #### Creating your metric tree
-	1. Navigate to the Metric tree: Access the Metric tree from the Metrics page by selecting the Metric Tree tab.
-	2. Identify Top-Line Metrics: Start by selecting your the top-line metrics, which represent your primary business goals.
-	3. Add Driver Metrics: Click on the more menu of any top-line metric to reveal the option to add one or more driver metrics. 
 
+    1. Navigate to the Metric tree: Access the Metric tree from the Metrics page by selecting the Metric Tree tab.
+    2. Identify Top-Line Metrics: Start by selecting your the top-line metrics, which represent your primary business goals.
+    3. Add Driver Metrics: Click on the more menu of any top-line metric to reveal the option to add one or more driver metrics.
 
 ### Metric library
 
@@ -116,28 +117,28 @@ This is because your current [exploration](/docs/visualizing-data/explorations) 
 
 ## Metrics in dashboards
 
-With metrics, you can skip the configuration of a dashboard [metric tile](/docs/dashboards/metrics) by populating a metric tile's configuration from a metric. There are two ways to use metrics to populate metric tiles, the metric can either be linked directly or the metric definition can be copied into a tile. Linked metrics will be updated when the metric definition is updated at the project level while copied metrics provide a starting point for building custom dashboard metric tiles that are only updated when the tile itself is modified.
+With metrics, you can skip the configuration of a dashboard [metric block](/docs/dashboards/metrics) by populating a metric block's configuration from a metric. There are two ways to use metrics to populate metric blocks, the metric can either be linked directly or the metric definition can be copied into a block. Linked metrics will be updated when the metric definition is updated at the project level while copied metrics provide a starting point for building custom dashboard metric blocks that are only updated when the block itself is modified.
 
 When using metrics in dashboards, follow these steps:
 
 1. Navigate to the dashboard you want to update.
 2. Click the **Edit** button in the top right of the dashboard.
-3. Find the existing metric tile you wish to update, or create a new metric tile.
-4. Open the metric tile's configuration by clicking the settings icon in the top right of the metric tile.
+3. Find the existing metric block you wish to update, or create a new metric block.
+4. Open the metric block's configuration by clicking the settings icon in the top right of the metric block.
 
-To link a metric tile to a metric:
+To link a metric block to a metric:
 
 5. Click the Linked Metric tab
 6. Select the metric you want to reference from the Linked Metric dropdown
-7. Your metric tile will now display the selected metric, to make changes to the value displayed you can edit the metric definition from the [Metrics page](#metric-page).
+7. Your metric block will now display the selected metric, to make changes to the value displayed you can edit the metric definition from the [Metrics page](#metric-page).
 8. Once you have finished editing the dashboard, click the **Save** button in the top right of the dashboard.
 
-To copy a metric's configuration into a metric tile:
+To copy a metric's configuration into a metric block:
 
 5. Click the Custom Metric tab
 6. Expand the **Copy metric configuration** section and select your metric from the list of available metrics.
 7. With your metric selected, click the **Copy config** button.
-8. Your metric tile's configuration will be updated with the configuration from your metric. You can open the metric tile's configuration to review the settings or make additional changes.
+8. Your metric block's configuration will be updated with the configuration from your metric. You can open the metric block's configuration to review the settings or make additional changes.
 9. Once you have finished editing the dashboard, click the **Save** button in the top right of the dashboard.
 
 ## Metrics as code

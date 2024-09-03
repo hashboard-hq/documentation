@@ -1,18 +1,18 @@
 ---
-description: Drag the number icon from the toolbar onto your dashboard to add a new metric tile to the dashboard. Hover over the metric and click the cog icon to edit it.
+description: Drag the number icon from the toolbar onto your dashboard to add a new metric block to the dashboard. Hover over the metric and click the cog icon to edit it.
 ---
 
 import { Callout } from "nextra-theme-docs";
 
-# Metric Tiles
+# Metric blocks
 
-Drag the number icon from the toolbar onto your dashboard to add a new metric tile to the dashboard. Hover over the metric and click the cog icon to edit it. Want to dig deeper into your data? Click on any metric tile when in view mode to see your metric in Explore.
+Drag the number icon from the toolbar onto your dashboard to add a new metric block to the dashboard. Hover over the metric and click the cog icon to edit it. Want to dig deeper into your data? Click on any metric block when in view mode to see your metric in Explore.
 
 ![Updating metric label text](/dashboards/text-label.gif)
 
 ## Linked Metrics and Custom Metrics
 
-Metric tiles in a dashboard can be defined as a reference to a metric from the [Metrics page](/docs/metrics#metric-page), or as a new custom metric that is only available in the dashboard it's defined in. Linked metric tiles will be updated if the corresponding metric definition changes at the project level allowing you to keep definitions centralized for key performance indicators across your organization.
+Metric blocks in a dashboard can be defined as a reference to a metric from the [Metrics page](/docs/metrics#metric-page), or as a new custom metric that is only available in the dashboard it's defined in. Linked metric blocks will be updated if the corresponding metric definition changes at the project level allowing you to keep definitions centralized for key performance indicators across your organization.
 
 ## Text labels
 
@@ -22,16 +22,16 @@ Metric tiles in a dashboard can be defined as a reference to a metric from the [
 
 ### Linked metric settings
 
-Defining linked metrics is as simple as choosing the name of project level metric definition you'd like to display in the dashboard. You can also choose whether or not [dashboard filters](Filters.md) will be applied to the tile.
+Defining linked metrics is as simple as choosing the name of project level metric definition you'd like to display in the dashboard. You can also choose whether or not [dashboard filters](Filters.md) will be applied to the block.
 
-**Metric Value:** Choose a [metric](/docs/metrics) to be displayed in the dashboard tile.
+**Metric Value:** Choose a [metric](/docs/metrics) to be displayed in the dashboard block.
 
 **Ignore Dashboard Filters:** Check this box if you want this metric to ignore
 [dashboard filters](Filters.md). When this is set, only the filters specified on the metric will be used.
 
 ### Custom metric settings
 
-Metrics can be calculated as either **Simple Metrics** or **Relative Comparison** metrics. **Simple Metrics** calculate a value across _all_ data in a filtered range whereas **Relative Comparison** metrics calculate a value over specific periods of data so you can see a metric value for the last week, month, etc. To start building a custom metric tile from a metric that has already been created in the Metrics page you can use the 'Copy metric configuration' functionality. This allows you to start building metric tiles from a common base but changes to the metric copied will not affect the custom metric tile.
+Metrics can be calculated as either **Simple Metrics** or **Relative Comparison** metrics. **Simple Metrics** calculate a value across _all_ data in a filtered range whereas **Relative Comparison** metrics calculate a value over specific periods of data so you can see a metric value for the last week, month, etc. To start building a custom metric block from a metric that has already been created in the Metrics page you can use the 'Copy metric configuration' functionality. This allows you to start building metric blocks from a common base but changes to the metric copied will not affect the custom metric block.
 
 #### Simple metrics
 
@@ -56,7 +56,7 @@ Metrics can be calculated as either **Simple Metrics** or **Relative Comparison*
 
 **Sparkline:** Click the toggle to enable or disable a sparkline visualization of your metric. Values will be plotted over the date you've selected to calculate the metric.
 
-**Comparison Text:** When comparisons are enabled the tile will display the difference between the value for the most recent period and the prior period in your data. For example, if you have your relative metric set to show user count over a month enabling this feature will show you the difference between users the last month of data and the prior month.
+**Comparison Text:** When comparisons are enabled the block will display the difference between the value for the most recent period and the prior period in your data. For example, if you have your relative metric set to show user count over a month enabling this feature will show you the difference between users the last month of data and the prior month.
 
 #### Filters
 
@@ -69,4 +69,4 @@ Metrics can be calculated as either **Simple Metrics** or **Relative Comparison*
 
 ### Formatting
 
-**Up/Down Colors:** If the metric is a **Relative Comparison** metric with comparison text enabled you'll be able to customize how negative and positive differences are displayed. Simply click into a color and change the values to a new color code. Positive differences will be displayed in the Up color and negative differences will be displayed in the Down color. This can only be configured for custom metric tiles.
+**Up/Down Colors:** If the metric is a **Relative Comparison** metric with comparison text enabled you'll be able to customize how negative and positive differences are displayed. Simply click into a color and change the values to a new color code. Positive differences will be displayed in the Up color and negative differences will be displayed in the Down color. This can only be configured for custom metric blocks.
