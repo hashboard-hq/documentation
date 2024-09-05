@@ -30,12 +30,12 @@ In the Model Builder, select "Advanced Configuration" and use the dropdowns to c
 - **Timestamp**
   - Events will be ordered by this attribute. Typically this is a timestamp representing when an event was detected.
 - **Entity**
-  - Event sequences will be segmented by this attribute. This will be the entity that "moves through" a funnel. This should be a unique identifier maintained across a series of events, such as user_id or session_id.
+  - Event sequences will be segmented by this attribute. This will be the entity that "moves through" a funnel. This should be a unique identifier maintained across a series of events, such as `user_id` or `session_id`.
 - **Event name**
-  - The most common attribute used to differentiate events. Typically this is a named identifier for the event, such as event_name or event_type.
+  - The most common attribute used to differentiate events. Typically this is a named identifier for the event, such as `event_name` or `event_type`.
   - Users will still be able to match to custom event patterns based on attributes other than (or in addition to) this key. This just provides a convenience for the most common way to match events in your data.
 
-### Pre-define event sequences _Optional_
+### Pre-define event sequences _(Optional)_
 
 It is helpful to align your organization on the definitions of common funnels. This is especially important when you have many different event types or require qualifying events with specific filters.
 
@@ -57,6 +57,6 @@ You may add as many predefined sequences as you wish.
 
 Once you've set up the data model for event analytics, you will see new options in the chart type selector in the Data Explorer. Selecting one of these new chart types will surface your event configuration as well as your predefined sequences for self service users.
 
-Currently Hashboard supports basic funnel analysis as well as conversion rate over time.
+Currently Hashboard supports [basic funnel analysis](./funnels.mdx) as well as [conversion rates over time](./conversion-rates.mdx).
 
 </Steps>

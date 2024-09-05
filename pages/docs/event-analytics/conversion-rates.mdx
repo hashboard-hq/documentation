@@ -1,20 +1,26 @@
-# How are conversion rates computed?
+---
+description: How are conversion rates calculated?
+---
 
-Conversion rates in Hashboard are measured using the following formula:
+# Conversion Rates
+
+Conversion rates measure the ratio of entities which enter a funnel to those which fully complete the funnel. The funnel and associated configuration works the same way as a basic [funnel analysis](./funnels.mdx).
 
 $$$
 rate = \frac{converted\_funnel}{entered\_funnel}
 $$$
 
-$entered\_funnel$ is the number of entities which matched the first step of the funnel within the given time bucket (e.g. month). $converted\_funnel$ is the number of entities which matched all steps of the funnel in order, within the time limit, starting in the given time bucket. You can see a breakdown of these values in the table view.
+Conversion rates are measured over time, with each time grain representing the overall conversion rate for entities which _entered_ the funnel during that time bucket. Hashboard will re-evaluate a given entity for each time bucket. This means `user1` might count toward the conversion rate once in January _and_ once in February, if they entered the funnel in both months.
 
-Hashboard uses to following logic to compute this:
-- For each time bucket (e.g. month), Hashboard will attempt to match at most one funnel per entity. Time bucketing is based on the **first step** in the funnel.
-    - This means that Hashboard will re-evaluate a given entity for each time bucket, e.g. `user1` might count toward the conversion rate once in January **and** once in February.
-- We always attempt to match the first step (chronologically) following the preceding step.
-- Rate calculations do not enforce the entire funnel to be completed within a single time bucket. For example, a entity could begin on January 28th and end on February 2nd. Since conversions are grouped to their start time-frame, this would count as a conversion for January.
-    - Rate calculations respect the time limit settings in the funnel configuration. This setting is applied independently from the granularity of the rate calculation. Using the example above, if the time limit was 2 days, the user wouldn't count as converted, since February 2nd is more than 2 days after January 28th.
+### Funnels crossing between time grains
 
-The following diagram outlines some examples of how a daily conversion rate might be computed:
+An entity may enter a funnel in one time bucket, and then complete the funnel in another bucket. For example, a entity could begin on January 28th and end on February 2nd. Conversions are grouped by their start time-frame, so this would count as a conversion for _January_.
+
+These calculations respect the time limit settings in the funnel configuration. This setting is applied independently from the granularity of the rate calculation. Using the example above, if the time limit was 2 days, the user would not count as converted, since February 2nd is more than 2 days after January 28th.
+
+### Complete example
+
+The following diagram outlines a complete example of how a daily conversion rate is computed.
 
 ![Conversion rates diagram](/event_analytics/conversion-rates.png)
+
