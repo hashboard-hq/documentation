@@ -2,6 +2,7 @@
 description: Explore event sequences over time.
 ---
 
+import MutedBlock from "/components/MutedBlock";
 
 # Funnels
 
@@ -9,28 +10,39 @@ Funnels are the basic building block of event analytics. They provide a way to s
 
 ## Configuration
 
-### Step sequence
-The step sequence is the ordered list of events which an entity must perform to complete the funnel. Step sequences can be edited during explore, or defined in the model for quicker access and sharing.
+### Event sequence
+The event sequence is the ordered list of events which an entity must perform to complete the funnel. Event sequences can be edited during explore, or defined in the model for quicker access and sharing.
 
-Steps are just a named condition to match a given event to. The most common condition is simply matching the name of an event. You can click the settings icon next to a step to edit the conditions directly. Using this, you can specify more nuanced steps, such as "a view_page event with '/blog' in the URL" instead of just "a view_page event".
+Steps are just a named condition to match a given event to. The most common condition is simply matching the name of an event. You can click the settings icon next to a step to edit the conditions directly. Using this, you can specify more nuanced steps, such as _"a view_page event with '/blog' in the URL"_ instead of just _"a view_page event"_.
 
 ### Filters
-Filters are applied to every event _before_ any funneling logic occurs. Since funnel queries can be more expensive than standard aggregates, this can be used to reduce the amount of data you are processing, or to focus your analysis to a particular time region or segment.
+Filters are applied to the query _before_ any funneling logic occurs. Since funnel queries can be more expensive than standard aggregates, this can be used to reduce the amount of data you are processing, or to focus your analysis to a particular time region or segment.
 
 Note that if you apply a historical timestamp filter, you may see lower conversion rates toward the end of the time window. The entity may not have had time to finish the funnel before the filter cut the data off.
 
 ### Time limit
-A time limit applies a maximum duration which a entity can spend within a funnel. Hashboard will match the first event as normal. Subsequent events for that entity must all occur within the time limit of their first event. After the time limit is up, all their future events will be ignored.
+The time limit sets the maximum duration which an entity can take to complete the event sequence. Hashboard will match the first event as normal. Subsequent events for that entity must all occur within the time limit of their first event. After the time limit is up, all their future events will be ignored.
 
 All entities are still evaluated only a single time. If an entity entered a funnel, timed out, and then later re-entered the funnel and succeeded, they would still be counted as not converting, as their "first attempt" at the funnel timed out.
 
 ### Breakouts & segmentation
 
-You can break out a funnel to see how different segments perform. Breakouts split the entities into distinct groups, and perform the funnel analysis once for each group.
+You can break out a funnel to see how different user segments perform, or compare the effect of differences in the first step.
 
-When breaking out on an attribute related to the entity, such as a user's `membership_type`, this works like a standard `GROUP BY`. Each user is still only evaluated once, and then bucketed into separate groups based on the breakout. No overlap will occur.
+When breaking out on an attribute related to the entity, such as a user's `membership_type`, this works like a standard `GROUP BY`. Each user is only evaluated once, and then bucketed into separate groups based on the breakout. No overlap will occur.
 
-When breaking out on other attributes, **a single entity may be evaluated multiple times**, since the value of the broken out column may change over the course of the funnel. The breakout splits groups based on the broken out column of the _first matched event_. For example, imagine a simple funnel with steps `ad_impression` -> `purchase`. We break out on `platform`, which will split funnels based on the `platform` users received the _ad_impression_ on (not the platform they made the purchase, which may be the same or different). If a given user saw an ad on both "mobile" and on "desktop", then they would appear in _both_ the "mobile" and "desktop" segments.
+When breaking out on other attributes, Hashboard runs parallel analyses, with variations on the the conditions for the initial step. All entities and events are shared between each analysis.
+
+<MutedBlock header="Example">
+  For example, imagine a simple funnel with steps `ad_impression` -> `purchase`.
+  This analysis answers the question _"how many users saw an ad then made a purchase?"_
+
+  We then break out on `platform`, which will split funnels based on the `platform` users received the _ad_impression_ on. If we have "mobile" and "desktop" platforms, then this will answer two correlated questions:
+  <br />- _"how many users saw an ad **on mobile** and then made a purchase?"_
+  <br />- _"how many users saw an ad **on desktop** and then made a purchase?"_
+
+  If a given user saw an ad on both mobile and on desktop, then they would appear in _both_ the "mobile" and "desktop" segments.
+</MutedBlock>
 
 ## How it works
 
