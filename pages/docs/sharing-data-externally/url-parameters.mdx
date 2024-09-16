@@ -1,0 +1,85 @@
+---
+description: Hashboard supports setting data filters for dashboards and explorations using URL parameters.
+---
+
+# URL Parameters
+
+Hashboard allows you to apply additional filters to your explorations and dashboards using URL parameters.
+
+Common use cases for filter URL parameters include:
+
+- Embedding a filtered view inside another application, using context from outside the iframe
+- Generating Hashboard URLs from a script or external application
+
+Filter URL parameters are supported when viewing Hashboard resources as a logged-in user on the web application or in embedded iframes. They are not supported for public links.
+
+## Filtering Explorations with URL Parameters
+
+To apply a filter to an [exploration](../visualizing-data/explorations) via a URL parameter, append `?filters=[...]` to your Hashboard URL, using a URL-encoded list of filter JSON specifications. The keys in these JSON objects match those used in the YAML specification visible in the resource’s [code editor](../data-ops/yaml-editor).
+
+Any valid filter added through the code editor can also be applied via the URL. If a filter is applied to a `columnId` that already has a filter in the base exploration, the URL filter will override the existing one.
+
+You can also use the `filters` URL parameter with [Saved Explorations](../visualizing-data/explorations#creating-a-saved-exploration). When applied, Hashboard will start a new exploration with the provided filters.
+
+## Filtering Dashboards with URL Parameters
+
+[Dashboards](../dashboards) support pre-selecting global filter values using the `filters` URL parameter.
+
+To set global filter values, append `?filters=[...]` to your Hashboard URL with a URL-encoded list of filter JSON specifications. The `columnId` of each filter must correspond to a global filter control on your dashboard. The `dataModel` key is optional—if omitted, the filter will apply to the first global filter that matches the provided `columnId`.
+
+## Examples
+
+Note that most modern browsers will automatically encode your URL when pasted into the address bar.
+
+### Filtering a single column by a list of values
+
+Filter YAML:
+
+```yaml
+filters:
+  - columnId: m::orders.type
+    values:
+      - Single Order
+      - Subscription
+```
+
+URL parameter:
+
+```
+?filters=[{"columnId":"m::orders.type","values":["Single Order","Subscription"]}]
+```
+
+Encoded URL parameter:
+
+```
+?filters=%5B%7B%22columnId%22%3A%22m%3A%3Aorders.type%22%2C%22values%22%3A%5B%22Single%20Order%22%2C%22Subscription%22%5D%7D%5D
+```
+
+### Filtering multiple columns
+
+Filter YAML:
+
+```yaml
+filters:
+  - columnId: timestamp
+    range:
+      - - -6
+        - month
+        - startOfPeriod: false
+      - - 0
+        - minute
+  - columnId: item_number
+    gt: 2
+```
+
+URL Parameter:
+
+```
+?filters=[{"columnId":"timestamp","range":[[-6,"month",{"startOfPeriod":false}],[0,"minute"]]},{"columnId":"item_number","gt":2}]
+```
+
+Encoded URL parameter:
+
+```
+?filters=%5B%7B%22columnId%22%3A%22timestamp%22%2C%22range%22%3A%5B%5B-6%2C%22month%22%2C%7B%22startOfPeriod%22%3Afalse%7D%5D%2C%5B0%2C%22minute%22%5D%5D%7D%2C%7B%22columnId%22%3A%22item_number%22%2C%22gt%22%3A2%7D%5D
+```

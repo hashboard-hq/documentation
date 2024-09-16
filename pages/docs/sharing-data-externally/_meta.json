@@ -1,3 +1,8 @@
 {
-  "iframe-embedding": { "title": "Analytics Embedding" }
+  "iframe-embedding": {
+    "title": "Analytics Embedding"
+  },
+  "url-parameters": {
+    "title": "URL Parameters"
+  }
 }

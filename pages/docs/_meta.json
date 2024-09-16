@@ -1,18 +1,50 @@
 {
-  "getting-started": { "title": "Getting Started" },
-  "database-connections": { "title": "Database Connections" },
-  "data-modeling": { "title": "Data Models" },
-  "visualizing-data": { "title": "Data Explorer" },
-  "metrics": { "title": "Metrics" },
-  "event-analytics": { "title": "Event Analytics" },
-  "project-search": { "title": "Project Search" },
-  "sql-runner": { "title": "SQL Runner" },
-  "sharing-data-externally": { "title": "Sharing Data Externally" },
-  "dashboards": { "title": "Dashboards" },
-  "project-management": { "title": "Project Management" },
-  "users-and-permissions": { "title": "Project Users and Permissions" },
-  "profile": { "title": "Your Profile" },
-  "data-ops": { "title": "Developer Reference" },
-  "guides": { "title": "Guides" },
-  "faq": { "title": "Frequently Asked Questions" }
+  "getting-started": {
+    "title": "Getting Started"
+  },
+  "database-connections": {
+    "title": "Database Connections"
+  },
+  "data-modeling": {
+    "title": "Data Models"
+  },
+  "visualizing-data": {
+    "title": "Data Explorer"
+  },
+  "metrics": {
+    "title": "Metrics"
+  },
+  "dashboards": {
+    "title": "Dashboards"
+  },
+  "event-analytics": {
+    "title": "Event Analytics"
+  },
+  "project-search": {
+    "title": "Project Search"
+  },
+  "sql-runner": {
+    "title": "SQL Runner"
+  },
+  "sharing-data-externally": {
+    "title": "Sharing Data Externally"
+  },
+  "project-management": {
+    "title": "Project Management"
+  },
+  "users-and-permissions": {
+    "title": "Project Users and Permissions"
+  },
+  "profile": {
+    "title": "Your Profile"
+  },
+  "data-ops": {
+    "title": "Developer Reference"
+  },
+  "guides": {
+    "title": "Guides"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions"
+  }
 }
