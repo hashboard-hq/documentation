@@ -1,0 +1,28 @@
+---
+description: Hashboard supports setting data filters for dashboards and explorations using URL parameters.
+---
+
+# URL Parameters
+
+Hashboard supports using URL parameters to apply additional filters to your explorations and dashboards.
+
+Use cases for using filter URL parameters includes:
+
+- Embedding a view inside of another application, filtered using context from outside the iframe
+- Generating Hashboard URLs from a script or other application
+
+Filter URL parameters are supported when viewing Hashboard resources as a logged-in user on the web application or within embedded iframes. They are not supported when sharing resources as public links.
+
+## Filtering explorations with URL parameters
+
+To apply a filter to an exploration with a URL parameter, append `?filters=[...] to your Hashboard URL with a URL-encoded list of filter JSON specifications. The keys of these JSON objects are the same keys used in the yml specification visible in the code editor of the resource.
+
+Any valid filter that can be added through the code editor can also be applied via the URL. If your URL-provided filter is applied to a `columnId` that already has a filter applied in the base exploration, that filter will be overriden.
+
+The `filter` URL parameter can also be used with Saved Explorations. When applied, Hashboard will start a new exploration with those filters applied.
+
+## Filtering dashboards with URL parameters
+
+Dashboars support setting global filter values with the `filters` URL parameter.
+
+To use this, append `?filters=[...]` to your Hashboard URL with a URL-encoded list of filter JSON specifications. The `columnId` of each filter must correspond to the `columnId` of a global filter control present on your dashboard. Including the `dataModel` key is optional -- if you exclude it, the filter will be applied to the first global filter that matches the provided `columnId`.
