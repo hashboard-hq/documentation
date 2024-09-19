@@ -29,11 +29,11 @@ Once the `hb init` command has created the `.hbproject` file, [`hb build`](/docs
 
 ## Configuring Hashboard's dbt Integration
 
-The `.hbproject` file can store configuration for Hashboard's dbt integration using the `dbt_root` key. This key specifies the path to the root directory of your dbt project.
+The `.hbproject` file can store configuration for Hashboard's dbt integration using the `dbtRoot` key. This key specifies the path to the root directory of your dbt project.
 
-There are two ways to set the `dbt_root` value:
+There are two ways to set the `dbtRoot` value:
 
 1. Pass the path to your dbt project root when running the `hb init` command: `hb init --dbt-root /path/to/your/dbt/project/root`
-2. Manually edit the `.hbproject` file and modify the dbt_root key
+2. Manually edit the `.hbproject` file and modify the dbtRoot key
 
-By setting the `dbt_root` value, Hashboard run the dbt integration during [`hb build`](/docs/data-ops/cli/v3/build) by default.
+By setting the `dbtRoot` value, Hashboard run the dbt integration during [`hb build`](/docs/data-ops/cli/v3/build) by default.
