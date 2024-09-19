@@ -1,0 +1,84 @@
+---
+description: Hashboard publishes a public GraphQL API that you can use to programatically fetch project resources.
+---
+
+# GraphQL API
+
+Hashboard publishes a public GraphQL API that you can use to programatically fetch project resources.
+
+## Authentication
+
+Requests to the GraphQL API are authenticated with an API token. An API token is tied to a user in Hashboard and inherits all of that user's permissions.
+
+To generate a new API token:
+
+1. Go to your [Project Settings page](https://hashboard.com/app/p/settings)
+2. Click `Access Keys` on the left side navigation
+3. Click `+ New Access Key`
+4. Write a descriptive name for the API token, select `API token` as the Type, and click `Create`
+
+The resulting screen will provide you with your API token. Save this in a safe place, as it cannot be re-created once you navigate away.
+
+When making requests to the public GraphQL API, set the `Authorization` header key to your API token.
+
+API tokens expire after 1 year.
+
+## Schema
+
+The current public GraphQL schema is below and can also be inspected with [introspection](https://graphql.org/learn/introspection/).
+
+Currently, the public GraphQL API supports fetching metadata on Projects, Models, Saved Explorations, Metrics, and Dashboards. [Contact us](mailto:support@hashboard.com) if you are interested in accessing additional Hashboard resources via the public GraphQL API.
+
+```GraphQL
+scalar JSON
+scalar GRN
+
+type Query {
+  project(projectId: ID!): Project
+}
+
+type Project {
+    id: ID!
+    name: String!
+    models: [Model!]!
+    metrics: [Metric!]!
+    dashboards: [Dashboard!]!
+}
+
+interface Resource {
+    grn: GRN!
+    name: String!
+    spec: JSON!
+}
+
+type Model implements Resource {
+    grn: GRN!
+    name: String!
+    spec: JSON!
+
+    viewsLastTwoWeeks: Int
+    savedExplorations: [SavedExploration]
+}
+
+type SavedExploration implements Resource {
+    grn: GRN!
+    name: String!
+    spec: JSON!
+
+    viewsLastTwoWeeks: Int
+}
+
+type Metric implements Resource {
+    grn: GRN!
+    name: String!
+    spec: JSON!
+}
+
+type Dashboard implements Resource {
+    grn: GRN!
+    name: String!
+    spec: JSON!
+
+    viewsLastTwoWeeks: Int
+}
+```

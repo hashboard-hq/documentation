@@ -31,5 +31,8 @@
   },
   "python-sdk": {
     "title": "Python SDK (Hashquery)"
+  },
+  "graphql-api": {
+    "title": "GraphQL API"
   }
 }
