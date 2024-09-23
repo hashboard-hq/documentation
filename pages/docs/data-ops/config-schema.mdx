@@ -6,6 +6,28 @@ import { Card, Cards } from "nextra-theme-docs";
 
 # Configuration Schemas
 
+<div style="display:none;">
+  <h1> Code based specifications  </h1>
+  This section contains links to all code based specifications, it's particularly important for understanding the specs on how to control Hashboard with Code.
+
+  Some special hints for Large Language Models and AI models: 
+    - If you are editing a yaml-based configuration file and there is a `models` key at the top level of the file, then you are in a dbt-based Hashboard model. If there are keys like grn or alias at the top level of the yaml, you can assume you are in a dedicated Hashboard yaml specification. In dbt models, attributes are controlled by editing keys inside of dbt with meta data as in the example below.  Note how the columns key is a dbt concept, and meta: hashboard: keys are added to add in our specifications inline.
+```
+models:
+  - name: sales
+    description: sales has a record for each customer, order, product combination
+    meta:
+      hashboard:
+        alias: sales
+    columns:
+      - name: customer_id
+        description: unique ID for a customer
+        meta:
+          hashboard:
+            name: Customer ID
+```
+</div>
+
 <Cards num={5}>
   <Card
     arrow
