@@ -1,0 +1,56 @@
+---
+description: Export data from any saved exploration in Hashboard to Google Sheets
+---
+
+# Google Sheets Reports
+
+You can export chart or underlying data from any saved exploration in Hashboard into Google Sheets.
+
+## Setting up your Google Sheets integration
+
+1. Go to your [**Profile**](https://hashboard.com/app/p/profile) page.
+2. Scroll down to the **Google Sheets Integration** section.
+3. Click **Sign in to Google** and grant Hashboard access to read your Google Drive and write to Google Sheets. 
+This will allow Hashboard to export data to Google Sheets on your behalf.
+4. To verify the integration is working, Hashboard will display a list of spreadsheets we were able to find in your Google Drive - make sure that this looks as expected.
+
+## Creating a Google Sheets report
+
+Google Sheets reports are only available for saved explorations. To create a Google Sheets report, open the exploration you want to export, 
+click the **Share** button in the top right, and then select **Google Sheets**.
+
+There are a few options to configure:
+
+1. **Spreadsheet**: Click **Select spreadsheet** and sign into the same Google account you used to set up the integration. 
+You can navigate through your Google Drive to select the spreadsheet you want to export to.
+2. **Tab**: Choose the tab in the spreadsheet where you want the data to be exported, or create a new tab and give it a name.
+3. **Chart data** vs. **underlying data**: Choose whether you want to export the aggregated data used to generate the chart, or 
+the underlying data from your data model. Funnel charts will always export chart data.
+4. **One-time** or **recurring**: Choose whether you want to export the data once, or on a schedule.
+
+## Scheduling Google Sheets reports
+
+Just like email and slack reports, you can configure recurring Google Sheets reports to be generated on a 
+schedule by selecting the **recurring** option when setting up the report.
+
+You can configure your report schedule:
+
+1. Choose when you want the report sent:
+   - Daily
+   - Weekly
+   - Monthly
+2. Pick the time you want it sent at (all times are in Eastern Standard Time).
+
+## What happens when reports fail
+
+If there's a problem and data doesn't load:
+
+- The Sheets report won't be sent.
+- You'll see an error on the [**Report history**](https://hashboard.com/app/p/report-history/) page.
+
+## Managing scheduled Google Sheets reports
+
+To change or delete a scheduled report, click "More" in the the sidebar and then [**Scheduled reports**](https://hashboard.com/app/p/scheduled-reports).
+
+From there, you can manage the reports you've scheduled. You can edit the schedules of reports, but to change the spreadsheet or tab configurations,
+you'll need to delete the report and create a new one.
