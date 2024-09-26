@@ -8,7 +8,7 @@ By combining Hashboard's CLI and preview features, you can integrate your entire
 
 ### Automatically generating Hashboard change previews
 
-Once you have defined and deployed core Hashboard resources [as code](./managing-resources-with-code.mdx), you can start using [Preview Builds](./cli/preview.mdx) to test and validate proposed changes to those resources.
+Once you have defined and deployed core Hashboard resources [as code](./managing-resources-with-code.mdx), you can start using [Preview Builds](./cli/v3/preview.mdx) to test and validate proposed changes to those resources.
 
 You can automate the creation of Preview Builds from any command line environment. For example, if you use GitHub, the following GitHub action will generate a Build Preview of the local `hashboard` directory whenever you send a pull request:
 
@@ -30,7 +30,7 @@ jobs:
 
 ### CI workflow for Hashboard and dbt
 
-You can combine [dbt](./dbt-integration.mdx), [Preview Builds](./cli/preview.mdx), and [environment variables](./environment-variables.mdx) to create complex end-to-end CI workflows.
+You can combine [dbt](./dbt-integration.mdx), [Preview Builds](./cli/v3/preview.mdx), and [environment variables](./environment-variables.mdx) to create complex end-to-end CI workflows.
 
 Suppose you have an existing workflow that runs your `dbt` pipelines automatically for every pull request, targeting a schema based on the pull request ID. Here is one way to introduce your Hashboard resources into this workflow:
 

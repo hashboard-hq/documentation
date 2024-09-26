@@ -28,7 +28,7 @@ the default filepath `~/.hashboard/hb_access_key.json`.
 hb token
 ```
 
-For information about how to store this token at a different filepath, see the [`token`](/docs/data-ops/cli/token) documentation.
+For information about how to store this token at a different filepath, see the [`token`](/docs/data-ops/cli/v3/token) documentation.
 
 ### Connect data sources and set up integrations
 
@@ -36,7 +36,7 @@ Hashboard integrates seamlessly with other tools so you can easily manage your d
 
 ### Pull resources or build a sample project
 
-If you've created data models, saved explorations or dashboards via the Hashboard GUI, you can get started iterating on those resources as code using the [`pull`](./cli/pull) command. `hb pull --all` will pull the configs of all resources in your project into your current directory.
+If you've created data models, saved explorations or dashboards via the Hashboard GUI, you can get started iterating on those resources as code using the [`pull`](./cli/v3/pull) command. `hb pull --all` will pull the configs of all resources in your project into your current directory.
 
 ```bash copy
 hb pull --all
@@ -50,7 +50,7 @@ You can now edit your resources as code and check them into Git for version cont
 
 ### Preview and apply your changes
 
-Use the [`build`](./cli/build) command to write your changes back to your Hashboard project. You'll be able to preview your changes before they're applied.
+Use the [`build`](./cli/v3/build) command to write your changes back to your Hashboard project. You'll be able to preview your changes before they're applied.
 
 ```bash copy
 hb build

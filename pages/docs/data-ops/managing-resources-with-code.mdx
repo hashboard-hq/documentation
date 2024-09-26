@@ -19,7 +19,7 @@ Below is more detail on each of these steps of the process.
 
 ### Creating a build
 
-Create a Hashboard build by defining one or more Hashboard yml [configuration files](#hashboard-configuration-files) in your filesystem and passing them into the [`hb build`](./cli/build) command.
+Create a Hashboard build by defining one or more Hashboard yml [configuration files](#hashboard-configuration-files) in your filesystem and passing them into the [`hb build`](./cli/v3/build) command.
 
 Hashboard builds automatically propagate any changes necessary to keep your project consistent. This includes:
 
@@ -69,7 +69,7 @@ Full documentation of all configuration files can be found for each resource typ
 - [Homepage Launchpad](/docs/data-ops/config-schema/Homepage-Launchpad)
 
 <Callout type="info">
-  To export configuration files, use the [`pull`](/docs/data-ops/cli/pull)
+  To export configuration files, use the [`pull`](/docs/data-ops/cli/v3/pull)
   command.
 </Callout>
 
@@ -91,9 +91,9 @@ To protect specific resources to only be editable with the Hashboard deployments
 
 Builds and [Project Drafts](/docs/project-management/drafts) serve similar purposes -- they both can be used to stage, test, and apply changes. Here is how they differ:
 
-|                                            | Builds                                          | Project drafts |
-| ------------------------------------------ | ----------------------------------------------- | -------------- |
-| Created from...                            | The CLI or git integration                      | The Hashboard UI         |
-| Can be edited?                             | No -- the changes within a build are immutable. | Yes            |
-| Supports environment variable substitution | Yes                                             | No             |
-| Can be deployed to multiple projects       | Yes                                             | No             |
+|                                            | Builds                                          | Project drafts   |
+| ------------------------------------------ | ----------------------------------------------- | ---------------- |
+| Created from...                            | The CLI or git integration                      | The Hashboard UI |
+| Can be edited?                             | No -- the changes within a build are immutable. | Yes              |
+| Supports environment variable substitution | Yes                                             | No               |
+| Can be deployed to multiple projects       | Yes                                             | No               |

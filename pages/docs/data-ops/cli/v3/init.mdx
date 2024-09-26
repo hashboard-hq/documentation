@@ -10,21 +10,22 @@ The `init` command initializes the root of your Hashboard project by creating a 
 
 ## Stable References for YAML Files
 
-In cases where a Hashboard YAML file does not have a GRN (Global Resource Name), the relative path from the `.hbproject` file to the YAML file is used as a stable reference. This ensures a consistent reference to the YAML file, regardless of where [`hb build`](/docs/data-ops/cli/build) commands are executed.
+In cases where a Hashboard YAML file does not have a GRN (Global Resource Name), the relative path from the `.hbproject` file to the YAML file is used as a stable reference. This ensures a consistent reference to the YAML file, regardless of where [`hb build`](/docs/data-ops/cli/v3/build) commands are executed.
 
-Once the `hb init` command has created the `.hbproject` file, [`hb build`](/docs/data-ops/cli/build) commands can be safely run in the same directory as the `.hbproject` file or any of its subdirectories.
+Once the `hb init` command has created the `.hbproject` file, [`hb build`](/docs/data-ops/cli/v3/build) commands can be safely run in the same directory as the `.hbproject` file or any of its subdirectories.
 
 <Callout type="info">
   Starting out, we recommend the following project structure with the `.hbproject` file at the root of your repo and two separate directories for your Hashboard and dbt files.
-  
-  ```
-  ├── .hbproject
-  └── hashboard
-    ├── model.yaml
-    └── dashboard.yaml
-  └── dbt
-    └── dbt_project.yml
-  ```
+
+```
+├── .hbproject
+└── hashboard
+  ├── model.yaml
+  └── dashboard.yaml
+└── dbt
+  └── dbt_project.yml
+```
+
 </Callout>
 
 ## Configuring Hashboard's dbt Integration

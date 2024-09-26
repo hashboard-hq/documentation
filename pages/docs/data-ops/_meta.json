@@ -5,12 +5,6 @@
   "managing-resources-with-code": {
     "title": "Managing Resources With Code"
   },
-  "cli": {
-    "title": "CLI reference"
-  },
-  "using-code-to-automate-bi-from-dbt": {
-    "title": "Using Code to Automate BI Deployments from dbt"
-  },
   "dbt-integration": {
     "title": "dbt Integration"
   },
@@ -23,11 +17,14 @@
   "environment-variables": {},
   "continuous-integration": {},
   "code-review": {},
-  "config-schema": {
-    "title": "Configuration Schemas"
+  "cli": {
+    "title": "CLI reference"
   },
   "yaml-editor": {
     "title": "Using the YAML Editor"
+  },
+  "config-schema": {
+    "title": "Configuration Schemas"
   },
   "python-sdk": {
     "title": "Python SDK (Hashquery)"

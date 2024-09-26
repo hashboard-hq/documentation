@@ -4,7 +4,7 @@ description: Hashboard can import models directly from dbt by specifying measure
 
 import { Steps, Callout } from "nextra-theme-docs";
 
-# dbt Integration
+# dbt Workflows
 
 ## Overview
 
@@ -18,9 +18,23 @@ Hashboard can import models directly from dbt by specifying measures in your dbt
 
 <Steps>
 
+### Configure your `.hbproject` file
+
+If you have not already, configure the root of your Hashboard project and your dbt project with [`hb init`](/docs/data-ops/cli/v3/init).
+
+Set the `dbtRoot` key in your Hashboard project file using [`hb init --dbt-root=path/to/dbt/project`](/docs/data-ops/cli/v3/init) or manually editing the `.hbproject` file if it already exists.
+
+```yaml filename="example .hbproject file" copy
+# This file marks the root of your Hashboard project directory. It determines
+# the identity of the resources in your local filesystem
+# and encodes additional project configuration metadata.
+# For additional information please visit docs.hashboard.com.
+dbtRoot: ./dbt/
+```
+
 ### Configure your `dbt_project.yml`
 
-You can use the `hashboard-defaults` key to specify the hashboard version (which is required) and connection information.
+You can use the `hashboard-defaults` key to specify the hashboard version and the data connection to use.
 
 ```yaml filename="dbt_project.yml" copy
 models:
@@ -28,15 +42,12 @@ models:
     # hashboard-defaults settings will be merged into each Hashboard model
     hashboard-defaults:
       hbVersion: "1.0"
-      # preventUpdatesFromUI defaults to false, but can be set to true
-      preventUpdatesFromUI: true
-      source:
-        connectionName: bigquery-prod # the name of the conneciton in Hashboard
+      connectionName: # which Hashboard data connection to use
 ```
 
 ### Define model information
 
-The simplest example of a Hashboard model just defines a measure. Hashboard models must include the `hashboard` key in the dbt model.
+The simplest example of a Hashboard model just defines a measure. Hashboard models must include the `hashboard` key in the dbt model meta.
 
 ```yaml filename="models/schema.yml" copy
 version: 2
@@ -63,17 +74,91 @@ models:
 
 ### Build your Hashboard models
 
-This is the simplest way to preview your models, there are more advanced options below.
+Assuming you've set the `dbtRoot` flag with [`hb init`](/docs/data-ops/cli/v3/init), you can simply run [`hb build`](/docs/data-ops/cli/v3/build) and Hashboard will automatically include your dbt-specified Hashboard models.
 
 ```bash copy
-# assuming you've already built your tables with dbt run
-hb preview --dbt
-
-# and later
-hb deploy --dbt
+hb build
 ```
 
 </Steps>
+
+## Slim CI: Defer schema with dbt Cloud or Core
+
+The Hashboard dbt integrations support `Defer` for both dbt Core and Cloud when running a build, also commonly referred to as "Slim CI".
+
+<Callout type="info">
+  Learn more about how [dbt Defer in
+  Core](https://docs.getdbt.com/reference/node-selection/defer) or [dbt Defer in
+  Cloud](https://docs.getdbt.com/docs/cloud/about-cloud-develop-defer) can speed
+  up development and reduce costs.
+</Callout>
+
+### Setup for database deferrals
+
+To enable database deferrals update your `.hbproject` file to include a dbtOptions key with the following configuration:
+
+```yaml filename="example .hbproject file" copy
+# This file marks the root of your Hashboard project directory. It determines
+# the identity of the resources in your local filesystem
+# and encodes additional project configuration metadata.
+# For additional information please visit docs.hashboard.com.
+dbtRoot: ./dbt/
+dbtOptions:
+  useDefer: true
+```
+
+If you're deferring across databases and not just schemas you must also set the `includeDbNameInSchema` value so that Hashboard fully qualifies the tables being referenced by your models. Also ensure that the data source connection you have configured for your dbt models has access to both production and development databases.
+
+```yaml filename="example .hbproject file" copy
+# This file marks the root of your Hashboard project directory. It determines
+# the identity of the resources in your local filesystem
+# and encodes additional project configuration metadata.
+# For additional information please visit docs.hashboard.com.
+dbtRoot: ./dbt/
+dbtOptions:
+  useDefer: true
+  includeDbNameInSchema: true
+```
+
+### dbt Core
+
+When using dbt Core, you can use the `--dbt-state` flag to pass a state for deferral.
+
+```bash copy
+hb build --dbt-state=target_prod/
+```
+
+### dbt Cloud
+
+With dbt Cloud, the Hashboard CLI will infer deferred schemas without any additional flags. You can simply run [`hb build`](/docs/data-ops/cli/v3/build) once you've configured your [Hashboard project file](/docs/data-ops/cli/v3/init).
+
+```bash copy
+hb build
+```
+
+### What happens when I run [`hb build`](/docs/data-ops/cli/v3/build)?
+
+1.  For each Hashboard model in the manifest, we run `dbt compile`, which returns a fully qualified reference to where the model would be built in the warehouse, including the deferred schema.
+2.  We use the `dbt compile` results to set the schemas for the Hashboard models in the build.
+3.  We run `dbt parse` to generate the `manifest.json`, which contains the Hashboard model definitions.
+
+## Building a subset of models with `dbt:` args
+
+By default, `hb build` will create a Hashboard build that includes all of the Hashboard models specified in dbt as well as any other Hashboard resources present in the working directory.
+
+If you only want to build a subset of the models, you can use [dbt's `select` syntax](https://docs.getdbt.com/reference/node-selection/syntax) prefixed by `dbt:` .
+
+For example, if you only wanted to build modified dbt models, you could run
+
+```bash copy
+hb build dbt:modified
+```
+
+If you only wanted to build dbt models without rebuilding resources defined in Hashboard yaml files you could run
+
+```bash copy
+hb build dbt:all
+```
 
 ## Model specification
 
@@ -108,12 +193,6 @@ How data model source is determined:
 
 - `source` has the same options as the corresponding field of [Hashboard data models](./config-schema/data-models.mdx).
 - Unless otherwise specified, Hashboard automatically infers defaults for the source `physicalName` and `schema`. If no `connectionName` or `connectionId` is specified, Hashboard will try to use a connection whose name is the same as the dbt target database (e.g. `"bigquery"` or `"snowflake"`).
-
-You may then use dbt-core to produce a [Manifest JSON file](https://docs.getdbt.com/reference/artifacts/manifest-json), which should be included with any Hashboard deploy (or preview):
-
-```bash copy
-hb preview --dbt-manifest=./target/manifest.json
-```
 
 Hashboard will include each dbt column as an attribute in the corresponding Hashboard model. You can also add additional fields to the dbt columns to take advantage of Hashboard's more advanced modeling features:
 
@@ -159,8 +238,6 @@ models:
           connectionName: "{{ target.database }}"
 ```
 
-Imported dbt models are exclusively controlled by code and cannot be saved from the web UI, though you are still free to prototype and experiment with dbt models in the Hashboard model editor.
-
 Column descriptions will be [automatically synced](../data-modeling/description-syncing.mdx) from dbt to the corresponding Hashboard model during deploys.
 
 ## Global configuration
@@ -180,14 +257,12 @@ To import all dbt models in a folder as Hashboard models, simply add
 
 ```yaml filename="dbt_project.yml"
 models:
-  the_models:
+  folder:
     +meta:
       hashboard:
         hbVersion: "1.0"
         source:
           connectionName: # which Hashboard data connection to use
-          # schema is always optional because Hashboard will infer it
-          schema: "{{ target.schema }}" # can use jinja substitution here
 ```
 
-This configuration will add the `meta.hashboard` object to every model in `the_models`, so they will all be imported into Hashboard. You can still add additional metadata for the specific models (such as adding additional metrics).
+This configuration will add the `meta.hashboard` object to every model in `folder`, so they will all be imported into Hashboard. You can still add additional metadata for the specific models (such as adding additional metrics).

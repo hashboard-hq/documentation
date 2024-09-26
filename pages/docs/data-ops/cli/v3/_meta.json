@@ -1,6 +1,10 @@
 {
-  "install": "Install the latest pre-release",
+  "credentials": "Credentials",
   "init": "init",
   "build": "build",
-  "dbt-integration": "dbt Workflows"
+  "pull": "pull",
+  "token": "token",
+  "cache": "cache",
+  "datasource": "datasource",
+  "tables": "tables"
 }
