@@ -30,6 +30,15 @@ You can navigate through your Google Drive to select the spreadsheet you want to
 the underlying data from your data model. Funnel charts will always export chart data.
 4. **One-time** or **recurring**: Choose whether you want to export the data once, or on a schedule.
 
+### Limitations of Google Sheets reports
+
+Spreadsheets in Google Sheets are limited to 10 million cells across all tabs in a single spreadsheet.
+Hashboard will automatically truncate rows of data if it exceeds this limit. 
+
+In addition, we limit the number of rows exported from underlying data to a maximum of 100,000. Generally, we 
+recommend exporting aggregated chart data instead of underlying data, as performance can be slow when exporting
+large amounts of underlying data.
+
 ## Scheduling Google Sheets reports
 
 Just like email and slack reports, you can configure recurring Google Sheets reports to be generated on a 
