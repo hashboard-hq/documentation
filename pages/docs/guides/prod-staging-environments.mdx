@@ -41,18 +41,7 @@ You can also use any dbt jinja or dbt macros to templatize or switch between dif
     ```
   </Tab>
   <Tab>
-  ```yaml dbt_project.yml copy {11}
-
-models:
-+meta: # hashboard-defaults settings will be merged into each Hashboard model
-hashboard-defaults:
-hbVersion: "1.0" # preventUpdatesFromUI defaults to false, but can be set to true
-preventUpdatesFromUI: true
-source:
-connectionName: bigquery-prod # you could also toggle the db connection
-schema: "{{ target.schema }}" # or you could do an env variable: # schema: "{{ env_var('HB_SCHEMA_ENV') }}" # OR a macro: # schema: "{{ my_custom_macro(env) }}"
-
-```
+  Hashboard's [dbt integration](../data-ops/dbt-integration) will automatically configure dbt-based models to pull data from the schema matching your dbt target.
 </Tab>
 </Tabs>
 

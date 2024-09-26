@@ -1,0 +1,309 @@
+---
+description: Hashboard provides GitHub Action examples for implementing continuous integration (CI/CD) for your business intelligence.
+---
+
+# GitHub Action examples
+
+### Previewing Hashboard changes in a pull request
+
+This action automatically generates a Hashboard build for the current branch and posts the results as a comment on the pull request.
+
+````yml
+name: hashboard-preview
+on: [pull_request]
+jobs:
+  create-hashboard-build:
+    name: "Create Hashboard build"
+    runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.merged }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Install dependencies"
+        run: pip install --pre hashboard-cli
+      - name: Create Hashboard build
+        id: create-hb-build
+        env:
+          HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
+          HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
+          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
+        run: |
+          hb build 2>&1 | tee out.txt
+          EXIT_CODE=${PIPESTATUS[0]}
+          RESULT=$(cat out.txt | sed 's/`//g')
+          URL=$(grep -o 'https://[^ ]*' out.txt)
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "url=$URL" >> $GITHUB_OUTPUT
+          echo "log<<$EOF" >> $GITHUB_OUTPUT
+          echo "$RESULT" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
+          echo "exitCode=$EXIT_CODE" >> $GITHUB_OUTPUT
+      - uses: actions/github-script@v6
+        name: "Comment on the pull request"
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `[Hashboard build](${{ steps.create-hb-build.outputs.url }})\n\`\`\`${{ steps.create-hb-build.outputs.log }}`
+            })
+      - id: set-appropriate-exit-code
+        name: "Set exit code"
+        run: exit "${{ steps.create-hb-build.outputs.exitCode }}"```
+````
+
+### Deploying Hashboard changes on merge to main
+
+This action automatically generates a Hashboard build for the current branch and applies it to your project.
+
+```yml
+name: hashboard-deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  create-and-apply-hashboard-build:
+    name: "Create and apply Hashboard build"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Install dependencies"
+        run: pip install --pre hashboard-cli
+
+      - name: Create and apply Hashboard build
+        id: create-and-apply-hb-build
+        env:
+          HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
+          HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
+          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            hb build && hb build apply
+          else
+            echo "No changes pushed, skipping Hashboard deploy."
+          fi
+```
+
+### Previewing dbt Core + Hashboard changes in a pull request
+
+This action creates a new staging schema in BigQuery, runs dbt into it, and then generates a Hashboard build pointing at that schema.
+
+````yml
+name: dbt-and-hashboard-preview
+on: [pull_request]
+env:
+  BQ_DATASET_NAME: "ci_pr_${{ github.event.pull_request.number }}"
+  BQ_DATASET_DESCRIPTION: "${{ github.event.pull_request.title}} (${{github.event.pull_request.html_url}})"
+jobs:
+  dbt-and-hashboard-preview:
+    name: "Run dbt pipeline and create Hashboard preview"
+    concurrency:
+      group: preview-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.merged }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Install dependencies"
+        run: |
+          pip install --upgrade --upgrade-strategy eager -r requirements.txt
+          dbt deps
+          dbt --version
+
+      - id: "auth"
+        name: "Authenticate with Google Cloud"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: "Set up Google Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
+
+      - name: "Create BigQuery dataset"
+        run: |
+          bq rm -f -r $GCP_PROJECT:$BQ_DATASET_NAME
+          bq --location=US mk --description="$BQ_DATASET_DESCRIPTION" "$GCP_PROJECT:$BQ_DATASET_NAME"
+
+      - name: dbt build
+        id: dbt-build
+        run: |
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "log<<$EOF" >> $GITHUB_OUTPUT
+          dbt build --target=github --full-refresh | tee out.txt
+          grep -q "WARN=0 ERROR=0 SKIP=0" out.txt
+
+      - name: Create Hashboard build
+        id: create-hb-build
+        env:
+          HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
+          HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
+          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
+        run: |
+          hb build 2>&1 | tee out.txt
+          EXIT_CODE=${PIPESTATUS[0]}
+          RESULT=$(cat out.txt | sed 's/`//g')
+          URL=$(grep -o 'https://[^ ]*' out.txt)
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "url=$URL" >> $GITHUB_OUTPUT
+          echo "log<<$EOF" >> $GITHUB_OUTPUT
+          echo "$RESULT" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
+          echo "exitCode=$EXIT_CODE" >> $GITHUB_OUTPUT
+
+      - uses: actions/github-script@v6
+        name: "Comment on the pull request"
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `[Hashboard build](${{ steps.create-hb-build.outputs.url }})\n\`\`\`${{ steps.create-hb-build.outputs.log }}`
+            })
+
+      - id: set-appropriate-exit-code
+        name: "Set exit code"
+        run: exit "${{ steps.create-hb-build.outputs.exitCode }}"```
+````
+
+### Previewing Hashboard against dbt Cloud CI job
+
+This action triggers a dbt Cloud CI job, waits for it to complete, and then generates a Hashboard build with any dbt models configured to use the data generated by the CI job.
+
+```yml
+name: dbt Cloud & Hashboard CI
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  dbt-cloud-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Trigger DBT Cloud Job
+        id: trigger-job
+        run: |
+          response=$(curl -X POST -s -w "\n%{http_code}" -H "Authorization: Token ${{ secrets.DBT_CLOUD_API_KEY }}" \
+                       -H "Content-Type: application/json" \
+                       "https://cloud.getdbt.com/api/v2/accounts/XXXX/jobs/XXXX/run/" \
+                       -d '{"cause": "Triggered by GH action", "git_branch": "${{ github.head_ref }}", "github_pull_request_id": ${{ github.event.pull_request.number }}}')
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          if [ $http_code -ne 200 ]; then
+            echo "Error: Received HTTP status code $http_code"
+            echo "Response body: $body"
+            exit 1
+          fi
+          job_id=$(echo $body | jq -r '.data.id')
+          if [ -z "$job_id" ] || [ "$job_id" = "null" ]; then
+            echo "Error: Failed to extract job ID from response"
+            echo "Response body: $body"
+            exit 1
+          fi
+          echo "JOB_ID=$job_id" >> $GITHUB_OUTPUT
+
+      - name: Install dbt and Hashboard CLI
+        run: |
+          pip install dbt
+          pip install --pre hashboard-cli
+
+      - name: Wait for DBT Cloud Job to complete and artifacts to be saved
+        run: |
+          job_id=${{ steps.trigger-job.outputs.JOB_ID }}
+          while true; do
+            response=$(curl -s -w "\n%{http_code}" -H "Authorization: Token ${{ secrets.DBT_CLOUD_API_KEY }}" \
+                        "https://cloud.getdbt.com/api/v2/accounts/XXXX/runs/$job_id/")
+
+            http_code=$(echo "$response" | tail -n1)
+            body=$(echo "$response" | sed '$d')
+
+            if [ $http_code -ne 200 ]; then
+              echo "Error: Received HTTP status code $http_code when checking job status"
+              echo "Response body: $body"
+              exit 1
+            fi
+
+            status=$(echo $body | jq -r '.data.status')
+            artifacts_saved=$(echo $body | jq -r '.data.artifacts_saved')
+
+            if [ "$status" = "10" ] && [ "$artifacts_saved" = "true" ]; then
+              echo "Job completed successfully and artifacts are saved"
+              break
+            elif [ "$status" = "20" ]; then
+              echo "Error: dbt run failed"
+              exit 1
+            elif [ "$status" = "30" ]; then
+              echo "Error: dbt run was cancelled"
+              exit 1
+            elif [ "$status" = "3" ]; then
+              echo "Job still running, waiting 5 seconds..."
+            else
+              echo "Unknown dbt run status code $status"
+              exit 1
+            fi
+
+            sleep 5
+          done
+
+      - name: Create artifacts directory
+        run: mkdir ci_artifacts
+
+      - name: Download manifest
+        run: |
+          response=$(curl -s -w "\n%{http_code}" --request GET \
+               -H "Authorization: Token ${{ secrets.DBT_CLOUD_API_KEY }}" \
+               "https://cloud.getdbt.com/api/v2/accounts/21999/runs/${{ steps.trigger-job.outputs.JOB_ID }}/artifacts/manifest.json")
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          if [ $http_code -ne 200 ]; then
+            echo "Error: Received HTTP status code $http_code when downloading manifest"
+            echo "Response body: $body"
+            exit 1
+          fi
+
+          echo "$body" > ci_artifacts/manifest.json
+
+      - name: Create Hashboard build
+        id: create-hb-build
+        env:
+          HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
+          HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
+          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_ACCESS_KEY_TOKEN }}
+        run: |
+          hb build  --dbt-artifacts=./ci_artifacts | tee out.txt
+          EXIT_CODE=${PIPESTATUS[0]}
+
+          RESULT=$(cat out.txt | sed 's/`//g')
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "log<<$EOF" >> $GITHUB_OUTPUT
+          echo "$RESULT" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
+          echo "exitCode=$EXIT_CODE" >> $GITHUB_OUTPUT
+
+      - uses: actions/github-script@v6
+        name: "Comment on the pull request"
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${{ steps.create-hb-build.outputs.log }}`
+            })
+
+      - id: set-appropriate-exit-code
+        name: "Set exit code"
+        run: exit "${{ steps.create-hb-build.outputs.exitCode }}"
+```

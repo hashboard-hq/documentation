@@ -30,14 +30,6 @@ hb pull --all
 
 You can pull down a specific resource by its [Global Resource Name](/docs/data-ops/resource-identifiers).
 
-<Callout type="warning">
-  When developing locally, you are not required to specify GRNs in Hashboard
-  resource configuration files. However, when running `hb deploy`, GRNs are
-  assigned based on the relative path from the working directory to the resource
-  configuration file. Subsequent uses of `hb pull` should therefore be run from
-  the same working directory.
-</Callout>
-
 ```bash
 # pull by a specific grn
 hb pull m:s3AdinvBhsdJ:
