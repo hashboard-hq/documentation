@@ -42,18 +42,18 @@ models:
     # hashboard-defaults settings will be merged into each Hashboard model
     hashboard-defaults:
       hbVersion: "1.0"
-      connectionName: # which Hashboard data connection to use
+      source:
+        connectionName: snowflake_production # which Hashboard data connection to use
 ```
 
 ### Define model information
 
-The simplest example of a Hashboard model just defines a measure. Hashboard models must include the `hashboard` key in the dbt model meta.
+Hashboard will build any dbt model that has a `hashboard` meta key present. The simplest example of a Hashboard model just defines a measure. Attributes are inherited automatically.
 
 ```yaml filename="models/schema.yml" copy
 version: 2
 
 models:
-  #
   - name: order_attribution
     description: This model describes how each order is attributed to different marketing touchpoints.
     columns:
@@ -250,7 +250,7 @@ models:
     +meta: # will be applied to every model in models/the_models
       hashboard-defaults:
         source:
-          connectionName: # which Hashboard data connection to use
+          connectionName: snowflake_production # which Hashboard data connection to use
 ```
 
 To import all dbt models in a folder as Hashboard models, simply add
@@ -262,7 +262,7 @@ models:
       hashboard:
         hbVersion: "1.0"
         source:
-          connectionName: # which Hashboard data connection to use
+          connectionName: snowflake_production # which Hashboard data connection to use
 ```
 
 This configuration will add the `meta.hashboard` object to every model in `folder`, so they will all be imported into Hashboard. You can still add additional metadata for the specific models (such as adding additional metrics).

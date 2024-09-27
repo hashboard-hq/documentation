@@ -24,6 +24,7 @@ const nextJsConfig = {
       permanent: false,
     },
 
+    // v2 commands that don't have equivalent v3 commands:
     {
       source: "/docs/data-ops/cli/preview",
       destination: "/docs/data-ops/cli/v2/preview",
@@ -34,9 +35,35 @@ const nextJsConfig = {
       destination: "/docs/data-ops/cli/v2/deploy",
       permanent: true,
     },
+    // v2 commands that are unchanged in v3:
     {
-      source: "/docs/data-ops/cli/:path((?!v3/).*)",
-      destination: "/docs/data-ops/cli/v3/:path*",
+      source: "/docs/data-ops/cli/credentials",
+      destination: "/docs/data-ops/cli/v3/credentials",
+      permanent: true,
+    },
+    {
+      source: "/docs/data-ops/cli/pull",
+      destination: "/docs/data-ops/cli/v3/pull",
+      permanent: true,
+    },
+    {
+      source: "/docs/data-ops/cli/token",
+      destination: "/docs/data-ops/cli/v3/token",
+      permanent: true,
+    },
+    {
+      source: "/docs/data-ops/cli/cache",
+      destination: "/docs/data-ops/cli/v3/cache",
+      permanent: true,
+    },
+    {
+      source: "/docs/data-ops/cli/datasource",
+      destination: "/docs/data-ops/cli/v3/datasource",
+      permanent: true,
+    },
+    {
+      source: "/docs/data-ops/cli/tables",
+      destination: "/docs/data-ops/cli/v3/tables",
       permanent: true,
     },
 

@@ -2,7 +2,7 @@
 description: A guide for migrating from v2 to v3 of the Hashboard CLI.
 ---
 
-# V2 to V3 migration guide
+# v2 to v3 migration guide
 
 Version 3 of the Hashboard CLI launched in September 2024. Below is a guide to upgrading from Version 2 to Version 3.
 
@@ -27,7 +27,7 @@ $ hb build dashboards/*  # Creates a build scoped just to your dashboards
 
 Note that builds can still delete downstream content.  For example, if you update a model and remove one of its attributes, Explorations which depend on that attribute may be slated for removal, even if they are not in the build.
 
-Deployment of all code-controlled resources is still available by supplying a `--full_rebuild` flag:
+Rebuilding all code-controlled resources in the project is still available by supplying a `--full_rebuild` flag:
 
 ```bash
 $ hb build . --full-rebuild  # Will delete any missing Hashboard resources that
@@ -38,7 +38,7 @@ $ hb build . --full-rebuild  # Will delete any missing Hashboard resources that
 
 The v2 CLI was sensitive to where you ran it (your current working directory) relative to your yml files. If you didn’t run `hb` from the right location, your resource IDs might unexpectedly change.
 
-The v3 CLI introduces a `hb init` command, which creates a `.hbproject` file in your filesystem. This file is to be placed at the root of your Hashboard project and ensures that your resource identities are stable, regardless of where you are running your `hb build` command.
+The v3 CLI introduces a `hb init` command, which creates a `.hbproject` file in your filesystem. This file is to be placed at the root of your Hashboard project. It ensures that your resource identities are stable whenever you run a Hashboard command within that directory or any of its subdirectories.
 
 Additionally, for dbt users, the `.hbproject` file can define the root of your dbt project. When present, we will always import your dbt models into your builds, so you no longer need to remember to include the `--dbt` flag.
 
@@ -56,4 +56,4 @@ We will continue adding additional useful metadata into the `.hbproject` file ov
     | --- | --- |
     | `hb preview (filepath)` | `hb build (filepath)` <br/><br/> Include the `--full_rebuild` flag if you want to delete missing resources. |
     | `hb deploy (filepath)`  | If the build was already created for previewing: `hb build apply`<br/><br/>If no build has been created yet:<br/>`hb build (filepaths) && hb build apply (--no-confirm)`<br/><br/>Include the `--full_rebuild` flag if you want to delete missing resources. |
-    | `hb preview/deploy --dbt` | Set `--dbt-root` when running `hb init`, and then use `hb build`<br/><br/>To exclude dbt models, use `hb build --no-dbt` |
+    | `hb preview/deploy --dbt` | Set `--dbt-root` when running `hb init`, and then use `hb build`, which will automatically build any dbt models that have `hashboard` meta key.|

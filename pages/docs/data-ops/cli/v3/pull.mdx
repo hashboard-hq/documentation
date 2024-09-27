@@ -38,14 +38,12 @@ hb pull m:s3AdinvBhsdJ:
 hb pull m::my_sales_model
 ```
 
-## Managing dbt state with `pull`
-
-The behavior of `hb pull` is a bit different when used for dbt models. We cannot update models automatically inside of dbt files (since there could be jinja that we can't decompile).
-
-Instead of updating resources in place, we'll create new model files outside of your dbt project. This lets you inspect the configuration and merge it into your dbt files.
-
 ## Config format used in `pull`
 
 `hb pull` uses the most verbose (and specific) possible format of a resource. Some configuration that is just defaulted or configured by Hashboard will be exported.
 
 For example: if you export a resource, it will default to being exported with a `pinned` [GRN](/docs/data-ops/resource-identifiers). You can remove the GRN to enable deploying the resource across different projects (or use an alias so that the resource is not bound to a specific instance in a single project).
+
+## dbt models and the `pull` command
+
+Currently, the Hashboard CLI does not automatically update Hashboard metadata inside of dbt files, so any dbt-based models are skipped when evaluating the `pull` command.

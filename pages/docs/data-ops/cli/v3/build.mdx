@@ -34,9 +34,9 @@ When you create a build, Hashboard will do the following:
 
 If you have not already, configure the root of your Hashboard project (and optionally your dbt project) with [`hb init`](/docs/data-ops/cli/v3/init).
 
-### Create a build: `hb build create`
+### Create a build
 
-Run `hb build create` or simply `hb build`.
+Run `hb build`, or equivalently `hb build create`.
 
 ```bash copy
 hb build
@@ -58,6 +58,12 @@ This evaluates all files in your current directory, any nested directories, and 
 ╰───────────────────────────────────────────────────────╯
 
 Check and apply these changes at the link or use `hb build apply`.
+```
+
+You can scope your build to specific resources by providing a list of filepath globs or dbt selectors to the `build` command.
+
+```bash copy
+hb build path/to/hashboard-files/* dbt:modified
 ```
 
 ### View the build
