@@ -26,7 +26,7 @@ Hashboard builds automatically propagate any changes necessary to keep your proj
 - **Updating downstream resources.** If a column is changed, it will be updated in all dependent items (regardless of whether the dependent items are part of your build) - so changes like name updates will be correctly reflected everywhere.
 - **Cleaning up defunct resources.** If any Models, Attributes, or Measures are deleted, all dependent items that relied on that Model or Column will also be deleted.
 
-The CLI will provide you with a link to view the details of your build after it is created. You can also see a list of all your previous builds on the [Builds](https://hashboard.com/app/p/data-ops) page.
+The CLI will provide you with a link to view the details of your build after it is created. You can also see a list of all your previous builds on the [Builds](https://hashboard.com/app/p/builds) page.
 
 ### Build validation
 
@@ -58,7 +58,7 @@ in your CLI. By default, this will apply the most recent build you created in yo
 
 ## Hashboard configuration files
 
-Hashboard supports configuration files written in YAML or JSON. A Hashboard Build will attempt to validate every file in the specified path with a `.yml` or `.json` extension.
+Hashboard supports configuration files written in YAML or JSON. A Hashboard Build will attempt to include every `.yml` or `.json` file containing an `hbVersion` key.
 
 Full documentation of all configuration files can be found for each resource type:
 
@@ -91,9 +91,9 @@ To protect specific resources to only be editable with the Hashboard deployments
 
 Builds and [Project Drafts](/docs/project-management/drafts) serve similar purposes -- they both can be used to stage, test, and apply changes. Here is how they differ:
 
-|                                            | Builds                                          | Project drafts   |
-| ------------------------------------------ | ----------------------------------------------- | ---------------- |
-| Created from...                            | The CLI or git integration                      | The Hashboard UI |
-| Can be edited?                             | No -- the changes within a build are immutable. | Yes              |
-| Supports environment variable substitution | Yes                                             | No               |
-| Can be deployed to multiple projects       | Yes                                             | No               |
+|                                                                   | Builds                                          | Project drafts   |
+| ----------------------------------------------------------------- | ----------------------------------------------- | ---------------- |
+| Created from...                                                   | The CLI or git integration                      | The Hashboard UI |
+| Can be edited?                                                    | No -- the changes within a build are immutable. | Yes              |
+| Supports environment variable substitution                        | Yes                                             | No               |
+| Can be used to deploy resources to multiple projects | Yes                                             | No               |

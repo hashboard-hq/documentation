@@ -30,9 +30,15 @@ hb token
 
 For information about how to store this token at a different filepath, see the [`token`](/docs/data-ops/cli/v3/token) documentation.
 
-### Connect data sources and set up integrations
+### Connect your data sources
 
-Hashboard integrates seamlessly with other tools so you can easily manage your data and dashboards with a single workflow. Read our documentation on how to integrate [dbt](./dbt-integration) to connect Hashboard to your data pipeline.
+Use the Hashboard UI to configure your [database connection](/docs/database-connections).
+
+### Initialize your Hashboard codebase
+This command creates your `.hbproject` file, which contains CLI configuration options. Run this  wherever you would like the root of your Hashboard files to be.
+```bash copy
+hb init
+```
 
 ### Pull resources or build a sample project
 
@@ -44,16 +50,27 @@ hb pull --all
 
 To get started with sample data, check out our [example projects on GitHub](https://github.com/hashboard-hq/examples).
 
+To bootstrap your Hashboard project with dbt models, see the documentation for our [dbt Integration](./dbt-integration).
+
 ### Edit resources
 
 You can now edit your resources as code and check them into Git for version control. Visit the [schema reference](./config-schema) to learn about how to define Hashboard resource configurations.
 
-### Preview and apply your changes
+### Preview your changes
 
-Use the [`build`](./cli/v3/build) command to write your changes back to your Hashboard project. You'll be able to preview your changes before they're applied.
+Create a build containing the changes you've staged. You'll be able to preview your changes and share it for review before applying them to your project.
 
 ```bash copy
 hb build
 ```
+
+### Apply your changes
+
+Once everything looks good, apply your build, which merges the staged changes into your project.
+```bash copy
+
+hb build apply
+```
+
 
 </Steps>
