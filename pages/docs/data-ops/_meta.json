@@ -15,8 +15,7 @@
     "title": "Resource Identifiers"
   },
   "environment-variables": {},
-  "continuous-integration": {},
-  "code-review": {},
+  "continuous-integration": {"title": "Code Review & Continuous Integration"},
   "cli": {
     "title": "CLI reference"
   },
