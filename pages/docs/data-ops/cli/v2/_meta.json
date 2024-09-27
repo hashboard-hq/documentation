@@ -1,7 +1,7 @@
 {
   "credentials": "Credentials",
-  "init": "init",
-  "build": "build",
+  "preview": "preview",
+  "deploy": "deploy",
   "pull": "pull",
   "token": "token",
   "cache": "cache",

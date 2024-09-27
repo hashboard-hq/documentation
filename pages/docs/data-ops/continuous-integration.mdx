@@ -2,168 +2,37 @@
 description: Hashboard can serve to run continuous integration on your Business Intelligence dashboards, this can be integrated with git and dbt workflows in Hashboard
 ---
 
-## Continuous integration
+import { Card, Cards } from "/components/Cards";
+
+## Code review & continuous integration
 
 By combining Hashboard's CLI and preview features, you can integrate your entire BI stack into a continuous integration workflow. You can even preview data changes in upstream pipelines and see how they will affect your dashboards and reporting.
 
-### Automatically generating Hashboard change previews
+### Overview
 
-Once you have defined and deployed core Hashboard resources [as code](./managing-resources-with-code.mdx), you can start using [Preview Builds](./cli/preview.mdx) to test and validate proposed changes to those resources.
+The ideal CI/CD flow for your team depends on the specifics of your development lifecycle and business goals. Here is a suggested framework to get you started:
 
-You can automate the creation of Preview Builds from any command line environment. For example, if you use GitHub, the following GitHub action will generate a Build Preview of the local `hashboard` directory whenever you send a pull request:
+1. Decide which kinds of changes in your data stack you want to include in your continuous integration process. Two common strategies are:
 
-```yaml
-name: hashboard-preview
-on: [pull_request]
-jobs:
-  create-hashboard-preview:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: pip install hashboard-cli
-      - run: cd hashboard && hb preview
-    env:
-      HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID_PROD }}
-      HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID_PROD }}
-      HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN_PROD }}
-```
+  - _Validate data changes only_. Changes to upstream pipelines and data models are reviewed and tested with a pull request and then are deployed automatically when the change is approved and merged. Changes to downstream Hashboard resources like Explorations and Dashboards are made through the Hashboard UI. This is a good choice if your Hashboard users are mostly non-technical, or changes to Dashboards are relatively low risk.
+  - _Validate a vertical slice of resources_. Changes to a specific set of Models, Explorations, Metrics, and Dashboards are reviewed as pull requests and then deployed together when the change is approved and merged. This is a good choice if you want tight governance over your entire BI stack. Common examples include deploying dashboards to external customers and developing BI in highly regulated industries.
 
-### CI workflow for Hashboard and dbt
+2. Define your governed Hashboard resources as `yml` configs in your git repo. We recommend adding these files alongside your data pipeline business logic, such as your dbt models. For a dbt-focused workflow, this might be limited to adding Hashboard metadata to your dbt models. (See [dbt Integration](./dbt-integration) for more details.)
 
-You can combine [dbt](./dbt-integration.mdx), [Preview Builds](./cli/preview.mdx), and [environment variables](./environment-variables.mdx) to create complex end-to-end CI workflows.
+3. Configure your pull requests to automatically generate Hashboard builds for proposed changes using a GitHub Action (or similar mechanism).
 
-Suppose you have an existing workflow that runs your `dbt` pipelines automatically for every pull request, targeting a schema based on the pull request ID. Here is one way to introduce your Hashboard resources into this workflow:
+4. Configure your deployment job to automatically generate and apply a Hashboard build whenever you want to trigger a deployment (for instance, when a new commit is pushed to your `main` branch).
 
-1. Store your Hashboard model yml files alongside your `dbt` models, in its own `hashboard/` directory
-2. Use an environment variable, `$DBT_SCHEMA`, when defining your models' data sources:
+### GitHub Action templates
 
-```yaml
-source:
-  connectionName: bigquery
-  physicalName: sales
-  schema: ${DBT_SCHEMA}
-```
+Below are sample GitHub Actions you can use to implement the workflow described above.
 
-You can also configure this in the `hashboard-defaults` section of your `dbt_project.yml` when using the [dbt integration](./dbt-integration#configure-your-dbt_projectyml).
+#### Hashboard-only
 
-3. Modify your GitHub action to generate a Hasboard Preview Build after running dbt, with `DBT_SCHEMA` set to the newly created target schema.
+- [Previewing Hashboard changes in a pull request](./continuous-integration/github-actions#previewing-hashboard-changes-in-a-pull-request)
+- [Deploying Hashboard changes on commit](./continuous-integration/github-actions#deploying-hashboard-changes-on-merge-to-main)
 
-This will now provide you with a preview of your entire Hashboard project, using the data from your staged dbt pipeline.
+#### Hashboard + dbt
 
-Here is a sample GitHub action for this workflow, using dbt and BigQuery, to get you started:
-
-```yaml
-# Runs the dbt pipeline against a new dataset, then creates a preview build in Hashboard.
-name: hashboard-preview
-
-on:
-  pull_request:
-    types: [opened, reopened, synchronize]
-    branches: [main]
-
-permissions:
-  contents: read
-  issues: write
-  pull-requests: write
-
-env:
-  BQ_DATASET_NAME: "ci_pr_${{ github.event.pull_request.number }}"
-  BQ_DATASET_DESCRIPTION: "${{ github.event.pull_request.title}} (${{github.event.pull_request.html_url}})"
-  PYTHONIOENCODING: ascii
-
-jobs:
-  create-preview:
-    name: "Run dbt pipeline and create Hashboard preview"
-    concurrency:
-      group: preview-${{ github.event.pull_request.number || github.ref }}
-      cancel-in-progress: true
-    runs-on: ubuntu-latest
-    if: ${{ !github.event.pull_request.merged }}
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: "Install Python 3.9"
-        id: install-python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9.16"
-
-      - name: "Install dependencies"
-        run: |
-          pip install --upgrade --upgrade-strategy eager -r requirements.txt
-          dbt deps
-          dbt --version
-
-      - id: "auth"
-        name: "Authenticate with Google Cloud"
-        uses: "google-github-actions/auth@v1"
-        with:
-          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
-          create_credentials_file: true
-          export_environment_variables: true
-
-      - name: "Set up Google Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v1"
-
-      - name: "Create BigQuery dataset"
-        run: |
-          bq rm -f -r $GCP_PROJECT:$BQ_DATASET_NAME
-          bq --location=US mk --description="$BQ_DATASET_DESCRIPTION" "$GCP_PROJECT:$BQ_DATASET_NAME"
-
-      - name: dbt seed
-        id: dbt-seed
-        run: |
-          dbt seed --target=github | tee out.txt
-          grep -q "WARN=0 ERROR=0 SKIP=0" out.txt
-
-      - name: dbt run
-        id: dbt-run
-        run: |
-          dbt run --target=github --full-refresh | tee out.txt
-          grep -q "WARN=0 ERROR=0 SKIP=0" out.txt
-
-      - name: dbt test
-        id: dbt-test
-        run: |
-          dbt test --target=github | tee out.txt
-          grep -q "WARN=0 ERROR=0 SKIP=0" out.txt
-
-      - name: Generate Hashboard preview
-        id: generate-preview
-        env:
-          HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
-          HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
-          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
-        run: |
-          DBT_SCHEMA="$BQ_DATASET_NAME" hb preview --dbt ./hashboard | tee output.txt
-          EXIT_CODE=${PIPESTATUS[0]}
-
-          if [ $EXIT_CODE -eq 0 ]; then
-            RESULT=$(awk -F'[/ ]' '/Follow build in web app:/ {print "\nhttps://hashboard.com/app/p/builds/"$(NF)"\n"}' output.txt && awk '/Build .* completed successfully/{flag=1} flag' output.txt)
-          else
-            ERRORS=$(awk '/Errors encountered when creating your build/,EOF' output.txt)
-            BUILD_ID=$(awk -F'[/ ]' '/Follow build in web app:/ {print $(NF)}' output.txt)
-            RESULT=$(printf "%s\nhttps://hashboard.com/app/p/builds/%s" "$ERRORS" "$BUILD_ID")
-          fi
-          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          echo "log<<$EOF" >> $GITHUB_OUTPUT
-          echo "$RESULT" >> $GITHUB_OUTPUT
-          echo "$EOF" >> $GITHUB_OUTPUT
-          echo "exitCode=$EXIT_CODE" >> $GITHUB_OUTPUT
-
-      - uses: actions/github-script@v6
-        name: "Comment on the pull request"
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `${{ steps.generate-preview.outputs.log }}
-            })
-
-      - id: set-appropriate-exit-code
-        name: "Set exit code"
-        run: exit "${{ steps.generate-preview.outputs.exitCode }}"
-```
+- [Previewing dbt Core + Hashboard changes in a pull request](./continuous-integration/github-actions#previewing-dbt-core--hashboard-changes-in-a-pull-request)
+- [Previewing dbt Cloud CI + Hashboard changes in a pull request](./continuous-integration/github-actions#previewing-dbt-cloud-ci--hashboard-changes-in-a-pull-request)

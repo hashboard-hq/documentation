@@ -1,5 +1,5 @@
 ---
-description: The Hashboard CLI allows you to create Preview and Deploy Builds directly from your terminal or continuous integration system.
+description: The Hashboard CLI allows you to create builds directly from your terminal or continuous integration system.
 ---
 
 import { Callout, Steps } from "nextra-theme-docs";
@@ -18,36 +18,36 @@ import {
 
 # Using the Hashboard CLI
 
-The Hashboard CLI allows you to create Preview and Deploy Builds directly from your terminal or continuous integration system.
+The Hashboard CLI allows you to stage, preview, and deploy Hashboard changes directly from your terminal or continuous integration system.
 
 Check out the [Quickstart guide](quickstart) to learn how to set up your CLI client and the [schema documentation](config-schema) to learn more about how specific resources are defined in Hashboard.
 
 ## Hashboard commands
 
 <Cards num={2}>
-  <Card icon={<Search {...iconProps} />} title="Preview" href="./cli/preview">
-    View changes before publishing to your project
+  <Card icon={<Search {...iconProps} />} title="Init" href="./cli/v3/init">
+    Initialize your Hashboard code repository
   </Card>
-  <Card icon={<FileUp {...iconProps} />} title="Deploy" href="./cli/deploy">
-    Update your Hashboard resources
+  <Card icon={<Search {...iconProps} />} title="Build" href="./cli/v3/build">
+    Preview and apply changes to your Hashboard project with code
   </Card>
-  <Card icon={<FileDown {...iconProps} />} title="Pull" href="./cli/pull">
+  <Card icon={<FileDown {...iconProps} />} title="Pull" href="./cli/v3/pull">
     Download and sync config files from existing resources
   </Card>
-  <Card icon={<Key {...iconProps} />} title="Token" href="./cli/token">
+  <Card icon={<Key {...iconProps} />} title="Token" href="./cli/v3/token">
     Download a token to authenticate your CLI client
   </Card>
-  <Card icon={<DatabaseZap {...iconProps} />} title="Cache" href="./cli/cache">
+  <Card icon={<DatabaseZap {...iconProps} />} title="Cache" href="./cli/v3/cache">
     Manage cached resource data
   </Card>
   <Card
     icon={<Database {...iconProps} />}
     title="Datasource"
-    href="./cli/datasource"
+    href="./cli/v3/datasource"
   >
     Manage data sources in Hashboard
   </Card>
-  <Card icon={<Table {...iconProps} />} title="Tables" href="./cli/tables">
+  <Card icon={<Table {...iconProps} />} title="Tables" href="./cli/v3/tables">
     List available tables in a database
   </Card>
 </Cards>
