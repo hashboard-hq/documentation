@@ -151,7 +151,7 @@ If you only want to build a subset of the models, you can use [dbt's `select` sy
 For example, if you only wanted to build modified dbt models, you could run
 
 ```bash copy
-hb build dbt:modified
+hb build dbt:state:modified
 ```
 
 If you only wanted to build dbt models without rebuilding resources defined in Hashboard yaml files you could run
