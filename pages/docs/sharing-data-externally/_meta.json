@@ -4,5 +4,8 @@
   },
   "filter-parameters": {
     "title": "Filter Parameters"
+  },
+  "sharing-to-sheets": {
+    "title": "Sharing to Google Sheets"
   }
 }
