@@ -4,7 +4,7 @@ description: Documentation for setting up Single Sign On with Okta
 
 # Okta Directory Sync (SCIM)
 
-Follow these instructions to configure Okta attribute mappings so that you can control Hashboard roles through your default Okta profile. The procedure will be similar for other SCIM providers. Contact your support channel if you'd like assistance configuring SCIM for your organization.
+Follow these instructions to configure Okta attribute mappings so that you can control Hashboard roles through your default Okta profile. The procedure will be similar for other SCIM providers. Contact your support Slack channel or [support@hashboard.com](mailto:support@hashboard.com) if you'd like assistance configuring SCIM for your organization.
 
 Start these instructions when you are prompted to provide a Directory Provider Value in the Hashboard SSO portal:
 
@@ -13,14 +13,18 @@ Start these instructions when you are prompted to provide a Directory Provider V
   style={{ maxWidth: "650px" }}
 />
 
-1. In the Profile Editor, edit your default User profile and add an attribute of type `string array` called "Hashboard roles" with the variable name `hbRoles`. Check off "Define enumerated list of values", and add one entry for each Hashboard roles. You can add to this list later if you add additional custom roles. Check off "Attribute required: Yes".
+1. In the Profile Editor, edit your default User profile and add an attribute with the following properties:
+    * Type `string array`
+    * Display name "Hashboard roles"
+    * Variable name `hbRoles`
+    * Check off "Define enumerated list of values", and add one entry for each Hashboard role. (You can add to this list later if you add additional custom roles.)
+    * Check off "Attribute required: Yes"
+    * Click Save
 
 <img
   src="/sso/okta-default-profile.png"
   style={{ maxWidth: "650px" }}
 />
-
-Click Save.
 
 2. Edit the profile of a user and assign them some Hashboad roles:
 
@@ -30,37 +34,46 @@ Click Save.
 />
 
 
-3. Back in the Profile Editor, edit your Hashboard User profile and add an attribute of type `string` called "Hashboard roles" with variable name `roles`, external name `roles`, and external namespace `urn:ietf:params:scim:schemas:core:2.0:User`.
+3. Back in the Profile Editor, edit your Hashboard User profile and add an attribute with the following properties:
+    * Type `string`
+    * Display name "Hashboard roles"
+    * Variable name `roles`
+    * External name `roles`
+    * External namespace `urn:ietf:params:scim:schemas:core:2.0:User`
+    * Click Save
 
 <img
   src="/sso/okta-hashboard-profile.png"
   style={{ maxWidth: "650px" }}
 />
 
-Click Save.
 
-4. Edit the Mappings of your Hashboard User profile. Click "Okta User to Hashboard" at the top:
+4. Edit the Mappings of your Hashboard User profile and:
+    * Click "Okta User to Hashboard" at the top
 
-<img
-  src="/sso/okta-mapping-tab.png"
-  style={{ maxWidth: "650px" }}
-/>
+      <img
+      src="/sso/okta-mapping-tab.png"
+      style={{ maxWidth: "650px" }}
+      />
 
-At the bottom, you will see an empty mapping to `roles`. In this field, add: `Arrays.toCsvString(user.hbRoles)`.
+    * At the bottom, you will see an empty mapping to `roles`. In this field, add: `Arrays.toCsvString(user.hbRoles)`.
 
-<img
-  src="/sso/okta-attribute-mapping.png"
-  style={{ maxWidth: "650px" }}
-/>
+      <img
+      src="/sso/okta-attribute-mapping.png"
+      style={{ maxWidth: "650px" }}
+      />
+    * Type in your test user's name in the Preview box. You should see their Hashboard roles outputted as a comma-separated list.
 
-Type in your test user's name in the Preview box. You should see their Hashboard roles outputted as a comma-separated list.
+      <img
+      src="/sso/okta-attributes-preview.png"
+      style={{ maxWidth: "650px" }}
+      />
+    * Click Save.
 
-<img
-  src="/sso/okta-attributes-preview.png"
-  style={{ maxWidth: "650px" }}
-/>
 
-Click Save.
+
+
+
 
 5. Back in the Hashboard portal, set your Directory Provider Value to `roles`, and click "Save custom attributes"
 
