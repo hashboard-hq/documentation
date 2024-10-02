@@ -13,12 +13,24 @@ Start these instructions when you are prompted to provide a Directory Provider V
   style={{ maxWidth: "650px" }}
 />
 
+## Overview
+
+Here is a summary of the overall configuration:
+
+* The Okta profile of each Hashboard user will be configured with one or more Hashboard roles
+* During mapping, those roles will be transformed into a comma-separated list with the `Arrays.toCsvString` expression
+* This list will be passed to Hashboard in the SCIM payload
+
+## Details
+
+The below instructions show how to configure Hashboard roles as part of the default Okta profile. Your own workflow may vary depending on your setup.
+
 1. In the Profile Editor, edit your default User profile and add an attribute with the following properties:
     * Type `string array`
     * Display name "Hashboard roles"
     * Variable name `hbRoles`
     * Check off "Define enumerated list of values", and add one entry for each Hashboard role. (You can add to this list later if you add additional custom roles.)
-    * Check off "Attribute required: Yes"
+    * Check off "Attribute required: Yes", if desired.
     * Click Save
 
 <img
