@@ -5,7 +5,22 @@
   "filter-parameters": {
     "title": "Filter Parameters"
   },
+  "public-links": {
+    "title": "Public Links"
+  },
+  "partner-projects": {
+    "title": "Partner Projects"
+  },
+  "email-reports": {
+    "title": "Email Reports"
+  },
   "sharing-to-sheets": {
     "title": "Sharing to Google Sheets"
+  },
+  "sharing-to-slack": {
+    "title": "Sharing to Slack"
+  },
+  "report-log": {
+    "title": "Report Log"
   }
 }
