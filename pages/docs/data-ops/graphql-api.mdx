@@ -27,7 +27,9 @@ API tokens expire after 1 year.
 
 The current public GraphQL schema is below and can also be inspected with [introspection](https://graphql.org/learn/introspection/).
 
-Currently, the public GraphQL API supports fetching metadata on Projects, Models, Saved Explorations, Metrics, and Dashboards. [Contact us](mailto:support@hashboard.com) if you are interested in accessing additional Hashboard resources via the public GraphQL API.
+Currently, the public GraphQL API supports fetching metadata on Projects, Models, Saved Explorations, Metrics, Dashboards, Users and Roles.
+
+[Contact us](mailto:support@hashboard.com) if you are interested in accessing additional Hashboard resources via the public GraphQL API.
 
 ```GraphQL
 scalar JSON
@@ -43,6 +45,8 @@ type Project {
     models: [Model!]!
     metrics: [Metric!]!
     dashboards: [Dashboard!]!
+    users: [User!]!
+    roles: [Role!]!
 }
 
 interface Resource {
@@ -80,5 +84,34 @@ type Dashboard implements Resource {
     spec: JSON!
 
     viewsLastTwoWeeks: Int
+}
+
+type User {
+    id: String!
+    fullName: String
+    displayName: String
+    email: String
+    roles: [String]
+}
+
+type Role {
+    id: String!
+    name: String!
+    description: String!
+    permissionRules: [PermissionRule]
+}
+
+type PermissionRule {
+    name: String!
+    resources: [String]!
+    permissions: [String]!
+    datasourceCredentials: [DataSourceCredentialsPermissions]
+}
+
+type DataSourceCredentialsPermissions {
+    datasourceName: String!
+    datasourceId: String!
+    credentialName: String!
+    credentialId: String!
 }
 ```
