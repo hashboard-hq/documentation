@@ -44,6 +44,12 @@ Additionally, for dbt users, the `.hbproject` file can define the root of your d
 
 We will continue adding additional useful metadata into the `.hbproject` file over time.
 
+### dbt flags 
+
+The v2 CLI consumed an arbitrary number of dbt flags that would be passed directly to the `dbt parse` step on build. In v3 of the CLI these flags should be set as environment variables when executing Hashboard commands. 
+
+For example `hb preview --target=prod` in v2 would be run as `DBT_TARGET=prod hb build` in v3 of the CLI. For a full list of flag and environment variable substitutes please refer to the [dbt flag documentation](https://docs.getdbt.com/reference/global-configs/about-global-configs#available-flags).
+
 ## **Migration**
 
 1. Upgrade your Python package: `pip install --upgrade hashboard-cli`
