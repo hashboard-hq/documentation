@@ -80,7 +80,7 @@ jobs:
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
-            hb build && hb build apply
+            hb build && hb build apply --no-confirm
           else
             echo "No changes pushed, skipping Hashboard deploy."
           fi
@@ -182,6 +182,9 @@ on:
 jobs:
   dbt-cloud-run:
     runs-on: ubuntu-latest
+    env:
+      DBT_ACCOUNT_ID: 21999  # Replace with your account ID
+      DBT_JOB_ID: 740531  # Replace with your CI job ID
 
     steps:
       - name: Checkout code
@@ -191,7 +194,7 @@ jobs:
         run: |
           response=$(curl -X POST -s -w "\n%{http_code}" -H "Authorization: Token ${{ secrets.DBT_CLOUD_API_KEY }}" \
                        -H "Content-Type: application/json" \
-                       "https://cloud.getdbt.com/api/v2/accounts/XXXX/jobs/XXXX/run/" \
+                       "https://cloud.getdbt.com/api/v2/accounts/$DBT_ACCOUNT_ID/jobs/$DBT_JOB_ID/run/" \
                        -d '{"cause": "Triggered by GH action", "git_branch": "${{ github.head_ref }}", "github_pull_request_id": ${{ github.event.pull_request.number }}}')
 
           http_code=$(echo "$response" | tail -n1)
@@ -219,7 +222,7 @@ jobs:
           job_id=${{ steps.trigger-job.outputs.JOB_ID }}
           while true; do
             response=$(curl -s -w "\n%{http_code}" -H "Authorization: Token ${{ secrets.DBT_CLOUD_API_KEY }}" \
-                        "https://cloud.getdbt.com/api/v2/accounts/XXXX/runs/$job_id/")
+                        "https://cloud.getdbt.com/api/v2/accounts/$DBT_ACCOUNT_ID/runs/$job_id/")
 
             http_code=$(echo "$response" | tail -n1)
             body=$(echo "$response" | sed '$d')
@@ -259,7 +262,7 @@ jobs:
         run: |
           response=$(curl -s -w "\n%{http_code}" --request GET \
                -H "Authorization: Token ${{ secrets.DBT_CLOUD_API_KEY }}" \
-               "https://cloud.getdbt.com/api/v2/accounts/21999/runs/${{ steps.trigger-job.outputs.JOB_ID }}/artifacts/manifest.json")
+               "https://cloud.getdbt.com/api/v2/accounts/$DBT_ACCOUNT_ID/runs/${{ steps.trigger-job.outputs.JOB_ID }}/artifacts/manifest.json")
 
           http_code=$(echo "$response" | tail -n1)
           body=$(echo "$response" | sed '$d')
