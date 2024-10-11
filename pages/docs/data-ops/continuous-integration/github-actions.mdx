@@ -239,6 +239,8 @@ jobs:
             if [ "$status" = "10" ] && [ "$artifacts_saved" = "true" ]; then
               echo "Job completed successfully and artifacts are saved"
               break
+            elif [ "$status" = "10" ]; then
+              echo "Job completed successfully, waiting for artifacts to be saved..."
             elif [ "$status" = "20" ]; then
               echo "Error: dbt run failed"
               exit 1
