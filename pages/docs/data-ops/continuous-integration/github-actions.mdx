@@ -298,11 +298,12 @@ jobs:
         name: "Comment on the pull request"
         with:
           script: |
+            const backticks = '```';
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `${{ steps.create-hb-build.outputs.log }}`
+              body: `${backticks}\n${steps.create-hb-build.outputs.log}\n${backticks}`
             })
 
       - id: set-appropriate-exit-code
