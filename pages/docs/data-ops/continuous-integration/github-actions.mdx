@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: "Install dependencies"
-        run: pip install --pre hashboard-cli
+        run: pip install hashboard-cli
       - name: Create Hashboard build
         id: create-hb-build
         env:
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: "Install dependencies"
-        run: pip install --pre hashboard-cli
+        run: pip install hashboard-cli
 
       - name: Create and apply Hashboard build
         id: create-and-apply-hb-build
@@ -215,7 +215,7 @@ jobs:
       - name: Install dbt and Hashboard CLI
         run: |
           pip install dbt
-          pip install --pre hashboard-cli
+          pip install hashboard-cli
 
       - name: Wait for DBT Cloud Job to complete and artifacts to be saved
         run: |
