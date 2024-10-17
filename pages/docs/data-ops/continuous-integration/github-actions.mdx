@@ -210,8 +210,6 @@ jobs:
           HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
-          HB_DBT_USE_DEFER: false
-          HB_DBT_INCLUDE_DB_IN_SCHEMA: false
         run: |
           hb build --dbt-artifacts=./target && hb build apply --no-confirm
 ````
@@ -490,8 +488,6 @@ jobs:
           HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_ACCESS_KEY_TOKEN }}
-          HB_DBT_USE_DEFER: false
-          HB_DBT_INCLUDE_DB_IN_SCHEMA: false
         run: |
           hb build  --dbt-artifacts=./ci_artifacts && hb build apply --no-confirm
 ```
