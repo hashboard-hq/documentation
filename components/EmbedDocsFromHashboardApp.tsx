@@ -40,17 +40,20 @@ export default function EmbedDocsFromHashboardApp({
   });
 
   return (
-    <iframe
-      className="glean-docs"
-      src={docUrl}
-      scrolling="no"
-      ref={iframe}
-      style={{
-        width: "100%",
-        height: "100%",
-        border: "none",
-        overflow: "hidden"
-      }}
-    />
+    <>
+      <iframe
+        className="glean-docs"
+        src={docUrl}
+        scrolling="no"
+        ref={iframe}
+        style={{
+          width: "100%",
+          height: "100%",
+          border: "none",
+          overflow: "hidden"
+        }}
+      />
+      <a href={docUrl} target="_blank">schema documentation</a>
+    </>
   );
 }
