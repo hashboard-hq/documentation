@@ -364,7 +364,7 @@ jobs:
         run: exit "${{ steps.create-hb-build.outputs.exitCode }}"
 ```
 
-### Deploying dbt Cloud CI + Hashboard changes to production
+### Deploying dbt Cloud + Hashboard changes to production
 
 This action runs when commits are merged to your `main` branch. It triggers a production dbt Cloud deploy job, waits for it to complete, and then generates and applies a Hashboard build.
 
