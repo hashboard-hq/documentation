@@ -179,17 +179,10 @@ on:
   push:
     branches: [main]
 
-env:
-  BQ_DATASET_NAME: "ci_pr_${{ github.event.pull_request.number }}"
-  BQ_DATASET_DESCRIPTION: "${{ github.event.pull_request.title}} (${{github.event.pull_request.html_url}})"
 jobs:
   dbt-and-hashboard-preview:
     name: "Run dbt pipeline and create Hashboard preview"
-    concurrency:
-      group: preview-${{ github.event.pull_request.number || github.ref }}
-      cancel-in-progress: true
     runs-on: ubuntu-latest
-    if: ${{ !github.event.pull_request.merged }}
     steps:
       - uses: actions/checkout@v3
 
