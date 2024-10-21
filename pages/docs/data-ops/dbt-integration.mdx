@@ -120,6 +120,8 @@ dbtOptions:
   includeDbNameInSchema: true
 ```
 
+These settings can be overridden on a per-command basis by specifying the environment variables `HB_DBT_USE_DEFER=true/false` and `HB_DBT_INCLUDE_DB_IN_SCHEMA=true/false` respectively.
+
 ### dbt Core
 
 When using dbt Core, you can use the `--dbt-state` flag to pass a state for deferral.
@@ -136,11 +138,19 @@ With dbt Cloud, the Hashboard CLI will infer deferred schemas without any additi
 hb build
 ```
 
-### What happens when I run [`hb build`](/docs/data-ops/cli/v3/build)?
+### What dbt commands are run as part of [`hb build`](/docs/data-ops/cli/v3/build)?
 
-1.  For each Hashboard model in the manifest, we run `dbt compile`, which returns a fully qualified reference to where the model would be built in the warehouse, including the deferred schema.
-2.  We use the `dbt compile` results to set the schemas for the Hashboard models in the build.
-3.  We run `dbt parse` to generate the `manifest.json`, which contains the Hashboard model definitions.
+The Hashboard CLI runs dbt commands internally to gather metadata about the current state of your dbt project. The Hashboard CLI never executes `dbt run` or `dbt build` to create content in your database on your behalf. In most cases, you will execute `dbt run` on your own, then execute `hb build` afterwards.
+
+The Hashboard CLI currently invokes the following commands:
+
+1. `dbt ls` is used to select the targeted models for the build.
+2. For each selected model, `dbt compile` is run to determine the fully qualified reference to where the model would be built in the warehouse, including the deferred schema.
+3. `dbt parse` is run to generate the dbt `manifest.json`, which contains the Hashboard model definitions.
+
+If you specify `hb --verbose build` then all internal dbt commands and their outputs will be logged to the console.
+
+If your dbt setup requires additional options that the CLI is unaware of, you can specify them as DBT environment variables (for a full list of flag and environment variable substitutes please refer to the [dbt flag documentation](https://docs.getdbt.com/reference/global-configs/about-global-configs#available-flags)). Alternatively, set the `HB_DBT_FLAGS` environment variable to pass a single string of additional flags/arguments through to all wrapped DBT invocations.
 
 ## Building a subset of models with `dbt:` args
 
