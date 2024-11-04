@@ -1,3 +1,6 @@
 {
-    "okta-scim": { "title": "Okta Directory Sync (SCIM)" }
+    "okta-scim": { "title": "Okta Directory Sync (SCIM)" },
+    "entra-scim": {
+        "title": "Entra ID Directory Sync (SCIM)"
+    }
 }

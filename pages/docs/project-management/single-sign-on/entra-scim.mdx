@@ -1,0 +1,48 @@
+---
+description: Documentation for setting up Single Sign On with Entra ID
+---
+
+# Entra ID Directory Sync (SCIM)
+
+Follow these instructions to configure Entra ID attribute mappings so that you can control Hashboard roles from within Entra ID. Contact your support Slack channel or [support@hashboard.com](mailto:support@hashboard.com) if you'd like assistance configuring SCIM for your organization.
+
+
+1. Complete the instructions in your setup portal to configure "Single Sign On". During this step, you will create the Hashboard application within Entra ID.
+
+2. Begin the instructions to configure "Directory Sync". Choose the existing Hashboard application you created in the previous step, and then proceed with the instructions until you get to the "Custom Attributes" step, which looks like this:
+
+<img
+  src="/sso/hashboard-portal-attributes.png"
+  style={{ maxWidth: "650px" }}
+/>
+
+
+3. When configuring the user attribute mappings, click "Show advanced options" and click "Edit attribute list for customappsso". Remove all existing `roles` mappings, and replace it with a single mapping of type "Expression". Set "Expression" to `SingleAppRoleAssignment([appRoleAssignments])` and "Target attribute" to `roles`. The final mapping should look like this:
+
+<img
+  src="/sso/entra-mappings.png"
+  style={{ maxWidth: "650px" }}
+/>
+
+4. In the left sidebar, under "Applications", click "App registrations". Go to the "All applications" tab, and click on the Hashboard application.
+
+5. Click "App roles" in the left sidebar. Create an app role for each of your Hashboard roles. The display name and value should match the role name in Hashboard. Here is an example using the default Hashboard roles:
+
+<img
+  src="/sso/entra-roles.png"
+  style={{ maxWidth: "650px" }}
+/>
+
+6. Return back to the Hashboard provisioning setup and assign a user to the Hashboard application. During this step, you will choose the Hashboard role for the user:
+
+<img
+  src="/sso/entra-assignment.png"
+  style={{ maxWidth: "650px" }}
+/>
+
+7. Back in the SSO configuration portal, type in `roles` in the custom attribute mapping for the `roles` field, and click "Save custom attributes".
+
+<img
+  src="/sso/hashboard-portal-complete.png"
+  style={{ maxWidth: "650px" }}
+/>
