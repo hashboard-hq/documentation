@@ -26,7 +26,7 @@ Follow these instructions to configure Entra ID attribute mappings so that you c
 
 4. In the left sidebar, under "Applications", click "App registrations". Go to the "All applications" tab, and click on the Hashboard application.
 
-5. Click "App roles" in the left sidebar. Create an app role for each of your Hashboard roles. The display name and value should match the role name in Hashboard. Here is an example using the default Hashboard roles:
+5. Click "App roles" in the left sidebar. Create an app role for each of your Hashboard roles. The display name and value should match the role name in Hashboard. Here is an example using the default Hashboard roles, "Owner", "Editor", "Collaborator", and "Viewer":
 
 <img
   src="/sso/entra-roles.png"
@@ -35,14 +35,19 @@ Follow these instructions to configure Entra ID attribute mappings so that you c
 
 6. Return back to the Hashboard provisioning setup and assign a user to the Hashboard application. During this step, you will choose the Hashboard role for the user:
 
+
+
+Start these instructions when you are prompted to provide a Directory Provider Value in the Hashboard SSO portal:
+
 <img
-  src="/sso/entra-assignment.png"
+  src="/sso/hashboard-portal-attributes.png"
   style={{ maxWidth: "650px" }}
 />
 
-7. Back in the SSO configuration portal, type in `roles` in the custom attribute mapping for the `roles` field, and click "Save custom attributes".
+## Overview
 
-<img
-  src="/sso/hashboard-portal-complete.png"
-  style={{ maxWidth: "650px" }}
-/>
+Here is a summary of the overall configuration:
+
+* Your Hashboard roles will be registered to the Hashboard application within Entra ID
+* Your users will be assigned a Hashboard role when provisioned to the application.
+*
