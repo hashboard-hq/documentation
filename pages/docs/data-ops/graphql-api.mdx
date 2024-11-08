@@ -4,7 +4,7 @@ description: Hashboard publishes a public GraphQL API that you can use to progra
 
 # GraphQL API
 
-Hashboard publishes a public GraphQL API that you can use to programatically fetch project resources.
+Hashboard publishes a public GraphQL API at `https://hashboard.com/api/graphql` that you can use to programatically fetch project resources.
 
 ## Authentication
 
@@ -19,7 +19,14 @@ To generate a new API token:
 
 The resulting screen will provide you with your API token. Save this in a safe place, as it cannot be re-created once you navigate away.
 
-When making requests to the public GraphQL API, set the `Authorization` header key to your API token.
+When making requests to the public GraphQL API, set the `Authorization` header key to your API token:
+
+```bash
+curl https://hashboard.com/api/graphql \
+  -H "Authorization: YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "{ project(projectId: \"PROJECT_ID\") { name models { name } } }"}'
+```
 
 API tokens expire after 1 year.
 
