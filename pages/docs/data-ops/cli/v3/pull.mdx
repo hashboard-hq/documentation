@@ -46,4 +46,44 @@ For example: if you export a resource, it will default to being exported with a 
 
 ## dbt models and the `pull` command
 
-Currently, the Hashboard CLI does not automatically update Hashboard metadata inside of dbt files, so any dbt-based models are skipped when evaluating the `pull` command.
+You can pull Hashboard model definitions directly into your dbt files using the `--include-dbt` flag.
+
+```bash
+# pull all resources controlled by code including dbt models
+hb pull --include-dbt
+
+# pull a single dbt model with either an alias or id
+hb pull m:s3AdinvBhsdJ --include-dbt
+hb pull m::my_sales_model --include-dbt
+```
+
+This will update the Hashboard metadata directly in your dbt properties yml files.
+
+```bash
+  models:
+    - name: sales
+      description: sales has a record for each customer, order, product combination
+      columns:
+        - name: ORDERDATE
+          description: the date of the order
++         meta:
++           hashboard:
++           primaryDate: true
+        - name: ORDERNUMBER
+        - name: PRODUCTCODE
+          description: Unique code
++         meta:
++           hashboard:
++             foreignModels:
++               - m::products
+        - name: CUSTOMERNAME
++     meta:
++       hashboard:
++         alias: sales
++         cols:
++           - id: unique_products
++             type: metric
++             name: unique products
++             aggregate: count_distinct
++             physicalName: PRODUCTCODE
+```
