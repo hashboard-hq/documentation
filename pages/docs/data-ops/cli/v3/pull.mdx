@@ -46,7 +46,7 @@ For example: if you export a resource, it will default to being exported with a 
 
 ## dbt models and the `pull` command
 
-You can pull Hashboard model definitions directly into your dbt files using the `--include-dbt` flag.
+You can pull Hashboard model definitions directly into your dbt files using the `--include-dbt` flag. If this flag is omitted the `hb pull` command will skip any models that were defined using the dbt integration by default.
 
 ```bash
 # pull all resources controlled by code including dbt models
