@@ -57,12 +57,13 @@ one default role selected at any given time, so to swap default roles, add a sec
 
 There are four roles in Hashboard with increasing levels of permissions. When adding a new user, our system-provided default role is `Editor`.
 
-| Role         | Description                                                                                                             |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| Owner        | Owners can manage members in a project.                                                                                 |
-| Editor       | Editors can manage data models and data connections, both creating and editing existing data models & data connections. |
-| Collaborator | Collaborators can interact with shared views, query data sources, explore data and create new saved explorations.       |
-| Viewer       | Viewers can interact with shared views, query data sources, and explore data.                                           |
+| Role              | Description                                                                                                             |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Owner             | Owners can manage members in a project.                                                                                 |
+| Editor            | Editors can manage data models and data connections, both creating and editing existing data models & data connections. |
+| Collaborator Plus | Collaborators Plus users can create and edit data models inside a project draft and run raw SQL queries.                |
+| Collaborator      | Collaborators can explore data and create and edit saved explorations, dashboards, and metrics.                         |
+| Viewer            | Viewers can explore data via dashboards, saved views, and data models.                                                  |
 
 <Callout type="info">
   **What permission do I need to `Download underlying data`?**— Users need a
@@ -73,27 +74,25 @@ There are four roles in Hashboard with increasing levels of permissions. When ad
   roles, or create a new role that does not have the `READ_RAW_DATA` permission.
 </Callout>
 
-## Modifying roles
+<br />
 
-<Callout type="warning">
-  **Limitations**— Roles are limited today in Hashboard to two main functions:
-  1) governing which actions can be taken such as creating saved explorations
-  and editing dashboards; and 2) governing access to data models. If you do not
-  have access to read data from a data model, then saved explorations for that
-  data model will not work. Today, it is not possible to remove access from a
-  specific saved exploration independently from a data model.
-</Callout>
+## Configuring roles
 
 Hashboard uses role based access control to allow users to do specific actions within Hashboard. You can assign system provided roles, configure data access and limit which actions specific users can take inside of Hashboard.
 
-1. Navigate to the `People` page using the link on the left sidebar.
-2. Click `Roles`.
-3. Click the pencil `✏️` icon next to the role you want to modify.
-4. You can edit the role name and description in the main role page.
-5. To edit a permission, again click on the pencil `✏️` icon to edit a permission rule.
-6. Here you can modify the permissions and resources associated with the permissions.
+<Callout type="warning">
+  **Limitations**— Roles are limited today in Hashboard to two main functions:
+  1. Governing which actions can be taken such as creating saved explorations
+  and editing dashboards.
+  2. Governing access to data models. If you do not have access to read data from
+  a data model, then saved explorations for that data model will not work.
 
-## Adding new roles
+Today, it is not possible to remove access from a specific saved exploration
+independently from a data model.
+
+</Callout>
+
+### Adding new roles
 
 1. Navigate to the `People` page using the link on the left sidebar.
 2. Click `Roles`.
@@ -101,8 +100,8 @@ Hashboard uses role based access control to allow users to do specific actions w
 4. Fill out the form and click the submit button: `Create Role`
    - **Name:** The name of the role.
    - **Description:** A description of the role.
-5. Your new role should appear in the list of roles. Click `Edit` button to edit the role.
-6. Your new role will initially have no permissions rules. Click the `+ Add Permission Rule` button to add a new permission rule.
+5. Your new role should appear in the list of roles. Click the `Edit` button to edit the role.
+6. Your new role will initially have no permissions rules. Click the `+` button to add a new permission rule. Name your permission rule with a descriptive name.
    <Callout type="info">
      **What are permission rules?**— Permission rules are a set of permissions
      that all operate on a common resource or resources. For example, you can
@@ -110,16 +109,38 @@ Hashboard uses role based access control to allow users to do specific actions w
      dashboards in a project. You can also create a separate permission rule
      that allows users with the role to read only a specific data model.
    </Callout>
-7. Name your permission rule with a descriptive name.
-8. Select resources that the rule will apply to with the `Data Access` section.
+   <br />{" "}
+7. Select resources that the rule will apply to with the `Data Access` section.
    Click the `Add` button to select from a list of all data models as well as a wildcard that targets any data model. Alternatively you can click the `Add all` button to add all models to the rule and the selectively remove models.
+8. If you want the role to access data using a specific set of credentials, you can add [role-based database credentials](/docs/database-connections/role-based-credentials) to the rule. These are optional and when omitted, the users of the role will use the default credentials for the data connection.
 9. Select permissions that the rule will apply to with the `Permissions` section.
    Click the `Add` button to select from a list of all permissions. Alternatively you can click the `Add all` button to add all permissions to the rule and the selectively remove permissions.
    You can also easily start from the system defined roles by clicking one of additional buttons in the `Permissions` section.
-10. Once you are done configuring a permission rule, you can either add more permission rules or click the `Save` button to save the role.
-11. After you save, the role is now available to assign to users.
+10. Select permissions that the will apply when the user is inside a [project draft](/docs/project-management/drafts) with the `Draft Permissions` section.
+    <Callout type="info">
+      **What are draft permissions?**— Draft permissions are permissions granted
+      when inside a project draft. These permissions are additive to the
+      permissions a role has when not inside a project draft. A common use-case
+      is for draft permissions is to grant users of a specific role the ability
+      to create and update data models inside a project draft, but not when
+      outside of a draft.
+    </Callout>
+    <br />
+11. Once you are done configuring a permission rule, you can either add more permission rules or click the `Save` button to save the role.
+12. After you save, the role is now available to assign to users.
 
-## Deleting roles
+### Modifying roles
+
+1. Navigate to the `People` page using the link on the left sidebar.
+2. Click `Roles`.
+3. Click the `Edit` button for the role you want to modify.
+4. You can edit the role name and description in the main role page.
+5. To change the permissions associated with the role, select one of the permission rules from the `Permission Rules` section.
+6. In the permission rule editor, you can update the resources and permissions associated with the rule.
+   You can also add [role-based database credentials](/docs/database-connections/role-based-credentials) to a permission rule from here.
+7. When you are done updating the role, click the `Save` button to save the changes.
+
+### Deleting roles
 
 Aside from roles selected as [default roles](#default-roles), you can delete roles at any time.
 
