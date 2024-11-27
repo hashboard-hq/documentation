@@ -1,0 +1,72 @@
+---
+description: Data models support a default exploration which is used as a starting point any time a new exploration is started from the data model.
+---
+
+# Default Model Exploration
+
+Data models support the ability to control the default exploration that is used when starting a new exploration from a data model.
+
+## Behavior without a default exploration
+
+By default, when starting a new exploration from a data model, Hashboard bootstraps a visualization using your model's measures and attributes.
+If a model has a primary date attribute, your model will be bootstrapped as a bar chart with the primary date on the x-axis and first-defined measure on the y-axis.
+If a model does not have a date attribute, your model will be bootstrapped as a table.
+
+## Configuring a default exploration
+
+Often times there may be a more useful starting point for your explorations based on a given model.
+
+To configure a default exploration for a model:
+
+1. Navigate to the Data Models page of your project.
+2. Find the model you want to configure and click the "Edit" button.
+3. Click the "Code editor" button inside the model builder.
+4. Once the code editor is open, add a new field at the root level named `defaultExploration`.
+5. Populate the `defaultExploration` field using the schemas for the `Data` and `Visualization` objects as defined in [saved explorations](/docs/data-ops/config-schema/saved-explorations). Both the `data` and `visualization` objects are required.
+6. When you are done, click the "Save and Explore" button. You will be redirected to the Data explorer and your default exploration will be used as the starting point.
+
+## Examples
+
+Default explorations support a wide variety of configurations, sharing many of the same options as saved explorations.
+The following are a few examples of different configurations you can use.
+
+### Line chart with a filter
+
+```yml
+hbVersion: "1.0"
+type: model
+defaultExploration:
+  data:
+    x:
+      - columnId: created_at
+        granularity: day
+    y:
+      - columnId: row_count
+  visualization:
+    chartType: line
+  filters:
+    - columnId: created_at
+      gte: 2020-01-01
+ ...
+```
+
+### Funnel table
+
+```yml
+hbVersion: "1.0"
+type: model
+defaultExploration:
+  data:
+    sequence:
+      - eventValue: user
+      - eventValue: add_to_cart
+      - eventValue: visit_checkout
+    preFilters:
+      - columnId: sent_at
+        gte:
+          - -2
+          - week
+          - startOfPeriod: false
+  visualization:
+    chartType: funnel_table
+```
