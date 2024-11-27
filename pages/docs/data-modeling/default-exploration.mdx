@@ -18,16 +18,18 @@ Often times there may be a more useful starting point for your explorations base
 
 To configure a default exploration for a model:
 
-1. Navigate to the Data Models page of your project.
-2. Find the model you want to configure and click the "Edit" button.
-3. Click the "Code editor" button inside the model builder.
-4. Once the code editor is open, add a new field at the root level named `defaultExploration`.
-5. Populate the `defaultExploration` field using the schemas for the `Data` and `Visualization` objects as defined in [saved explorations](/docs/data-ops/config-schema/saved-explorations). Both the `data` and `visualization` objects are required.
-6. When you are done, click the "Save and Explore" button. You will be redirected to the Data explorer and your default exploration will be used as the starting point.
+1. Configure a new exploration that you would like to use as the model's default with the Data Explorer.
+2. Once you have your exploration configured to your liking, reveal the "Code editor" by clicking the "Code editor" button.
+3. Copy the `data` and `visualization` fields and their associated values from the code editor. Keep these copied values handy.
+4. Open the "More" menu and select "Edit data model".
+5. Click the "Code editor" button inside the model builder.
+6. Once the code editor is open, add a new field at the root level named `defaultExploration`.
+7. Populate the `defaultExploration` field with the `data` and `visualization` values you copied in step 3.
+8. When you are done, click the "Save and Explore" button. You will be redirected to the Data explorer and your default exploration will be used as the starting point.
 
 ## Examples
 
-Default explorations support a wide variety of configurations, sharing many of the same options as saved explorations.
+Default explorations support a wide variety of configurations, sharing many of the same options as [saved explorations](/docs/data-ops/config-schema/saved-explorations).
 The following are a few examples of different configurations you can use.
 
 ### Line chart with a filter
