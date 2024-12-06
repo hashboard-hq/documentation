@@ -1,0 +1,36 @@
+# Seat Types and User Roles
+
+Hashboard uses a seat-based licensing model with two distinct seat types: Editor and Collaborator.
+Each user in your Hashboard instance occupies either an Editor or Collaborator seat based on their assigned roles and permissions.
+
+> **Note:** The Editor and Collaborator seat types share names with our default system-defined roles
+> (see [Managing Users and Roles](/docs/users-and-permissions/managing-users-and-roles)),
+> but seat type and role-name are distinct concepts. Hashboard's default role named "Editor" that comes with every new project can be modified to no longer be considered an
+> Editor seat type, and similarly, a role named "Collaborator" can be adjusted to have permissions that qualify it as an Editor seat type.
+
+## Understanding seat types
+
+### Editor Seats
+
+Editors are users who can modify data models and have broader control over the analytics environment.
+A user is considered an Editor if they have any of the following permissions:
+
+- `CREATE_DATA_MODEL`
+- `UPDATE_DATA_MODEL`
+- `APPLY_DRAFT`
+
+### Collaborator Seats
+
+Collaborators are users who can view, explore, and interact with data models but cannot modify them.
+These users typically focus on data consumption and analysis rather than data model management.
+
+## Seat type assignment
+
+- Users are automatically assigned a seat type based on the roles they are assigned within a project.
+- If a user has multiple roles with different permission levels, they will be assigned an Editor seat if any of their roles include Editor-level permissions
+- Seat type assignment is dynamic and will update if a user's roles or permissions change
+
+## Users in multiple projects
+
+Organizations can have multiple projects within Hashboard (such as with [Partner Projects](docs/sharing-data-externally/partner-projects)), and users of that organization can belong to multiple projects.
+For specifics on how multi-project seat assignment works, please reach out to our sales team at [sales@hashboard.com](mailto:sales@hashboard.com).
