@@ -24,7 +24,18 @@ If Google Cloud is an option, you may also want to consider BigQuery as an alter
 
 ## Create a Snowflake user
 
-You can run the following script. Make sure you fill out your database name, warehouse and a password in the script:
+### Authentication types
+
+Snowflake offers two authentication methods that Hashboard supports:
+- **Password authentication:** The traditional username/password login.
+- **Key-pair authentication:** A more secure method using public/private key pairs, in which you associate a public key with your Snowflake user.
+
+To use key-pair authentication, you will need to generate a public/private key pair yourself. Additionally you can optionally encrypt your private key with a passphrase for more security.
+Read more about generating key pairs in Snowflake's [documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key).
+
+### Create a user
+
+You can run the following script. Make sure you fill out your database name, warehouse and a password or public key in the script:
 
 ```sql
 use role ACCOUNTADMIN;
@@ -34,7 +45,14 @@ set warehouse_name = '--YOUR WAREHOUSE NAME--';
 set hashboard_user = 'HASHBOARD_USER';
 set hashboard_role = 'HASHBOARD_ROLE';
 
-create user if not exists identifier($hashboard_user) password='--YOUR PASSWORD--';
+create user if not exists identifier($hashboard_user);
+
+-- if using password authentication:
+ALTER USER identifier($hashboard_user) SET PASSWORD='--YOUR PASSWORD--';
+
+-- if using key-pair authentication:
+ALTER USER identifier($hashboard_user) SET RSA_PUBLIC_KEY='--YOUR PUBLIC KEY--';
+
 create role if not exists identifier($hashboard_role);
 grant role identifier($hashboard_role) to user identifier($hashboard_user);
 
@@ -59,10 +77,17 @@ grant SELECT on future views in database identifier($database_name) to role iden
 
 ### Settings
 
+- **Authentication type:** either `Password` or `Key Pair` depending on whether your user is associated with a password or a public key. Learn more about [key pair authentication](https://docs.snowflake.com/en/user-guide/key-pair-auth).
 - **Account:** [Your snowflake account identifier](https://docs.snowflake.com/en/user-guide/connecting.html#your-snowflake-account-identifier) is provided by Snowflake and included in the start of the URL you use to login to Snowflake: `<account_identifier>.snowflakecomputing.com`.
 - **User:** The Snowflake user. Best practice is to have a service user specifically dedicated to Hashboard.
-- **Password:** The password used to login to Snowflake.
 - **Database:** The Snowflake database to use. Databases correspond with logical groupings of tables and views in Snowflake.
 - **Schema:** _optional_ If you provide a schema, we will limit listed tables in the model builder to this schema. If you need to limit permissions to a specific schema, you should do this with Snowflake permissions.
 - **Warehouse:** The warehouse to use in Snowflake. Warehouses correspond with compute resources.
 - **Role:** You must specify a role to be assumed when connecting from Hashboard. See Snowflake's [roles](https://docs.snowflake.com/en/user-guide/security-access-control-overview.html#roles) documentation.
+
+If password authentication is selected:
+- **Password:** The password used to login to Snowflake.
+
+If key pair authentication is selected:
+- **Private key:** The (encrypted or unencrypted) private key used to login to Snowflake, provided as a .p8 or .pem file.
+- **Encryption passphrase:** _optional_ If an encrypted private key was provided, you will need to provide the passphrase used to decrypt it.
