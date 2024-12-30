@@ -5,6 +5,7 @@
   "description-syncing": {},
   "model-joins": {},
   "default-exploration": {},
+  "model-folders": {},
   "best-practices": {},
   "query-data-files": { "title": "Uploading Files" },
   "caching": {}
