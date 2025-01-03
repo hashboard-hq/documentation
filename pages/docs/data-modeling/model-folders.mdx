@@ -1,0 +1,62 @@
+---
+description: Organize your data models into folders to keep your project tidy and make it easier for users to find relevant models.
+---
+
+# Data Model Folders
+
+Data model folders help you organize your models into logical groups, making it easier for users to find and work with related data models.
+
+## Creating and Managing Folders
+
+There are several ways to organize your data models into folders:
+
+### Using the Model Builder
+
+<img
+  src="/images/model-folders/model-builder-folders.png"
+  alt="Setting a folder"
+  style={{ marginTop: "20px" }}
+/>
+
+1. Locate the model you want to configure and open it in the Model Builder.
+2. Locate the "Folder" field in the model settings under the "Metadata" heading.
+3. Click "Select folders..."
+4. Select an existing folder or create a new one with the "New folder" button.
+5. Click "Move" to close the dialog and then "Save" to save your changes to the model.
+
+### Using the Data Models Page
+
+<img
+  src="/images/model-folders/folder-drag.png"
+  alt="Dragging to a folder"
+  style={{ marginTop: "20px" }}
+/>
+
+1. Navigate to the Data Models page.
+2. Create a new folder using the "New Folder" button and give the folder a descriptive name.
+3. Drag and drops models or folders onto the new folder to move them into the folder.
+4. Alternatively, you can use the "More" menu to move models or folders via the "Move to folder" dialog.
+
+### With DataOps
+
+```
+hbVersion: "1.0"
+type: model
+alias: marketing_attribution
+name: marketing_attribution
+description: This model describes how each order is attributed to different marketing touchpoints.
+folder: Marketing/2024
+
+
+...
+```
+
+You can also create folders with DataOps. Just set the `folder` field in a model's configuration file.
+The folder field represents a path so use slashes to place your model in a subfolder (e.g. `marketing/campaigns/2024`).
+
+## Best Practices for your Data Model Folders
+
+- Group related models together by business unit, department, or concept (e.g., "Marketing", "Finance", "Product Analytics").
+- Use consistent naming conventions for folders.
+- Consider using subfolders for complex hierarchies.
+- Keep folder structures relatively shallow (2-3 levels) for easy navigation.
