@@ -1,34 +1,33 @@
 # Seat Types and User Roles
 
-Hashboard uses a seat-based licensing model with two distinct seat types: Editor and Collaborator.
-Each user in your Hashboard instance occupies either an Editor or Collaborator seat based on their assigned roles and permissions.
-
-> **Note:** The Editor and Collaborator seat types share names with our default system-defined roles
-> (see [Managing Users and Roles](/docs/users-and-permissions/managing-users-and-roles)),
-> but seat type and role-name are distinct concepts. Hashboard's default role named "Editor" that comes with every new project can be modified to no longer be considered an
-> Editor seat type, and similarly, a role named "Collaborator" can be adjusted to have permissions that qualify it as an Editor seat type.
+Hashboard uses a seat-based licensing model with two distinct seat types: Developer and Consumer.
+Each user in your Hashboard instance occupies either an Developer or Consumer seat based on their assigned roles and permissions.
 
 ## Understanding seat types
 
-### Editor Seats
+### Developer Seats
 
-Editors are users who can modify data models and have broader control over the analytics environment.
-A user is considered an Editor if they have any of the following permissions:
+Developers are users who can modify data models and have broader control over the analytics environment.
+A user is considered an Developer if they have any of the following permissions:
 
 - `CREATE_DATA_MODEL`
 - `UPDATE_DATA_MODEL`
 - `APPLY_DRAFT`
 
-### Collaborator Seats
+Hashboard's system-defined roles of Owner and Editor are considered Developer seats by default but can be configured to suit your organization's needs.
 
-Collaborators are users who can view, explore, and interact with data models but cannot modify them.
+### Consumer Seats
+
+Consumers are users who can view, explore, and interact with data models but cannot modify them.
 These users typically focus on data consumption and analysis rather than data model management.
 
 ## Seat type assignment
 
 - Users are automatically assigned a seat type based on the roles they are assigned within a project.
-- If a user has multiple roles with different permission levels, they will be assigned an Editor seat if any of their roles include Editor-level permissions
+- If a user has multiple roles with different permission levels, they will be assigned an Developer seat if any of their roles include Developer-level permissions
 - Seat type assignment is dynamic and will update if a user's roles or permissions change
+
+Hashboard's system-defined roles of Collaborator, Collaborator Plus, and Viewer are considered Consumer seats in their initial configuration but can be configured to suit your organization's needs.
 
 ## Users in multiple projects
 
