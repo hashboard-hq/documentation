@@ -62,9 +62,18 @@ You can see the validation status of your draft on that draft details page.
   for example, a drafted saved exploration that references a model that has been trashed within the base project.
 - **No errors or warnings** means that the draft is in a valid state and can be applied to the project.
 
-## Applying project drafts
+## Managing draft state
 
-When you're ready to apply your project draft to your project, click the `Apply` button.
+Drafts can be in any of the following states:
+
+- Staged: Changes can be previewed. If there are no errors you can apply all changes directly to your project.
+- Staging Only: Changes can be previewed but cannot be applied.
+- Applied: Changes were applied to the project.
+- Archived: This draft is being retained for record-keeping purposes but cannot be modified or applied to the project.
+
+By default drafts begin in the "Staged" state. In order to move a draft to "Staging Only" you can click the dropdown next to the 'Apply' button in the Draft UI and mark the build as 'Staging Only'. The dropdown also contains an option to archive the selected draft.
+
+If you would like to apply the changes in your draft to your project, click the `Apply` button.
 
 If there are no validation errors, you will see a list of resources being changed.
 Review these changes carefully, as it is possible for changes within the draft to propagate and create additional changes to resources in the project.

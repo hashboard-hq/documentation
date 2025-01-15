@@ -91,9 +91,22 @@ To protect specific resources to only be editable with the Hashboard deployments
 
 Builds and [Project Drafts](/docs/project-management/drafts) serve similar purposes -- they both can be used to stage, test, and apply changes. Here is how they differ:
 
-|                                                                   | Builds                                          | Project drafts   |
-| ----------------------------------------------------------------- | ----------------------------------------------- | ---------------- |
-| Created from...                                                   | The CLI or git integration                      | The Hashboard UI |
-| Can be edited?                                                    | No -- the changes within a build are immutable. | Yes              |
-| Supports environment variable substitution                        | Yes                                             | No               |
+|                                                      | Builds                                          | Project drafts   |
+| ---------------------------------------------------- | ----------------------------------------------- | ---------------- |
+| Created from...                                      | The CLI or git integration                      | The Hashboard UI |
+| Can be edited?                                       | No -- the changes within a build are immutable. | Yes              |
+| Supports environment variable substitution           | Yes                                             | No               |
 | Can be used to deploy resources to multiple projects | Yes                                             | No               |
+
+### Managing build state
+
+Builds can be in any of the following states:
+
+- Queued: Our servers have received the files you would like to build, the build is waiting to be processed.
+- Building: Our servers are converting your files into Hashboard resources, you should see results shortly.
+- Staged: All resources have been built and can be previewed. If there are no errors you can apply all changes directly to your project.
+- Staging Only: All resources have been built and can be previewed. However these changes cannot be applied.
+- Applied: Changes were applied to the project.
+- Archived: This build is being retained for record-keeping purposes but cannot be modified or applied to the project.
+
+By default builds that are created will finish in the "Staged" state. In order to create a "Staging Only" build you can run `hb build --staging-only` or click the dropdown next to the 'Apply' button in the Build UI and mark the build as 'Staging Only'. The dropdown also contains an option to archive the selected build. To apply a build that has successfully been staged you can either click "Apply" in the Build UI or run `hb build apply` via the command line.
