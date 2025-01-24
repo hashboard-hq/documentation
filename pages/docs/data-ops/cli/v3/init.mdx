@@ -38,3 +38,23 @@ There are two ways to set the `dbtRoot` value:
 2. Manually edit the `.hbproject` file and modify the dbtRoot key
 
 By setting the `dbtRoot` value, Hashboard run the dbt integration during [`hb build`](/docs/data-ops/cli/v3/build) by default.
+
+## The .hbproject file
+
+Below are all the options that can be defined within the .hbproject file
+
+```
+dbtRoot: path/to/folder
+dbtOptions:
+  useDefer: True
+  includeDbNameInSchema: False
+  accountId: dbt-cloud-account-id
+```
+
+Any value under dbtOptions can also be set using the corresponding environment variable
+
+| .hbproject key        | env variable                | usage                                                                                                                             |
+| --------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| useDefer              | HB_DBT_USE_DEFER            | Boolean value indicating if Hashboard should look for tables deferred to production in dbt.                                       |
+| includeDbNameInSchema | HB_DBT_INCLUDE_DB_IN_SCHEMA | Boolean value indicating if schemas should be qualified with a database name, primarily used when doing cross database deferrals. |
+| accountId             | HB_DBT_CLOUD_ACCOUNT_ID     | The dbt Cloud account id to use when fetching a specific run if creating a build with the --dbt-cloud-run-id flag                 |
