@@ -41,7 +41,16 @@ By setting the `dbtRoot` value, Hashboard run the dbt integration during [`hb bu
 
 ## The .hbproject file
 
-Below are all the options that can be defined within the .hbproject file
+Below are all the options that can be defined within the .hbproject file. Any value under dbtOptions can also be set using the corresponding environment variable.
+
+| .hbproject key                    | env variable                | usage                                                                                                                                       |
+| --------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| dbtRoot                           |                             | Path to the root directory of your dbt project                                                                                              |
+| dbtOptions: useDefer              | HB_DBT_USE_DEFER            | "True" or "False" value indicating if Hashboard should look for tables deferred to production in dbt.                                       |
+| dbtOptions: includeDbNameInSchema | HB_DBT_INCLUDE_DB_IN_SCHEMA | "True" or "False" value indicating if schemas should be qualified with a database name, primarily used when doing cross database deferrals. |
+| dbtOptions: accountId             | HB_DBT_CLOUD_ACCOUNT_ID     | The dbt Cloud account id to use when fetching a specific run if creating a build with the --dbt-cloud-run-id flag                           |
+
+### Example
 
 ```
 dbtRoot: path/to/folder
@@ -50,11 +59,3 @@ dbtOptions:
   includeDbNameInSchema: False
   accountId: dbt-cloud-account-id
 ```
-
-Any value under dbtOptions can also be set using the corresponding environment variable
-
-| .hbproject key        | env variable                | usage                                                                                                                             |
-| --------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| useDefer              | HB_DBT_USE_DEFER            | Boolean value indicating if Hashboard should look for tables deferred to production in dbt.                                       |
-| includeDbNameInSchema | HB_DBT_INCLUDE_DB_IN_SCHEMA | Boolean value indicating if schemas should be qualified with a database name, primarily used when doing cross database deferrals. |
-| accountId             | HB_DBT_CLOUD_ACCOUNT_ID     | The dbt Cloud account id to use when fetching a specific run if creating a build with the --dbt-cloud-run-id flag                 |
