@@ -34,9 +34,11 @@ You can also use any dbt jinja or dbt macros to templatize or switch between dif
       - id: bounce_rate
         type: measure
         name: bounce rate
-        formattingOptions:
-          fixedDecimals: 0
-          formatAsPercent: true
+        numberFormat:
+          style: percent
+          decimals:
+            min: 0
+            max: 0
         sql: safe_divide(sum(if(event_name='bounceResource',1,0)),count(distinct user_id))
     ```
   </Tab>
