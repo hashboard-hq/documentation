@@ -163,18 +163,3 @@ A few notes on the resulting columns:
   equal number of future months. To correct for this, it's possible to use a
   Kaplan-Meier estimator which will be left as a separate exercise.
 </Callout>
-
-## Create retention table
-
-<Iframe src="https://demo.hashboard.com/public/sv/05d6b182-b7ae-3f36-81b8-a97b0f65e391" />{" "}
-
-1. Make sure you add the Active Users measure specified above.
-2. Select a `pivot table` as your visualization type from the chart dropdown on
-   the top left.
-3. Select `cohort` as your rows.
-4. Select `month_number` as your columns.
-5. Click into the `control` tab on the right-hand side and make sure you sort
-   rows by `cohort` descending and sort the columns by `month_number` ascending.
-6. As the measure, select `Active Users` as the calculation, select
-   `Percentage of Row Max` and finally as the Color scale, select
-   `Percentage Color Scale`.
