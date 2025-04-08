@@ -100,3 +100,33 @@ There are two ways to get column documentation into Hashboard from dbt:
 2. You can use dbt's [persist_docs](https://docs.getdbt.com/reference/resource-configs/persist_docs) to push column definitions from dbt into your warehouse. Then use Hashboard's [database column description sync](docs/data-modeling/description-syncing).
 
 You can also document columnd directly by editing measures and attributes [in the model](docs/data-modeling).
+
+### How do I change the currency symbol in my attribute or measure?
+
+For a numeric attribute or measure, you can change the currency symbol in the [model builder](docs/data-modeling). First, click on the attribute/measure, and
+then in the **Format** section of its configuration, click the **Advanced Configuration** button. In the modal that opens, you can click on the **Currency** tab
+and then select the currency you'd like to use from the dropdown. When you save your changes to the model, the changes will be propagated to any explorations, metrics,
+or dashboards that reference the attribute/measure.
+
+### How do I change a model's data connection?
+
+You can only change the data connection for a model in YML, either through the CLI or the [YML editor](docs/data-ops/yaml-editor) in the model builder.
+Changing the `connectionName` or `connectionId` keys under the `source` key in the YML will update the data connection for the model.
+
+### I've changed an event name in my underlying table, why isn't it showing up as an option in the event analytics configuration?
+
+Models are [cached](/docs/data-modeling/caching) by default for 4 hours. If you've changed an event name in your underlying data, you will need to reset the cache for it to be reflected in the event analytics configuration.
+
+You can do this in two ways:
+1. From the UI: Go into the model's advanced settings (accessible from the 3-dot menu on the top right) and click the "Remove all cached queries" button
+2. From the CLI: Run the command `hb cache clear m:<model ID>`
+
+### What do dashed lines on my charts mean?
+
+Dashed lines on line charts indicate that the data is not continuous at the current time grain. If you want to get rid of the dashed lines, you can either:
+1. Make the time grain longer (e.g. from day to week)
+2. Use a different chart type, such as a bar chart
+
+### How can I change the owner of my scheduled report?
+
+There is no way to change this within Hashboard. However, if you contact us at support@hashboard.com, we can help you.
