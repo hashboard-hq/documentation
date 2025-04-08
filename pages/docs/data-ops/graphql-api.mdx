@@ -2,6 +2,8 @@
 description: Hashboard publishes a public GraphQL API that you can use to programatically fetch project resources.
 ---
 
+import { Callout } from "nextra-theme-docs";
+
 # GraphQL API
 
 Hashboard publishes a public GraphQL API at `https://hashboard.com/api/graphql` that you can use to programatically fetch project resources.
@@ -37,6 +39,12 @@ The current public GraphQL schema is below and can also be inspected with [intro
 Currently, the public GraphQL API supports fetching metadata on Projects, Models, Saved Explorations, Metrics, Dashboards, Users and Roles.
 
 [Contact us](mailto:support@hashboard.com) if you are interested in accessing additional Hashboard resources via the public GraphQL API.
+
+<Callout type="info">
+  `viewLastTwoWeeks` tracks the number of times a resource has been viewed in the last two weeks. <br/><br/>
+  Views are non-unique, and only direct views of a resource are tracked. For example, if a dashboard contains a saved exploration, viewing that dashboard will not count as a view for that saved exploration.  <br/><br/>
+  If you need information on unique or non-direct views, it might be better to use the Activity modal, which can be found from the 3-dot menu on the top right of a resource.
+</Callout>
 
 ```GraphQL
 scalar JSON
