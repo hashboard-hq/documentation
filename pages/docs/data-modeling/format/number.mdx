@@ -1,0 +1,180 @@
+---
+description: Number Formats ...
+---
+
+import { Callout } from "nextra-theme-docs";
+
+# Number Format
+
+The format of a numeric value is best determined by the what the value represents, and the information it conveys to the reader.
+
+In Hashboard, you can define the format of a numeric type in the same place that the field is defined. The **quick controls** allow you to make common format adjustments and choose from a set of pre-defined templates. The **advanced configuration** panel allows you to make more detailed format adjustments.
+
+## Common formats
+
+Hashboard supports fine-control over each format option allowing for a wide-range of formats. The most common ones are:
+
+| Format | Example |
+| ------ | ------- |
+| Plain text | 1234.56 | 
+| Number | 1,234.56 |
+| Large number | 1.2K | 
+| Whole number | 1,234 |
+| Fixed precision | 12.3400 | 
+| Currency | $1,234.56 |
+| Large currency | $1.2M | 
+| Percent | 12.34% |
+| Scientific | 1.23e3 | 
+| Accounting | (1,234.56) |
+| SI Prefix | 1.23 k |
+
+
+
+
+## Quick controls
+
+<img
+  src="/number_format/quick_controls.png"
+  alt="Number format quick controls"
+  style={{ padding: "20px", width: "490px" }}
+/>
+
+
+## Advanced configuration
+
+<img
+  src="/number_format/advanced_controls.png"
+  alt="Number format advanced configuration panel"
+  style={{ padding: "20px", width: "490px" }}
+/>
+
+## Understanding number formats
+
+The first step to formatting numeric value is determining what the value represents -- the idea or information it conveys to the reader.
+
+Hashboard distinguishes a few top-level format styles: Number, Percent, and Currency. These representations have different roles when communicating information and are anchored to different understandings and scales. They share common concerns like the readability of large and small numbers, distinguishing positive and negative amounts, and expressing precision. The Number (also called Standard or Decimal) style acts as a shared foundation, and the Percent and Currency styles enable additional configuration. 
+
+### Style
+
+
+| Format        | Example     | Represents | Role | Anchor |
+| ------------- | ----------- | ---------- | ---- | ------ |
+| Number        | 1,234.56    | A measured, counted, or calculated value | General purpose | Implicit (unit or context dependent) |
+| Percent       | 12.34%      | A ratio or part | Relative comparison | Whole (100) |
+| Currency      | $1,234.56    | A monetary value | Financial cost or worth | Currency system |
+
+
+### Grouping
+
+The simplest form of readability is separating groups of digits. A comma (,) is the thousands separator found in most English speaking countries, e.g. 1,234 instead of 1234, and a dot (.) separates integer from fractional digits, e.g. 12.34. The symbol used for each separation is locale-dependent, since different region and language combinations use different symbols and even different grouping cycles. Hashboard will always format numbers in the context of the user's locale, and supports fine-grain control of when to display **grouping separators** (such as commas between thousands).
+
+#### Grouping separators
+
+- **Auto** (default): use a separator symbol when there's a minimum number of digits (respects locale preference where sometimes groups are not separated, e.g. displaying both 1000 and 10,000)
+- **Always**: always use a separator symbol (e.g. 1,000, 10,000, 1,000,000)
+- **Never**: never use a separator symbol (e.g. 1000, 10000, 1000000)
+
+### Notation
+
+When numeric values are very large or very small, there's a tradeoff of displaying an exact value and taking up a lot of space, e.g. 390,234,200 or 0.0000023. A **notation style** can improve the readability with a commonly understood scale. Some styles are regional (like compact notation) and only apply to large numbers (e.g. 1,000, 1,000,000, etc.) while some are universal (scientific notation or metric prefix) and help with small numbers as well (e.g. 0.0001, 0.000000001).
+
+#### Notation style
+
+- **None** (default): no scaling, display the number as is
+- **Short Scale**: use a common scale for large numbers, e.g. K, M, B
+- **Verbose**: use a common scale for large numbers, written out in long form, e.g. thousand, million, billion
+- **Scientific**: use scientific e notation, e.g. 1e1, 1e2, 1e3
+- **Engineering**: use engineering e notation, e.g. 1e3, 1e6, 1e9
+- **Metric-prefix**: use the metric unit prefix (SI prefix) scale, e.g. 1 k, 1 M, 1 G and 1 m, 1 µ, 1 n
+
+### Sign
+
+Some data values range from negative to positive, and it's important to distinguish between them. A **sign display** and **sign style** can change which symbols to use and when to display them.
+
+#### Sign style
+
+- **Mathematical**: use a plus (+) or minus (-) sign, e.g. +123, -123
+- **Accounting**: use no sign for positive values, and parentheses for negative values, e.g. 123, (123)
+
+#### Sign display
+
+- **Negative**: only display a sign for negative values, never for positive values, e.g. 1, -1
+- **Always**: display a sign for negative and positive values, e.g. +1, -1
+- **Never**: never display a sign, e.g. 1, 1
+
+### Precision
+
+#### Decimals
+
+#### Significant digits
+
+### Currency
+
+#### Currency code
+
+#### Currency display
+
+### Percent
+
+#### Percent mode
+
+### Other specifications
+
+<Callout type="warning">
+  **Other specifications**— Hashboard recognizes that additional specifications exist for formatting numbers, but does not currently support. Please reach out to us if you would like to see support for these.
+  
+  * **Spreadsheet Format Code (SFC)**
+</Callout>
+
+#### D3
+
+#### Intl.NumberFormat
+
+## FAQ
+
+**Does Hashboard support duration formatting?**
+No, Hashboard does not support duration formatting. If you are interested in formatting durations, please reach out to us.
+
+**Does Hashboard support unit formatting?**
+No, Hashboard does not support unit formatting. If you are interested in formatting units, please reach out to us.
+
+**Does Hashboard support project-level global templates or defaults?**
+No, Hashboard does not support project-level global templates or defaults. If you are interested in this feature, please reach out to us.
+
+**Does Hashboard support currency conversion?**
+No, Hashboard does not support currency conversion. If the underlying value represents a certain currency, then assigning a different currency code is incorrect. You must take care to ensure the code you choose is accurate.
+
+
+## Not supported
+
+---
+
+large and small: grouping separators, notation 
+positive and negative: sign (style, display)
+precision: fractional, significant
+
+arbitrary, units workaround: prefix, suffix
+
+currency: code / currency system, display (ambiguity, verbosity)
+percent: mode, whole (upcoming)
+
+other specifications: d3, sfc 
+
+not supported: duration, units, project-level global templates or defaults
+
+advisories: 
+- formatting does not perform currency conversion -- the currency set should match what the underlying value actually represents
+- formatting is applied only at the very end, right before display. it does not impact aggregation or sql in any way. (rely on built in sql functions to manipulate precision)
+
+- Grouping separators
+
+
+| Format        | Example     | Description |
+| ------------- | ----------- | ----------- |
+| Plain text    | 1234.56     | A raw value with no explicit semantics |
+| Number        | 1,234.56    | A value with basic structure like grouping digits when large. | Quantities with fractional parts |
+| Percent       | 12.34%      | A value is part of a whole amount. |
+| Currency      | $1234.56    | The value is monetary |
+
+
+Significant part of understanding number format options is knowing what problems they solve. And there is a significant lack of understanding in promoting readability by locale.
