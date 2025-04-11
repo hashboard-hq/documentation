@@ -8,5 +8,6 @@
   "model-folders": {},
   "best-practices": {},
   "query-data-files": { "title": "Uploading Files" },
-  "caching": {}
+  "caching": {},
+  "format": { "title": "Format" }
 }
